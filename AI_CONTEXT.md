@@ -16,16 +16,19 @@ AI-first with manual supervision and manual asset work where needed.
 Multiple AI tools may be used across the project's lifetime, but only one agent actively edits the project at a time.
 
 ## Current State
-Governance, project memory, and the core Godot 4 project foundation are initialized and verified. The repository contains `project.godot` (configured for Godot 4.7.2 Forward+), core directories (`src/`, `scenes/`, `assets/`, `tests/`), and a verified minimal test scene (`scenes/test_main.tscn`). Git repository initialization is pending.
+Phase 0 Foundation is complete. The repository has Git version control on branch `main` synced with GitHub remote, standard Godot 4 `.gitignore`, confirmed Godot 4.7.2 Forward+ configuration, established directory conventions, accepted foundational ADRs (ADR-001, ADR-002, ADR-003), foundation base classes (`ItemDefinition`, `DamageCalculator`, `StatsComponent`), and a headless automated test runner.
 
+## Confirmed Technical Decisions
+- Language: Statically typed GDScript (ADR-001)
+- Architecture: Hybrid Composition + Resource-Driven Architecture (ADR-002)
+- Persistence: Versioned structured JSON with atomic writes (ADR-003)
+- Conventions: Documented in `docs/PROJECT_CONVENTIONS.md`
 
-## Undecided Technical Areas
-- Programming language (GDScript vs C#)
-- Game architecture (Node-based, component, data-driven, state machines)
-- Networking architecture
-- Backend language
-- Database
-- Long-term version-control workflow (Git repository initialization pending)
+## Undecided Technical Areas (Deferred)
+- Networking architecture (deferred until single-player prototype proves stable)
+- Backend language (deferred; not required for single-player)
+- Database (deferred; not required for single-player)
+
 
 Do not invent permanent decisions. Use ADRs when a major decision becomes necessary.
 

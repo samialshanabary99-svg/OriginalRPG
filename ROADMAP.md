@@ -6,10 +6,13 @@ This roadmap is intentionally high level. Agents should create concrete tasks be
 - [x] Repository structure & documentation hierarchy
 - [x] AI memory protocol & governance files
 - [x] Godot 4 project foundation (`project.godot` initialization)
-- [x] Core directory structure (`src/`, `scenes/`, `assets/`, `tests/`)
+- [x] Core directory structure (`src/`, `scenes/`, `assets/`, `data/`, `tests/`)
 - [x] Git repository initialization & `.gitignore`
-- [ ] Scripting language decision (GDScript vs C# ADR)
-- [ ] Development/testing conventions
+- [x] Scripting language decision (ADR-001: Typed GDScript)
+- [x] Architecture & persistence decisions (ADR-002, ADR-003)
+- [x] Development & testing conventions (`docs/PROJECT_CONVENTIONS.md`)
+- [x] Baseline automated test runner (`tests/test_runner.gd`)
+
 
 
 
