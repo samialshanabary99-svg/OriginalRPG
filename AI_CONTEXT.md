@@ -16,8 +16,9 @@ AI-first with manual supervision and manual asset work where needed.
 Multiple AI tools may be used across the project's lifetime, but only one agent actively edits the project at a time.
 
 ## Current State
-**Phase 1 — Core Prototype is complete and stable.**
-The repository has a working, headless-tested playable prototype with: a Main Menu (`scenes/ui/main_menu.tscn`), a Test World map (`scenes/maps/test_world.tscn`) with world boundaries, a Player (`scenes/entities/player.tscn`, `CharacterBody2D`) with WASD/Arrow movement, Camera2D follower, `StatsComponent`, and `InteractorComponent`, an interactive `AncientMonument` object, a HUD showing HP and a Return to Menu button, and scene transition flow (Menu → World → Menu). 31 automated headless tests pass.
+**Phase 2 — RPG Systems complete and stable. 81/81 automated tests pass.**
+Built on the Phase 1 prototype: `CharacterStatsComponent` (attack, defence, level, XP, level-up loop), `Enemy` entity (patrol/aggro AI, melee combat, `receive_hit()`, XP reward on death), `InventoryComponent`, `ItemPickup`, `ItemDefinition` (Category enum, serialize/deserialize), `QuestDefinition` (data stub), expanded HUD (HP + Level + XP), and `DamageCalculator.xp_reward()`.
+
 
 
 ## Confirmed Technical Decisions

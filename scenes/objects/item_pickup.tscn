@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://item_pickup_scene"]
+
+[ext_resource type="Script" path="res://src/entities/item_pickup.gd" id="1_pickup"]
+[ext_resource type="Texture2D" uid="uid://icon" path="res://icon.svg" id="2_icon"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_trigger"]
+radius = 24.0
+
+[node name="ItemPickup" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_pickup")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_icon")
+scale = Vector2(0.08, 0.08)
+modulate = Color(1.0, 0.9, 0.2, 1.0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_trigger")

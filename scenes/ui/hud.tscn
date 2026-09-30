@@ -20,10 +20,19 @@ theme_override_constants/separation = 10
 layout_mode = 2
 text = "HP: 100 / 100"
 
+[node name="LevelLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Lv 1"
+
+[node name="XPLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "XP: 0 / 100"
+
 [node name="ControlsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Move: WASD / Arrows
-Interact: E or Space"
+Interact: E or Space
+Attack: J / LMB"
 
 [node name="ReturnButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2

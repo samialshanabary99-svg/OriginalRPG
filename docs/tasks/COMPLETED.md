@@ -19,6 +19,11 @@
   - **Date:** 2026-10-01
   - **Agent:** Agent-1 (Prototype)
   - **Result:** Implemented full minimal playable prototype: Main Menu, Test World map, Player (`CharacterBody2D`, WASD movement, Camera2D), `InteractorComponent`, `AncientMonument` interactive object, HUD with signal-bound HP display, Return to Menu flow. Fixed `StatsComponent` signal emission (replaced property setter with explicit `set_health()`/`apply_damage()`/`heal()` methods). Fixed `AncientMonument` to wire core signals in `_init()` for testability. Expanded test runner to 31 tests across 6 groups — all passing. Runtime headless smoke test exits cleanly (code 0). Reference changelog: `docs/changelog/2026-10-01-prototype-phase1.md`.
+- **Phase 2 — RPG Systems**
+  - **Date:** 2026-10-01
+  - **Agent:** Agent-1 (RPG Systems)
+  - **Result:** Implemented `CharacterStatsComponent` (attack/defence/level/XP/level-up loop), `Enemy` entity (IDLE/PATROL/AGGRO/DEAD AI, melee combat), `InventoryComponent`, `ItemPickup`, expanded `ItemDefinition` (Category enum, serialize/deserialize), `QuestDefinition` (data stub), expanded HUD (Level+XP labels), TestWorld enemy death → XP grant wiring, `DamageCalculator.xp_reward()`. 81/81 automated tests pass. Runtime smoke test clean. Reference changelog: `docs/changelog/2026-10-01-phase2-rpg-systems.md`.
+
 
 
 

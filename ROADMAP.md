@@ -30,16 +30,16 @@ This roadmap is intentionally high level. Agents should create concrete tasks be
 
 
 ## Phase 2 — RPG Systems
-- Stats
-- Combat
-- Skills
-- Items
-- Inventory
-- Equipment
-- Enemies
-- NPCs
-- Quests
-- Progression
+- [x] `CharacterStatsComponent` (attack, defence, level, experience, level-up, serialization)
+- [x] `DamageCalculator.xp_reward()` helper
+- [x] `Enemy` entity (CharacterBody2D, IDLE/PATROL/AGGRO/DEAD state machine, melee combat)
+- [x] `InventoryComponent` (add/remove/has/count, capacity, signals, serialization)
+- [x] `ItemDefinition` expanded (Category enum, serialize/deserialize)
+- [x] `ItemPickup` scene (Interactable → InventoryComponent)
+- [x] `QuestDefinition` resource stub (data only, no runtime log yet)
+- [x] HUD expanded (Level + XP labels, signal-bound to CharacterStatsComponent)
+- [x] TestWorld wires enemy death → XP grant → HUD notification
+- [x] 81 automated headless tests across 12 groups
 
 ## Phase 3 — Content
 - Maps

@@ -9,3 +9,7 @@ static func calculate_damage(attack: int, defense: int, min_damage: int = 1) -> 
 
 static func is_alive(current_hp: int) -> bool:
 	return current_hp > 0
+
+## Calculate XP reward for defeating an enemy of a given level.
+static func xp_reward(enemy_level: int) -> int:
+	return maxi(enemy_level * 20, 10)
