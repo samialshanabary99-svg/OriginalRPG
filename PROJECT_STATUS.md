@@ -33,10 +33,10 @@ Foundation / early development.
 Not implemented. Future architecture remains undecided.
 
 ## Known Issues
-- Git is not yet initialized in the project directory.
 - Godot 4 executable is located at `C:\Users\SAMI\Desktop\ProjectZero\Godot_v4.7.2-stable_win64_console.exe` but is not added to the system `PATH`.
 
 ## Last Updated
-2026-09-30 (Agent-1 - Godot 4 Foundation Verified)
+2026-09-30 (Agent-1 - Git Baseline Pushed to GitHub)
+
 
 
