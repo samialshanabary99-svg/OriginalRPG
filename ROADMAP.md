@@ -18,12 +18,16 @@ This roadmap is intentionally high level. Agents should create concrete tasks be
 
 
 ## Phase 1 — Core Prototype
-- Player character
-- Movement
-- Camera
-- Basic world/map
-- Basic interaction
-- Basic UI
+- [x] Player character scene (`CharacterBody2D`, component-based)
+- [x] WASD / Arrow key movement with velocity-based locomotion
+- [x] Camera2D follower with position smoothing
+- [x] Bounded test world map (`scenes/maps/test_world.tscn`)
+- [x] Interactive object system (`Interactable`, `InteractorComponent`, `AncientMonument`)
+- [x] HUD with signal-bound HP display and dialogue panel
+- [x] Main Menu with scene transition to game and exit
+- [x] Return to Menu (ESC or HUD button)
+- [x] 31 automated headless tests covering all Phase 1 systems
+
 
 ## Phase 2 — RPG Systems
 - Stats

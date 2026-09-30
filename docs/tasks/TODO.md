@@ -1,23 +1,31 @@
 # TODO
 
-## Phase 1 — Core Prototype Tasks
-- **Task: Player Character Scene & Movement**
-  - Goal: Create `scenes/entities/player.tscn` (`CharacterBody2D`) with basic 8-directional / click-to-move input and collision.
-  - Scope: `src/entities/player.gd`, `scenes/entities/player.tscn`.
+## Phase 2 — RPG Systems (Not yet started)
+
+- **Task: Expand Player Stats Model**
+  - Goal: Add `attack`, `defence`, `level`, `experience` to `StatsComponent` or create a dedicated `CharacterStatsComponent`.
+  - Scope: `src/components/`, `src/core/`.
+  - Acceptance Criteria: Stats are exported, serializable, and emit change signals.
+
+- **Task: Basic Enemy Entity**
+  - Goal: Create `scenes/entities/enemy.tscn` (`CharacterBody2D`) with idle/patrol state machine and aggro detection (Area2D).
+  - Scope: `src/entities/enemy.gd`, `scenes/entities/`.
   - Dependencies: `StatsComponent`.
-  - Acceptance Criteria: Player moves in 2D space, respects collisions, and runs headlessly in test runner.
 
-- **Task: Camera Follower**
-  - Goal: Add smoothed `Camera2D` following the player character with configurable zoom and drag margins.
-  - Scope: `scenes/entities/player.tscn`.
+- **Task: Combat — Melee Attack**
+  - Goal: Player can press Attack input; triggers hit detection on enemy; `DamageCalculator` resolves; enemy HP drops; enemy dies.
+  - Scope: `src/entities/`, `src/services/damage_calculator.gd`.
+  - Dependencies: Enemy Entity task.
 
-- **Task: Prototype Environment / Map**
-  - Goal: Create a basic testing map scene (`scenes/maps/test_world.tscn`) with boundaries and tilemap / placeholder background.
-  - Scope: `scenes/maps/`.
+- **Task: Item Pickup**
+  - Goal: Create `ItemPickup` scene extending `Interactable`. On interact, adds `ItemDefinition` to player inventory slot.
+  - Scope: `src/entities/item_pickup.gd`, `scenes/objects/`.
+  - Dependencies: `InteractorComponent`, `ItemDefinition`.
 
-- **Task: Health HUD Display**
-  - Goal: Create lightweight HUD connecting to `StatsComponent` `health_changed` signal.
-  - Scope: `scenes/ui/`, `src/ui/`.
+- **Task: Inventory Component**
+  - Goal: Create `InventoryComponent` (Node) with typed `Array[ItemDefinition]` storage, add/remove/has methods, serialization.
+  - Scope: `src/components/inventory_component.gd`.
 
-
-
+- **Task: Quest Log Stub (Data Only)**
+  - Goal: Define `QuestDefinition` Resource with id, title, description, state enum. Load from `data/quests/`. No runtime UI yet.
+  - Scope: `src/core/quest_definition.gd`, `data/quests/`.

@@ -15,6 +15,11 @@
   - **Date:** 2026-10-01
   - **Agent:** Agent-1 (Architecture & Foundation)
   - **Result:** Formalized and accepted ADR-001 (GDScript), ADR-002 (Hybrid Composition), ADR-003 (JSON Persistence). Created `docs/PROJECT_CONVENTIONS.md`. Implemented core data classes (`ItemDefinition`, `DamageCalculator`, `StatsComponent`), established folder structure (`data/`, `src/components/`, `src/core/`, `src/services/`), and implemented headless test runner (`tests/test_runner.gd`) passing 4/4 automated tests. Reference changelog: `docs/changelog/2026-10-01-technical-foundation.md`.
+- **Phase 1 — Core Prototype (Gameplay Loop)**
+  - **Date:** 2026-10-01
+  - **Agent:** Agent-1 (Prototype)
+  - **Result:** Implemented full minimal playable prototype: Main Menu, Test World map, Player (`CharacterBody2D`, WASD movement, Camera2D), `InteractorComponent`, `AncientMonument` interactive object, HUD with signal-bound HP display, Return to Menu flow. Fixed `StatsComponent` signal emission (replaced property setter with explicit `set_health()`/`apply_damage()`/`heal()` methods). Fixed `AncientMonument` to wire core signals in `_init()` for testability. Expanded test runner to 31 tests across 6 groups — all passing. Runtime headless smoke test exits cleanly (code 0). Reference changelog: `docs/changelog/2026-10-01-prototype-phase1.md`.
+
 
 
 

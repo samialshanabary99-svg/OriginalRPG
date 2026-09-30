@@ -16,7 +16,9 @@ AI-first with manual supervision and manual asset work where needed.
 Multiple AI tools may be used across the project's lifetime, but only one agent actively edits the project at a time.
 
 ## Current State
-Phase 0 Foundation is complete. The repository has Git version control on branch `main` synced with GitHub remote, standard Godot 4 `.gitignore`, confirmed Godot 4.7.2 Forward+ configuration, established directory conventions, accepted foundational ADRs (ADR-001, ADR-002, ADR-003), foundation base classes (`ItemDefinition`, `DamageCalculator`, `StatsComponent`), and a headless automated test runner.
+**Phase 1 — Core Prototype is complete and stable.**
+The repository has a working, headless-tested playable prototype with: a Main Menu (`scenes/ui/main_menu.tscn`), a Test World map (`scenes/maps/test_world.tscn`) with world boundaries, a Player (`scenes/entities/player.tscn`, `CharacterBody2D`) with WASD/Arrow movement, Camera2D follower, `StatsComponent`, and `InteractorComponent`, an interactive `AncientMonument` object, a HUD showing HP and a Return to Menu button, and scene transition flow (Menu → World → Menu). 31 automated headless tests pass.
+
 
 ## Confirmed Technical Decisions
 - Language: Statically typed GDScript (ADR-001)

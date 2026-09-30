@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3x7mplayer01"]
+
+[ext_resource type="Script" path="res://src/entities/player.gd" id="1_player"]
+[ext_resource type="Script" path="res://src/components/stats_component.gd" id="2_stats"]
+[ext_resource type="Script" path="res://src/components/interactor_component.gd" id="3_interactor"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="4_icon"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_col"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_interact"]
+radius = 50.0
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 1
+collision_mask = 2
+script = ExtResource("1_player")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_icon")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_col")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_enabled = true
+position_smoothing_speed = 7.0
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("2_stats")
+
+[node name="InteractorComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+script = ExtResource("3_interactor")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractorComponent"]
+shape = SubResource("CircleShape2D_interact")

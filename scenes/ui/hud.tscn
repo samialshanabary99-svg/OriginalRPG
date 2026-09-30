@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://hudview001"]
+
+[ext_resource type="Script" path="res://src/ui/hud.gd" id="1_hud"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_hud")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 0
+offset_right = 240.0
+offset_bottom = 120.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="HealthLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "HP: 100 / 100"
+
+[node name="ControlsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Move: WASD / Arrows
+Interact: E or Space"
+
+[node name="ReturnButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Return to Menu"
+
+[node name="DialoguePanel" type="PanelContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -120.0
+offset_right = 300.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="DialoguePanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 15
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 15
+theme_override_constants/margin_bottom = 10
+
+[node name="DialogueLabel" type="Label" parent="DialoguePanel/MarginContainer"]
+layout_mode = 2
+text = "Inspection Message"
+autowrap_mode = 2

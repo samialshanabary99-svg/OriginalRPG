@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=3 uid="uid://monument001"]
+
+[ext_resource type="Script" path="res://src/entities/ancient_monument.gd" id="1_monument"]
+[ext_resource type="Texture2D" path="res://icon.svg" id="2_icon"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_col"]
+size = Vector2(40.0, 40.0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_trigger"]
+radius = 48.0
+
+[node name="AncientMonument" type="Area2D"]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_monument")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.4, 0.8, 0.9, 1)
+scale = Vector2(0.35, 0.5)
+texture = ExtResource("2_icon")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_col")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_trigger")
+
+[node name="PromptLabel" type="Label" parent="."]
+offset_left = -100.0
+offset_top = -65.0
+offset_right = 100.0
+offset_bottom = -40.0
+text = "Press E to Read"
+horizontal_alignment = 1
