@@ -28,13 +28,16 @@ var _target_player: CharacterBody2D = null
 var _attack_timer: float = 0.0
 
 func _ready() -> void:
+	input_pickable = true
 	# Defensive: @onready may not resolve in all instantiation contexts
 	if stats == null:
 		stats = get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
 	if stats != null:
 		stats.died.connect(_on_died)
-	aggro_area.area_entered.connect(_on_aggro_area_entered)
-	aggro_area.area_exited.connect(_on_aggro_area_exited)
+	if aggro_area != null:
+		aggro_area.area_entered.connect(_on_aggro_area_entered)
+		aggro_area.area_exited.connect(_on_aggro_area_exited)
+	input_event.connect(_on_input_event)
 	_patrol_origin = global_position
 	_pick_patrol_target()
 
@@ -86,18 +89,25 @@ func _tick_aggro(_delta: float) -> void:
 		_flip_sprite(velocity.x)
 		move_and_slide()
 
+signal targeted(enemy: Enemy)
+
+func is_targetable() -> bool:
+	var s: CharacterStatsComponent = stats if stats != null else get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
+	return _state != State.DEAD and s != null and s.current_health > 0
+
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if event is InputEventMouseButton:
+		var mb := event as InputEventMouseButton
+		if mb.pressed and mb.button_index == MOUSE_BUTTON_LEFT:
+			targeted.emit(self)
+
 # ── Combat ────────────────────────────────────────────────────────────────────
 
 func _perform_attack() -> void:
 	_attack_timer = attack_cooldown
 	if _target_player == null or not is_instance_valid(_target_player):
 		return
-	var player_stats: StatsComponent = _target_player.get_node_or_null("CharacterStatsComponent") as StatsComponent
-	if player_stats == null:
-		player_stats = _target_player.get_node_or_null("StatsComponent") as StatsComponent
-	if player_stats != null:
-		var dmg: int = DamageCalculator.calculate_damage(stats.attack, player_stats.defence if player_stats is CharacterStatsComponent else 0)
-		player_stats.apply_damage(dmg)
+	DamageCalculator.resolve_attack(self, _target_player)
 
 ## Called by Player when landing a hit on this enemy.
 func receive_hit(attacker_attack: int) -> void:
@@ -111,6 +121,7 @@ func receive_hit(attacker_attack: int) -> void:
 		return
 	var dmg: int = DamageCalculator.calculate_damage(attacker_attack, s.defence)
 	s.apply_damage(dmg)
+
 
 
 # ── Signals ───────────────────────────────────────────────────────────────────

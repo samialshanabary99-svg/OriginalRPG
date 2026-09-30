@@ -26,6 +26,11 @@
   - **Date:** 2026-10-01
   - **Agent:** Agent-1 (Player Architecture)
   - **Result:** Expanded Player architecture into a decoupled RPG character foundation. Implemented data-driven `CharacterDefinition` (`data/characters/`), dual-resource pool (Health + Mana) with progression and additive stat modifier system in `CharacterStatsComponent`, `EquipmentComponent` slot registry, and comprehensive player state management (`CharacterState { ALIVE, DEAD, STUNNED, CASTING }`, `facing_direction` tracking). Validated with 123 passing automated tests and clean runtime execution. Reference changelog: `docs/changelog/2026-10-01-player-foundation.md`.
+- **Combat Vertical Slice**
+  - **Date:** 2026-10-01
+  - **Agent:** Agent-1 (Combat Architecture)
+  - **Result:** Implemented minimal complete combat vertical slice: Player -> Target Enemy -> Attack -> Damage -> Health Reduction -> Enemy Defeat -> Player Receives Result. Created `CombatResult` RefCounted class, unified attack resolution in `DamageCalculator.resolve_attack()`, player target acquisition (`set_target`, `acquire_target`, `clear_target`), enemy targetable check and click-targeting, automated XP awards upon defeat, and HUD combat event reporting. Validated with 149 passing automated tests (26 combat-specific tests) and runtime execution. Reference changelog: `docs/changelog/2026-10-01-combat-vertical-slice.md`.
+
 
 
 

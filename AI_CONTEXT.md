@@ -16,12 +16,16 @@ AI-first with manual supervision and manual asset work where needed.
 Multiple AI tools may be used across the project's lifetime, but only one agent actively edits the project at a time.
 
 ## Current State
-**Player Character Foundation complete and stable. 123/123 automated tests pass.**
-The player architecture has been expanded into a decoupled RPG character foundation:
-- Player identity and progression parameters via data-driven `CharacterDefinition` resources (`data/characters/`).
-- `CharacterStatsComponent` equipped with dual resource pools (Health + Mana), level progression, and dynamic additive stat modifiers.
-- `EquipmentComponent` slot registry managing items and driving stat modifiers.
-- `Player` controller managing character states (`ALIVE`, `DEAD`, `STUNNED`, `CASTING`), 4/8-direction movement facing tracking, and component aggregation.
+**Combat Vertical Slice complete and stable. 149/149 automated tests pass.**
+The combat interaction loop is fully implemented and verified:
+- Player target acquisition and explicit targeting (`set_target`, `acquire_target`, `target_changed`).
+- Deterministic attack calculation via `DamageCalculator.resolve_attack()`.
+- Complete outcome encapsulated in `CombatResult` RefCounted model.
+- Target health reduction and defeat flow with automatic XP rewards.
+- Symmetrical, unified execution shared between Player and Enemy entities.
+- Input validation and guards for dead targets, invalid targets, cooldowns, and dead attackers.
+- Test world contains a live Enemy instance wired to HUD combat log dialogue.
+
 
 
 

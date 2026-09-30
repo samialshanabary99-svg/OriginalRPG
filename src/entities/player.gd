@@ -29,6 +29,8 @@ signal player_moved(position: Vector2)
 signal player_attacked()
 signal player_state_changed(new_state: CharacterState)
 signal facing_changed(direction: Vector2)
+signal target_changed(new_target: Node)
+signal combat_resolved(result: CombatResult)
 
 # ── Exports ───────────────────────────────────────────────────────────────────
 ## Pixel movement speed. Separate from the logical speed_stat on CharacterStatsComponent.
@@ -49,6 +51,9 @@ signal facing_changed(direction: Vector2)
 var input_direction: Vector2      = Vector2.ZERO
 var facing_direction: Vector2     = Vector2.RIGHT   ## Last non-zero movement direction
 var character_state: CharacterState = CharacterState.ALIVE
+var current_target: Node          = null
+var last_combat_result: CombatResult = null
+
 
 var _attack_timer: float = 0.0
 
@@ -109,19 +114,90 @@ func interact() -> void:
 	if interactor_component != null:
 		interactor_component.try_interact()
 
-# ── Combat ────────────────────────────────────────────────────────────────────
-func _try_attack() -> void:
-	if _attack_timer > 0.0 or stats == null:
+# ── Targeting ─────────────────────────────────────────────────────────────────
+func set_target(new_target: Node) -> void:
+	if current_target == new_target:
 		return
+	current_target = new_target
+	target_changed.emit(current_target)
+
+func clear_target() -> void:
+	set_target(null)
+
+func acquire_target() -> Node:
+	if attack_area == null:
+		return null
+	var candidates: Array[Enemy] = []
+	for body: Node in attack_area.get_overlapping_bodies():
+		if body is Enemy and is_instance_valid(body):
+			var enemy: Enemy = body as Enemy
+			if enemy.has_method("is_targetable"):
+				if enemy.is_targetable():
+					candidates.append(enemy)
+			else:
+				var s: StatsComponent = DamageCalculator.get_entity_stats(enemy)
+				if s != null and s.current_health > 0:
+					candidates.append(enemy)
+
+	if candidates.is_empty():
+		return null
+
+	var my_pos: Vector2 = global_position
+	candidates.sort_custom(func(a: Enemy, b: Enemy) -> bool:
+		return my_pos.distance_squared_to(a.global_position) < my_pos.distance_squared_to(b.global_position)
+	)
+	var chosen: Enemy = candidates[0]
+	set_target(chosen)
+	return chosen
+
+# ── Combat ────────────────────────────────────────────────────────────────────
+func attack_target(target: Node = null) -> CombatResult:
+	if character_state != CharacterState.ALIVE:
+		var fail_res := CombatResult.failure("attacker_invalid_state", self, target)
+		last_combat_result = fail_res
+		combat_resolved.emit(fail_res)
+		return fail_res
+
+	if _attack_timer > 0.0:
+		var cd_res := CombatResult.failure("on_cooldown", self, target)
+		last_combat_result = cd_res
+		combat_resolved.emit(cd_res)
+		return cd_res
+
+	var chosen: Node = target
+	if chosen == null:
+		chosen = current_target
+	if chosen == null:
+		chosen = acquire_target()
+
+	if chosen == null:
+		var no_target_res := CombatResult.failure("no_target", self, null)
+		last_combat_result = no_target_res
+		combat_resolved.emit(no_target_res)
+		return no_target_res
+
+	if stats == null:
+		stats = get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
+
 	_attack_timer = attack_cooldown
 	player_attacked.emit()
 
-	if attack_area == null:
-		return
-	for body: Node in attack_area.get_overlapping_bodies():
-		if body is Enemy:
-			# Use final_attack so equipment bonuses are included
-			(body as Enemy).receive_hit(stats.final_attack)
+	var result: CombatResult = DamageCalculator.resolve_attack(self, chosen)
+	last_combat_result = result
+	combat_resolved.emit(result)
+
+	if result.is_valid and result.target_defeated:
+		if result.xp_earned > 0 and stats != null:
+			stats.gain_experience(result.xp_earned)
+		if current_target == chosen:
+			clear_target()
+
+	return result
+
+
+func _try_attack() -> void:
+	attack_target()
+
 
 # ── Character state management ────────────────────────────────────────────────
 func _set_state(new_state: CharacterState) -> void:

@@ -30,6 +30,9 @@ func _init() -> void:
 	_test_player_foundation()
 	_test_equipment_modifiers()
 
+	# Combat Vertical Slice
+	_test_combat_vertical_slice()
+
 	print("")
 	print("[TestRunner] ─────────────────────────────────────────")
 	print("[TestRunner] %d tests | %d failures" % [_total, _failed])
@@ -499,4 +502,99 @@ func _test_equipment_modifiers() -> void:
 	_ok("is_slot_occupied false after unequip", not eq.is_slot_occupied("head"))
 
 	host.free()
+
+func _test_combat_vertical_slice() -> void:
+	print("\n[Group O] Combat Vertical Slice")
+
+	var player: Player = (load("res://scenes/entities/player.tscn") as PackedScene).instantiate() as Player
+	get_root().add_child(player)
+
+	var enemy: Enemy = (load("res://scenes/entities/enemy.tscn") as PackedScene).instantiate() as Enemy
+	get_root().add_child(enemy)
+
+	var p_stats: CharacterStatsComponent = player.get_node("CharacterStatsComponent") as CharacterStatsComponent
+	var e_stats: CharacterStatsComponent = enemy.get_node("CharacterStatsComponent") as CharacterStatsComponent
+
+	# 1. Target acquisition / setting
+	var target_signals: Array[Node] = []
+	player.target_changed.connect(func(t: Node): target_signals.append(t))
+
+	player.set_target(enemy)
+	_ok("Player target successfully set to enemy", player.current_target == enemy)
+	_ok("target_changed signal fired", target_signals.size() == 1 and target_signals[0] == enemy)
+
+	# 2. Valid attack execution
+	var initial_enemy_hp: int = e_stats.current_health
+	var expected_dmg: int = DamageCalculator.calculate_damage(p_stats.final_attack, e_stats.final_defence)
+
+	var combat_results: Array[CombatResult] = []
+	player.combat_resolved.connect(func(res: CombatResult): combat_results.append(res))
+
+	var attack_res: CombatResult = player.attack_target(enemy)
+	_ok("attack_target returns valid CombatResult", attack_res.is_valid)
+	_ok("combat_resolved signal emitted with result", combat_results.size() == 1 and combat_results[0] == attack_res)
+	_ok("last_combat_result matches returned result", player.last_combat_result == attack_res)
+	_ok("attacker is player", attack_res.attacker == player)
+	_ok("target is enemy", attack_res.target == enemy)
+
+	# 3. Deterministic damage calculation
+	_ok("damage_dealt matches DamageCalculator formula", attack_res.damage_dealt == expected_dmg)
+
+	# 4. Enemy health reduction
+	_ok("enemy health reduced by damage dealt", e_stats.current_health == initial_enemy_hp - expected_dmg)
+	_ok("attack_res target_remaining_health matches enemy current_health", attack_res.target_remaining_health == e_stats.current_health)
+
+	# 5. Defeat & Reward flow
+	var weak_enemy: Enemy = (load("res://scenes/entities/enemy.tscn") as PackedScene).instantiate() as Enemy
+	get_root().add_child(weak_enemy)
+	var weak_stats: CharacterStatsComponent = weak_enemy.get_node("CharacterStatsComponent") as CharacterStatsComponent
+	weak_stats.set_health(1) # 1 HP remaining
+
+	player.set_target(weak_enemy)
+	player._attack_timer = 0.0 # reset cooldown for test
+
+	var initial_xp: int = p_stats.experience
+	var defeat_res: CombatResult = player.attack_target(weak_enemy)
+
+	_ok("attack against 1HP enemy is valid", defeat_res.is_valid)
+	_ok("target_defeated is true", defeat_res.target_defeated)
+	_ok("weak enemy health is 0", weak_stats.current_health == 0)
+	_ok("weak enemy is_targetable() is false", not weak_enemy.is_targetable())
+	_ok("defeat_res awarded XP", defeat_res.xp_earned > 0)
+	_ok("player gained XP from defeat", p_stats.experience == initial_xp + defeat_res.xp_earned)
+	_ok("player current_target cleared on defeat", player.current_target == null)
+
+	# 6. Invalid / dead target handling
+	# Case A: Attack dead target
+	player._attack_timer = 0.0
+	var dead_target_res: CombatResult = player.attack_target(weak_enemy)
+	_ok("attack on already dead target is invalid", not dead_target_res.is_valid)
+	_ok("error_reason is target_dead", dead_target_res.error_reason == "target_dead")
+	_ok("no damage dealt to dead target", dead_target_res.damage_dealt == 0)
+
+	# Case B: Attack null target with no enemies in range
+	player.clear_target()
+	player._attack_timer = 0.0
+	var no_target_res: CombatResult = player.attack_target(null)
+	_ok("attack with no target is invalid", not no_target_res.is_valid)
+	_ok("error_reason is no_target", no_target_res.error_reason == "no_target")
+
+	# Case C: Attack while on cooldown
+	player.set_target(enemy)
+	player._attack_timer = 1.0 # set cooldown active
+	var cooldown_res: CombatResult = player.attack_target(enemy)
+	_ok("attack while on cooldown is invalid", not cooldown_res.is_valid)
+	_ok("error_reason is on_cooldown", cooldown_res.error_reason == "on_cooldown")
+
+	# Case D: Attack when player is dead
+	player._attack_timer = 0.0
+	player.character_state = Player.CharacterState.DEAD
+	var dead_player_res: CombatResult = player.attack_target(enemy)
+	_ok("attack when player dead is invalid", not dead_player_res.is_valid)
+	_ok("error_reason is attacker_invalid_state", dead_player_res.error_reason == "attacker_invalid_state")
+
+	player.free()
+	enemy.free()
+	# weak_enemy queues itself for free on death
+
 

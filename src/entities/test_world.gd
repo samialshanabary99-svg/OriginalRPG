@@ -12,11 +12,11 @@ func _ready() -> void:
 	if hud != null and player != null:
 		hud.bind_player(player)
 		hud.return_to_menu_requested.connect(_on_return_to_menu)
+		player.combat_resolved.connect(_on_player_combat_resolved)
 
 	if monument != null and hud != null:
 		monument.inspection_triggered.connect(hud.show_dialogue)
 
-	# Wire all enemies in scene to grant XP on death
 	_register_enemies()
 
 func _register_enemies() -> void:
@@ -25,18 +25,23 @@ func _register_enemies() -> void:
 			_connect_enemy(child as Enemy)
 
 func _connect_enemy(enemy: Enemy) -> void:
+	if player != null and enemy.has_signal("targeted"):
+		enemy.targeted.connect(player.set_target)
 	enemy.enemy_died.connect(_on_enemy_died)
 
-func _on_enemy_died(enemy: Enemy) -> void:
-	if player == null or player.stats == null:
+func _on_player_combat_resolved(result: CombatResult) -> void:
+	if hud == null or not result.is_valid:
 		return
-	var xp: int = DamageCalculator.xp_reward(enemy.stats.level)
-	player.stats.gain_experience(xp)
-	if hud != null:
-		hud.show_dialogue("Enemy defeated! +" + str(xp) + " XP")
-		# Auto-hide after 2 seconds
-		await get_tree().create_timer(2.0).timeout
-		hud.hide_dialogue()
+	if result.target_defeated:
+		hud.show_dialogue("Enemy defeated! +%d XP" % result.xp_earned)
+	elif result.damage_dealt > 0:
+		var target_name: String = result.target.name if result.target != null else "Enemy"
+		hud.show_dialogue("Hit %s for %d DMG (HP: %d)" % [target_name, result.damage_dealt, result.target_remaining_health])
+
+func _on_enemy_died(_enemy: Enemy) -> void:
+	# Dialogue is handled via _on_player_combat_resolved; can be extended for world events
+	pass
+
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause_menu"):

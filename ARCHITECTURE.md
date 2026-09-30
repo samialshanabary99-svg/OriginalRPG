@@ -66,6 +66,46 @@ The player architecture follows a modular composition pattern using a `Character
 - **Skills:** Resource checks (`stats.spend_mana()`), state validation (`character_state == ALIVE`), casting state transitions (`CASTING`).
 - **Combat & CC:** Stun/freeze/root effects transition player state to `STUNNED`, suspending input processing.
 
+## Combat Architecture (Vertical Slice)
+Combat follows a deterministic, decoupled interaction pipeline:
+
+```
+PLAYER / ATTACKER
+  │
+  ▼ (Acquire or select target)
+TARGET ENEMY
+  │
+  ▼ (attack_target() checks cooldown & character_state)
+ATTACK INITIATION
+  │
+  ▼ (DamageCalculator.resolve_attack)
+DAMAGE CALCULATION (Deterministic: maxi(atk - def, min_damage))
+  │
+  ▼ (target_stats.apply_damage)
+TARGET HEALTH REDUCTION & DEFEAT CHECK
+  │
+  ▼ (CombatResult object created)
+ATTACKER RECEIVES RESULT (combat_resolved signal, XP reward if defeated)
+```
+
+### Key Principles:
+1. **Clear Ownership of Combat State:**
+   - Attacker owns its targeting state (`current_target`), attack timer (`_attack_timer`), and receives the `CombatResult`.
+   - Target owns its health state via `CharacterStatsComponent` / `StatsComponent`.
+   - `DamageCalculator` is stateless: purely functional calculations with no persistent combat state.
+2. **Unified & Non-Duplicated Resolution:**
+   - Both Player attacks on Enemies and Enemy attacks on Players execute via `DamageCalculator.resolve_attack()`.
+   - Validates entity presence, life status, stats existence, calculates damage, applies health changes, and handles defeat XP calculation.
+3. **Data Model (`CombatResult`):**
+   - RefCounted object storing `attacker`, `target`, `is_valid`, `damage_dealt`, `target_defeated`, `target_remaining_health`, `xp_earned`, `error_reason`, and `damage_type`.
+4. **Extension Points:**
+   - **Different Weapons:** Weapon items provide base damage and damage type to `DamageCalculator`.
+   - **Skills:** Skill execution provides custom attack power and mana costs, returning a `CombatResult`.
+   - **Damage Types & Defenses:** `damage_type` field ready for elemental resistance/weakness calculations.
+   - **Status Effects:** `CombatResult` can carry applied effect payloads (e.g. burn, poison, stun).
+   - **Player Progression:** Defeat events automatically forward XP rewards into `CharacterStatsComponent.gain_experience()`.
+
+
 
 
 ### 4. Future Multiplayer & Networking (Exploratory / Deferred)
