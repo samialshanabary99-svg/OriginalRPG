@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://testmainsce01"]
+
+[node name="TestMain" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+offset_right = 320.0
+offset_bottom = 40.0
+text = "OriginalRPG - Godot 4 Foundation Verified"

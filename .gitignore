@@ -1,0 +1,20 @@
+# Godot 4+ cache & import files
+.godot/
+
+# Godot editor exports
+build/
+bin/
+
+# Godot presets (uncomment if export_presets.cfg contains private signing keys/passwords)
+# export_presets.cfg
+
+# Mono/C# build artifacts (if C# is used)
+.vs/
+.idea/
+*.csproj.user
+obj/
+
+# OS metadata & temporary files
+.DS_Store
+Thumbs.db
+*.tmp
