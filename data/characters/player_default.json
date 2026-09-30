@@ -1,0 +1,15 @@
+{
+  "character_id": "player_default",
+  "display_name": "Hero",
+  "character_class": "adventurer",
+  "base_max_health": 100,
+  "base_max_mana": 50,
+  "base_attack": 10,
+  "base_defence": 5,
+  "base_speed_stat": 10,
+  "health_per_level": 10,
+  "mana_per_level": 5,
+  "attack_per_level": 2,
+  "defence_per_level": 1,
+  "xp_per_level": 100
+}

@@ -16,8 +16,13 @@ AI-first with manual supervision and manual asset work where needed.
 Multiple AI tools may be used across the project's lifetime, but only one agent actively edits the project at a time.
 
 ## Current State
-**Phase 2 — RPG Systems complete and stable. 81/81 automated tests pass.**
-Built on the Phase 1 prototype: `CharacterStatsComponent` (attack, defence, level, XP, level-up loop), `Enemy` entity (patrol/aggro AI, melee combat, `receive_hit()`, XP reward on death), `InventoryComponent`, `ItemPickup`, `ItemDefinition` (Category enum, serialize/deserialize), `QuestDefinition` (data stub), expanded HUD (HP + Level + XP), and `DamageCalculator.xp_reward()`.
+**Player Character Foundation complete and stable. 123/123 automated tests pass.**
+The player architecture has been expanded into a decoupled RPG character foundation:
+- Player identity and progression parameters via data-driven `CharacterDefinition` resources (`data/characters/`).
+- `CharacterStatsComponent` equipped with dual resource pools (Health + Mana), level progression, and dynamic additive stat modifiers.
+- `EquipmentComponent` slot registry managing items and driving stat modifiers.
+- `Player` controller managing character states (`ALIVE`, `DEAD`, `STUNNED`, `CASTING`), 4/8-direction movement facing tracking, and component aggregation.
+
 
 
 

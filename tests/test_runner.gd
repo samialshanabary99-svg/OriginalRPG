@@ -26,6 +26,10 @@ func _init() -> void:
 	_test_enemy_entity()
 	_test_xp_leveling()
 
+	# RPG Player Foundation Expansion
+	_test_player_foundation()
+	_test_equipment_modifiers()
+
 	print("")
 	print("[TestRunner] ─────────────────────────────────────────")
 	print("[TestRunner] %d tests | %d failures" % [_total, _failed])
@@ -115,6 +119,8 @@ func _test_player_composition() -> void:
 	get_root().add_child(player)
 
 	_ok("has CharacterStatsComponent", player.get_node_or_null("CharacterStatsComponent") != null)
+	_ok("has InventoryComponent", player.get_node_or_null("InventoryComponent") != null)
+	_ok("has EquipmentComponent", player.get_node_or_null("EquipmentComponent") != null)
 	_ok("has InteractorComponent", player.get_node_or_null("InteractorComponent") != null)
 	_ok("has AttackArea", player.get_node_or_null("AttackArea") != null)
 	_ok("has Camera2D", player.get_node_or_null("Camera2D") != null)
@@ -355,3 +361,142 @@ func _test_xp_leveling() -> void:
 	_ok("xp_reward(2) == 40", reward == 40)
 
 	cs.free()
+
+func _test_player_foundation() -> void:
+	print("\n[Group M] Player Character Foundation")
+	# 1. CharacterDefinition data integrity
+	var def := CharacterDefinition.new()
+	def.character_id = "test_mage"
+	def.display_name = "Apprentice"
+	def.character_class = "mage"
+	def.base_max_health = 75
+	def.base_max_mana = 120
+	def.base_attack = 6
+	def.base_defence = 3
+	def.base_speed_stat = 12
+	def.health_per_level = 6
+	def.mana_per_level = 15
+	def.attack_per_level = 1
+	def.defence_per_level = 1
+
+	var ser: Dictionary = def.serialize()
+	_ok("CharacterDefinition serialize has character_id", ser.get("character_id") == "test_mage")
+	_ok("CharacterDefinition serialize has base_max_mana", ser.get("base_max_mana") == 120)
+
+	var def2 := CharacterDefinition.new()
+	def2.deserialize(ser)
+	_ok("CharacterDefinition deserialize restores class", def2.character_class == "mage")
+	_ok("CharacterDefinition deserialize restores base_max_health", def2.base_max_health == 75)
+
+	# 2. CharacterStatsComponent initialized from CharacterDefinition
+	var cs := CharacterStatsComponent.new()
+	cs.definition = def2
+	cs._ready()
+	_ok("Stats initialized from definition: max_health", cs.max_health == 75)
+	_ok("Stats initialized from definition: current_health", cs.current_health == 75)
+	_ok("Stats initialized from definition: current_mana", cs.current_mana == 120)
+	_ok("Stats initialized from definition: final_attack", cs.final_attack == 6)
+	_ok("Stats initialized from definition: final_defence", cs.final_defence == 3)
+
+	# 3. Mana system (spend, clamp, restore)
+	var mana_emitted: Array[bool] = [false]
+	cs.mana_changed.connect(func(c: int, _m: int): mana_emitted[0] = true)
+	var spend_ok: bool = cs.spend_mana(30)
+	_ok("spend_mana(30) succeeds", spend_ok and cs.current_mana == 90)
+	_ok("mana_changed signal emitted on spend", mana_emitted[0])
+	var overspend: bool = cs.spend_mana(100)
+	_ok("overspend mana fails gracefully", not overspend and cs.current_mana == 90)
+	cs.restore_mana(50)
+	_ok("restore_mana clamps to max_mana", cs.current_mana == 120)
+
+	# 4. Level-up scaling with CharacterDefinition
+	cs.gain_experience(100)
+	_ok("Mage scaled health on level-up (+6)", cs.max_health == 81)
+	_ok("Mage scaled mana on level-up (+15)", cs.final_max_mana == 135)
+	_ok("Mage scaled attack on level-up (+1)", cs.final_attack == 7)
+	cs.free()
+
+	# 5. Player instance state and movement foundation
+	var player: Player = (load("res://scenes/entities/player.tscn") as PackedScene).instantiate() as Player
+	get_root().add_child(player)
+	_ok("Player initial state is ALIVE", player.character_state == Player.CharacterState.ALIVE)
+	_ok("Player is_alive() true initially", player.is_alive())
+	_ok("Player is_moving() false initially", not player.is_moving())
+
+	# Movement facing tracking
+	var facing_changes: Array[Vector2] = []
+	player.facing_changed.connect(func(dir: Vector2): facing_changes.append(dir))
+	player.input_direction = Vector2(0.0, 1.0)
+	player._apply_movement()
+	_ok("Facing direction updated to down", player.facing_direction == Vector2(0.0, 1.0))
+	_ok("facing_changed signal fired", facing_changes.size() == 1 and facing_changes[0] == Vector2(0.0, 1.0))
+	_ok("Player is_moving() true when velocity > 0", player.is_moving())
+
+	# CharacterState transition on death
+	var state_events: Array[int] = []
+	player.player_state_changed.connect(func(st: int): state_events.append(st))
+	var player_stats: CharacterStatsComponent = player.get_node("CharacterStatsComponent") as CharacterStatsComponent
+	# Explicitly connect if player _ready has not executed yet
+	if not player_stats.died.is_connected(player._on_died):
+		player_stats.died.connect(player._on_died)
+	player_stats.apply_damage(9999)
+	_ok("Player state transitions to DEAD on fatal damage", player.character_state == Player.CharacterState.DEAD)
+	_ok("Player is_alive() false after death", not player.is_alive())
+	_ok("player_state_changed signal fired with DEAD", state_events.size() == 1 and state_events[0] == Player.CharacterState.DEAD)
+
+	player.free()
+
+func _test_equipment_modifiers() -> void:
+	print("\n[Group N] Equipment & Modifiers")
+	var cs := CharacterStatsComponent.new()
+	cs.base_attack = 10
+	cs.base_defence = 5
+	cs.base_speed = 10
+	cs.base_max_mana = 50
+	cs.max_health = 100
+	cs._ready()
+
+	# 1. Direct modifier system on CharacterStatsComponent
+	cs.add_modifier("sword_iron", {"attack": 8, "speed": -1})
+	_ok("Modifier increases final_attack", cs.final_attack == 18)
+	_ok("Modifier adjusts final_speed", cs.final_speed == 9)
+	_ok("Base attack unchanged after modifier", cs.base_attack == 10)
+	_ok("has_modifier returns true", cs.has_modifier("sword_iron"))
+
+	cs.add_modifier("shield_wood", {"defence": 6, "max_health": 20})
+	_ok("Stacking modifier adds defence", cs.final_defence == 11)
+	_ok("Equipment modifier expands max_health", cs.max_health == 120)
+
+	cs.remove_modifier("sword_iron")
+	_ok("remove_modifier restores final_attack", cs.final_attack == 10)
+	_ok("remove_modifier restores final_speed", cs.final_speed == 10)
+	_ok("Remaining modifier stays active", cs.final_defence == 11)
+
+	# 2. EquipmentComponent slot management
+	var eq := EquipmentComponent.new()
+	# Attach to temporary parent node along with stats
+	var host := Node2D.new()
+	get_root().add_child(host)
+	host.add_child(cs)
+	host.add_child(eq)
+
+	var item_helmet := ItemDefinition.new()
+	item_helmet.item_id = "helm_bronze"
+	item_helmet.display_name = "Bronze Helmet"
+	item_helmet.category = ItemDefinition.Category.ARMOUR
+
+	var equipped_signals: Array[String] = []
+	eq.item_equipped.connect(func(slot: String, _it: ItemDefinition): equipped_signals.append(slot))
+
+	var equip_ok: bool = eq.equip("head", item_helmet)
+	_ok("equip returns true", equip_ok)
+	_ok("item_equipped signal fired for head slot", equipped_signals.size() == 1 and equipped_signals[0] == "head")
+	_ok("is_slot_occupied true for head", eq.is_slot_occupied("head"))
+	_ok("get_equipped returns item", eq.get_equipped("head") == item_helmet)
+
+	var unequipped_item: ItemDefinition = eq.unequip("head")
+	_ok("unequip returns equipped item", unequipped_item == item_helmet)
+	_ok("is_slot_occupied false after unequip", not eq.is_slot_occupied("head"))
+
+	host.free()
+

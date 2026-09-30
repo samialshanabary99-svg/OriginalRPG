@@ -1,19 +1,21 @@
 # Project Status
 
 ## Current Phase
-**Phase 2 Complete — RPG Systems Layer Stable. 81/81 automated tests passing.**
+**Player Character Foundation Complete — 123/123 automated tests passing.**
 
 ## Working Systems
 - All Phase 1 systems (Main Menu, Test World, Player, Camera, Interaction, HUD, scene transitions).
-- **`CharacterStatsComponent`**: attack, defence, speed_stat, level, experience, `gain_experience()`, level-up loop with stat scaling, full serialization.
-- **`InventoryComponent`**: add/remove/has/count items, capacity enforcement, signals, serialize/deserialize.
-- **`ItemDefinition`**: Resource with Category enum, serialize/deserialize.
-- **`ItemPickup`**: `Interactable`-based world pickup → `InventoryComponent`.
-- **`Enemy`**: `CharacterBody2D` with IDLE/PATROL/AGGRO/DEAD state machine, `receive_hit()`, `enemy_died` signal, XP grant integration.
-- **`QuestDefinition`**: data Resource with xp/gold rewards, serialize/deserialize (no runtime quest log yet).
-- **`DamageCalculator`**: `xp_reward(level)` helper added.
-- **`HUD`**: now shows HP, Level, and XP (bound via signals to `CharacterStatsComponent`).
-- **`TestWorld`**: wires enemy death → player XP gain + HUD notification.
+- **`CharacterDefinition`** (`src/core/character_definition.gd`): Data-only archetypes (`data/characters/`) defining base stats, mana, and level-up growth parameters.
+- **`CharacterStatsComponent`** (`src/components/character_stats_component.gd`): Dual resources (HP + Mana), progression (Level + XP), dynamic additive stat modifiers, separate computed final stats (`final_attack`, `final_defence`, `final_speed`, `final_max_mana`).
+- **`EquipmentComponent`** (`src/components/equipment_component.gd`): Slot registry managing item equipping and driving `CharacterStatsComponent` stat modifiers.
+- **`InventoryComponent`** (`src/components/inventory_component.gd`): Item container on Player and entities with serialization.
+- **`Player`** (`src/entities/player.gd`): Full character state machine (`ALIVE`, `DEAD`, `STUNNED`, `CASTING`), 4/8-direction `facing_direction` tracking, `is_moving()` and `is_alive()` helpers, delegating serialization.
+- **`Enemy`** (`src/entities/enemy.gd`): AI patrol/aggro states, combat execution, XP reward on defeat.
+- **`ItemDefinition` & `ItemPickup`**: Categorized resources, world pickups.
+- **`QuestDefinition`**: Data stub for quests.
+- **`DamageCalculator`**: Stat arithmetic and XP reward scaling.
+- **`HUD`**: Signal-bound HP, Level, and XP indicators.
+
 
 
 ## In Progress

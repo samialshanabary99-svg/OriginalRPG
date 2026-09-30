@@ -1,31 +1,24 @@
 # TODO
 
-## Phase 2 — RPG Systems (Not yet started)
+## Phase 3 — Save/Load & Persistence (Next)
 
-- **Task: Expand Player Stats Model**
-  - Goal: Add `attack`, `defence`, `level`, `experience` to `StatsComponent` or create a dedicated `CharacterStatsComponent`.
-  - Scope: `src/components/`, `src/core/`.
-  - Acceptance Criteria: Stats are exported, serializable, and emit change signals.
+- **Task: Save/Load Service (SaveService)**
+  - Goal: Implement JSON save/load service adhering to ADR-003 with versioning, checksum/validation, and atomic file replacement (`user://save.json`).
+  - Scope: `src/services/save_service.gd`.
+  - Dependencies: `Player.serialize()`, `CharacterStatsComponent.serialize()`, `InventoryComponent.serialize()`, `EquipmentComponent.serialize()`.
+  - Acceptance Criteria: Roundtrip persistence test in test runner; handles missing or corrupt files safely with default fallback.
 
-- **Task: Basic Enemy Entity**
-  - Goal: Create `scenes/entities/enemy.tscn` (`CharacterBody2D`) with idle/patrol state machine and aggro detection (Area2D).
-  - Scope: `src/entities/enemy.gd`, `scenes/entities/`.
-  - Dependencies: `StatsComponent`.
+- **Task: UI Integration for Save/Load & Character Details**
+  - Goal: Add Save/Load buttons to Main Menu and Pause Menu; add Character Sheet window to display Player attributes, Mana, and equipped gear.
+  - Scope: `scenes/ui/`, `src/ui/`.
+  - Acceptance Criteria: Player can trigger save from pause menu; loading game restores character position, stats, inventory, and equipment.
 
-- **Task: Combat — Melee Attack**
-  - Goal: Player can press Attack input; triggers hit detection on enemy; `DamageCalculator` resolves; enemy HP drops; enemy dies.
-  - Scope: `src/entities/`, `src/services/damage_calculator.gd`.
-  - Dependencies: Enemy Entity task.
+## Phase 4 — Content Expansion & Advanced Systems
 
-- **Task: Item Pickup**
-  - Goal: Create `ItemPickup` scene extending `Interactable`. On interact, adds `ItemDefinition` to player inventory slot.
-  - Scope: `src/entities/item_pickup.gd`, `scenes/objects/`.
-  - Dependencies: `InteractorComponent`, `ItemDefinition`.
+- **Task: Equipment Stat Calculation Binding**
+  - Goal: Extend `ItemDefinition` with `stat_bonuses` dictionary so equipped weapons/armour automatically pass bonuses to `EquipmentComponent` and `CharacterStatsComponent`.
+  - Scope: `src/core/item_definition.gd`, `data/items/`.
 
-- **Task: Inventory Component**
-  - Goal: Create `InventoryComponent` (Node) with typed `Array[ItemDefinition]` storage, add/remove/has methods, serialization.
-  - Scope: `src/components/inventory_component.gd`.
-
-- **Task: Quest Log Stub (Data Only)**
-  - Goal: Define `QuestDefinition` Resource with id, title, description, state enum. Load from `data/quests/`. No runtime UI yet.
-  - Scope: `src/core/quest_definition.gd`, `data/quests/`.
+- **Task: Skills & Spellcasting System**
+  - Goal: Implement skill execution consuming Mana via `CharacterStatsComponent.spend_mana()` with casting state (`CharacterState.CASTING`).
+  - Scope: `src/core/skill_definition.gd`, `src/components/skills_component.gd`.

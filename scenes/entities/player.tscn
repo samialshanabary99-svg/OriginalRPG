@@ -1,9 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://player_scene"]
+[gd_scene load_steps=9 format=3 uid="uid://player_scene"]
 
 [ext_resource type="Script" path="res://src/entities/player.gd" id="1_player"]
 [ext_resource type="Script" path="res://src/components/character_stats_component.gd" id="2_char_stats"]
 [ext_resource type="Script" path="res://src/components/interactor_component.gd" id="3_interactor"]
 [ext_resource type="Texture2D" uid="uid://icon" path="res://icon.svg" id="4_icon"]
+[ext_resource type="Script" path="res://src/components/inventory_component.gd" id="5_inventory"]
+[ext_resource type="Script" path="res://src/components/equipment_component.gd" id="6_equipment"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
 radius = 12.0
@@ -35,8 +37,16 @@ zoom = Vector2(2.0, 2.0)
 [node name="CharacterStatsComponent" type="Node" parent="."]
 script = ExtResource("2_char_stats")
 max_health = 100
-attack = 10
-defence = 5
+base_attack = 10
+base_defence = 5
+base_max_mana = 50
+
+[node name="InventoryComponent" type="Node" parent="."]
+script = ExtResource("5_inventory")
+capacity = 20
+
+[node name="EquipmentComponent" type="Node" parent="."]
+script = ExtResource("6_equipment")
 
 [node name="InteractorComponent" type="Area2D" parent="."]
 collision_layer = 0
