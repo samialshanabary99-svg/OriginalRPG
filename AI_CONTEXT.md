@@ -16,12 +16,13 @@ AI-first with manual supervision and manual asset work where needed.
 Multiple AI tools may be used across the project's lifetime, but only one agent actively edits the project at a time.
 
 ## Current State
-**Data-Driven Content Architecture complete and stable. 219/219 automated tests pass.**
-- Centralized `ContentRegistry` loads, validates, and serves `CharacterDefinition`, `EnemyDefinition`, `ItemDefinition`, and `SkillDefinition`.
-- Structured JSON definitions reside in `res://data/{characters,enemies,items,skills}/`.
+**AI-Assisted Asset Pipeline & Content Architecture complete and stable. 237/237 automated tests pass.**
+- Formal AI-assisted asset pipeline documented in `docs/assets/ASSET_PIPELINE.md` with complete manifest in `docs/assets/ASSET_MANIFEST.md`.
+- Automated asset validation via `AssetValidator`, `scripts/validate_assets.gd`, and `scripts/validate_assets.ps1`.
+- Centralized `ContentRegistry` loads, validates, and serves definitions from `res://data/{characters,enemies,items,skills}/`.
 - New enemies and archetypes instantiated directly from data via `Enemy.init_from_id()` and `Player.init_from_character_id()`.
 - Player skills system operational via `Player.try_use_skill()`.
-- All 219 automated tests pass across 17 groups.
+- All 237 automated tests pass across 18 groups.
 - Standalone executable `build/OriginalRPG.exe` built and synchronized to `C:\Users\SAMI\Desktop\ProjectZero\OriginalRPG.exe`.
 
 

@@ -38,6 +38,10 @@
   - **Date:** 2026-10-01
   - **Agent:** Antigravity (Data & Content Architecture)
   - **Result:** Formalized and accepted ADR-004. Designed and implemented data-driven content pipeline using typed Resources (`EnemyDefinition`, `ItemDefinition`, `SkillDefinition`, `CharacterDefinition`) backed by structured JSON files in `res://data/` and loaded by `ContentRegistry`. Implemented strict schema validation detecting malformed definitions. Wired dynamic entity instantiation (`Enemy.init_from_id()`, `Player.try_use_skill()`, `InventoryComponent.add_item_by_id()`). Created example data for 2 enemies, 5 items, 2 skills, and 2 character archetypes. Expanded test runner with 56 new assertions across Group Q, reaching 219/219 passing tests. Rebuilt and smoke-tested standalone Windows executable. Reference changelog: `docs/changelog/2026-10-01-data-driven-content-architecture.md`.
+- **AI-Assisted Asset Pipeline & Manifest System**
+  - **Date:** 2026-10-01
+  - **Agent:** Antigravity (Asset Pipeline)
+  - **Result:** Established formal AI-assisted asset pipeline specification (`docs/assets/ASSET_PIPELINE.md`), standardized directory hierarchy, naming conventions, dimension tiers, and RGBA transparency standards. Rebuilt comprehensive asset manifest (`docs/assets/ASSET_MANIFEST.md`) with 100% disk asset coverage and planned stubs. Implemented automated asset validator (`AssetValidator`, `scripts/validate_assets.gd`, `scripts/validate_assets.ps1`) detecting format, naming, dimension, transparency, and manifest coverage failures. Added Group R tests (18 assertions) reaching 237/237 passing tests. Rebuilt and verified standalone Windows executable. Reference changelog: `docs/changelog/2026-10-01-ai-asset-pipeline.md`.
 
 
 

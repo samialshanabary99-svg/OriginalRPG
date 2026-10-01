@@ -39,6 +39,9 @@ func _init() -> void:
 	# Data-Driven Content Architecture & Validation
 	_test_data_driven_content()
 
+	# AI-Assisted Asset Pipeline & Validator
+	_test_asset_pipeline_validation()
+
 	print("")
 	print("[TestRunner] ─────────────────────────────────────────")
 	print("[TestRunner] %d tests | %d failures" % [_total, _failed])
@@ -794,6 +797,68 @@ func _test_data_driven_content() -> void:
 	# Cleanup
 	p.queue_free()
 	goblin_instance.queue_free()
+
+func _test_asset_pipeline_validation() -> void:
+	print("\n[Group R] AI-Assisted Asset Pipeline & Validator")
+
+	# 1. Directory validation of existing assets
+	var dir_res: Dictionary = AssetValidator.validate_directory("res://assets")
+	_ok("Existing assets directory passes validation", bool(dir_res.get("valid", false)))
+	_ok("At least 40 asset files checked", int(dir_res.get("files_checked", 0)) >= 40)
+	_ok("Zero asset directory errors", (dir_res.get("errors", []) as Array).is_empty())
+
+	# 2. Manifest coverage validation
+	var manifest_res: Dictionary = AssetValidator.check_manifest_coverage("res://assets", "docs/assets/ASSET_MANIFEST.md")
+	_ok("Asset manifest file exists and is valid", bool(manifest_res.get("valid", false)))
+	_ok("Zero unmanifested assets on disk", int(manifest_res.get("missing_count", -1)) == 0)
+
+	# 3. Naming convention unit tests
+	var name_space_errs: Array[String] = AssetValidator.check_naming_convention("goblin scout.png")
+	_ok("Validator flags whitespace in filename", not name_space_errs.is_empty())
+
+	var name_upper_errs: Array[String] = AssetValidator.check_naming_convention("GoblinScout.png")
+	_ok("Validator flags uppercase characters in filename", not name_upper_errs.is_empty())
+
+	var name_symbol_errs: Array[String] = AssetValidator.check_naming_convention("goblin@scout!.png")
+	_ok("Validator flags special characters in filename", not name_symbol_errs.is_empty())
+
+	var name_valid_errs: Array[String] = AssetValidator.check_naming_convention("goblin_scout_idle_001.png")
+	_ok("Validator accepts valid snake_case filename", name_valid_errs.is_empty())
+
+	var dir_valid_errs: Array[String] = AssetValidator.check_naming_convention("south-west")
+	_ok("Validator accepts hyphenated directional name", dir_valid_errs.is_empty())
+
+	# 4. Format & extension checks
+	var jpg_res: Dictionary = AssetValidator.validate_file("res://assets/test_asset.jpg")
+	_ok("Validator rejects .jpg image format", not bool(jpg_res.get("valid", true)))
+
+	var bmp_res: Dictionary = AssetValidator.validate_file("res://assets/test_asset.bmp")
+	_ok("Validator rejects .bmp image format", not bool(bmp_res.get("valid", true)))
+
+	var exe_res: Dictionary = AssetValidator.validate_file("res://assets/test_asset.exe")
+	_ok("Validator rejects executable in assets", not bool(exe_res.get("valid", true)))
+
+	# 5. Icon dimension checks
+	var test_img_non_square := Image.create(32, 48, false, Image.FORMAT_RGBA8)
+	var icon_rect_errs: Array[String] = AssetValidator.check_image_properties(test_img_non_square, "res://assets/icons/items/test_icon.png")
+	_ok("Validator rejects non-square icon", icon_rect_errs.any(func(e: String) -> bool: return e.contains("not square")))
+
+	var test_img_odd_size := Image.create(50, 50, false, Image.FORMAT_RGBA8)
+	var icon_odd_errs: Array[String] = AssetValidator.check_image_properties(test_img_odd_size, "res://assets/icons/items/test_icon.png")
+	_ok("Validator rejects non-standard icon size (50x50)", icon_odd_errs.any(func(e: String) -> bool: return e.contains("standard icon size")))
+
+	var test_img_valid_icon := Image.create(32, 32, false, Image.FORMAT_RGBA8)
+	var icon_valid_errs: Array[String] = AssetValidator.check_image_properties(test_img_valid_icon, "res://assets/icons/items/test_icon.png")
+	_ok("Validator accepts 32x32 RGBA8 square icon", icon_valid_errs.is_empty())
+
+	# 6. Transparency format checks
+	var test_img_rgb_no_alpha := Image.create(32, 32, false, Image.FORMAT_RGB8)
+	var no_alpha_errs: Array[String] = AssetValidator.check_image_properties(test_img_rgb_no_alpha, "res://assets/sprites/player/test.png")
+	_ok("Validator rejects image lacking alpha channel (RGB8)", no_alpha_errs.any(func(e: String) -> bool: return e.contains("alpha channel")))
+
+	# 7. Unmanifested asset detection
+	var missing_test: Dictionary = AssetValidator.check_manifest_coverage("res://assets", "docs/assets/nonexistent_manifest.md")
+	_ok("check_manifest_coverage detects missing manifest file", not bool(missing_test.get("valid", true)))
 
 
 
