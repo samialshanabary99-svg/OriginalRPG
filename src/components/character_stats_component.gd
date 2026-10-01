@@ -27,6 +27,7 @@ signal stats_recomputed()
 
 # ── Base stats (grow each level) ──────────────────────────────────────────────
 @export_group("Base Stats")
+@export var base_max_health: int = 100
 @export var base_attack: int    = 10
 @export var base_defence: int   = 5
 @export var base_speed: int     = 10   ## Logical speed rating (not pixel move_speed)
@@ -58,6 +59,8 @@ func _ready() -> void:
 	# Apply definition if provided
 	if definition != null:
 		_apply_definition()
+	elif base_max_health == 100 and max_health != 100:
+		base_max_health = max_health
 	_recompute_final_stats()
 	super._ready()             # StatsComponent sets current_health = max_health
 	current_mana = final_max_mana
@@ -66,7 +69,8 @@ func _ready() -> void:
 ## Apply CharacterDefinition base values to this component.
 ## Called once at _ready if definition is set.
 func _apply_definition() -> void:
-	max_health        = definition.base_max_health
+	base_max_health   = definition.base_max_health
+	max_health        = base_max_health
 	base_max_mana     = definition.base_max_mana
 	base_attack       = definition.base_attack
 	base_defence      = definition.base_defence
@@ -94,7 +98,7 @@ func _recompute_final_stats() -> void:
 
 	# HP max may grow from equipment — clamp current health to new max
 	var prev_max: int = max_health
-	max_health = max_health + mod_max_health  # base max_health is already level-grown
+	max_health = base_max_health + mod_max_health
 	if current_health > max_health:
 		current_health = max_health
 	if prev_max != max_health:
@@ -149,46 +153,49 @@ func _level_up() -> void:
 	level += 1
 	# Grow base stats from definition if available, else use fixed increments
 	if definition != null:
-		max_health    += definition.health_per_level
-		base_max_mana += definition.mana_per_level
-		base_attack   += definition.attack_per_level
-		base_defence  += definition.defence_per_level
+		base_max_health += definition.health_per_level
+		base_max_mana   += definition.mana_per_level
+		base_attack     += definition.attack_per_level
+		base_defence    += definition.defence_per_level
 	else:
-		max_health    += 10
-		base_max_mana += 5
-		base_attack   += 2
-		base_defence  += 1
+		base_max_health += 10
+		base_max_mana   += 5
+		base_attack     += 2
+		base_defence    += 1
+	_recompute_final_stats()
 	# Full restore on level-up (classic RPG feel)
 	set_health(max_health)
 	current_mana = final_max_mana
-	_recompute_final_stats()
 	level_up.emit(level)
 
 # ── Serialization ─────────────────────────────────────────────────────────────
 func serialize() -> Dictionary:
 	var base: Dictionary = super.serialize()
 	base.merge({
-		"base_attack":   base_attack,
-		"base_defence":  base_defence,
-		"base_speed":    base_speed,
-		"base_max_mana": base_max_mana,
-		"current_mana":  current_mana,
-		"level":         level,
-		"experience":    experience,
-		"xp_per_level":  xp_per_level,
+		"base_max_health": base_max_health,
+		"base_attack":     base_attack,
+		"base_defence":    base_defence,
+		"base_speed":      base_speed,
+		"base_max_mana":   base_max_mana,
+		"current_mana":    current_mana,
+		"level":           level,
+		"experience":      experience,
+		"xp_per_level":    xp_per_level,
 	})
 	return base
 
 func deserialize(data: Dictionary) -> void:
 	super.deserialize(data)
-	if data.has("base_attack"):   base_attack   = int(data["base_attack"])
-	if data.has("base_defence"):  base_defence  = int(data["base_defence"])
-	if data.has("base_speed"):    base_speed    = int(data["base_speed"])
-	if data.has("base_max_mana"): base_max_mana = int(data["base_max_mana"])
-	if data.has("current_mana"):  current_mana  = int(data["current_mana"])
-	if data.has("level"):         level         = int(data["level"])
-	if data.has("experience"):    experience    = int(data["experience"])
-	if data.has("xp_per_level"):  xp_per_level  = int(data["xp_per_level"])
+	if data.has("base_max_health"): base_max_health = int(data["base_max_health"])
+	elif data.has("max_health"):    base_max_health = int(data["max_health"])
+	if data.has("base_attack"):     base_attack     = int(data["base_attack"])
+	if data.has("base_defence"):    base_defence    = int(data["base_defence"])
+	if data.has("base_speed"):      base_speed      = int(data["base_speed"])
+	if data.has("base_max_mana"):   base_max_mana   = int(data["base_max_mana"])
+	if data.has("current_mana"):    current_mana    = int(data["current_mana"])
+	if data.has("level"):           level           = int(data["level"])
+	if data.has("experience"):      experience      = int(data["experience"])
+	if data.has("xp_per_level"):    xp_per_level    = int(data["xp_per_level"])
 	_recompute_final_stats()
 
 # ── Backwards compatibility shims ────────────────────────────────────────────

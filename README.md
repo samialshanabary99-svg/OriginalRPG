@@ -66,16 +66,18 @@ Some technical choices are deliberately undecided.
 | Engine | Godot 4 | Confirmed |
 | Initial game mode | Single-player | Confirmed |
 | Future multiplayer | Possible | Undecided architecture |
-| Programming language | Agent decision | Undecided |
-| Game architecture | Agent decision | Undecided |
-| Backend language | Agent decision | Undecided |
-| Database | Agent decision | Undecided |
-| Networking | Agent decision | Undecided |
-| Version control strategy | Git recommended | To be formalized |
+| Programming language | Statically typed GDScript (ADR-001) | Confirmed |
+| Game architecture | Hybrid Composition + Resource-Driven (ADR-002) | Confirmed |
+| Persistence architecture | Versioned structured JSON with atomic writes (ADR-003) | Confirmed |
+| Content architecture | Data-Driven Definitions with Schema Validation (ADR-004) | Confirmed |
+| Backend language | Undecided (deferred; not required for single-player) | Undecided |
+| Database | Undecided (deferred; not required for single-player) | Undecided |
+| Networking | Undecided (deferred until single-player proves stable) | Undecided |
+| Version control strategy | Git repository with Godot 4 .gitignore on main | Confirmed |
 | AI agents | Multiple AI tools | Confirmed |
 | Concurrent agents | One active agent at a time | Confirmed |
 | Art pipeline | AI + manual, primarily AI | Confirmed |
-| Asset manifest | Required | Confirmed |
+| Asset manifest | Required (docs/assets/ASSET_MANIFEST.md) | Confirmed |
 
 ### Important
 

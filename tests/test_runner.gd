@@ -483,6 +483,9 @@ func _test_equipment_modifiers() -> void:
 	_ok("remove_modifier restores final_attack", cs.final_attack == 10)
 	_ok("remove_modifier restores final_speed", cs.final_speed == 10)
 	_ok("Remaining modifier stays active", cs.final_defence == 11)
+	_ok("max_health does not accumulate on unrelated modifier removal", cs.max_health == 120)
+	cs.remove_modifier("shield_wood")
+	_ok("Removing health modifier restores base max_health", cs.max_health == 100)
 
 	# 2. EquipmentComponent slot management
 	var eq := EquipmentComponent.new()

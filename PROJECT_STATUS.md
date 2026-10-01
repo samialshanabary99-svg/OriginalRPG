@@ -1,7 +1,7 @@
 # Project Status
 
 ## Current Phase
-**AI-Assisted Asset Pipeline & Content Architecture Complete — 237/237 automated tests passing.**
+**Repository Audit & Documentation Alignment Complete — 239/239 automated tests passing.**
 
 ## Working Systems
 - All Phase 1 systems (Main Menu, Test World, Player, Camera, Interaction, HUD, scene transitions).
@@ -58,7 +58,8 @@ Not implemented. Architecture intentionally decoupled to support future headless
 
 ## Known Issues
 - Godot 4 executable located at `C:\Users\SAMI\Desktop\ProjectZero\Godot_v4.7.2-stable_win64_console.exe` — not on system `PATH`.
-- No sprite art yet; player and objects use the default Godot icon as a placeholder.
+- Non-player entities (Enemy, AncientMonument) still use placeholder `icon.svg` textures pending asset creation.
+- Damaging skills do not award XP on defeat (addressed in proposed ADR-005).
 
 ## Last Updated
-2026-10-01 (Agent-1 — Phase 1 Core Prototype Complete)
+2026-10-01 (Antigravity — Senior QA & Architecture Review Audit Complete)

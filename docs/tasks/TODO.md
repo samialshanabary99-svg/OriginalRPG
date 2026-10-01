@@ -15,10 +15,19 @@
 
 ## Phase 4 — Content Expansion & Advanced Systems
 
-- **Task: Equipment Stat Calculation Binding**
-  - Goal: Extend `ItemDefinition` with `stat_bonuses` dictionary so equipped weapons/armour automatically pass bonuses to `EquipmentComponent` and `CharacterStatsComponent`.
-  - Scope: `src/core/item_definition.gd`, `data/items/`.
+- **Task: Unified Skill Combat Resolution (ADR-005)**
+  - Goal: Route damaging skills through `DamageCalculator.resolve_attack()`, ensuring uniform combat events and XP awards upon defeat.
+  - Scope: `src/entities/player.gd`, `src/services/damage_calculator.gd`.
+  - Acceptance Criteria: Defeating an enemy with `fireball` awards XP to player and emits `combat_resolved`.
 
-- **Task: Skills & Spellcasting System**
-  - Goal: Implement skill execution consuming Mana via `CharacterStatsComponent.spend_mana()` with casting state (`CharacterState.CASTING`).
-  - Scope: `src/core/skill_definition.gd`, `src/components/skills_component.gd`.
+- **Task: Additional Maps & Dungeons**
+  - Goal: Create multi-room or tiled dungeon map with collision boundaries and environment tiles adhering to `docs/assets/ASSET_PIPELINE.md`.
+  - Scope: `scenes/maps/`, `assets/tiles/`.
+
+- **Task: NPCs & Interactive Dialogue System**
+  - Goal: Create NPC entities using `Interactable` component with branching dialogue data.
+  - Scope: `src/entities/npc.gd`, `data/dialogues/`.
+
+- **Task: QuestLog Runtime Component**
+  - Goal: Implement runtime tracker for `QuestDefinition` resources with objective completion and reward distribution.
+  - Scope: `src/components/quest_log_component.gd`.

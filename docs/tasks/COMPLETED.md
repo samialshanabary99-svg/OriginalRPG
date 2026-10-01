@@ -42,6 +42,10 @@
   - **Date:** 2026-10-01
   - **Agent:** Antigravity (Asset Pipeline)
   - **Result:** Established formal AI-assisted asset pipeline specification (`docs/assets/ASSET_PIPELINE.md`), standardized directory hierarchy, naming conventions, dimension tiers, and RGBA transparency standards. Rebuilt comprehensive asset manifest (`docs/assets/ASSET_MANIFEST.md`) with 100% disk asset coverage and planned stubs. Implemented automated asset validator (`AssetValidator`, `scripts/validate_assets.gd`, `scripts/validate_assets.ps1`) detecting format, naming, dimension, transparency, and manifest coverage failures. Added Group R tests (18 assertions) reaching 237/237 passing tests. Rebuilt and verified standalone Windows executable. Reference changelog: `docs/changelog/2026-10-01-ai-asset-pipeline.md`.
+- **Senior QA & Architecture Review Audit**
+  - **Date:** 2026-10-01
+  - **Agent:** Antigravity (Senior QA & Architecture Review)
+  - **Result:** Conducted an exhaustive repository audit across Code, Scenes, Architecture, Documentation, and Change History. Identified and fixed a HIGH-severity mathematical accumulation bug in `CharacterStatsComponent.max_health` where adding/removing modifiers compounded `max_health` indefinitely. Fixed signal declaration convention placement in `Enemy`. Proposed ADR-005 for unified skill combat resolution. Aligned `ARCHITECTURE.md`, `README.md`, `ROADMAP.md`, `PROJECT_STATUS.md`, `AI_CONTEXT.md`, and `docs/tasks/TODO.md` with repository reality. Added regression test coverage bringing test suite to 239/239 passing assertions across 18 groups. Generated comprehensive audit report (`docs/reports/2026-10-01-repository-audit.md`). Rebuilt and smoke-tested standalone Windows executable. Reference changelog: `docs/changelog/2026-10-01-repository-audit-and-doc-alignment.md`.
 
 
 

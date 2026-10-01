@@ -7,6 +7,7 @@ extends CharacterBody2D
 ## On death: grants XP to player, removes self from scene.
 
 signal enemy_died(enemy: Enemy)
+signal targeted(enemy: Enemy)
 
 enum State { IDLE, PATROL, AGGRO, DEAD }
 
@@ -96,8 +97,6 @@ func _tick_aggro(_delta: float) -> void:
 		velocity = to_player.normalized() * move_speed
 		_flip_sprite(velocity.x)
 		move_and_slide()
-
-signal targeted(enemy: Enemy)
 
 func is_targetable() -> bool:
 	var s: CharacterStatsComponent = stats if stats != null else get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent

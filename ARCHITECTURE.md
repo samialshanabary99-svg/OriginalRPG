@@ -12,16 +12,26 @@ Early-stage and intentionally flexible.
 - Scripting Language: Statically typed GDScript ([ADR-001](docs/decisions/ADR-001-scripting-language.md))
 - Core Game & Data Architecture: Hybrid Composition + Resource-Driven Architecture ([ADR-002](docs/decisions/ADR-002-game-and-data-architecture.md))
 - Save/Load Architecture: Versioned structured JSON with atomic file writing ([ADR-003](docs/decisions/ADR-003-save-load-architecture.md))
+- Content Architecture: Data-Driven Definitions with Strict Schema Validation ([ADR-004](docs/decisions/ADR-004-data-driven-content-architecture.md))
 - Technical Conventions: Established in `docs/PROJECT_CONVENTIONS.md`
+
+## Proposed Decisions
+- Unified Combat & Skill Resolution Architecture ([ADR-005](docs/decisions/ADR-005-unified-skill-combat-resolution.md))
 
 ## Verified Existing Architecture
 - **Governance & Documentation System:** Multi-agent coordination protocols, templates, and task tracking directories exist under `docs/`.
-- **Engine Baseline:** Godot 4.7.2 Forward+ project initialized with `project.godot`, standard directory boundaries (`src/`, `scenes/`, `assets/`, `data/`, `tests/`), and startup scene `scenes/test_main.tscn`.
+- **Engine Baseline:** Godot 4.7.2 Forward+ project initialized with `project.godot`, standard directory boundaries (`src/`, `scenes/`, `assets/`, `data/`, `tests/`), and main scene `scenes/ui/main_menu.tscn`.
 - **Core Models & Components:**
-  - `ItemDefinition` (`src/core/item_definition.gd`): Custom `Resource` template for item definitions.
-  - `DamageCalculator` (`src/services/damage_calculator.gd`): Pure static service for decoupled combat arithmetic.
-  - `StatsComponent` (`src/components/stats_component.gd`): Reusable entity component for attributes, damage, healing, and JSON serialization.
-- **Testing Framework:** Headless test runner script (`tests/test_runner.gd`) executing 123 automated unit tests across 14 groups.
+  - `ItemDefinition` (`src/core/item_definition.gd`): Custom `Resource` template with equipment slots and stat modifiers.
+  - `EnemyDefinition` (`src/core/enemy_definition.gd`): Data-driven archetype for enemy AI, combat ratings, visual tint, and XP awards.
+  - `SkillDefinition` (`src/core/skill_definition.gd`): Data-driven archetype for skill costs, powers, target types, and cooldowns.
+  - `CharacterDefinition` (`src/core/character_definition.gd`): Player archetype with base attributes and level growth formulas.
+  - `DamageCalculator` (`src/services/damage_calculator.gd`): Pure static service for deterministic combat calculations.
+  - `ContentRegistry` (`src/services/content_registry.gd`): Central cache and schema validator loading data from `res://data/`.
+  - `AssetValidator` (`src/services/asset_validator.gd`): Pipeline validator enforcing format, naming, transparency, dimensions, and manifest registration.
+  - `StatsComponent` (`src/components/stats_component.gd`): Entity component for health, damage, healing, and JSON serialization.
+  - `CharacterStatsComponent` (`src/components/character_stats_component.gd`): Progression, mana pool, and dynamic additive stat modifiers with clean `base_max_health` decoupling.
+- **Testing Framework:** Headless test runner script (`tests/test_runner.gd`) executing 239 automated unit and regression tests across 18 groups.
 
 ## Player Character Architecture
 The player architecture follows a modular composition pattern using a `CharacterBody2D` host node composed of independent, decoupled components:
@@ -105,8 +115,38 @@ ATTACKER RECEIVES RESULT (combat_resolved signal, XP reward if defeated)
    - **Status Effects:** `CombatResult` can carry applied effect payloads (e.g. burn, poison, stun).
    - **Player Progression:** Defeat events automatically forward XP rewards into `CharacterStatsComponent.gain_experience()`.
 
+## Data-Driven Content Pipeline & ContentRegistry
+Per [ADR-004](docs/decisions/ADR-004-data-driven-content-architecture.md), all gameplay definitions are decoupled into structured JSON files under `res://data/` and loaded into strongly-typed `Resource` models by `ContentRegistry` (`src/services/content_registry.gd`):
 
+- **Categories & Paths:**
+  - Characters: `res://data/characters/*.json` → `CharacterDefinition`
+  - Enemies: `res://data/enemies/*.json` → `EnemyDefinition`
+  - Items: `res://data/items/*.json` → `ItemDefinition`
+  - Skills: `res://data/skills/*.json` → `SkillDefinition`
+- **Validation:**
+  - `ContentRegistry.load_all()` scans all JSON files and validates identifiers, non-empty strings, positive health/power/costs, and slot requirements.
+  - Entities instantiate directly from data without code modifications:
+    - `Enemy.init_from_id("goblin_scout")` or `Enemy.init_from_definition(def)`
+    - `Player.init_from_character_id("mage_apprentice")`
+    - `InventoryComponent.add_item_by_id("potion_health")`
+- **Immutability:**
+  - Loaded definitions are cached in static registries and treated as immutable shared templates at runtime.
 
+## Player Visual & Animation Presentation
+The player character uses an 8-directional animated presentation layer:
+- **`AnimatedSprite2D`**: Driven by `assets/sprites/player/player_sprite_frames.tres` (4 frames per direction looping at 5 FPS).
+- **Directional Mapping:** Mathematical 8-octant direction calculation in `Player.vector_to_direction_name(dir: Vector2)` maps continuous velocity angles to cardinal/diagonal states (`idle_south`, `idle_south-east`, etc.).
+- **Backward Compatibility:** Preserves hidden fallback `Sprite2D` node for compatibility with legacy test assertions.
+
+## AI-Assisted Asset Pipeline & Manifest System
+All game assets adhere to strict pipeline standards documented in `docs/assets/ASSET_PIPELINE.md`:
+- **Asset Manifest:** Every non-metadata asset is catalogued in `docs/assets/ASSET_MANIFEST.md` with dimensions, frame sizes, tool source, prompt references, and licenses.
+- **`AssetValidator` (`src/services/asset_validator.gd`):** Automated validation service verifying:
+  - Allowed file formats (`.png`, `.svg`, `.tres`, `.res`, `.json`).
+  - Strict `snake_case` naming (no uppercase, no spaces, no invalid characters).
+  - Power-of-two or standard dimension tiers (icons: 16/24/32/48/64/128; sprites: 16px grid multiples).
+  - Transparency integrity (RGBA8 alpha channel present).
+  - 100% manifest registration coverage.
 
 ### 4. Future Multiplayer & Networking (Exploratory / Deferred)
 - **Status:** Deferred until single-player core mechanics prove stable.
