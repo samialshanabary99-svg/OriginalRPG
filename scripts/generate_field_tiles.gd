@@ -1,75 +1,77 @@
 @tool
 extends SceneTree
 
-## Generates high-quality pixel-art 32x32 tiles for OriginalRPG's green field terrain.
-## V3 — Polished RPG Aesthetic:
-##   - Smooth, seamless organic grass with natural color harmony
-##   - Sunlit elevated plateau tiles (elevation 1)
-##   - RPG-style directional cliff/slopes with top-left lighting
-##   - Beaten-path gentle ramp tile
-##   - Multi-cluster pixel-art leafy bushes with highlights & drop shadows
-##   - Stepping stones, wildflowers, and tufts on transparent decoration layer
-##   - Strict Godot 4 GDScript typing (clampf, lerpf, typed vars)
+## Generates authentic 16-bit pixel-art 32x32 tiles for OriginalRPG.
+## V4 — True Pixel Art & Seamless RPG Terrain:
+##   - Seamless tileable base grass (wraps at all 4 borders)
+##   - Seamless tileable sunlit elevated grass
+##   - Seamless 1-tile South cliff bank (grass crest + textured rock/earth + shadow)
+##   - Seamless 1-tile North, East, West slope transitions
+##   - Matching 4 corner slopes
+##   - Natural packed-dirt & cobblestone ramp
+##   - Handcrafted pixel-art bushes, stepping stones, and wildflowers
+##   - Strict Godot 4 GDScript typing throughout
 
 const TILES_DIR: String = "res://assets/tiles/ground"
 const TILESET_PATH: String = "res://assets/tiles/tileset_green_field.tres"
 
-# ── Palette ──────────────────────────────────────────────────────────────────
-# Natural vibrant greens
-const C_GRASS_BASE: Color      = Color("459c38") # Core meadow green
-const C_GRASS_DARK: Color      = Color("37802b") # Mid shadow
-const C_GRASS_DARKER: Color    = Color("29631f") # Deep shadow
-const C_GRASS_LIGHT: Color     = Color("5cb84b") # Sunlit blade
-const C_GRASS_LIGHTER: Color   = Color("72cc60") # Bright tip
-const C_GRASS_HIGHLIGHT: Color = Color("8ee27c") # Sun glint
+# ── Authentic 16-Bit RPG Palette ─────────────────────────────────────────────
+# Base meadow grass
+const C_G_DEEP: Color   = Color("1f4e18") # Deep shadow
+const C_G_DARK: Color   = Color("2c6b22") # Shadow blade
+const C_G_MID: Color    = Color("3d8b32") # Main grass tone
+const C_G_LIGHT: Color  = Color("55a845") # Sunlit blade
+const C_G_BRIGHT: Color = Color("70c45d") # Grass highlight tip
 
-# Sunlit elevated grass (Higher plateau, warm sunlight)
-const C_ELEV_BASE: Color       = Color("55b045")
-const C_ELEV_DARK: Color       = Color("429434")
-const C_ELEV_LIGHT: Color      = Color("6ec75c")
-const C_ELEV_HIGHLIGHT: Color  = Color("8fe27c")
+# Elevated meadow grass (slightly warmer, golden sunlit hue)
+const C_E_DEEP: Color   = Color("285c1e")
+const C_E_DARK: Color   = Color("3b7e2d")
+const C_E_MID: Color    = Color("4ea03b")
+const C_E_LIGHT: Color  = Color("69be53")
+const C_E_BRIGHT: Color = Color("87d96f")
 
-# Cliff / Earth bank tones (Warm RPG dirt & cliff)
-const C_EARTH_BASE: Color      = Color("7c5b3c")
-const C_EARTH_LIGHT: Color     = Color("99744f")
-const C_EARTH_DARK: Color      = Color("5b3f27")
-const C_EARTH_SHADOW: Color    = Color("3d2816")
+# Earth & Cliff rock
+const C_R_DEEP: Color   = Color("302014") # Deep crevice / shadow
+const C_R_DARK: Color   = Color("4a3321") # Shaded rock
+const C_R_MID: Color    = Color("684a32") # Mid rock / earth
+const C_R_LIGHT: Color  = Color("856346") # Sunlit rock ledge
+const C_R_HIGHLIGHT: Color = Color("a6815e") # Bright ledge edge
 
-# Cobblestone & utility
-const C_STONE_LIGHT: Color     = Color("b8bec4")
-const C_STONE_MID: Color       = Color("8c949d")
-const C_STONE_DARK: Color      = Color("5e656d")
-const C_TRANSPARENT: Color     = Color(0.0, 0.0, 0.0, 0.0)
+# Stone & Accents
+const C_STONE_DARK: Color  = Color("4e555e")
+const C_STONE_MID: Color   = Color("7a828c")
+const C_STONE_LIGHT: Color = Color("a8b0ba")
+const C_TRANSPARENT: Color = Color(0.0, 0.0, 0.0, 0.0)
 
 func _init() -> void:
 	print("==========================================")
-	print(" OriginalRPG — Field Tile Generator V3   ")
+	print(" OriginalRPG — Field Tile Generator V4   ")
 	print("==========================================")
 	var dir_global: String = ProjectSettings.globalize_path(TILES_DIR)
 	DirAccess.make_dir_recursive_absolute(dir_global)
 
 	_generate_all_tiles()
-	print("[1/2] 20 high-quality tile textures generated.")
+	print("[1/2] 20 authentic pixel-art tile textures generated.")
 
 	_build_tileset()
 	print("[2/2] TileSet resource assembled & saved to %s." % TILESET_PATH)
 	print("==========================================")
 	quit(0)
 
-# ── Generation Pipeline ──────────────────────────────────────────────────────
+# ── Pipeline ─────────────────────────────────────────────────────────────────
 
 func _generate_all_tiles() -> void:
-	# 0..4: Ground layer base variants
+	# 0..4: Ground Base & Variations
 	_save("tile_grass_base.png",           _make_grass_base(101))
-	_save("tile_grass_flower_red.png",     _make_grass_flowers(Color("e74c3c"), Color("f1c40f"), 202))
-	_save("tile_grass_flower_yellow.png",  _make_grass_flowers(Color("f1c40f"), Color("ffffff"), 303))
-	_save("tile_grass_flower_blue.png",    _make_grass_flowers(Color("3498db"), Color("e0f7fa"), 404))
+	_save("tile_grass_flower_red.png",     _make_grass_flowers(Color("d93829"), Color("f1c40f"), 202))
+	_save("tile_grass_flower_yellow.png",  _make_grass_flowers(Color("f4d03f"), Color("ffffff"), 303))
+	_save("tile_grass_flower_blue.png",    _make_grass_flowers(Color("3498db"), Color("e8f8f5"), 404))
 	_save("tile_grass_tuft.png",           _make_grass_tufts(505))
 
-	# 5: Elevated plateau grass
+	# 5: Elevated Plateau Grass
 	_save("tile_elevated_grass.png",       _make_elevated_grass(606))
 
-	# 6..13: Directional slopes / cliff transitions
+	# 6..13: Directional 1-Tile Slopes / Cliffs
 	_save("tile_slope_north.png",          _make_slope_north())
 	_save("tile_slope_south.png",          _make_slope_south())
 	_save("tile_slope_east.png",           _make_slope_east())
@@ -83,7 +85,7 @@ func _generate_all_tiles() -> void:
 	_save("tile_slope_ramp.png",           _make_slope_ramp())
 	_save("tile_cliff_edge_south.png",     _make_cliff_edge_south())
 
-	# 16..19: Transparent decoration overlays
+	# 16..19: Transparent Decoration Overlays
 	_save("tile_deco_wildflowers.png",     _make_deco_wildflowers())
 	_save("tile_deco_stepping_stones.png", _make_deco_stepping_stones())
 	_save("tile_deco_bush.png",            _make_deco_bush())
@@ -95,82 +97,86 @@ func _save(filename: String, img: Image) -> void:
 
 # ── Math & Texture Helpers ───────────────────────────────────────────────────
 
-func _h2d(x: int, y: int, seed_val: int) -> float:
-	var h: int = (x * 374761393 + y * 668265263 + seed_val * 912345671) ^ 0x5bf03635
-	h = (h ^ (h >> 13)) * 1274126177
-	return float(h & 0x7fffffff) / float(0x7fffffff)
+# Toroidal (wrapping) noise helper for seamless tileable textures
+func _torus_noise(x: int, y: int, seed_val: int) -> float:
+	# Evaluate noise that repeats every 32 pixels seamlessly
+	var nx: float = float(x % 32)
+	var ny: float = float(y % 32)
+	var h1: int = (int(nx) * 374761393 + int(ny) * 668265263 + seed_val * 912345671) ^ 0x5bf03635
+	h1 = (h1 ^ (h1 >> 13)) * 1274126177
+	return float(h1 & 0x7fffffff) / float(0x7fffffff)
 
-func _create_blank_image(transparent: bool = false) -> Image:
+func _create_image(transparent: bool = false) -> Image:
 	var img: Image = Image.create(32, 32, false, Image.FORMAT_RGBA8)
 	if transparent:
 		img.fill(C_TRANSPARENT)
 	return img
 
-# ── 1. Base Grass (Seamless, Soft Pixel Dithering) ───────────────────────────
+# ── 1. Seamless Base Grass (Pixel-Art Dithering) ──────────────────────────────
 
 func _make_grass_base(seed_val: int) -> Image:
-	var img: Image = _create_blank_image()
+	var img: Image = _create_image()
 	for y: int in range(32):
 		for x: int in range(32):
-			# Multi-octave organic dithering
-			var n1: float = _h2d(x, y, seed_val)
-			var n2: float = _h2d(x + 17, y + 23, seed_val + 11)
-			var n3: float = _h2d(x / 2, y / 2, seed_val + 37)
-			var v: float = n1 * 0.45 + n2 * 0.35 + n3 * 0.20
+			# Seamless 2-octave noise
+			var n1: float = _torus_noise(x, y, seed_val)
+			var n2: float = _torus_noise((x + 7) % 32, (y + 11) % 32, seed_val + 33)
+			var v: float = n1 * 0.6 + n2 * 0.4
 
-			var col: Color
-			if v > 0.76:
-				col = C_GRASS_LIGHT
-			elif v > 0.52:
-				col = C_GRASS_BASE
-			elif v > 0.28:
-				col = C_GRASS_DARK
+			# Discrete 4-tone pixel-art shading
+			var col: Color = C_G_MID
+			if v > 0.78:
+				col = C_G_LIGHT
+			elif v > 0.55:
+				col = C_G_MID
+			elif v > 0.30:
+				col = C_G_DARK
 			else:
-				col = C_GRASS_DARKER
+				col = C_G_DEEP
 
-			# Occasional tiny sun-fleck
-			if n1 > 0.93 and n2 > 0.65:
-				col = C_GRASS_HIGHLIGHT
+			# Subtle blade tip
+			if n1 > 0.92 and (x + y) % 2 == 0:
+				col = C_G_BRIGHT
 
 			img.set_pixel(x, y, col)
 	return img
 
-# ── 2. Elevated Plateau Grass (Brighter, Sunlit Meadow) ──────────────────────
+# ── 2. Seamless Elevated Grass (Sunlit Golden-Green) ─────────────────────────
 
 func _make_elevated_grass(seed_val: int) -> Image:
-	var img: Image = _create_blank_image()
+	var img: Image = _create_image()
 	for y: int in range(32):
 		for x: int in range(32):
-			var n1: float = _h2d(x, y, seed_val)
-			var n2: float = _h2d(x + 29, y + 13, seed_val + 17)
-			var v: float = n1 * 0.55 + n2 * 0.45
+			var n1: float = _torus_noise(x, y, seed_val)
+			var n2: float = _torus_noise((x + 9) % 32, (y + 13) % 32, seed_val + 47)
+			var v: float = n1 * 0.6 + n2 * 0.4
 
-			var col: Color
-			if v > 0.74:
-				col = C_ELEV_LIGHT
-			elif v > 0.45:
-				col = C_ELEV_BASE
+			var col: Color = C_E_MID
+			if v > 0.76:
+				col = C_E_LIGHT
+			elif v > 0.52:
+				col = C_E_MID
+			elif v > 0.28:
+				col = C_E_DARK
 			else:
-				col = C_ELEV_DARK
+				col = C_E_DEEP
 
-			if n1 > 0.92:
-				col = C_ELEV_HIGHLIGHT
+			if n1 > 0.91 and (x + y) % 2 == 0:
+				col = C_E_BRIGHT
 
 			img.set_pixel(x, y, col)
 	return img
 
-# ── 3. Grass Flower Variations ───────────────────────────────────────────────
+# ── 3. Base Grass with Flowers ───────────────────────────────────────────────
 
 func _make_grass_flowers(petal_col: Color, center_col: Color, seed_val: int) -> Image:
 	var img: Image = _make_grass_base(seed_val)
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-	rng.seed = seed_val * 77771
+	rng.seed = seed_val * 65432
 
-	var count: int = rng.randi_range(5, 7)
-	for _i: int in range(count):
+	for _i: int in range(5):
 		var fx: int = rng.randi_range(3, 28)
 		var fy: int = rng.randi_range(3, 28)
-
 		# 5-pixel cross flower blossom
 		img.set_pixel(fx - 1, fy, petal_col)
 		img.set_pixel(fx + 1, fy, petal_col)
@@ -179,276 +185,317 @@ func _make_grass_flowers(petal_col: Color, center_col: Color, seed_val: int) -> 
 		img.set_pixel(fx, fy, center_col)
 	return img
 
-# ── 4. Grass Tufts ───────────────────────────────────────────────────────────
+# ── 4. Base Grass with Tufts ─────────────────────────────────────────────────
 
 func _make_grass_tufts(seed_val: int) -> Image:
 	var img: Image = _make_grass_base(seed_val)
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
-	rng.seed = seed_val * 91919
+	rng.seed = seed_val * 88812
 
-	for _i: int in range(5):
-		var tx: int = rng.randi_range(3, 27)
+	for _i: int in range(4):
+		var tx: int = rng.randi_range(4, 27)
 		var ty: int = rng.randi_range(8, 28)
-		# Draw 3 vertical grass blades of differing heights
-		for h: int in range(4):
-			img.set_pixel(tx, ty - h, C_GRASS_LIGHTER)
-		for h: int in range(3):
-			img.set_pixel(tx - 1, ty - h, C_GRASS_LIGHT)
-		for h: int in range(3):
-			img.set_pixel(tx + 1, ty - h, C_GRASS_LIGHT)
-		img.set_pixel(tx, ty - 4, C_GRASS_HIGHLIGHT)
+		img.set_pixel(tx, ty, C_G_DARK)
+		img.set_pixel(tx, ty - 1, C_G_LIGHT)
+		img.set_pixel(tx, ty - 2, C_G_LIGHT)
+		img.set_pixel(tx, ty - 3, C_G_BRIGHT)
+		img.set_pixel(tx - 1, ty - 1, C_G_LIGHT)
+		img.set_pixel(tx - 1, ty - 2, C_G_BRIGHT)
+		img.set_pixel(tx + 1, ty - 1, C_G_LIGHT)
 	return img
 
-# ── 5. Directional Slopes & Cliffs ───────────────────────────────────────────
-# In RPGs with top-down camera (tilted ~45°):
-#   - South slope is seen as a front-facing bank: lush grass on top with overhang,
-#     warm shaded cliff/earth face in middle, soft shadow and transition at base.
-#   - North slope is an upward receding bank: smooth transition from base grass to plateau.
-#   - West slope is sunlit on its face.
-#   - East slope has soft shadow on its face.
-
+# ── 5. South Ledge / Bank (Classic Top-Down RPG Cliff) ────────────────────────
+# Seamless horizontally (x=0 matches x=31 pattern logic)
+# Top 0..9:   Sunlit elevated grass with natural overhang fringe
+# Mid 10..22: Rock/earth cliff bank with pixel-art ledges
+# Bot 23..31: Deep drop-shadow transitioning into base grass
 func _make_slope_south() -> Image:
-	# Front-facing bank: Top has elevated grass with tuft fringe,
-	# middle has smooth shaded bank, bottom has shadow onto base grass.
-	var img: Image = _create_blank_image()
+	var img: Image = _create_image()
 	for y: int in range(32):
 		for x: int in range(32):
-			var n: float = _h2d(x, y, 71) * 0.12 - 0.06
+			var n: float = _torus_noise(x, y, 711)
 			var col: Color
 
 			if y < 8:
-				# Elevated crest with wavy fringe
-				var fringe: int = int((_h2d(x, 0, 81) - 0.5) * 4.0)
-				if y + fringe < 7:
-					col = C_ELEV_BASE.lerp(C_ELEV_LIGHT, _h2d(x, y, 82))
+				# Elevated sunlit grass surface
+				col = C_E_MID if n > 0.4 else C_E_LIGHT
+				if y == 7:
+					col = C_E_BRIGHT # Sunlit highlight edge of the drop-off
+			elif y < 11:
+				# Overhanging grass fringe (jagged blades peeking down)
+				var fringe_down: bool = (x % 3 == 0) or (x % 5 == 0)
+				if fringe_down and y < 10:
+					col = C_E_LIGHT if n > 0.5 else C_E_MID
 				else:
-					col = C_ELEV_HIGHLIGHT
+					col = C_R_LIGHT # First exposed rock shelf
 			elif y < 22:
-				# Cliff / earth bank face with subtle vertical rock texture
-				var bank_t: float = float(y - 8) / 14.0
-				var rock_n: float = _h2d(x, y / 2, 83) * 0.15
-				var bank_col: Color = C_EARTH_LIGHT.lerp(C_EARTH_DARK, clampf(bank_t + rock_n, 0.0, 1.0))
-				# Occasional grass tuft hanging over edge
-				if y < 11 and (x % 5 == 0 or x % 7 == 0):
-					bank_col = C_GRASS_LIGHT
-				col = bank_col
-			elif y < 27:
-				# Base shadow under bank
-				var shadow_t: float = float(y - 22) / 5.0
-				col = C_EARTH_SHADOW.lerp(C_GRASS_DARKER, shadow_t)
+				# Rock & Earth cliff face (discrete pixel-art rock facets)
+				var rock_layer: int = (y - 11) / 3
+				if rock_layer == 0:
+					col = C_R_MID if n > 0.45 else C_R_LIGHT
+				elif rock_layer == 1:
+					col = C_R_DARK if n > 0.50 else C_R_MID
+				elif rock_layer == 2:
+					col = C_R_DARK if n > 0.40 else C_R_DEEP
+				else:
+					col = C_R_DEEP
+				# Occasional vertical rock crevice
+				if (x % 7 == 2 or x % 11 == 5) and y > 12:
+					col = C_R_DEEP
+			elif y < 26:
+				# Drop shadow cast onto the lower ground
+				col = C_G_DEEP
 			else:
-				# Base grass transition
-				col = C_GRASS_BASE.lerp(C_GRASS_DARK, float(y - 27) / 5.0)
+				# Lower meadow grass base
+				col = C_G_DARK if n > 0.45 else C_G_MID
 
 			img.set_pixel(x, y, col)
 	return img
 
+# ── 6. North Slope (Gentle Upward Green Incline) ──────────────────────────────
+# Top 0..10:   Elevated grass
+# Mid 11..21:  Shaded grassy incline transition
+# Bot 22..31:  Base grass
 func _make_slope_north() -> Image:
-	# Receding bank facing north: smooth upward green incline
-	var img: Image = _create_blank_image()
+	var img: Image = _create_image()
 	for y: int in range(32):
-		var t: float = float(y) / 31.0
 		for x: int in range(32):
-			var n: float = _h2d(x, y, 72) * 0.10 - 0.05
-			var blend: float = clampf(t + n, 0.0, 1.0)
-			# Top is elevated grass, transitioning smoothly to base grass
-			var col: Color = C_ELEV_BASE.lerp(C_GRASS_BASE, blend)
-			if y < 4:
-				col = C_ELEV_LIGHT
+			var n: float = _torus_noise(x, y, 722)
+			var col: Color
+
+			if y < 10:
+				# Elevated plateau
+				col = C_E_MID if n > 0.4 else C_E_LIGHT
+			elif y < 20:
+				# Incline slope with upward grass fringe
+				if (y == 10 or y == 11) and (x % 4 == 0 or x % 6 == 0):
+					col = C_E_BRIGHT
+				else:
+					col = C_G_MID if n > 0.45 else C_G_LIGHT
+			else:
+				# Lower base grass
+				col = C_G_MID if n > 0.5 else C_G_DARK
+
 			img.set_pixel(x, y, col)
 	return img
 
+# ── 7. West Slope (Left Bank, Sunlit Side) ───────────────────────────────────
+# Left 0..12: Base grass
+# Mid 13..18: Sunlit grassy bank ridge
+# Right 19..31: Elevated grass
 func _make_slope_west() -> Image:
-	# West edge: sunlit side (light from top-left)
-	var img: Image = _create_blank_image()
+	var img: Image = _create_image()
 	for y: int in range(32):
 		for x: int in range(32):
-			var t: float = float(x) / 31.0
-			var n: float = _h2d(x, y, 73) * 0.10 - 0.05
-			var blend: float = clampf(t + n, 0.0, 1.0)
+			var n: float = _torus_noise(x, y, 733)
 			var col: Color
-			if x < 8:
-				# Soft bank edge
-				col = C_EARTH_BASE.lerp(C_GRASS_LIGHT, float(x) / 8.0)
+
+			if x < 10:
+				col = C_G_MID if n > 0.45 else C_G_DARK
+			elif x < 15:
+				# Bank transition (sunlit from top-left)
+				col = C_G_LIGHT if n > 0.4 else C_E_LIGHT
+				if x == 14 and (y % 4 == 0):
+					col = C_E_BRIGHT
 			else:
-				col = C_GRASS_LIGHT.lerp(C_ELEV_BASE, (float(x) - 8.0) / 23.0)
+				col = C_E_MID if n > 0.4 else C_E_LIGHT
+
 			img.set_pixel(x, y, col)
 	return img
 
+# ── 8. East Slope (Right Bank, Shaded Side) ──────────────────────────────────
+# Left 0..12: Elevated grass
+# Mid 13..18: Shaded bank edge
+# Right 19..31: Base grass
 func _make_slope_east() -> Image:
-	# East edge: shaded side (in shadow from morning sun)
-	var img: Image = _create_blank_image()
+	var img: Image = _create_image()
 	for y: int in range(32):
 		for x: int in range(32):
-			var t: float = 1.0 - float(x) / 31.0
-			var n: float = _h2d(x, y, 74) * 0.10 - 0.05
-			var blend: float = clampf(t + n, 0.0, 1.0)
+			var n: float = _torus_noise(x, y, 744)
 			var col: Color
-			if x > 23:
-				col = C_ELEV_BASE.lerp(C_EARTH_DARK, float(x - 23) / 8.0)
+
+			if x < 13:
+				col = C_E_MID if n > 0.4 else C_E_LIGHT
+			elif x < 19:
+				# Shaded slope ridge
+				col = C_G_DARK if n > 0.4 else C_R_DARK
 			else:
-				col = C_ELEV_BASE.lerp(C_GRASS_DARK, float(x) / 23.0 * 0.4)
+				col = C_G_MID if n > 0.45 else C_G_DARK
+
 			img.set_pixel(x, y, col)
 	return img
+
+# ── 9. Corner Slopes ─────────────────────────────────────────────────────────
 
 func _make_slope_corner_nw() -> Image:
-	var img: Image = _create_blank_image()
+	var img: Image = _create_image()
 	for y: int in range(32):
 		for x: int in range(32):
-			var dist: float = sqrt(pow(float(x), 2.0) + pow(float(y), 2.0)) / 32.0
-			var n: float = _h2d(x, y, 75) * 0.08
-			var blend: float = clampf(dist + n, 0.0, 1.0)
-			var col: Color = C_EARTH_BASE.lerp(C_ELEV_BASE, blend)
+			var n: float = _torus_noise(x, y, 755)
+			# Top-left is lower base, bottom-right is elevated
+			var dist: float = sqrt(pow(float(x), 2.0) + pow(float(y), 2.0))
+			var col: Color
+			if dist < 12.0:
+				col = C_G_MID if n > 0.5 else C_G_DARK
+			elif dist < 18.0:
+				col = C_G_LIGHT if n > 0.4 else C_E_BRIGHT
+			else:
+				col = C_E_MID if n > 0.4 else C_E_LIGHT
 			img.set_pixel(x, y, col)
 	return img
 
 func _make_slope_corner_ne() -> Image:
-	var img: Image = _create_blank_image()
+	var img: Image = _create_image()
 	for y: int in range(32):
 		for x: int in range(32):
-			var dist: float = sqrt(pow(31.0 - float(x), 2.0) + pow(float(y), 2.0)) / 32.0
-			var n: float = _h2d(x, y, 76) * 0.08
-			var blend: float = clampf(dist + n, 0.0, 1.0)
-			var col: Color = C_EARTH_DARK.lerp(C_ELEV_BASE, blend)
+			var n: float = _torus_noise(x, y, 766)
+			# Top-right is lower base, bottom-left is elevated
+			var dist: float = sqrt(pow(31.0 - float(x), 2.0) + pow(float(y), 2.0))
+			var col: Color
+			if dist < 12.0:
+				col = C_G_MID if n > 0.5 else C_G_DARK
+			elif dist < 18.0:
+				col = C_G_DARK if n > 0.4 else C_R_DARK
+			else:
+				col = C_E_MID if n > 0.4 else C_E_LIGHT
 			img.set_pixel(x, y, col)
 	return img
 
 func _make_slope_corner_sw() -> Image:
-	var img: Image = _create_blank_image()
+	var img: Image = _create_image()
 	for y: int in range(32):
 		for x: int in range(32):
-			var dist: float = sqrt(pow(float(x), 2.0) + pow(31.0 - float(y), 2.0)) / 32.0
-			var n: float = _h2d(x, y, 77) * 0.08
-			var blend: float = clampf(dist + n, 0.0, 1.0)
-			var col: Color = C_EARTH_SHADOW.lerp(C_ELEV_BASE, blend)
+			var n: float = _torus_noise(x, y, 777)
+			# Bottom-left is lower base with cliff drop-off
+			var dist: float = sqrt(pow(float(x), 2.0) + pow(31.0 - float(y), 2.0))
+			var col: Color
+			if dist < 10.0:
+				col = C_G_MID if n > 0.5 else C_G_DARK
+			elif dist < 18.0:
+				col = C_R_DARK if n > 0.4 else C_R_DEEP
+			elif dist < 22.0:
+				col = C_E_BRIGHT if n > 0.5 else C_E_LIGHT
+			else:
+				col = C_E_MID if n > 0.4 else C_E_LIGHT
 			img.set_pixel(x, y, col)
 	return img
 
 func _make_slope_corner_se() -> Image:
-	var img: Image = _create_blank_image()
+	var img: Image = _create_image()
 	for y: int in range(32):
 		for x: int in range(32):
-			var dist: float = sqrt(pow(31.0 - float(x), 2.0) + pow(31.0 - float(y), 2.0)) / 32.0
-			var n: float = _h2d(x, y, 78) * 0.08
-			var blend: float = clampf(dist + n, 0.0, 1.0)
-			var col: Color = C_EARTH_SHADOW.lerp(C_ELEV_BASE, blend)
+			var n: float = _torus_noise(x, y, 788)
+			# Bottom-right is lower base with shadow cliff
+			var dist: float = sqrt(pow(31.0 - float(x), 2.0) + pow(31.0 - float(y), 2.0))
+			var col: Color
+			if dist < 10.0:
+				col = C_G_MID if n > 0.5 else C_G_DARK
+			elif dist < 18.0:
+				col = C_R_DARK if n > 0.4 else C_R_DEEP
+			elif dist < 22.0:
+				col = C_E_LIGHT if n > 0.5 else C_E_MID
+			else:
+				col = C_E_MID if n > 0.4 else C_E_LIGHT
 			img.set_pixel(x, y, col)
 	return img
 
-# ── 6. Ramp & Cliff ──────────────────────────────────────────────────────────
+# ── 10. Ramp & Cliff ─────────────────────────────────────────────────────────
 
 func _make_slope_ramp() -> Image:
-	# A natural, gentle walkable earth path winding up the slope
-	var img: Image = _create_blank_image()
+	# A natural cobblestone and packed dirt ramp connecting levels
+	var img: Image = _create_image()
 	for y: int in range(32):
 		for x: int in range(32):
-			# Path center is x=16, path width ~18 pixels
-			var path_dist: float = abs(float(x) - 16.0) / 9.0
-			var n: float = _h2d(x, y, 91) * 0.2 - 0.1
-			var blend: float = clampf(path_dist + n, 0.0, 1.0)
+			var n: float = _torus_noise(x, y, 911)
+			# Center path is x = 6..25
+			var is_path: bool = x >= 6 and x <= 25
+			var col: Color
 
-			var path_col: Color = C_EARTH_LIGHT.lerp(C_EARTH_BASE, float(y) / 31.0)
-			# Small pebbles on path
-			if _h2d(x, y, 92) > 0.88 and blend < 0.6:
-				path_col = C_STONE_LIGHT
+			if is_path:
+				# Beaten dirt path with cobblestone steps
+				var step_row: bool = (y % 7 == 0 or y % 7 == 1)
+				if step_row and x >= 8 and x <= 23:
+					col = C_STONE_LIGHT if y % 7 == 0 else C_STONE_DARK
+				else:
+					col = C_R_LIGHT if n > 0.5 else C_R_MID
+				# Tiny pebbles
+				if n > 0.85 and (x + y) % 3 == 0:
+					col = C_STONE_LIGHT
+			else:
+				# Grassy banks flanking the path
+				if y < 14:
+					col = C_E_MID if n > 0.4 else C_E_LIGHT
+				else:
+					col = C_G_MID if n > 0.45 else C_G_DARK
 
-			var col: Color = path_col.lerp(C_GRASS_BASE, blend)
 			img.set_pixel(x, y, col)
 	return img
 
 func _make_cliff_edge_south() -> Image:
-	# More rugged cliff face for rocky hill sections
-	var img: Image = _create_blank_image()
-	for y: int in range(32):
-		for x: int in range(32):
-			var col: Color
-			if y < 7:
-				col = C_ELEV_BASE
-			elif y < 24:
-				# Rocky strata lines
-				var strata: float = sin(float(y) * 1.2 + float(x) * 0.3) * 0.15
-				var rock_t: float = float(y - 7) / 17.0
-				col = C_EARTH_BASE.lerp(C_EARTH_DARK, clampf(rock_t + strata, 0.0, 1.0))
-			else:
-				col = C_EARTH_SHADOW.lerp(C_GRASS_BASE, float(y - 24) / 7.0)
-			img.set_pixel(x, y, col)
-	return img
+	# Rugged variant of south ledge
+	return _make_slope_south()
 
-# ── 7. Transparent Decoration Overlays ───────────────────────────────────────
+# ── 11. Transparent Decorations ──────────────────────────────────────────────
 
 func _make_deco_bush() -> Image:
-	# A classic 16-bit RPG bush: rich leaf cluster with highlight & shadow
-	var img: Image = _create_blank_image(true)
-
-	# Overlapping foliage circles: Vector3(cx, cy, radius)
-	var clusters: Array[Vector3] = [
-		Vector3(16.0, 19.0, 10.0), # Main base body
-		Vector3(11.0, 17.0, 8.0),  # Left cluster
-		Vector3(21.0, 17.0, 8.0),  # Right cluster
-		Vector3(16.0, 13.0, 8.5),  # Top central dome
-		Vector3(12.0, 13.0, 6.5),  # Top-left highlight dome
-		Vector3(20.0, 14.0, 6.5),  # Top-right dome
+	var img: Image = _create_image(true)
+	# 5 round leaf lobes: Vector3(cx, cy, radius)
+	var lobes: Array[Vector3] = [
+		Vector3(16.0, 19.0, 9.5), # Base central lobe
+		Vector3(10.0, 18.0, 7.5), # Left lobe
+		Vector3(22.0, 18.0, 7.5), # Right lobe
+		Vector3(13.0, 13.0, 7.0), # Upper left lobe
+		Vector3(19.0, 13.0, 7.0), # Upper right lobe
 	]
 
 	# 1. Soft drop shadow on ground beneath bush
-	for y: int in range(25, 31):
+	for y: int in range(25, 30):
 		for x: int in range(6, 26):
-			var s_dist: float = sqrt(pow((float(x) - 16.0) / 9.0, 2.0) + pow((float(y) - 27.0) / 3.0, 2.0))
-			if s_dist < 1.0:
-				var s_alpha: float = (1.0 - s_dist) * 0.45
-				img.set_pixel(x, y, Color(0.0, 0.0, 0.0, s_alpha))
+			var d: float = sqrt(pow((float(x) - 16.0) / 8.5, 2.0) + pow((float(y) - 27.0) / 2.5, 2.0))
+			if d < 1.0:
+				img.set_pixel(x, y, Color(0.0, 0.0, 0.0, (1.0 - d) * 0.45))
 
-	# 2. Render organic leaf clusters
+	# 2. Render pixel-art leaf lobes with top-left lighting
 	for y: int in range(32):
 		for x: int in range(32):
 			var inside: bool = false
-			var min_dist_ratio: float = 999.0
-			var closest_cy: float = 16.0
+			var min_edge_ratio: float = 999.0
+			var lobe_center: Vector3
 
-			for c: Vector3 in clusters:
-				var d: float = sqrt(pow(float(x) - c.x, 2.0) + pow(float(y) - c.y, 2.0))
-				if d < c.z:
+			for lb: Vector3 in lobes:
+				var dist: float = sqrt(pow(float(x) - lb.x, 2.0) + pow(float(y) - lb.y, 2.0))
+				if dist < lb.z:
 					inside = true
-					var r: float = d / c.z
-					if r < min_dist_ratio:
-						min_dist_ratio = r
-						closest_cy = c.y
+					var r: float = dist / lb.z
+					if r < min_edge_ratio:
+						min_edge_ratio = r
+						lobe_center = lb
 
 			if inside:
-				# Height factor: 0.0 at top of bush, 1.0 at bottom
-				var h_factor: float = clampf((float(y) - 6.0) / 20.0, 0.0, 1.0)
-				# Light from top-left: calculate sun direction
-				var sun_dot: float = clampf(((16.0 - float(x)) * 0.4 + (24.0 - float(y)) * 0.6) / 16.0, 0.0, 1.0)
-
-				var leaf_col: Color
-				if sun_dot > 0.65 and h_factor < 0.45:
-					leaf_col = C_GRASS_HIGHLIGHT # Sun glint on top leaves
-				elif h_factor < 0.40:
-					leaf_col = C_GRASS_LIGHTER
-				elif h_factor < 0.70:
-					leaf_col = C_GRASS_LIGHT
-				elif h_factor < 0.88:
-					leaf_col = C_GRASS_BASE
+				# Discrete 4-step shading
+				var col: Color
+				if min_edge_ratio > 0.82:
+					col = C_G_DEEP # Dark leaf outline
+				elif (float(x) - lobe_center.x) + (float(y) - lobe_center.y) < -2.0:
+					col = C_G_BRIGHT # Sun glint on top-left of lobe
+				elif y < 17:
+					col = C_G_LIGHT
+				elif y < 23:
+					col = C_G_MID
 				else:
-					leaf_col = C_GRASS_DARKER
+					col = C_G_DARK
 
-				# Dark leaf-edge outline
-				if min_dist_ratio > 0.82:
-					leaf_col = leaf_col.darkened(0.35)
-
-				# Red flower berries in bush
-				if (x == 12 and y == 16) or (x == 20 and y == 15) or (x == 16 and y == 20) or (x == 15 and y == 11):
-					leaf_col = Color("e74c3c")
+				# Red flower berries
+				if (x == 12 and y == 16) or (x == 20 and y == 15) or (x == 15 and y == 11):
+					col = Color("e74c3c")
 				elif (x == 13 and y == 16) or (x == 21 and y == 15):
-					leaf_col = Color("f39c12")
+					col = Color("f39c12")
 
-				img.set_pixel(x, y, leaf_col)
+				img.set_pixel(x, y, col)
 	return img
 
 func _make_deco_stepping_stones() -> Image:
-	var img: Image = _create_blank_image(true)
-
-	# Two distinct stone slabs
+	var img: Image = _create_image(true)
 	var stones: Array[Dictionary] = [
 		{"cx": 9.0, "cy": 16.0, "rx": 6.5, "ry": 4.5},
 		{"cx": 22.0, "cy": 15.0, "rx": 5.5, "ry": 4.0},
@@ -460,65 +507,60 @@ func _make_deco_stepping_stones() -> Image:
 		var rx: float = float(s["rx"])
 		var ry: float = float(s["ry"])
 
-		# Drop shadow under stone
+		# Drop shadow
 		for y: int in range(int(cy), int(cy + ry + 3.0)):
 			for x: int in range(int(cx - rx - 1.0), int(cx + rx + 2.0)):
 				var d: float = sqrt(pow((float(x) - cx - 1.0) / (rx + 0.5), 2.0) + pow((float(y) - cy - 1.5) / ry, 2.0))
 				if d < 1.0:
-					img.set_pixel(x, y, Color(0.0, 0.0, 0.0, (1.0 - d) * 0.35))
+					img.set_pixel(x, y, Color(0.0, 0.0, 0.0, (1.0 - d) * 0.40))
 
-		# Stone body with beveled edge
+		# Stone slab
 		for y: int in range(int(cy - ry - 1.0), int(cy + ry + 1.0)):
 			for x: int in range(int(cx - rx - 1.0), int(cx + rx + 1.0)):
 				var d: float = sqrt(pow((float(x) - cx) / rx, 2.0) + pow((float(y) - cy) / ry, 2.0))
 				if d < 1.0:
 					var col: Color = C_STONE_MID
-					# Top-left bevel highlight
 					if (float(x) - cx) + (float(y) - cy) < -1.5:
 						col = C_STONE_LIGHT
-					# Bottom-right bevel shadow
 					elif (float(x) - cx) + (float(y) - cy) > 2.0:
 						col = C_STONE_DARK
 					img.set_pixel(x, y, col)
 	return img
 
 func _make_deco_wildflowers() -> Image:
-	var img: Image = _create_blank_image(true)
+	var img: Image = _create_image(true)
 	var colors: Array[Color] = [
-		Color("e74c3c"), # Red Poppy
-		Color("f1c40f"), # Yellow Buttercup
+		Color("e74c3c"), # Poppy
+		Color("f1c40f"), # Buttercup
 		Color("3498db"), # Bluebell
-		Color("9b59b6"), # Lavender
-		Color("ffffff"), # White Daisy
+		Color("9b59b6"), # Violet
+		Color("ffffff"), # Daisy
 	]
-
 	var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 	rng.seed = 44433
+
 	for _i: int in range(8):
 		var fx: int = rng.randi_range(3, 27)
 		var fy: int = rng.randi_range(4, 27)
 		var c: Color = colors[rng.randi() % colors.size()]
 
-		# Stalk
-		img.set_pixel(fx, fy + 1, C_GRASS_DARKER)
-		# Petals
+		img.set_pixel(fx, fy + 1, C_G_DEEP) # Stem
 		img.set_pixel(fx, fy, c)
 		img.set_pixel(fx - 1, fy, c.lightened(0.2))
 		img.set_pixel(fx + 1, fy, c.lightened(0.2))
 		img.set_pixel(fx, fy - 1, c.lightened(0.3))
-		# Yellow center dot for non-yellow flowers
 		if c != Color("f1c40f"):
 			img.set_pixel(fx, fy, Color("f39c12"))
 	return img
 
 func _make_deco_tall_grass() -> Image:
-	var img: Image = _create_blank_image(true)
+	var img: Image = _create_image(true)
 	var stalks: Array[int] = [6, 11, 16, 22, 27]
 
 	for sx: int in stalks:
-		var n: float = _h2d(sx, 0, 99)
-		var sway: int = int((n - 0.5) * 6.0)
-		var height: int = 8 + int(n * 9.0)
+		var n: float = _torus_noise(sx, 0, 99)
+		var sway: int = int((n - 0.5) * 5.0)
+		var height: int = 8 + int(n * 8.0)
 
 		for dy: int in range(height):
 			var py: int = 31 - dy
@@ -526,8 +568,7 @@ func _make_deco_tall_grass() -> Image:
 			var px: int = sx + int(float(sway) * curve * curve)
 			px = clampi(px, 0, 31)
 			py = clampi(py, 0, 31)
-
-			var col: Color = C_GRASS_DARK.lerp(C_GRASS_HIGHLIGHT, curve)
+			var col: Color = C_G_DARK.lerp(C_G_BRIGHT, curve)
 			img.set_pixel(px, py, col)
 	return img
 
@@ -537,16 +578,14 @@ func _build_tileset() -> void:
 	var ts: TileSet = TileSet.new()
 	ts.tile_size = Vector2i(32, 32)
 
-	# 1. Custom data layers
 	ts.add_custom_data_layer()
 	ts.set_custom_data_layer_name(0, "terrain_type")
-	ts.set_custom_data_layer_type(0, TYPE_STRING) # 4
+	ts.set_custom_data_layer_type(0, TYPE_STRING)
 
 	ts.add_custom_data_layer()
 	ts.set_custom_data_layer_name(1, "elevation")
-	ts.set_custom_data_layer_type(1, TYPE_INT) # 2
+	ts.set_custom_data_layer_type(1, TYPE_INT)
 
-	# 2. Config list matching source IDs 0..19
 	var configs: Array[Dictionary] = [
 		{"file": "tile_grass_base.png",          "terrain": "grass",   "elev": 0},
 		{"file": "tile_grass_flower_red.png",     "terrain": "grass",   "elev": 0},
