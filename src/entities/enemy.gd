@@ -15,6 +15,8 @@ enum State { IDLE, PATROL, AGGRO, DEAD }
 @export var aggro_range: float = 150.0
 @export var attack_range: float = 30.0
 @export var attack_cooldown: float = 1.2
+@export var definition_id: String = ""
+@export var definition: EnemyDefinition = null
 
 @onready var stats: CharacterStatsComponent = $CharacterStatsComponent
 @onready var aggro_area: Area2D = $AggroArea
@@ -38,6 +40,12 @@ func _ready() -> void:
 		aggro_area.area_entered.connect(_on_aggro_area_entered)
 		aggro_area.area_exited.connect(_on_aggro_area_exited)
 	input_event.connect(_on_input_event)
+
+	if definition != null:
+		init_from_definition(definition)
+	elif not definition_id.is_empty():
+		init_from_id(definition_id)
+
 	_patrol_origin = global_position
 	_pick_patrol_target()
 
@@ -157,3 +165,39 @@ func _pick_patrol_target() -> void:
 func _flip_sprite(vx: float) -> void:
 	if sprite != null and vx != 0.0:
 		sprite.flip_h = vx < 0.0
+
+## Initializes this enemy's stats, behavior, and visuals from an EnemyDefinition ID.
+func init_from_id(id: String) -> bool:
+	var def: EnemyDefinition = ContentRegistry.get_enemy(id)
+	if def == null:
+		return false
+	init_from_definition(def)
+	return true
+
+## Initializes this enemy's stats, behavior, and visuals directly from an EnemyDefinition.
+func init_from_definition(def: EnemyDefinition) -> void:
+	if def == null:
+		return
+	definition = def
+	definition_id = def.enemy_id
+	move_speed = def.move_speed
+	patrol_radius = def.patrol_radius
+	aggro_range = def.aggro_range
+	attack_range = def.attack_range
+	attack_cooldown = def.attack_cooldown
+
+	if sprite == null:
+		sprite = get_node_or_null("Sprite2D") as Sprite2D
+	if sprite != null:
+		sprite.modulate = def.sprite_tint
+		sprite.scale = def.sprite_scale
+
+	if stats == null:
+		stats = get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
+	if stats != null:
+		stats.max_health = def.max_health
+		stats.set_health(def.max_health)
+		stats.base_attack = def.attack
+		stats.final_attack = def.attack
+		stats.base_defence = def.defence
+		stats.final_defence = def.defence

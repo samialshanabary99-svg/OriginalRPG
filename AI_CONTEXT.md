@@ -16,12 +16,12 @@ AI-first with manual supervision and manual asset work where needed.
 Multiple AI tools may be used across the project's lifetime, but only one agent actively edits the project at a time.
 
 ## Current State
-**Combat & Player Presentation complete and stable. 163/163 automated tests pass.**
-- Player visuals integrated with 8-directional animated idle breathing sprites (`AnimatedSprite2D`, `player_sprite_frames.tres`).
-- Mathematical 8-octant direction calculation dynamically drives directional animations on movement.
-- Player targeting, deterministic combat calculations (`CombatResult`, `DamageCalculator`), and health/defeat/XP flow fully operational.
-- Unified execution shared between Player and Enemy entities.
-- All 163 automated tests pass across 16 groups.
+**Data-Driven Content Architecture complete and stable. 219/219 automated tests pass.**
+- Centralized `ContentRegistry` loads, validates, and serves `CharacterDefinition`, `EnemyDefinition`, `ItemDefinition`, and `SkillDefinition`.
+- Structured JSON definitions reside in `res://data/{characters,enemies,items,skills}/`.
+- New enemies and archetypes instantiated directly from data via `Enemy.init_from_id()` and `Player.init_from_character_id()`.
+- Player skills system operational via `Player.try_use_skill()`.
+- All 219 automated tests pass across 17 groups.
 - Standalone executable `build/OriginalRPG.exe` built and synchronized to `C:\Users\SAMI\Desktop\ProjectZero\OriginalRPG.exe`.
 
 
@@ -32,6 +32,7 @@ Multiple AI tools may be used across the project's lifetime, but only one agent 
 - Language: Statically typed GDScript (ADR-001)
 - Architecture: Hybrid Composition + Resource-Driven Architecture (ADR-002)
 - Persistence: Versioned structured JSON with atomic writes (ADR-003)
+- Content Architecture: Data-Driven Definitions with Strict Schema Validation (ADR-004)
 - Conventions: Documented in `docs/PROJECT_CONVENTIONS.md`
 
 ## Undecided Technical Areas (Deferred)

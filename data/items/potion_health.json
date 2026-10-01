@@ -1,0 +1,9 @@
+{
+  "item_id": "potion_health",
+  "display_name": "Health Potion",
+  "description": "A glass vial filled with crimson elixir. Restores 50 health.",
+  "stackable": true,
+  "max_stack_size": 20,
+  "category": "consumable",
+  "heal_amount": 50
+}

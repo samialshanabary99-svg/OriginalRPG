@@ -34,6 +34,10 @@
   - **Date:** 2026-10-01
   - **Agent:** Antigravity (Player Visuals)
   - **Result:** Integrated user-provided `Idle` sprite assets into the player character. Built `assets/sprites/player/player_sprite_frames.tres` with 8 directional breathing idle animations at 5 FPS loop. Attached `AnimatedSprite2D` node in `scenes/entities/player.tscn` (retaining backward-compatible `Sprite2D`). Added 8-octant mathematical angle partitioning in `src/entities/player.gd` for dynamic directional animation transitions. Expanded test suite with 14 new tests (Group P) to 163/163 passing. Rebuilt standalone Windows executable and updated desktop shortcut. Reference changelog: `docs/changelog/2026-10-01-player-idle-animation.md`.
+- **Data-Driven Content Architecture & Validation**
+  - **Date:** 2026-10-01
+  - **Agent:** Antigravity (Data & Content Architecture)
+  - **Result:** Formalized and accepted ADR-004. Designed and implemented data-driven content pipeline using typed Resources (`EnemyDefinition`, `ItemDefinition`, `SkillDefinition`, `CharacterDefinition`) backed by structured JSON files in `res://data/` and loaded by `ContentRegistry`. Implemented strict schema validation detecting malformed definitions. Wired dynamic entity instantiation (`Enemy.init_from_id()`, `Player.try_use_skill()`, `InventoryComponent.add_item_by_id()`). Created example data for 2 enemies, 5 items, 2 skills, and 2 character archetypes. Expanded test runner with 56 new assertions across Group Q, reaching 219/219 passing tests. Rebuilt and smoke-tested standalone Windows executable. Reference changelog: `docs/changelog/2026-10-01-data-driven-content-architecture.md`.
 
 
 

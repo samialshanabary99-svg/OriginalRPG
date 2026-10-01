@@ -1,0 +1,9 @@
+{
+  "item_id": "potion_mana",
+  "display_name": "Mana Potion",
+  "description": "A shimmering azure draught that replenishes 30 mana points.",
+  "stackable": true,
+  "max_stack_size": 20,
+  "category": "consumable",
+  "mana_amount": 30
+}

@@ -61,7 +61,7 @@ var _attack_timer: float = 0.0
 func _ready() -> void:
 	if stats == null:
 		stats = get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
-	if stats != null:
+	if stats != null and not stats.died.is_connected(_on_died):
 		stats.died.connect(_on_died)
 	if animated_sprite == null:
 		animated_sprite = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
@@ -248,6 +248,63 @@ func attack_target(target: Node = null) -> CombatResult:
 
 func _try_attack() -> void:
 	attack_target()
+
+## Initializes player base stats and archetype from a CharacterDefinition ID.
+func init_from_character_id(id: String) -> bool:
+	var def: CharacterDefinition = ContentRegistry.get_character(id)
+	if def == null:
+		return false
+	if stats == null:
+		stats = get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
+	if stats != null:
+		stats.definition = def
+		stats._apply_definition()
+		stats._recompute_final_stats()
+		stats.set_health(stats.max_health)
+		stats.current_mana = stats.final_max_mana
+	return true
+
+## Executes a skill by ID using SkillDefinition and CharacterStatsComponent mana.
+func try_use_skill(skill_id: String, target: Node = null) -> Dictionary:
+	if character_state != CharacterState.ALIVE:
+		return {"success": false, "reason": "attacker_invalid_state"}
+
+	var skill: SkillDefinition = ContentRegistry.get_skill(skill_id)
+	if skill == null:
+		return {"success": false, "reason": "skill_not_found"}
+
+	if stats == null:
+		stats = get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
+	if stats == null:
+		return {"success": false, "reason": "no_stats_component"}
+
+	if stats.current_mana < skill.mana_cost:
+		return {"success": false, "reason": "not_enough_mana", "mana_cost": skill.mana_cost, "current_mana": stats.current_mana}
+
+	stats.spend_mana(skill.mana_cost)
+
+	if skill.skill_type == "heal":
+		stats.heal(skill.power)
+		return {"success": true, "skill": skill, "healed": skill.power, "current_health": stats.current_health}
+	elif skill.skill_type == "damage":
+		var chosen: Node = target
+		if chosen == null:
+			chosen = current_target
+		if chosen == null:
+			chosen = acquire_target()
+		if chosen == null:
+			return {"success": true, "skill": skill, "warning": "no_target_affected"}
+
+		var target_stats: StatsComponent = DamageCalculator.get_entity_stats(chosen)
+		if target_stats != null and DamageCalculator.is_alive(target_stats.current_health):
+			var dmg: int = DamageCalculator.calculate_damage(stats.final_attack + skill.power, DamageCalculator.get_defense_power(chosen))
+			target_stats.apply_damage(dmg)
+			var defeated: bool = (target_stats.current_health == 0)
+			if defeated and chosen == current_target:
+				clear_target()
+			return {"success": true, "skill": skill, "damage_dealt": dmg, "target_defeated": defeated}
+
+	return {"success": true, "skill": skill}
 
 
 # ── Character state management ────────────────────────────────────────────────

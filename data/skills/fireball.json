@@ -1,0 +1,10 @@
+{
+  "skill_id": "fireball",
+  "display_name": "Fireball",
+  "description": "Hurls a searing sphere of flame at the target enemy.",
+  "mana_cost": 15,
+  "cooldown": 2.0,
+  "power": 35,
+  "skill_type": "damage",
+  "target_type": "single_enemy"
+}

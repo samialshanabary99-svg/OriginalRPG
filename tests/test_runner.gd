@@ -36,6 +36,9 @@ func _init() -> void:
 	# Player 8-Directional Idle Animation
 	_test_player_idle_animation()
 
+	# Data-Driven Content Architecture & Validation
+	_test_data_driven_content()
+
 	print("")
 	print("[TestRunner] ─────────────────────────────────────────")
 	print("[TestRunner] %d tests | %d failures" % [_total, _failed])
@@ -650,6 +653,147 @@ func _test_player_idle_animation() -> void:
 	_ok("AnimatedSprite2D plays idle_north-west after moving north-west", anim_sprite.animation == &"idle_north-west")
 
 	player.free()
+
+func _test_data_driven_content() -> void:
+	print("\n[Group Q] Data-Driven Content Architecture & Validation")
+
+	# 1. Loading all definitions from res://data/
+	var load_summary: Dictionary = ContentRegistry.load_all()
+	_ok("ContentRegistry loads definitions without errors", (load_summary["errors"] as Array).is_empty())
+	_ok("ContentRegistry loaded at least 8 definitions", int(load_summary["loaded"]) >= 8)
+
+	# 2. Check registered definitions
+	_ok("ContentRegistry has player_default", ContentRegistry.has_character("player_default"))
+	_ok("ContentRegistry has mage_apprentice", ContentRegistry.has_character("mage_apprentice"))
+	_ok("ContentRegistry has goblin_scout", ContentRegistry.has_enemy("goblin_scout"))
+	_ok("ContentRegistry has orc_warrior", ContentRegistry.has_enemy("orc_warrior"))
+	_ok("ContentRegistry has herb_basic", ContentRegistry.has_item("herb_basic"))
+	_ok("ContentRegistry has potion_health", ContentRegistry.has_item("potion_health"))
+	_ok("ContentRegistry has potion_mana", ContentRegistry.has_item("potion_mana"))
+	_ok("ContentRegistry has sword_iron", ContentRegistry.has_item("sword_iron"))
+	_ok("ContentRegistry has shield_wooden", ContentRegistry.has_item("shield_wooden"))
+	_ok("ContentRegistry has fireball", ContentRegistry.has_skill("fireball"))
+	_ok("ContentRegistry has heal_minor", ContentRegistry.has_skill("heal_minor"))
+
+	# 3. Enemy Definition values
+	var goblin: EnemyDefinition = ContentRegistry.get_enemy("goblin_scout")
+	_ok("goblin_scout max_health == 35", goblin != null and goblin.max_health == 35)
+	_ok("goblin_scout attack == 7", goblin != null and goblin.attack == 7)
+	_ok("goblin_scout move_speed == 110.0", goblin != null and is_equal_approx(goblin.move_speed, 110.0))
+	_ok("goblin_scout xp_reward == 15", goblin != null and goblin.xp_reward == 15)
+
+	var orc: EnemyDefinition = ContentRegistry.get_enemy("orc_warrior")
+	_ok("orc_warrior max_health == 80", orc != null and orc.max_health == 80)
+	_ok("orc_warrior attack == 14", orc != null and orc.attack == 14)
+	_ok("orc_warrior defence == 4", orc != null and orc.defence == 4)
+	_ok("orc_warrior xp_reward == 35", orc != null and orc.xp_reward == 35)
+
+	# 4. Item Definition values
+	var sword: ItemDefinition = ContentRegistry.get_item("sword_iron")
+	_ok("sword_iron category is WEAPON", sword != null and sword.category == ItemDefinition.Category.WEAPON)
+	_ok("sword_iron equip_slot is weapon", sword != null and sword.equip_slot == "weapon")
+	_ok("sword_iron has attack modifier of 8", sword != null and int(sword.stat_modifiers.get("attack", 0)) == 8)
+	_ok("sword_iron is not stackable", sword != null and not sword.stackable)
+
+	var shield: ItemDefinition = ContentRegistry.get_item("shield_wooden")
+	_ok("shield_wooden category is ARMOUR", shield != null and shield.category == ItemDefinition.Category.ARMOUR)
+	_ok("shield_wooden has defence modifier of 5", shield != null and int(shield.stat_modifiers.get("defence", 0)) == 5)
+
+	var pot: ItemDefinition = ContentRegistry.get_item("potion_health")
+	_ok("potion_health heal_amount is 50", pot != null and pot.heal_amount == 50)
+
+	# 5. Skill Definition values
+	var fireball: SkillDefinition = ContentRegistry.get_skill("fireball")
+	_ok("fireball mana_cost is 15", fireball != null and fireball.mana_cost == 15)
+	_ok("fireball power is 35", fireball != null and fireball.power == 35)
+	_ok("fireball skill_type is damage", fireball != null and fireball.skill_type == "damage")
+
+	var heal_skill: SkillDefinition = ContentRegistry.get_skill("heal_minor")
+	_ok("heal_minor skill_type is heal", heal_skill != null and heal_skill.skill_type == "heal")
+	_ok("heal_minor target_type is self", heal_skill != null and heal_skill.target_type == "self")
+
+	# 6. Validation tests for malformed definitions
+	var bad_enemy := EnemyDefinition.new()
+	bad_enemy.enemy_id = "" # empty id
+	bad_enemy.max_health = -10
+	bad_enemy.attack = -5
+	var enemy_errs: Array[String] = bad_enemy.validate()
+	_ok("Validation detects empty enemy_id", enemy_errs.any(func(e: String) -> bool: return e.contains("enemy_id")))
+	_ok("Validation detects negative enemy max_health", enemy_errs.any(func(e: String) -> bool: return e.contains("max_health")))
+
+	var bad_item := ItemDefinition.new()
+	bad_item.item_id = ""
+	bad_item.category = ItemDefinition.Category.WEAPON
+	bad_item.equip_slot = "" # invalid weapon without slot
+	var item_errs: Array[String] = bad_item.validate()
+	_ok("Validation detects empty item_id", item_errs.any(func(e: String) -> bool: return e.contains("item_id")))
+	_ok("Validation detects weapon missing equip_slot", item_errs.any(func(e: String) -> bool: return e.contains("equip_slot")))
+
+	var bad_skill := SkillDefinition.new()
+	bad_skill.skill_id = "test_bad"
+	bad_skill.display_name = "Bad Skill"
+	bad_skill.skill_type = "invalid_type"
+	bad_skill.target_type = "invalid_target"
+	bad_skill.mana_cost = -5
+	var skill_errs: Array[String] = bad_skill.validate()
+	_ok("Validation detects invalid skill_type", skill_errs.any(func(e: String) -> bool: return e.contains("skill_type")))
+	_ok("Validation detects negative mana_cost", skill_errs.any(func(e: String) -> bool: return e.contains("mana_cost")))
+
+	var bad_json_errs: Array[String] = ContentRegistry.validate_json_string('{"enemy_id": "", "max_health": 0}', "enemy")
+	_ok("validate_json_string catches invalid schema", bad_json_errs.size() >= 2)
+
+	# 7. Enemy runtime instantiation from definition
+	var enemy_scene: PackedScene = load("res://scenes/entities/enemy.tscn")
+	var goblin_instance: Enemy = enemy_scene.instantiate() as Enemy
+	get_root().add_child(goblin_instance)
+	goblin_instance.init_from_id("goblin_scout")
+	_ok("Enemy initialized from goblin_scout has 35 max_health", goblin_instance.stats.max_health == 35)
+	_ok("Enemy initialized from goblin_scout has 35 current_health", goblin_instance.stats.current_health == 35)
+	_ok("Enemy initialized from goblin_scout has 7 attack", goblin_instance.stats.final_attack == 7)
+	_ok("Enemy initialized from goblin_scout has 110.0 move_speed", is_equal_approx(goblin_instance.move_speed, 110.0))
+	_ok("Enemy definition reference is set", goblin_instance.definition == goblin)
+
+	# 8. Combat with data-driven enemy and custom XP reward
+	var player_scene: PackedScene = load("res://scenes/entities/player.tscn")
+	var p: Player = player_scene.instantiate() as Player
+	get_root().add_child(p)
+	p._ready()
+	p.stats.level = 1
+	p.stats.experience = 0
+
+	# Fast attack to defeat 35 HP goblin
+	p.set_target(goblin_instance)
+	var combat_res: CombatResult = DamageCalculator.resolve_attack(p, goblin_instance, 100)
+	_ok("Combat against goblin defeats target", combat_res.target_defeated)
+	_ok("Combat against goblin awards data-driven xp_reward (15)", combat_res.xp_earned == 15)
+
+	# 9. Skill usage via Player
+	p.stats.current_mana = 50
+	p.stats.apply_damage(30)
+	var prev_hp: int = p.stats.current_health
+	var heal_res: Dictionary = p.try_use_skill("heal_minor")
+	_ok("try_use_skill heal_minor succeeds", bool(heal_res.get("success", false)))
+	_ok("heal_minor spends 20 mana", p.stats.current_mana == 30)
+	_ok("heal_minor restores player health", p.stats.current_health > prev_hp)
+
+	var fireball_res: Dictionary = p.try_use_skill("fireball", goblin_instance)
+	_ok("fireball succeeds", bool(fireball_res.get("success", false)))
+	_ok("fireball spends 15 mana", p.stats.current_mana == 15)
+
+	# Out of mana test
+	p.stats.current_mana = 5 # less than 15
+	var oom_res: Dictionary = p.try_use_skill("fireball", goblin_instance)
+	_ok("fireball fails when out of mana", not bool(oom_res.get("success", true)))
+	_ok("oom_res reason is not_enough_mana", str(oom_res.get("reason", "")) == "not_enough_mana")
+
+	# 10. InventoryComponent add_item_by_id
+	var add_ok: bool = p.inventory.add_item_by_id("potion_health")
+	_ok("add_item_by_id adds potion_health to player inventory", add_ok)
+	_ok("player inventory has potion_health", p.inventory.has_item("potion_health"))
+
+	# Cleanup
+	p.queue_free()
+	goblin_instance.queue_free()
 
 
 

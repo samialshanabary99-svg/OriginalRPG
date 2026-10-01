@@ -1,0 +1,15 @@
+{
+  "character_id": "mage_apprentice",
+  "display_name": "Apprentice Mage",
+  "character_class": "mage",
+  "base_max_health": 75,
+  "base_max_mana": 120,
+  "base_attack": 6,
+  "base_defence": 3,
+  "base_speed_stat": 10,
+  "health_per_level": 6,
+  "mana_per_level": 15,
+  "attack_per_level": 1,
+  "defence_per_level": 1,
+  "xp_per_level": 100
+}

@@ -1,0 +1,10 @@
+{
+  "skill_id": "heal_minor",
+  "display_name": "Minor Heal",
+  "description": "Channels soothing light to restore health to the caster.",
+  "mana_cost": 20,
+  "cooldown": 3.0,
+  "power": 40,
+  "skill_type": "heal",
+  "target_type": "self"
+}

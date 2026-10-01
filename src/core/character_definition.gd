@@ -69,3 +69,25 @@ func deserialize(data: Dictionary) -> void:
 	if data.has("attack_per_level"): attack_per_level = int(data["attack_per_level"])
 	if data.has("defence_per_level"):defence_per_level= int(data["defence_per_level"])
 	if data.has("xp_per_level"):     xp_per_level     = int(data["xp_per_level"])
+
+func validate() -> Array[String]:
+	var errors: Array[String] = []
+	if character_id.strip_edges().is_empty():
+		errors.append("Character 'character_id' cannot be empty.")
+	if display_name.strip_edges().is_empty():
+		errors.append("Character '%s': 'display_name' cannot be empty." % character_id)
+	if base_max_health <= 0:
+		errors.append("Character '%s': 'base_max_health' must be greater than 0." % character_id)
+	if base_max_mana < 0:
+		errors.append("Character '%s': 'base_max_mana' cannot be negative." % character_id)
+	if base_attack < 0:
+		errors.append("Character '%s': 'base_attack' cannot be negative." % character_id)
+	if base_defence < 0:
+		errors.append("Character '%s': 'base_defence' cannot be negative." % character_id)
+	if base_speed_stat < 0:
+		errors.append("Character '%s': 'base_speed_stat' cannot be negative." % character_id)
+	if xp_per_level <= 0:
+		errors.append("Character '%s': 'xp_per_level' must be greater than 0." % character_id)
+	if health_per_level < 0 or mana_per_level < 0 or attack_per_level < 0 or defence_per_level < 0:
+		errors.append("Character '%s': Level scaling increments cannot be negative." % character_id)
+	return errors

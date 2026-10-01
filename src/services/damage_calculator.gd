@@ -78,7 +78,9 @@ static func resolve_attack(attacker: Node, target: Node, override_attack: int = 
 
 	var xp: int = 0
 	if defeated:
-		if target_stats is CharacterStatsComponent:
+		if target != null and "definition" in target and target.definition != null and "xp_reward" in target.definition:
+			xp = int(target.definition.xp_reward)
+		elif target_stats is CharacterStatsComponent:
 			xp = xp_reward((target_stats as CharacterStatsComponent).level)
 		else:
 			xp = xp_reward(1)

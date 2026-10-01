@@ -4,5 +4,6 @@
   "description": "A common wild herb. Smells earthy. Useful for potions.",
   "stackable": true,
   "max_stack_size": 99,
-  "category": 0
+  "category": "consumable",
+  "heal_amount": 15
 }

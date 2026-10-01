@@ -1,26 +1,32 @@
 # Project Status
 
 ## Current Phase
-**Combat & Player Presentation Complete — 163/163 automated tests passing.**
+**Data-Driven Content Architecture Complete — 219/219 automated tests passing.**
 
 ## Working Systems
 - All Phase 1 systems (Main Menu, Test World, Player, Camera, Interaction, HUD, scene transitions).
-- **`CharacterDefinition`** (`src/core/character_definition.gd`): Data-only archetypes (`data/characters/`) defining base stats, mana, and level-up growth parameters.
+- **`Data-Driven Content Pipeline & ContentRegistry`** (`src/services/content_registry.gd`, `res://data/`):
+  - Centralized registry loading and caching definitions from `res://data/{characters,enemies,items,skills}/`.
+  - Comprehensive validation detecting empty identifiers, invalid types, negative stats/mana/cooldowns.
+  - Runtime instantiation of enemies and archetype initialization of players without code changes.
+- **`CharacterDefinition`** (`src/core/character_definition.gd`): Data archetypes (`data/characters/`) with validation, base stats, mana, and level-up growth parameters.
+- **`EnemyDefinition`** (`src/core/enemy_definition.gd`): Data-driven enemy archetypes (`data/enemies/`) defining combat attributes, patrol/aggro radii, speeds, visual tints, and XP awards.
+- **`ItemDefinition`** (`src/core/item_definition.gd`): Data-driven items (`data/items/`) with categories, equipment slots, stat modifiers, and consumable heal/mana recovery.
+- **`SkillDefinition`** (`src/core/skill_definition.gd`): Data-driven skills (`data/skills/`) with mana costs, cooldowns, powers, target types, and effect categories.
 - **`CharacterStatsComponent`** (`src/components/character_stats_component.gd`): Dual resources (HP + Mana), progression (Level + XP), dynamic additive stat modifiers, separate computed final stats (`final_attack`, `final_defence`, `final_speed`, `final_max_mana`).
-- **`EquipmentComponent`** (`src/components/equipment_component.gd`): Slot registry managing item equipping and driving `CharacterStatsComponent` stat modifiers.
-- **`InventoryComponent`** (`src/components/inventory_component.gd`): Item container on Player and entities with serialization.
+- **`EquipmentComponent`** (`src/components/equipment_component.gd`): Slot registry managing item equipping and driving `CharacterStatsComponent` stat modifiers via item `get_stat_bonuses()`.
+- **`InventoryComponent`** (`src/components/inventory_component.gd`): Item container on Player and entities with serialization and `add_item_by_id()`.
 - **`Combat Pipeline & CombatResult`** (`src/core/combat_result.gd`, `src/services/damage_calculator.gd`):
   - Deterministic attack resolution pipeline (`DamageCalculator.resolve_attack()`).
   - Player targeting (`set_target()`, `clear_target()`, `acquire_target()`, `current_target`).
-  - Target defeat handling with automatic XP award (`result.xp_earned`) and HUD combat event reporting.
-  - Invalid target and dead target validation guards.
-  - Symmetrical execution for both player attacks on enemies and enemy attacks on player.
+  - Target defeat handling with automatic data-driven XP award (`target.definition.xp_reward`) and HUD combat reporting.
+  - Guards for dead targets, invalid targets, cooldowns, and dead attackers.
 - **`Player Visuals & Animations`** (`assets/sprites/player/`, `scenes/entities/player.tscn`):
-  - 8-directional animated idle breathing states (`idle_south`, `idle_south-east`, `idle_east`, `idle_north-east`, `idle_north`, `idle_north-west`, `idle_west`, `idle_south-west`).
+  - 8-directional animated idle breathing states (`idle_south` through `idle_south-west`).
   - `AnimatedSprite2D` node driven by `player_sprite_frames.tres` (4 frames per direction at 5 FPS loop).
   - Mathematical 8-octant direction calculation updating animation state dynamically with movement.
-- **`Player`** (`src/entities/player.gd`): Full character state machine (`ALIVE`, `DEAD`, `STUNNED`, `CASTING`), 4/8-direction `facing_direction` tracking, `is_moving()` and `is_alive()` helpers, `attack_target()` returning `CombatResult`, delegating serialization.
-- **`Enemy`** (`src/entities/enemy.gd`): AI patrol/aggro states, `is_targetable()` check, click-targeting event, unified combat execution, XP reward on defeat.
+- **`Player`** (`src/entities/player.gd`): Full character state machine, facing tracking, `attack_target()`, `try_use_skill()`, `init_from_character_id()`, delegating serialization.
+- **`Enemy`** (`src/entities/enemy.gd`): AI patrol/aggro states, `init_from_id()` and `init_from_definition()`, dynamic stats and visual tint, click-targeting event, unified combat execution.
 - **`TestWorld`** (`scenes/maps/test_world.tscn`): Playable slice containing Player, AncientMonument, and Enemy instance with signal-bound HUD feedback.
 
 

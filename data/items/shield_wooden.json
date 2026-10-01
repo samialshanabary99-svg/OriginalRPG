@@ -1,0 +1,13 @@
+{
+  "item_id": "shield_wooden",
+  "display_name": "Wooden Shield",
+  "description": "A sturdy round wooden shield reinforced with iron rivets.",
+  "stackable": false,
+  "max_stack_size": 1,
+  "category": "armour",
+  "equip_slot": "offhand",
+  "stat_modifiers": {
+    "defence": 5,
+    "max_health": 15
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "enemy_id": "goblin_scout",
+  "display_name": "Goblin Scout",
+  "description": "A nimble goblin equipped with crude daggers. Strikes fast but fragile.",
+  "max_health": 35,
+  "attack": 7,
+  "defence": 1,
+  "xp_reward": 15,
+  "move_speed": 110.0,
+  "patrol_radius": 120.0,
+  "aggro_range": 160.0,
+  "attack_range": 30.0,
+  "attack_cooldown": 1.0,
+  "sprite_tint": "#88ee55ff",
+  "sprite_scale": [0.13, 0.13]
+}

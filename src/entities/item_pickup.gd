@@ -7,11 +7,14 @@ extends Interactable
 signal picked_up(item: ItemDefinition, by: Node)
 
 @export var item: ItemDefinition = null
+@export var item_id: String = ""
 @export var respawn_time: float = 0.0   # 0 = no respawn
 
 @onready var sprite: Sprite2D = $Sprite2D
 
 func _ready() -> void:
+	if item == null and not item_id.is_empty():
+		item = ContentRegistry.get_item(item_id)
 	if item != null:
 		prompt_message = "Press E to pick up [%s]" % item.display_name
 	interacted.connect(_on_interacted)
