@@ -2,6 +2,14 @@
 
 [ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_grass_base.png" id="1_4krbh"]
 [ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_grass_flower_red.png" id="2_2w84a"]
+[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_grass_flower_yellow.png" id="13_4ecfm"]
+[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_grass_flower_blue.png" id="14_f0rss"]
+[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_grass_tuft.png" id="15_vl2c1"]
+[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_elevated_grass.png" id="16_p6gkj"]
+[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_slope_north.png" id="17_plswu"]
+[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_slope_south.png" id="18_gmauf"]
+[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_slope_east.png" id="19_0i8s7"]
+[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_slope_west.png" id="20_qqf7l"]
 [ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_slope_corner_ne.png" id="3_478fn"]
 [ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_slope_corner_nw.png" id="4_yygqx"]
 [ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_slope_corner_se.png" id="5_ikuq3"]
@@ -12,115 +20,146 @@
 [ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_deco_stepping_stones.png" id="10_bs30r"]
 [ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_deco_bush.png" id="11_6dusx"]
 [ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_deco_tall_grass.png" id="12_b8npg"]
-[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_grass_flower_yellow.png" id="13_4ecfm"]
-[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_grass_flower_blue.png" id="14_f0rss"]
-[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_grass_tuft.png" id="15_vl2c1"]
-[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_elevated_grass.png" id="16_p6gkj"]
-[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_slope_north.png" id="17_plswu"]
-[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_slope_south.png" id="18_gmauf"]
-[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_slope_east.png" id="19_0i8s7"]
-[ext_resource type="Texture2D" path="res://assets/tiles/ground/tile_slope_west.png" id="20_qqf7l"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2sqsr"]
 texture = ExtResource("1_4krbh")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = "grass"
+0:0/0/custom_data_1 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0s742"]
 texture = ExtResource("2_2w84a")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = "grass"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m28o5"]
-texture = ExtResource("3_478fn")
-0:0/0 = 0
-0:0/0/custom_data_0 = "slope"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1ak1j"]
-texture = ExtResource("4_yygqx")
-0:0/0 = 0
-0:0/0/custom_data_0 = "slope"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jure4"]
-texture = ExtResource("5_ikuq3")
-0:0/0 = 0
-0:0/0/custom_data_0 = "slope"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4bky"]
-texture = ExtResource("6_y783o")
-0:0/0 = 0
-0:0/0/custom_data_0 = "slope"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujl0h"]
-texture = ExtResource("7_qurxw")
-0:0/0 = 0
-0:0/0/custom_data_0 = "ramp"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lp515"]
-texture = ExtResource("8_hewd8")
-0:0/0 = 0
-0:0/0/custom_data_0 = "cliff"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lhax4"]
-texture = ExtResource("9_xxiox")
-0:0/0 = 0
-0:0/0/custom_data_0 = "flower"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q0nay"]
-texture = ExtResource("10_bs30r")
-0:0/0 = 0
-0:0/0/custom_data_0 = "stone"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yeog8"]
-texture = ExtResource("11_6dusx")
-0:0/0 = 0
-0:0/0/custom_data_0 = "foliage"
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hdqyf"]
-texture = ExtResource("12_b8npg")
-0:0/0 = 0
-0:0/0/custom_data_0 = "foliage"
+0:0/0/custom_data_1 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b7ekj"]
 texture = ExtResource("13_4ecfm")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = "grass"
+0:0/0/custom_data_1 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_302lv"]
 texture = ExtResource("14_f0rss")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = "grass"
+0:0/0/custom_data_1 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4tntn"]
 texture = ExtResource("15_vl2c1")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = "grass"
+0:0/0/custom_data_1 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jhwny"]
 texture = ExtResource("16_p6gkj")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = "grass"
 0:0/0/custom_data_1 = 1
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_coplw"]
 texture = ExtResource("17_plswu")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = "slope"
+0:0/0/custom_data_1 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oc2g1"]
 texture = ExtResource("18_gmauf")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = "slope"
+0:0/0/custom_data_1 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4u73n"]
 texture = ExtResource("19_0i8s7")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = "slope"
+0:0/0/custom_data_1 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jg8ku"]
 texture = ExtResource("20_qqf7l")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
 0:0/0/custom_data_0 = "slope"
+0:0/0/custom_data_1 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_m28o5"]
+texture = ExtResource("3_478fn")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "slope"
+0:0/0/custom_data_1 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1ak1j"]
+texture = ExtResource("4_yygqx")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "slope"
+0:0/0/custom_data_1 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jure4"]
+texture = ExtResource("5_ikuq3")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "slope"
+0:0/0/custom_data_1 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r4bky"]
+texture = ExtResource("6_y783o")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "slope"
+0:0/0/custom_data_1 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ujl0h"]
+texture = ExtResource("7_qurxw")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "ramp"
+0:0/0/custom_data_1 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lp515"]
+texture = ExtResource("8_hewd8")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "cliff"
+0:0/0/custom_data_1 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lhax4"]
+texture = ExtResource("9_xxiox")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "flower"
+0:0/0/custom_data_1 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_q0nay"]
+texture = ExtResource("10_bs30r")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "stone"
+0:0/0/custom_data_1 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yeog8"]
+texture = ExtResource("11_6dusx")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "foliage"
+0:0/0/custom_data_1 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_hdqyf"]
+texture = ExtResource("12_b8npg")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = "foliage"
+0:0/0/custom_data_1 = 0
 
 [resource]
 tile_size = Vector2i(32, 32)

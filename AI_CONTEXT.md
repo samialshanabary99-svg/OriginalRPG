@@ -16,9 +16,10 @@ AI-first with manual supervision and manual asset work where needed.
 Multiple AI tools may be used across the project's lifetime, but only one agent actively edits the project at a time.
 
 ## Current State
-**Multi-Layer TileMapLayer Field Terrain Complete. 296/296 automated tests pass.**
+**Multi-Layer TileMapLayer Field Terrain Complete & Floor Rendering Fixed. 296/296 automated tests pass.**
 - Multi-layer 2D `TileMapLayer` field architecture (`GroundLayer`, `ElevationLayer`, `DecorationLayer`) in `scenes/maps/test_world.tscn`.
 - 20 custom 32×32 RGBA8 pixel-art tiles (`assets/tiles/ground/`) with custom data layers for `terrain_type` and `elevation` in `assets/tiles/tileset_green_field.tres`.
+- **FIXED:** `tileset_green_field.tres` now has `texture_region_size = Vector2i(32, 32)` on all 20 `TileSetAtlasSource` entries — tiles render at full 32×32 filling the entire playable field.
 - Zero physics collision geometry on slopes/plateaus ensuring completely smooth, free player movement across rolling hills and ramps.
 - Authentic Ragnarok Online inspired Basic Info Window (`src/ui/basic_info_window.gd`, `scenes/ui/basic_info_window.tscn`, `assets/ui/`) with live signal binding.
 - Formal AI-assisted asset pipeline documented in `docs/assets/ASSET_PIPELINE.md` with complete manifest in `docs/assets/ASSET_MANIFEST.md`.
