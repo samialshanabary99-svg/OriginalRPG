@@ -21,6 +21,7 @@ size = Vector2(40, 1000)
 script = ExtResource("1_world")
 
 [node name="Background" type="ColorRect" parent="." unique_id=100825413]
+z_index = -3
 offset_left = -800.0
 offset_top = -500.0
 offset_right = 800.0
