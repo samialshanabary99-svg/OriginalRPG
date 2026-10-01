@@ -107,6 +107,22 @@ OriginalRPG/
 - **Headless Execution:** All core calculation logic must run headlessly without requiring a display or window.
 - **Runner:** Tested via headless Godot execution:
   ```powershell
-  godot --headless --script tests/test_runner.gd
-  ```
 - Before marking any gameplay task complete, run the test runner and verify zero failures.
+
+---
+
+## 7. Build & Executable Protocol
+
+- **Automated Build Script:** Located at `scripts/build.ps1` (with `scripts/build.bat` for one-click rebuilds).
+- **Mandate:** After every code update that alters gameplay, components, scenes, or assets, the agent MUST run `scripts/build.ps1`.
+- **Target Deliverables:**
+  - Primary executable: `build/OriginalRPG.exe` (embedded PCK, fully standalone).
+  - Convenience copy: `C:\Users\SAMI\Desktop\ProjectZero\OriginalRPG.exe`.
+  - Desktop shortcut: `Play OriginalRPG.lnk` on user desktop.
+- **Verification Requirement:**
+  - Always verify the newly built executable headlessly:
+    ```powershell
+    & "build/OriginalRPG.exe" --headless --quit-after 60
+    ```
+  - Exit code must be 0 with zero fatal errors.
+

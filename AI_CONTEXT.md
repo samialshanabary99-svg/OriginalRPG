@@ -48,10 +48,11 @@ Do not invent permanent decisions. Use ADRs when a major decision becomes necess
 1. Preserve existing functionality.
 2. Understand before changing.
 3. Make focused changes.
-4. Test.
+4. Test (run automated test suite tests/test_runner.gd).
 5. Document additions/modifications/deletions.
 6. Update project memory.
-7. Leave a clear handoff.
+7. Rebuild standalone executable via scripts/build.ps1 after every code update and verify with headless smoke test.
+8. Leave a clear handoff.
 
 ## Source of Truth
 Current repository state + documented ADRs + current project status.
