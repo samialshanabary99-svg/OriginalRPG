@@ -30,6 +30,10 @@
   - **Date:** 2026-10-01
   - **Agent:** Agent-1 (Combat Architecture)
   - **Result:** Implemented minimal complete combat vertical slice: Player -> Target Enemy -> Attack -> Damage -> Health Reduction -> Enemy Defeat -> Player Receives Result. Created `CombatResult` RefCounted class, unified attack resolution in `DamageCalculator.resolve_attack()`, player target acquisition (`set_target`, `acquire_target`, `clear_target`), enemy targetable check and click-targeting, automated XP awards upon defeat, and HUD combat event reporting. Validated with 149 passing automated tests (26 combat-specific tests) and runtime execution. Reference changelog: `docs/changelog/2026-10-01-combat-vertical-slice.md`.
+- **Player 8-Directional Idle Animation Integration**
+  - **Date:** 2026-10-01
+  - **Agent:** Antigravity (Player Visuals)
+  - **Result:** Integrated user-provided `Idle` sprite assets into the player character. Built `assets/sprites/player/player_sprite_frames.tres` with 8 directional breathing idle animations at 5 FPS loop. Attached `AnimatedSprite2D` node in `scenes/entities/player.tscn` (retaining backward-compatible `Sprite2D`). Added 8-octant mathematical angle partitioning in `src/entities/player.gd` for dynamic directional animation transitions. Expanded test suite with 14 new tests (Group P) to 163/163 passing. Rebuilt standalone Windows executable and updated desktop shortcut. Reference changelog: `docs/changelog/2026-10-01-player-idle-animation.md`.
 
 
 

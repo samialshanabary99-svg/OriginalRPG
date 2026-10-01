@@ -1,7 +1,7 @@
 # Project Status
 
 ## Current Phase
-**Combat Vertical Slice Complete — 149/149 automated tests passing.**
+**Combat & Player Presentation Complete — 163/163 automated tests passing.**
 
 ## Working Systems
 - All Phase 1 systems (Main Menu, Test World, Player, Camera, Interaction, HUD, scene transitions).
@@ -15,6 +15,10 @@
   - Target defeat handling with automatic XP award (`result.xp_earned`) and HUD combat event reporting.
   - Invalid target and dead target validation guards.
   - Symmetrical execution for both player attacks on enemies and enemy attacks on player.
+- **`Player Visuals & Animations`** (`assets/sprites/player/`, `scenes/entities/player.tscn`):
+  - 8-directional animated idle breathing states (`idle_south`, `idle_south-east`, `idle_east`, `idle_north-east`, `idle_north`, `idle_north-west`, `idle_west`, `idle_south-west`).
+  - `AnimatedSprite2D` node driven by `player_sprite_frames.tres` (4 frames per direction at 5 FPS loop).
+  - Mathematical 8-octant direction calculation updating animation state dynamically with movement.
 - **`Player`** (`src/entities/player.gd`): Full character state machine (`ALIVE`, `DEAD`, `STUNNED`, `CASTING`), 4/8-direction `facing_direction` tracking, `is_moving()` and `is_alive()` helpers, `attack_target()` returning `CombatResult`, delegating serialization.
 - **`Enemy`** (`src/entities/enemy.gd`): AI patrol/aggro states, `is_targetable()` check, click-targeting event, unified combat execution, XP reward on defeat.
 - **`TestWorld`** (`scenes/maps/test_world.tscn`): Playable slice containing Player, AncientMonument, and Enemy instance with signal-bound HUD feedback.

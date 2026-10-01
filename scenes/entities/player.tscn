@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://player_scene"]
+[gd_scene load_steps=10 format=3 uid="uid://player_scene"]
 
 [ext_resource type="Script" path="res://src/entities/player.gd" id="1_player"]
 [ext_resource type="Script" path="res://src/components/character_stats_component.gd" id="2_char_stats"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" path="res://icon.svg" id="4_icon"]
 [ext_resource type="Script" path="res://src/components/inventory_component.gd" id="5_inventory"]
 [ext_resource type="Script" path="res://src/components/equipment_component.gd" id="6_equipment"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/player/player_sprite_frames.tres" id="7_frames"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
 radius = 12.0
@@ -22,7 +23,15 @@ collision_layer = 1
 collision_mask = 2
 script = ExtResource("1_player")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -4)
+scale = Vector2(0.5, 0.5)
+sprite_frames = ExtResource("7_frames")
+animation = &"idle_east"
+autoplay = "idle_east"
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("4_icon")
 scale = Vector2(0.15, 0.15)
 

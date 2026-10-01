@@ -1,0 +1,87 @@
+{
+  "group_id": "f8abef0e-dddd-41d6-a840-23b6ce1139e2",
+  "states": [
+    {
+      "character": {
+        "id": "36e4ddc9-e887-4918-81ba-7717aa79984e",
+        "name": "Idle",
+        "prompt": "Young male fantasy novice adventurer, inspired by classic 2D MMORPG beginner characters, full-body standing character, 3/4 view facing slightly left, youthful face, short messy dark brown hair, large expressive anime-style eyes, simple friendly appearance. Wearing a loose off-white long-sleeve linen tunic with a small V-neck and subtle stitching, brown leather shoulder strap crossing the chest, wide brown leather utility belt with several small leather pouches, simple cloth and leather gloves, dark brown fitted trousers, rugged brown leather ankle boots. Small beginner sword and simple equipment attached to the belt, lightweight adventurer gear, no heavy armor, no cape, no elaborate decorations. Slightly slim young male body proportions, natural relaxed stance, arms slightly away from body, detailed clothing folds, layered leather accessories, small buckles and straps, practical low-level adventurer equipment. Classic fantasy RPG aesthetic, highly detailed pixel art, crisp pixel clusters, carefully shaded pixels, strong silhouette, detailed face and hair, rich texture, warm natural earthy colors, clean outlines, polished 2D MMORPG character sprite, transparent background, centered character, full body, no environment.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-09-25T19:21:57.154848+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {
+          "Breathing_Idle": {
+            "east": [
+              "Idle/animations/Breathing_Idle/east/frame_000.png",
+              "Idle/animations/Breathing_Idle/east/frame_001.png",
+              "Idle/animations/Breathing_Idle/east/frame_002.png",
+              "Idle/animations/Breathing_Idle/east/frame_003.png"
+            ],
+            "north-west": [
+              "Idle/animations/Breathing_Idle/north-west/frame_000.png",
+              "Idle/animations/Breathing_Idle/north-west/frame_001.png",
+              "Idle/animations/Breathing_Idle/north-west/frame_002.png",
+              "Idle/animations/Breathing_Idle/north-west/frame_003.png"
+            ],
+            "north": [
+              "Idle/animations/Breathing_Idle/north/frame_000.png",
+              "Idle/animations/Breathing_Idle/north/frame_001.png",
+              "Idle/animations/Breathing_Idle/north/frame_002.png",
+              "Idle/animations/Breathing_Idle/north/frame_003.png"
+            ],
+            "north-east": [
+              "Idle/animations/Breathing_Idle/north-east/frame_000.png",
+              "Idle/animations/Breathing_Idle/north-east/frame_001.png",
+              "Idle/animations/Breathing_Idle/north-east/frame_002.png",
+              "Idle/animations/Breathing_Idle/north-east/frame_003.png"
+            ],
+            "south": [
+              "Idle/animations/Breathing_Idle/south/frame_000.png",
+              "Idle/animations/Breathing_Idle/south/frame_001.png",
+              "Idle/animations/Breathing_Idle/south/frame_002.png",
+              "Idle/animations/Breathing_Idle/south/frame_003.png"
+            ],
+            "south-west": [
+              "Idle/animations/Breathing_Idle/south-west/frame_000.png",
+              "Idle/animations/Breathing_Idle/south-west/frame_001.png",
+              "Idle/animations/Breathing_Idle/south-west/frame_002.png",
+              "Idle/animations/Breathing_Idle/south-west/frame_003.png"
+            ],
+            "south-east": [
+              "Idle/animations/Breathing_Idle/south-east/frame_000.png",
+              "Idle/animations/Breathing_Idle/south-east/frame_001.png",
+              "Idle/animations/Breathing_Idle/south-east/frame_002.png",
+              "Idle/animations/Breathing_Idle/south-east/frame_003.png"
+            ],
+            "west": [
+              "Idle/animations/Breathing_Idle/west/frame_000.png",
+              "Idle/animations/Breathing_Idle/west/frame_001.png",
+              "Idle/animations/Breathing_Idle/west/frame_002.png",
+              "Idle/animations/Breathing_Idle/west/frame_003.png"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-10-01T00:15:57.830672"
+}

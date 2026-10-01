@@ -1,0 +1,190 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south/frame_000.png" id="1_birdr"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south/frame_001.png" id="2_ugqmv"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south/frame_002.png" id="3_becct"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south/frame_003.png" id="4_43x5o"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/east/frame_000.png" id="5_21ask"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/east/frame_001.png" id="6_1ylmj"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/east/frame_002.png" id="7_3bs3v"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/east/frame_003.png" id="8_hlgg7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north/frame_000.png" id="9_u21pn"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north/frame_001.png" id="10_6htba"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north/frame_002.png" id="11_257qj"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north/frame_003.png" id="12_pkcxm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-east/frame_000.png" id="13_arpse"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-east/frame_001.png" id="14_vtkic"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-east/frame_002.png" id="15_6ka7h"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-east/frame_003.png" id="16_16md8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-west/frame_000.png" id="17_7rjyt"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-west/frame_001.png" id="18_r46dr"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-west/frame_002.png" id="19_xb5kh"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-west/frame_003.png" id="20_1hak2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-east/frame_000.png" id="21_6b3h5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-east/frame_001.png" id="22_l3plx"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-east/frame_002.png" id="23_3eoeh"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-east/frame_003.png" id="24_aiv65"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-west/frame_000.png" id="25_dsyp8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-west/frame_001.png" id="26_543ky"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-west/frame_002.png" id="27_xyv84"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-west/frame_003.png" id="28_qrbkl"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/west/frame_000.png" id="29_810eq"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/west/frame_001.png" id="30_qfsdj"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/west/frame_002.png" id="31_okm3d"]
+[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/west/frame_003.png" id="32_cuc3k"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_birdr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ugqmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_becct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_43x5o")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_21ask")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_1ylmj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3bs3v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_hlgg7")
+}],
+"loop": 1,
+"name": &"idle_east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_u21pn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_6htba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_257qj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_pkcxm")
+}],
+"loop": 1,
+"name": &"idle_north",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_arpse")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vtkic")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_6ka7h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_16md8")
+}],
+"loop": 1,
+"name": &"idle_north-east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_7rjyt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_r46dr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_xb5kh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_1hak2")
+}],
+"loop": 1,
+"name": &"idle_north-west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_birdr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_ugqmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_becct")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_43x5o")
+}],
+"loop": 1,
+"name": &"idle_south",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("21_6b3h5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_l3plx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_3eoeh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_aiv65")
+}],
+"loop": 1,
+"name": &"idle_south-east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("25_dsyp8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_543ky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_xyv84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_qrbkl")
+}],
+"loop": 1,
+"name": &"idle_south-west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("29_810eq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_qfsdj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_okm3d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_cuc3k")
+}],
+"loop": 1,
+"name": &"idle_west",
+"speed": 5.0
+}]

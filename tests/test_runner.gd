@@ -33,6 +33,9 @@ func _init() -> void:
 	# Combat Vertical Slice
 	_test_combat_vertical_slice()
 
+	# Player 8-Directional Idle Animation
+	_test_player_idle_animation()
+
 	print("")
 	print("[TestRunner] ─────────────────────────────────────────")
 	print("[TestRunner] %d tests | %d failures" % [_total, _failed])
@@ -596,5 +599,57 @@ func _test_combat_vertical_slice() -> void:
 	player.free()
 	enemy.free()
 	# weak_enemy queues itself for free on death
+
+func _test_player_idle_animation() -> void:
+	print("\n[Group P] Player 8-Directional Idle Animation")
+
+	var player: Player = (load("res://scenes/entities/player.tscn") as PackedScene).instantiate() as Player
+	get_root().add_child(player)
+
+	# 1. Node composition
+	_ok("Player has AnimatedSprite2D", player.get_node_or_null("AnimatedSprite2D") != null)
+	var anim_sprite: AnimatedSprite2D = player.get_node("AnimatedSprite2D") as AnimatedSprite2D
+	_ok("AnimatedSprite2D has sprite_frames assigned", anim_sprite.sprite_frames != null)
+
+	var sf: SpriteFrames = anim_sprite.sprite_frames
+	var directions: Array[String] = [
+		"south", "south-east", "east", "north-east",
+		"north", "north-west", "west", "south-west"
+	]
+
+	# 2. All 8 directional animations present and each has 4 frames
+	var all_animations_present: bool = true
+	var all_have_four_frames: bool = true
+	for dir: String in directions:
+		var a_name: StringName = StringName("idle_" + dir)
+		if not sf.has_animation(a_name):
+			all_animations_present = false
+		elif sf.get_frame_count(a_name) != 4:
+			all_have_four_frames = false
+
+	_ok("SpriteFrames has all 8 idle directional animations", all_animations_present)
+	_ok("All 8 idle animations have 4 frames", all_have_four_frames)
+
+	# 3. Vector to direction name conversion tests
+	_ok("Vector (0, 1) converts to south", Player.vector_to_direction_name(Vector2(0, 1)) == "south")
+	_ok("Vector (1, 0) converts to east", Player.vector_to_direction_name(Vector2(1, 0)) == "east")
+	_ok("Vector (0, -1) converts to north", Player.vector_to_direction_name(Vector2(0, -1)) == "north")
+	_ok("Vector (-1, 0) converts to west", Player.vector_to_direction_name(Vector2(-1, 0)) == "west")
+	_ok("Vector (1, 1) converts to south-east", Player.vector_to_direction_name(Vector2(1, 1)) == "south-east")
+	_ok("Vector (-1, 1) converts to south-west", Player.vector_to_direction_name(Vector2(-1, 1)) == "south-west")
+	_ok("Vector (1, -1) converts to north-east", Player.vector_to_direction_name(Vector2(1, -1)) == "north-east")
+	_ok("Vector (-1, -1) converts to north-west", Player.vector_to_direction_name(Vector2(-1, -1)) == "north-west")
+
+	# 4. Movement facing updates animation
+	player.input_direction = Vector2(0, 1) # moving south
+	player._apply_movement()
+	_ok("AnimatedSprite2D plays idle_south after moving south", anim_sprite.animation == &"idle_south")
+
+	player.input_direction = Vector2(-1, -1) # moving north-west
+	player._apply_movement()
+	_ok("AnimatedSprite2D plays idle_north-west after moving north-west", anim_sprite.animation == &"idle_north-west")
+
+	player.free()
+
 
 

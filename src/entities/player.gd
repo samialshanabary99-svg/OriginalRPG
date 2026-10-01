@@ -38,12 +38,12 @@ signal combat_resolved(result: CombatResult)
 @export var move_speed: float = 200.0
 @export var attack_cooldown: float = 0.6
 
-# ── Component references ──────────────────────────────────────────────────────
 @onready var stats: CharacterStatsComponent   = $CharacterStatsComponent
 @onready var inventory: InventoryComponent    = $InventoryComponent
 @onready var equipment: EquipmentComponent    = $EquipmentComponent
 @onready var interactor_component: InteractorComponent = $InteractorComponent
 @onready var attack_area: Area2D              = $AttackArea
+@onready var animated_sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var sprite: Sprite2D                 = $Sprite2D
 @onready var camera: Camera2D                 = $Camera2D
 
@@ -63,6 +63,10 @@ func _ready() -> void:
 		stats = get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
 	if stats != null:
 		stats.died.connect(_on_died)
+	if animated_sprite == null:
+		animated_sprite = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	_update_animation()
+
 
 
 func _physics_process(delta: float) -> void:
@@ -102,12 +106,59 @@ func _apply_movement() -> void:
 
 		player_moved.emit(global_position)
 
-		# Sprite flip for horizontal movement
+		# Sprite flip for horizontal movement (legacy fallback)
 		if sprite != null and input_direction.x != 0.0:
 			sprite.flip_h = input_direction.x < 0.0
 
+	_update_animation()
+
 func is_moving() -> bool:
 	return velocity.length_squared() > 0.0
+
+# ── Animation ─────────────────────────────────────────────────────────────────
+func _update_animation() -> void:
+	if animated_sprite == null:
+		animated_sprite = get_node_or_null("AnimatedSprite2D") as AnimatedSprite2D
+	if animated_sprite == null:
+		return
+
+	var dir_name: String = get_facing_direction_name()
+	var anim_name: StringName = StringName("idle_" + dir_name)
+
+	if animated_sprite.animation != anim_name:
+		if animated_sprite.sprite_frames != null and animated_sprite.sprite_frames.has_animation(anim_name):
+			animated_sprite.play(anim_name)
+		elif animated_sprite.sprite_frames != null and animated_sprite.sprite_frames.has_animation(&"idle"):
+			animated_sprite.play(&"idle")
+
+func get_facing_direction_name() -> String:
+	return vector_to_direction_name(facing_direction)
+
+static func vector_to_direction_name(dir: Vector2) -> String:
+	if dir == Vector2.ZERO:
+		return "south"
+	var angle: float = dir.angle()
+	var octant: int = wrapi(int(round(angle / (PI / 4.0))), -4, 4)
+	match octant:
+		0:
+			return "east"
+		1:
+			return "south-east"
+		2:
+			return "south"
+		3:
+			return "south-west"
+		-4, 4:
+			return "west"
+		-3:
+			return "north-west"
+		-2:
+			return "north"
+		-1:
+			return "north-east"
+		_:
+			return "south"
+
 
 # ── Interaction ───────────────────────────────────────────────────────────────
 func interact() -> void:

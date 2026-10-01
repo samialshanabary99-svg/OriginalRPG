@@ -16,15 +16,13 @@ AI-first with manual supervision and manual asset work where needed.
 Multiple AI tools may be used across the project's lifetime, but only one agent actively edits the project at a time.
 
 ## Current State
-**Combat Vertical Slice complete and stable. 149/149 automated tests pass.**
-The combat interaction loop is fully implemented and verified:
-- Player target acquisition and explicit targeting (`set_target`, `acquire_target`, `target_changed`).
-- Deterministic attack calculation via `DamageCalculator.resolve_attack()`.
-- Complete outcome encapsulated in `CombatResult` RefCounted model.
-- Target health reduction and defeat flow with automatic XP rewards.
-- Symmetrical, unified execution shared between Player and Enemy entities.
-- Input validation and guards for dead targets, invalid targets, cooldowns, and dead attackers.
-- Test world contains a live Enemy instance wired to HUD combat log dialogue.
+**Combat & Player Presentation complete and stable. 163/163 automated tests pass.**
+- Player visuals integrated with 8-directional animated idle breathing sprites (`AnimatedSprite2D`, `player_sprite_frames.tres`).
+- Mathematical 8-octant direction calculation dynamically drives directional animations on movement.
+- Player targeting, deterministic combat calculations (`CombatResult`, `DamageCalculator`), and health/defeat/XP flow fully operational.
+- Unified execution shared between Player and Enemy entities.
+- All 163 automated tests pass across 16 groups.
+- Standalone executable `build/OriginalRPG.exe` built and synchronized to `C:\Users\SAMI\Desktop\ProjectZero\OriginalRPG.exe`.
 
 
 
