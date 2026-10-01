@@ -11,14 +11,31 @@ signal return_to_menu_requested()
 @onready var dialogue_panel: PanelContainer = $DialoguePanel
 @onready var dialogue_label: Label = $DialoguePanel/MarginContainer/DialogueLabel
 @onready var return_button: Button = $MarginContainer/VBoxContainer/ReturnButton
+@onready var toggle_info_button: Button = $MarginContainer/VBoxContainer/ToggleInfoButton if has_node("MarginContainer/VBoxContainer/ToggleInfoButton") else null
+@onready var basic_info_window: Control = $BasicInfoWindow if has_node("BasicInfoWindow") else null
 
 func _ready() -> void:
 	dialogue_panel.visible = false
 	return_button.pressed.connect(_on_return_pressed)
+	if toggle_info_button != null:
+		toggle_info_button.pressed.connect(toggle_basic_info)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("toggle_character_info") or (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_V):
+		toggle_basic_info()
+
+func toggle_basic_info() -> void:
+	if basic_info_window != null:
+		if basic_info_window.has_method("toggle_window"):
+			basic_info_window.toggle_window()
+		else:
+			basic_info_window.visible = not basic_info_window.visible
 
 func bind_player(player: Player) -> void:
 	if player == null:
 		return
+	if basic_info_window != null and basic_info_window.has_method("bind_player"):
+		basic_info_window.bind_player(player)
 	# Support both CharacterStatsComponent and plain StatsComponent
 	var s: StatsComponent = player.get_node_or_null("CharacterStatsComponent") as StatsComponent
 	if s == null:

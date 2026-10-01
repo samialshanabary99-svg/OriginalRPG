@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=3 uid="uid://hudview001"]
 
 [ext_resource type="Script" path="res://src/ui/hud.gd" id="1_hud"]
+[ext_resource type="PackedScene" path="res://scenes/ui/basic_info_window.tscn" id="2_basic_info"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_hud")
@@ -32,11 +33,22 @@ text = "XP: 0 / 100"
 layout_mode = 2
 text = "Move: WASD / Arrows
 Interact: E or Space
-Attack: J / LMB"
+Attack: J / LMB
+Info: V"
+
+[node name="ToggleInfoButton" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Basic Info (V)"
 
 [node name="ReturnButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Return to Menu"
+
+[node name="BasicInfoWindow" parent="." instance=ExtResource("2_basic_info")]
+offset_left = 910.0
+offset_top = 20.0
+offset_right = 1250.0
+offset_bottom = 450.0
 
 [node name="DialoguePanel" type="PanelContainer" parent="."]
 anchors_preset = 7

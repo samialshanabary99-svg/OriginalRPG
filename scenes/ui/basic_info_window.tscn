@@ -1,0 +1,589 @@
+[gd_scene load_steps=22 format=3 uid="uid://basicinfowin01"]
+
+[ext_resource type="Script" path="res://src/ui/basic_info_window.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/ui/portraits/portrait_valkyria.png" id="2_portrait"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/icon_hp.png" id="3_hp"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/icon_sp.png" id="4_sp"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/icon_stamina.png" id="5_stamina"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/icon_power.png" id="6_power"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/icon_weight.png" id="7_weight"]
+[ext_resource type="Texture2D" path="res://assets/ui/icons/icon_money.png" id="8_money"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_title"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.529, 0.31, 0.22, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_color = Color(0.337, 0.192, 0.129, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+bg_color = Color(0.627, 0.353, 0.243, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.282, 0.145, 0.086, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main"]
+content_margin_left = 12.0
+content_margin_top = 10.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.98, 0.835, 0.67, 1)
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.58, 0.329, 0.22, 1)
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_portrait"]
+bg_color = Color(0.906, 0.745, 0.557, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.216, 0.102, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bar_bg"]
+bg_color = Color(0.145, 0.145, 0.2, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.078, 0.078, 0.114, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tag_lvl"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.11, 0.23, 0.16, 1)
+corner_radius_top_left = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_green"]
+bg_color = Color(0.184, 0.71, 0.329, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tag_job"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.24, 0.2, 0.1, 1)
+corner_radius_top_left = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_yellow"]
+bg_color = Color(0.961, 0.729, 0.145, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_red"]
+bg_color = Color(0.898, 0.224, 0.208, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_blue"]
+bg_color = Color(0.118, 0.533, 0.898, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_orange"]
+bg_color = Color(0.984, 0.549, 0.0, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fill_crimson"]
+bg_color = Color(0.827, 0.184, 0.184, 1)
+corner_radius_top_left = 2
+corner_radius_top_right = 2
+corner_radius_bottom_right = 2
+corner_radius_bottom_left = 2
+
+[node name="BasicInfoWindow" type="Control"]
+custom_minimum_size = Vector2(340, 430)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 340.0
+offset_bottom = 430.0
+mouse_filter = 0
+script = ExtResource("1_script")
+
+[node name="WindowFrame" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TitleBar" type="PanelContainer" parent="WindowFrame"]
+custom_minimum_size = Vector2(0, 26)
+layout_mode = 2
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_title")
+
+[node name="HBox" type="HBoxContainer" parent="WindowFrame/TitleBar"]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="WindowFrame/TitleBar/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="BtnMinimize" type="Button" parent="WindowFrame/TitleBar/HBox"]
+custom_minimum_size = Vector2(20, 18)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.988, 0.929, 0.863, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "-"
+
+[node name="BtnClose" type="Button" parent="WindowFrame/TitleBar/HBox"]
+custom_minimum_size = Vector2(20, 18)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.988, 0.929, 0.863, 1)
+theme_override_font_sizes/font_size = 10
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "X"
+
+[node name="MainPanel" type="PanelContainer" parent="WindowFrame"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_main")
+
+[node name="Margin" type="MarginContainer" parent="WindowFrame/MainPanel"]
+layout_mode = 2
+
+[node name="ContentVBox" type="VBoxContainer" parent="WindowFrame/MainPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HeaderHBox" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PortraitFrame" type="PanelContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox"]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_portrait")
+
+[node name="PortraitTexture" type="TextureRect" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/PortraitFrame"]
+layout_mode = 2
+texture = ExtResource("2_portrait")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ProfileInfo" type="VBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 3
+
+[node name="LabelName" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.09, 0.165, 0.325, 1)
+theme_override_font_sizes/font_size = 18
+text = "VALKYRIA"
+
+[node name="SubHBox" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo"]
+layout_mode = 2
+
+[node name="LabelJob" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/SubHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 11
+text = "Job Novice"
+
+[node name="Spacer" type="Control" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/SubHBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelID" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/SubHBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.153, 0.325, 0.549, 1)
+theme_override_font_sizes/font_size = 11
+text = "ID: 1024567"
+
+[node name="LvlExpRow" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TagLvl" type="PanelContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/LvlExpRow"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tag_lvl")
+
+[node name="LabelTag" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/LvlExpRow/TagLvl"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 9
+text = "LVL"
+
+[node name="BarLvlExp" type="ProgressBar" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/LvlExpRow"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_green")
+max_value = 2800.0
+value = 1500.0
+show_percentage = false
+
+[node name="LabelLvlExp" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/LvlExpRow/BarLvlExp"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+text = "1500 / 2800"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JobExpRow" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TagJob" type="PanelContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/JobExpRow"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tag_job")
+
+[node name="LabelTag" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/JobExpRow/TagJob"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.9, 0.9, 1)
+theme_override_font_sizes/font_size = 9
+text = "JOB"
+
+[node name="BarJobExp" type="ProgressBar" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/JobExpRow"]
+custom_minimum_size = Vector2(0, 14)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_yellow")
+max_value = 1800.0
+value = 900.0
+show_percentage = false
+
+[node name="LabelJobExp" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/JobExpRow/BarJobExp"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 9
+text = "900 / 1800"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExpSection" type="VBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox"]
+layout_mode = 2
+
+[node name="ExpDivider" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/ExpSection"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LeftLine" type="ColorRect" parent="WindowFrame/MainPanel/Margin/ContentVBox/ExpSection/ExpDivider"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+color = Color(0.702, 0.533, 0.396, 1)
+
+[node name="LabelExp" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/ExpSection/ExpDivider"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.529, 0.31, 0.22, 1)
+theme_override_font_sizes/font_size = 11
+text = "EXP"
+
+[node name="RightLine" type="ColorRect" parent="WindowFrame/MainPanel/Margin/ContentVBox/ExpSection/ExpDivider"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+color = Color(0.702, 0.533, 0.396, 1)
+
+[node name="StatsSection" type="VBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="HpRow" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Icon" type="TextureRect" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/HpRow"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("3_hp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelName" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/HpRow"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "HP"
+
+[node name="BarHP" type="ProgressBar" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/HpRow"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_red")
+max_value = 850.0
+value = 850.0
+show_percentage = false
+
+[node name="LabelHP" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/HpRow/BarHP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "850 / 850"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpRow" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Icon" type="TextureRect" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/SpRow"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("4_sp")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelName" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/SpRow"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "SP"
+
+[node name="BarSP" type="ProgressBar" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/SpRow"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_blue")
+max_value = 120.0
+value = 120.0
+show_percentage = false
+
+[node name="LabelSP" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/SpRow/BarSP"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "120 / 120"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StaminaRow" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Icon" type="TextureRect" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/StaminaRow"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("5_stamina")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelName" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/StaminaRow"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Stamina"
+
+[node name="BarStamina" type="ProgressBar" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/StaminaRow"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_orange")
+max_value = 100.0
+value = 95.0
+show_percentage = false
+
+[node name="LabelStamina" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/StaminaRow/BarStamina"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "95 / 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PowerRow" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="Icon" type="TextureRect" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/PowerRow"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("6_power")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelName" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/PowerRow"]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 12
+text = "Power"
+
+[node name="BarPower" type="ProgressBar" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/PowerRow"]
+custom_minimum_size = Vector2(0, 18)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_styles/background = SubResource("StyleBoxFlat_bar_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_fill_crimson")
+max_value = 100.0
+value = 75.0
+show_percentage = false
+
+[node name="LabelPower" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/PowerRow/BarPower"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 10
+text = "75 / 100"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FooterSection" type="VBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="OrnamentDivider" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="LeftLine" type="ColorRect" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection/OrnamentDivider"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+color = Color(0.702, 0.533, 0.396, 1)
+
+[node name="LabelGlyph" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection/OrnamentDivider"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.529, 0.31, 0.22, 1)
+theme_override_font_sizes/font_size = 11
+text = "— ※ —"
+
+[node name="RightLine" type="ColorRect" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection/OrnamentDivider"]
+custom_minimum_size = Vector2(0, 1)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+color = Color(0.702, 0.533, 0.396, 1)
+
+[node name="WeightRow" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection/WeightRow"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("7_weight")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelWeight" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection/WeightRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 13
+text = "Weight"
+
+[node name="Spacer" type="Control" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection/WeightRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelWeightVal" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection/WeightRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 13
+text = "1200 / 2900"
+
+[node name="MoneyRow" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection"]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection/MoneyRow"]
+custom_minimum_size = Vector2(20, 20)
+layout_mode = 2
+texture = ExtResource("8_money")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LabelMoney" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection/MoneyRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 13
+text = "Money"
+
+[node name="Spacer" type="Control" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection/MoneyRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LabelMoneyVal" type="Label" parent="WindowFrame/MainPanel/Margin/ContentVBox/FooterSection/MoneyRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 13
+text = "80,000,000"

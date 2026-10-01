@@ -46,6 +46,10 @@
   - **Date:** 2026-10-01
   - **Agent:** Antigravity (Senior QA & Architecture Review)
   - **Result:** Conducted an exhaustive repository audit across Code, Scenes, Architecture, Documentation, and Change History. Identified and fixed a HIGH-severity mathematical accumulation bug in `CharacterStatsComponent.max_health` where adding/removing modifiers compounded `max_health` indefinitely. Fixed signal declaration convention placement in `Enemy`. Proposed ADR-005 for unified skill combat resolution. Aligned `ARCHITECTURE.md`, `README.md`, `ROADMAP.md`, `PROJECT_STATUS.md`, `AI_CONTEXT.md`, and `docs/tasks/TODO.md` with repository reality. Added regression test coverage bringing test suite to 239/239 passing assertions across 18 groups. Generated comprehensive audit report (`docs/reports/2026-10-01-repository-audit.md`). Rebuilt and smoke-tested standalone Windows executable. Reference changelog: `docs/changelog/2026-10-01-repository-audit-and-doc-alignment.md`.
+- **Ragnarok-Style Basic Info Window**
+  - **Date:** 2026-10-01
+  - **Agent:** Antigravity (UI & Game Systems)
+  - **Result:** Designed and implemented an authentic *Ragnarok Online* inspired Basic Info Window matching visual reference layout. Extracted character portrait (`portrait_valkyria.png`) and 6 custom RGBA8 status icons (`icon_hp.png`, `icon_sp.png`, `icon_stamina.png`, `icon_power.png`, `icon_weight.png`, `icon_money.png`), registered in asset manifest, and validated via `validate_assets.ps1`. Built `src/ui/basic_info_window.gd` and `scenes/ui/basic_info_window.tscn` with parchment styling, dual EXP progression bars (Base/Job), 4 attribute/resource bars, inventory weight, and formatted Zeny display. Supported mouse drag-and-drop repositioning, minimize foldout toggle, close button, and visibility toggle via hotkey (`V`) and HUD on-screen button. Fully bound via signals to `CharacterStatsComponent` and `InventoryComponent`. Added Group S tests (26 assertions) reaching 265/265 passing tests. Rebuilt standalone Windows executable and updated desktop shortcut. Reference changelog: `docs/changelog/2026-10-01-basic-info-window.md`.
 
 
 

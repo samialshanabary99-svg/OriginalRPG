@@ -16,14 +16,15 @@ AI-first with manual supervision and manual asset work where needed.
 Multiple AI tools may be used across the project's lifetime, but only one agent actively edits the project at a time.
 
 ## Current State
-**Repository Audit & Architecture Review Complete. 239/239 automated tests pass.**
-- Full repository audit completed; fixed CharacterStatsComponent max_health accumulation bug and signal placement.
+**Ragnarok-Style Basic Info Window Complete. 265/265 automated tests pass.**
+- Authentic Ragnarok Online inspired Basic Info Window (`src/ui/basic_info_window.gd`, `scenes/ui/basic_info_window.tscn`, `assets/ui/`).
+- Draggable window with custom wood/parchment styling, character portrait, 6 custom RGBA8 status icons, dual EXP bars (Base/Job), 4 resource bars, weight & Zeny readouts, and minimize toggle.
+- Hotkey toggle (`V`), HUD button toggle, and reactive signal binding to `CharacterStatsComponent` and `InventoryComponent`.
+- Full repository audit complete; fixed CharacterStatsComponent max_health accumulation bug and signal placement.
 - Formal AI-assisted asset pipeline documented in `docs/assets/ASSET_PIPELINE.md` with complete manifest in `docs/assets/ASSET_MANIFEST.md`.
 - Automated asset validation via `AssetValidator`, `scripts/validate_assets.gd`, and `scripts/validate_assets.ps1`.
 - Centralized `ContentRegistry` loads, validates, and serves definitions from `res://data/{characters,enemies,items,skills}/`.
-- New enemies and archetypes instantiated directly from data via `Enemy.init_from_id()` and `Player.init_from_character_id()`.
-- Player skills system operational via `Player.try_use_skill()` (proposed for unification under ADR-005).
-- All 239 automated tests pass across 18 groups.
+- All 265 automated tests pass across 19 groups.
 - Standalone executable `build/OriginalRPG.exe` built and synchronized to `C:\Users\SAMI\Desktop\ProjectZero\OriginalRPG.exe`.
 
 

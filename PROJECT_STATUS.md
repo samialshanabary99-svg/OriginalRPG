@@ -1,7 +1,7 @@
 # Project Status
 
 ## Current Phase
-**Repository Audit & Documentation Alignment Complete — 239/239 automated tests passing.**
+**Ragnarok-Style Basic Info Window Complete — 265/265 automated tests passing across 19 test groups.**
 
 ## Working Systems
 - All Phase 1 systems (Main Menu, Test World, Player, Camera, Interaction, HUD, scene transitions).
@@ -31,13 +31,15 @@
   - Mathematical 8-octant direction calculation updating animation state dynamically with movement.
 - **`Player`** (`src/entities/player.gd`): Full character state machine, facing tracking, `attack_target()`, `try_use_skill()`, `init_from_character_id()`, delegating serialization.
 - **`Enemy`** (`src/entities/enemy.gd`): AI patrol/aggro states, `init_from_id()` and `init_from_definition()`, dynamic stats and visual tint, click-targeting event, unified combat execution.
-- **`TestWorld`** (`scenes/maps/test_world.tscn`): Playable slice containing Player, AncientMonument, and Enemy instance with signal-bound HUD feedback.
-
-
-
+- **`Ragnarok-Style Basic Info Window`** (`src/ui/basic_info_window.gd`, `scenes/ui/basic_info_window.tscn`, `assets/ui/`):
+  - Authentic RO aesthetic with wood title bar, parchment panel, inner recessed borders, character portrait, and 6 custom 32x32 RGBA8 status icons.
+  - Dual EXP progression bars (Base LVL & Job LVL) with progress readouts.
+  - 4 status bars (HP, SP, Stamina, Power) and footer stats (Weight, formatted Zeny).
+  - Draggable window via title bar, minimize foldout toggle, close button `[X]`, and hotkey (`V`) / HUD button toggle.
+  - Live signal binding to `CharacterStatsComponent` and `InventoryComponent`.
 
 ## In Progress
-- None. Phase 2 is stable. Awaiting Phase 3 task selection.
+- None. Phase 2 & UI systems stable. Awaiting next user request.
 
 ## Planned (Phase 3 — Save/Load & Persistence)
 - JSON save/load service (`SaveService`) for player stats + inventory
@@ -52,7 +54,6 @@
 - Quest log runtime component (`QuestLog`)
 - Sound effects and ambient audio
 
-
 ## Multiplayer
 Not implemented. Architecture intentionally decoupled to support future headless server evaluation.
 
@@ -62,4 +63,4 @@ Not implemented. Architecture intentionally decoupled to support future headless
 - Damaging skills do not award XP on defeat (addressed in proposed ADR-005).
 
 ## Last Updated
-2026-10-01 (Antigravity — Senior QA & Architecture Review Audit Complete)
+2026-10-01 (Antigravity — Ragnarok-Style Basic Info Window Complete & Verified)

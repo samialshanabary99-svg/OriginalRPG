@@ -42,6 +42,9 @@ func _init() -> void:
 	# AI-Assisted Asset Pipeline & Validator
 	_test_asset_pipeline_validation()
 
+	# Ragnarok Online Style Basic Info Window
+	_test_basic_info_window()
+
 	print("")
 	print("[TestRunner] ─────────────────────────────────────────")
 	print("[TestRunner] %d tests | %d failures" % [_total, _failed])
@@ -862,6 +865,73 @@ func _test_asset_pipeline_validation() -> void:
 	# 7. Unmanifested asset detection
 	var missing_test: Dictionary = AssetValidator.check_manifest_coverage("res://assets", "docs/assets/nonexistent_manifest.md")
 	_ok("check_manifest_coverage detects missing manifest file", not bool(missing_test.get("valid", true)))
+
+func _test_basic_info_window() -> void:
+	print("\n[Group S] Basic Info Window (Ragnarok Online Style)")
+
+	var packed: PackedScene = load("res://scenes/ui/basic_info_window.tscn")
+	_ok("BasicInfoWindow scene loads", packed != null)
+
+	var win: BasicInfoWindow = packed.instantiate() as BasicInfoWindow
+	get_root().add_child(win)
+	win._ready()
+
+	_ok("BasicInfoWindow instance valid", win != null)
+	_ok("Has title bar", win.title_bar != null)
+	_ok("Has minimize button", win.btn_minimize != null)
+	_ok("Has close button", win.btn_close != null)
+	_ok("Has portrait texture", win.portrait_rect != null and win.portrait_rect.texture != null)
+	_ok("Default character name is VALKYRIA", win.label_name.text == "VALKYRIA")
+	_ok("Default job is Job Novice", win.label_job.text == "Job Novice")
+	_ok("Default ID is ID: 1024567", win.label_id.text == "ID: 1024567")
+
+	# Bar checks
+	_ok("Has HP bar", win.bar_hp != null)
+	_ok("Has SP bar", win.bar_sp != null)
+	_ok("Has Stamina bar", win.bar_stamina != null)
+	_ok("Has Power bar", win.bar_power != null)
+	_ok("Has LVL EXP bar", win.bar_lvl_exp != null)
+	_ok("Has JOB EXP bar", win.bar_job_exp != null)
+
+	# Stats checks
+	_ok("Has weight label", win.label_weight_val != null and win.label_weight_val.text.contains("2900"))
+	_ok("Has money label", win.label_money_val != null and win.label_money_val.text == "80,000,000")
+
+	# Minimize / Expand toggle
+	win._on_minimize_pressed()
+	_ok("Minimize hides stats section", not win.stats_section.visible)
+	win._on_minimize_pressed()
+	_ok("Restore shows stats section", win.stats_section.visible)
+
+	# Close and Toggle
+	win._on_close_pressed()
+	_ok("Close button hides window", not win.visible)
+	win.toggle_window()
+	_ok("Toggle window restores visibility", win.visible)
+
+	# Dynamic binding to player
+	var player_packed: PackedScene = load("res://scenes/entities/player.tscn")
+	var player: Player = player_packed.instantiate() as Player
+	get_root().add_child(player)
+	player._ready()
+
+	win.bind_player(player)
+	_ok("Bound player updates HP bar to player HP", win.bar_hp.value == player.stats.current_health)
+	_ok("Bound player updates SP bar to player mana", win.bar_sp.value == player.stats.current_mana)
+
+	# Live signal response
+	player.stats.apply_damage(30)
+	_ok("HP bar updates on damage", win.bar_hp.value == player.stats.current_health)
+
+	player.stats.spend_mana(15)
+	_ok("SP bar updates on mana spend", win.bar_sp.value == player.stats.current_mana)
+
+	# Number formatting helper
+	_ok("Money formatting works", BasicInfoWindow._format_number(1234567) == "1,234,567")
+
+	win.free()
+	player.free()
+
 
 
 

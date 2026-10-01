@@ -150,6 +150,58 @@ license_or_usage_notes: Project-authored Godot resource
 notes: Automatically maps 8 idle animations at 5.0 FPS with loop enabled.
 ```
 
+### 5. `ui_portrait_valkyria`
+```yaml
+asset_id: ui_portrait_valkyria
+name: Valkyria Novice Character Portrait
+type: ui
+path: assets/ui/portraits/portrait_valkyria.png
+source: user_provided
+generator_or_tool: ai_generated
+prompt_reference: Classic Ragnarok Online inspired red-haired novice heroine portrait
+author: User
+created_date: 2026-10-01
+modified_date: 2026-10-01
+dimensions: 128x128
+frame_size: 128x128
+animation_frames: 1
+animation: none
+directions: 1
+format: png
+transparency: rgba_alpha
+intended_use: Character portrait displayed in the Basic Info Window
+related_entity: scenes/ui/basic_info_window.tscn
+status: approved
+license_or_usage_notes: Custom user asset for OriginalRPG Basic Info Window
+notes: 128x128 pixel portrait with decorative frame.
+```
+
+### 6. `ui_basic_info_icons`
+```yaml
+asset_id: ui_basic_info_icons
+name: Basic Info Window Attribute & Currency Icons
+type: ui
+path: assets/ui/icons/
+source: user_provided
+generator_or_tool: manual_extraction
+prompt_reference: Ragnarok Online Basic Info UI icons (HP, SP, Stamina, Power, Weight, Money)
+author: Antigravity (Agent)
+created_date: 2026-10-01
+modified_date: 2026-10-01
+dimensions: 32x32
+frame_size: 32x32
+animation_frames: 6
+animation: none
+directions: 1
+format: png
+transparency: rgba_alpha
+intended_use: Attribute and resource row icons for Basic Info Window
+related_entity: scenes/ui/basic_info_window.tscn
+status: approved
+license_or_usage_notes: Project UI icons (icon_hp.png, icon_sp.png, icon_stamina.png, icon_power.png, icon_weight.png, icon_money.png)
+notes: Set of 6 standard 32x32 RGBA icons with transparent backgrounds.
+```
+
 ---
 
 ## Planned Content Assets (Data Stubs)
