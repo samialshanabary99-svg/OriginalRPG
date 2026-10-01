@@ -16,15 +16,15 @@ AI-first with manual supervision and manual asset work where needed.
 Multiple AI tools may be used across the project's lifetime, but only one agent actively edits the project at a time.
 
 ## Current State
-**Ragnarok-Style Basic Info Window Complete. 265/265 automated tests pass.**
-- Authentic Ragnarok Online inspired Basic Info Window (`src/ui/basic_info_window.gd`, `scenes/ui/basic_info_window.tscn`, `assets/ui/`).
-- Draggable window with custom wood/parchment styling, character portrait, 6 custom RGBA8 status icons, dual EXP bars (Base/Job), 4 resource bars, weight & Zeny readouts, and minimize toggle.
-- Hotkey toggle (`V`), HUD button toggle, and reactive signal binding to `CharacterStatsComponent` and `InventoryComponent`.
-- Full repository audit complete; fixed CharacterStatsComponent max_health accumulation bug and signal placement.
+**Multi-Layer TileMapLayer Field Terrain Complete. 296/296 automated tests pass.**
+- Multi-layer 2D `TileMapLayer` field architecture (`GroundLayer`, `ElevationLayer`, `DecorationLayer`) in `scenes/maps/test_world.tscn`.
+- 20 custom 32×32 RGBA8 pixel-art tiles (`assets/tiles/ground/`) with custom data layers for `terrain_type` and `elevation` in `assets/tiles/tileset_green_field.tres`.
+- Zero physics collision geometry on slopes/plateaus ensuring completely smooth, free player movement across rolling hills and ramps.
+- Authentic Ragnarok Online inspired Basic Info Window (`src/ui/basic_info_window.gd`, `scenes/ui/basic_info_window.tscn`, `assets/ui/`) with live signal binding.
 - Formal AI-assisted asset pipeline documented in `docs/assets/ASSET_PIPELINE.md` with complete manifest in `docs/assets/ASSET_MANIFEST.md`.
 - Automated asset validation via `AssetValidator`, `scripts/validate_assets.gd`, and `scripts/validate_assets.ps1`.
 - Centralized `ContentRegistry` loads, validates, and serves definitions from `res://data/{characters,enemies,items,skills}/`.
-- All 265 automated tests pass across 19 groups.
+- All 296 automated tests pass across 20 groups.
 - Standalone executable `build/OriginalRPG.exe` built and synchronized to `C:\Users\SAMI\Desktop\ProjectZero\OriginalRPG.exe`.
 
 

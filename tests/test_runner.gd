@@ -45,6 +45,9 @@ func _init() -> void:
 	# Ragnarok Online Style Basic Info Window
 	_test_basic_info_window()
 
+	# Multi-Layer TileMapLayer Field & Slope Systems
+	_test_multi_layer_tilemap_field()
+
 	print("")
 	print("[TestRunner] ─────────────────────────────────────────")
 	print("[TestRunner] %d tests | %d failures" % [_total, _failed])
@@ -931,6 +934,79 @@ func _test_basic_info_window() -> void:
 
 	win.free()
 	player.free()
+
+func _test_multi_layer_tilemap_field() -> void:
+	print("\n[Group T] Multi-Layer TileMapLayer Field & Slope Systems")
+
+	# 1. Scene loading & node structure
+	var world_scene: PackedScene = load("res://scenes/maps/test_world.tscn")
+	_ok("TestWorld scene loads", world_scene != null)
+	var world: Node = world_scene.instantiate()
+	get_root().add_child(world)
+	_ok("TestWorld instantiates successfully", world != null)
+
+	var ground: TileMapLayer = world.get_node_or_null("GroundLayer") as TileMapLayer
+	var elev: TileMapLayer = world.get_node_or_null("ElevationLayer") as TileMapLayer
+	var deco: TileMapLayer = world.get_node_or_null("DecorationLayer") as TileMapLayer
+
+	_ok("Has GroundLayer TileMapLayer", ground != null)
+	_ok("Has ElevationLayer TileMapLayer", elev != null)
+	_ok("Has DecorationLayer TileMapLayer", deco != null)
+
+	# 2. Z-Index and Y-Sort layering
+	_ok("GroundLayer z_index is -2", ground.z_index == -2)
+	_ok("ElevationLayer z_index is -1", elev.z_index == -1)
+	_ok("DecorationLayer y_sort_enabled is true", deco.y_sort_enabled)
+
+	# 3. TileSet resource and custom data layers
+	var ts: TileSet = ground.tile_set
+	_ok("TileSet assigned to GroundLayer", ts != null)
+	_ok("TileSet tile_size is 32x32", ts.tile_size == Vector2i(32, 32))
+	_ok("TileSet has at least 2 custom data layers", ts.get_custom_data_layers_count() >= 2)
+	_ok("TileSet custom data layer 0 is terrain_type", ts.get_custom_data_layer_name(0) == "terrain_type")
+	_ok("TileSet custom data layer 1 is elevation", ts.get_custom_data_layer_name(1) == "elevation")
+	_ok("TileSet has 20 atlas sources", ts.get_source_count() == 20)
+
+	# 4. GroundLayer terrain data
+	var spawn_tile: TileData = ground.get_cell_tile_data(Vector2i(0, 0))
+	_ok("Spawn cell (0, 0) has ground tile", spawn_tile != null)
+	_ok("Spawn cell terrain_type is grass", str(spawn_tile.get_custom_data("terrain_type")) == "grass")
+	_ok("Spawn cell elevation is 0", int(spawn_tile.get_custom_data("elevation")) == 0)
+
+	# 5. ElevationLayer rolling hills & slopes
+	var plateau_tile: TileData = elev.get_cell_tile_data(Vector2i(10, -8))
+	_ok("Plateau cell (10, -8) has elevated tile", plateau_tile != null)
+	_ok("Plateau cell elevation is 1", plateau_tile != null and int(plateau_tile.get_custom_data("elevation")) == 1)
+
+	var ramp_tile: TileData = elev.get_cell_tile_data(Vector2i(10, -3))
+	_ok("Ramp cell (10, -3) has ramp tile", ramp_tile != null)
+	_ok("Ramp terrain_type is ramp", ramp_tile != null and str(ramp_tile.get_custom_data("terrain_type")) == "ramp")
+
+	var slope_tile: TileData = elev.get_cell_tile_data(Vector2i(10, -13))
+	_ok("Slope cell (10, -13) has slope tile", slope_tile != null)
+	_ok("Slope terrain_type is slope", slope_tile != null and str(slope_tile.get_custom_data("terrain_type")) == "slope")
+
+	# 6. DecorationLayer details
+	var stone_tile: TileData = deco.get_cell_tile_data(Vector2i(1, 0))
+	_ok("DecorationLayer stepping stone at (1, 0)", stone_tile != null and str(stone_tile.get_custom_data("terrain_type")) == "stone")
+
+	var flower_tile: TileData = deco.get_cell_tile_data(Vector2i(2, -2))
+	_ok("DecorationLayer wildflowers at (2, -2)", flower_tile != null and str(flower_tile.get_custom_data("terrain_type")) == "flower")
+
+	# 7. Player movement invariant: slopes and ground have zero collision layers
+	var player_node: Player = world.get_node_or_null("Player") as Player
+	_ok("TestWorld contains Player instance", player_node != null)
+	_ok("TileSet has zero physics collision layers", ts.get_physics_layers_count() == 0)
+	_ok("ElevationLayer has zero physics collision geometry", elev.tile_set.get_physics_layers_count() == 0)
+	_ok("GroundLayer has zero physics collision geometry", ground.tile_set.get_physics_layers_count() == 0)
+
+	# 8. WorldBoundaries verification
+	var boundaries: StaticBody2D = world.get_node_or_null("WorldBoundaries") as StaticBody2D
+	_ok("WorldBoundaries StaticBody2D is present", boundaries != null)
+	_ok("WorldBoundaries is on collision layer 2", boundaries != null and (boundaries.collision_layer & 2) != 0)
+
+	# Clean up
+	world.queue_free()
 
 
 

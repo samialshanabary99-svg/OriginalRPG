@@ -1,10 +1,16 @@
 # Project Status
 
 ## Current Phase
-**Ragnarok-Style Basic Info Window Complete — 265/265 automated tests passing across 19 test groups.**
+**Multi-Layer TileMapLayer Field Terrain & Slope System Complete — 296/296 automated tests passing across 20 test groups.**
 
 ## Working Systems
 - All Phase 1 systems (Main Menu, Test World, Player, Camera, Interaction, HUD, scene transitions).
+- **`Multi-Layer TileMapLayer Field Terrain & Slope System`** (`scenes/maps/test_world.tscn`, `assets/tiles/`):
+  - 3 dedicated layers: `GroundLayer` (z = -2), `ElevationLayer` (z = -1), `DecorationLayer` (z = 0, y_sort_enabled).
+  - 20 custom 32×32 pixel-art RGBA8 tiles (`assets/tiles/ground/`): lush meadow grass, flower variants, elevated grass, directional slopes, corners, ramps, cliffs, stepping stones, and doodads.
+  - Unified Godot 4 `TileSet` (`assets/tiles/tileset_green_field.tres`) with custom data layers for `terrain_type` (footstep/physics metadata) and `elevation`.
+  - Zero physics collision geometry on slopes/plateaus ensuring completely free, smooth player movement across hills.
+  - Manifest and dimension compliance (70 files checked, 0 errors).
 - **`AI-Assisted Asset Pipeline & Validator`** (`src/services/asset_validator.gd`, `scripts/validate_assets.gd`, `docs/assets/`):
   - Strict naming, directory, dimension, format, and RGBA transparency enforcement.
   - Comprehensive asset manifest ([`docs/assets/ASSET_MANIFEST.md`](file:///c:/Users/SAMI/Desktop/ProjectZero/OriginalRPG/docs/assets/ASSET_MANIFEST.md)) with 100% disk coverage verification.
@@ -63,4 +69,4 @@ Not implemented. Architecture intentionally decoupled to support future headless
 - Damaging skills do not award XP on defeat (addressed in proposed ADR-005).
 
 ## Last Updated
-2026-10-01 (Antigravity — Ragnarok-Style Basic Info Window Complete & Verified)
+2026-10-01 (Antigravity — Multi-Layer TileMapLayer Field Complete & Verified)
