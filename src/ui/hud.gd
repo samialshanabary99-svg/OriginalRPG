@@ -12,7 +12,11 @@ signal return_to_menu_requested()
 @onready var dialogue_label: Label = $DialoguePanel/MarginContainer/DialogueLabel
 @onready var return_button: Button = $MarginContainer/VBoxContainer/ReturnButton
 @onready var toggle_info_button: Button = $MarginContainer/VBoxContainer/ToggleInfoButton if has_node("MarginContainer/VBoxContainer/ToggleInfoButton") else null
-@onready var basic_info_window: Control = $BasicInfoWindow if has_node("BasicInfoWindow") else null
+@onready var basic_info_window: Control = $BasicInfoWindow if has_node("BasicInfoWindow") else null:
+	get:
+		if basic_info_window == null and has_node("BasicInfoWindow"):
+			basic_info_window = get_node_or_null("BasicInfoWindow") as Control
+		return basic_info_window
 
 func _ready() -> void:
 	dialogue_panel.visible = false
@@ -31,7 +35,7 @@ func toggle_basic_info() -> void:
 		else:
 			basic_info_window.visible = not basic_info_window.visible
 
-func bind_player(player: Player) -> void:
+func bind_player(player: Node) -> void:
 	if player == null:
 		return
 	if basic_info_window != null and basic_info_window.has_method("bind_player"):
@@ -41,12 +45,15 @@ func bind_player(player: Player) -> void:
 	if s == null:
 		s = player.get_node_or_null("StatsComponent") as StatsComponent
 	if s != null:
-		s.health_changed.connect(_on_health_changed)
+		if not s.health_changed.is_connected(_on_health_changed):
+			s.health_changed.connect(_on_health_changed)
 		_on_health_changed(s.current_health, s.max_health)
 		if s is CharacterStatsComponent:
 			var cs: CharacterStatsComponent = s as CharacterStatsComponent
-			cs.level_up.connect(_on_level_up)
-			cs.experience_changed.connect(_on_experience_changed)
+			if not cs.level_up.is_connected(_on_level_up):
+				cs.level_up.connect(_on_level_up)
+			if not cs.experience_changed.is_connected(_on_experience_changed):
+				cs.experience_changed.connect(_on_experience_changed)
 			_on_level_up(cs.level)
 			_on_experience_changed(cs.experience, cs.xp_to_next_level())
 

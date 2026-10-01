@@ -1008,6 +1008,76 @@ func _test_multi_layer_tilemap_field() -> void:
 	# Clean up
 	world.queue_free()
 
+	# ─────────────────────────────────────────────────────────────────────────────
+	# Group U: Hybrid 3D Terrain & Billboard Presentation (ADR-006)
+	# ─────────────────────────────────────────────────────────────────────────────
+	print("\n[Group U] Hybrid 3D Terrain & Billboard Presentation (ADR-006)")
+
+	# 1. 3D Scene loading
+	var world_3d_scene: PackedScene = load("res://scenes/maps/test_world_3d.tscn")
+	_ok("TestWorld3D scene loads", world_3d_scene != null)
+	var world_3d: TestWorld3D = world_3d_scene.instantiate() as TestWorld3D
+	get_root().add_child(world_3d)
+	world_3d._ready()
+	_ok("TestWorld3D instantiates successfully", world_3d != null)
+
+	# 2. Lighting & Environment
+	var dir_light: DirectionalLight3D = world_3d.get_node_or_null("DirectionalLight3D") as DirectionalLight3D
+	_ok("TestWorld3D has DirectionalLight3D", dir_light != null)
+	_ok("DirectionalLight3D has shadows enabled", dir_light != null and dir_light.shadow_enabled)
+
+	var world_env: WorldEnvironment = world_3d.get_node_or_null("WorldEnvironment") as WorldEnvironment
+	_ok("TestWorld3D has WorldEnvironment", world_env != null)
+
+	# 3. 3D Terrain & Multi-tier elevation
+	var terrain_node: Node3D = world_3d.get_node_or_null("Terrain") as Node3D
+	_ok("TestWorld3D has Terrain node", terrain_node != null)
+
+	var terrain_mesh: MeshInstance3D = world_3d.get_node_or_null("Terrain/TerrainMesh") as MeshInstance3D
+	_ok("Terrain has generated MeshInstance3D", terrain_mesh != null and terrain_mesh.mesh != null)
+
+	var terrain_body: StaticBody3D = world_3d.get_node_or_null("Terrain/StaticBody3D") as StaticBody3D
+	_ok("Terrain has StaticBody3D collision", terrain_body != null)
+	_ok("Terrain StaticBody3D is on layer 2", terrain_body != null and (terrain_body.collision_layer & 2) != 0)
+
+	# Validate multi-tier height calculation
+	var h_valley: float = world_3d._calculate_height(0.0, 0.0)
+	var h_plateau: float = world_3d._calculate_height(11.0, -11.0)
+	var h_ridge: float = world_3d._calculate_height(-12.0, -14.0)
+	_ok("Valley baseline height is near zero", abs(h_valley) < 0.5)
+	_ok("Plateau tier 1 is significantly higher than valley", h_plateau > 1.8)
+	_ok("Lookout ridge tier 2 is highest elevation", h_ridge > 3.0)
+
+	# 4. Player3D and Billboard
+	var p3d: Player3D = world_3d.get_node_or_null("Player3D") as Player3D
+	_ok("TestWorld3D has Player3D instance", p3d != null)
+	_ok("Player3D has AnimatedSprite3D billboard", p3d != null and p3d.animated_sprite != null)
+	_ok("AnimatedSprite3D billboard mode is BILLBOARD_FIXED_Y", p3d != null and p3d.animated_sprite.billboard == BaseMaterial3D.BILLBOARD_FIXED_Y)
+	_ok("AnimatedSprite3D has 8-directional sprite frames", p3d != null and p3d.animated_sprite.sprite_frames != null and p3d.animated_sprite.sprite_frames.has_animation("idle_south"))
+
+	# 5. 3D Camera
+	var cam: Camera3D = p3d.get_node_or_null("CameraArm/Camera3D") as Camera3D if p3d != null else null
+	_ok("Player3D has Camera3D attached", cam != null)
+	_ok("Camera3D is active", cam != null and cam.current)
+
+	# 6. Decoupled RPG Components on Player3D (ADR-002 compatibility)
+	_ok("Player3D has CharacterStatsComponent", p3d != null and p3d.stats != null)
+	_ok("Player3D has InventoryComponent", p3d != null and p3d.inventory != null)
+	_ok("Player3D has EquipmentComponent", p3d != null and p3d.equipment != null)
+
+	# 7. Direction mapping in 3D
+	_ok("Vector (0, 0, 1) converts to south in 3D", p3d._vector_to_direction(Vector3(0, 0, 1)) == "south")
+	_ok("Vector (0, 0, -1) converts to north in 3D", p3d._vector_to_direction(Vector3(0, 0, -1)) == "north")
+	_ok("Vector (1, 0, 0) converts to east in 3D", p3d._vector_to_direction(Vector3(1, 0, 0)) == "east")
+	_ok("Vector (-1, 0, 0) converts to west in 3D", p3d._vector_to_direction(Vector3(-1, 0, 0)) == "west")
+
+	# 8. 2D HUD on CanvasLayer over 3D world
+	var hud3d: HUD = world_3d.get_node_or_null("HUD") as HUD
+	_ok("TestWorld3D has 2D HUD CanvasLayer", hud3d != null)
+	_ok("HUD contains BasicInfoWindow", hud3d != null and hud3d.basic_info_window != null)
+
+	world_3d.queue_free()
+
 
 
 

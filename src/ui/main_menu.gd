@@ -12,7 +12,7 @@ func _ready() -> void:
 	start_button.grab_focus()
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file("res://scenes/maps/test_world.tscn")
+	get_tree().change_scene_to_file("res://scenes/maps/test_world_3d.tscn")
 
 func _on_quit_pressed() -> void:
 	get_tree().quit()

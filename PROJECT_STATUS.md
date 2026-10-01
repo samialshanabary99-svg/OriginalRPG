@@ -1,7 +1,7 @@
 # Project Status
 
 ## Current Phase
-**Multi-Layer TileMapLayer Field Terrain & Slope System Complete (floor rendering fixed) — 296/296 automated tests passing across 20 test groups.**
+**Hybrid 3D Terrain + 2D Billboard Presentation Implemented (ADR-006) — 323/323 automated tests passing across 21 test groups.**
 
 ## Working Systems
 - All Phase 1 systems (Main Menu, Test World, Player, Camera, Interaction, HUD, scene transitions).

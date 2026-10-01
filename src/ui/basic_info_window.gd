@@ -56,7 +56,7 @@ signal window_minimized(is_minimized: bool)
 var _is_dragging: bool = false
 var _drag_offset: Vector2 = Vector2.ZERO
 var _is_minimized: bool = false
-var _bound_player: Player = null
+var _bound_player: Node = null
 
 # Fallback values when not wired to specific data
 var current_stamina: int = 95
@@ -121,7 +121,7 @@ func _process(_delta: float) -> void:
 			_is_dragging = false
 
 # ── Data Binding ─────────────────────────────────────────────────────────────
-func bind_player(player: Player) -> void:
+func bind_player(player: Node) -> void:
 	if player == null:
 		return
 	_bound_player = player
@@ -132,7 +132,7 @@ func bind_player(player: Player) -> void:
 	var p_id: String = "ID: 1024567"
 
 	if player.stats != null and player.stats.definition != null:
-		var def := player.stats.definition
+		var def: CharacterDefinition = player.stats.definition as CharacterDefinition
 		if not def.display_name.is_empty():
 			p_name = def.display_name.to_upper()
 		if not def.character_class.is_empty():
@@ -145,11 +145,16 @@ func bind_player(player: Player) -> void:
 	# Stats binding
 	if player.stats != null:
 		var s: CharacterStatsComponent = player.stats
-		s.health_changed.connect(_on_health_changed)
-		s.mana_changed.connect(_on_mana_changed)
-		s.level_up.connect(_on_level_up)
-		s.experience_changed.connect(_on_experience_changed)
-		s.stats_recomputed.connect(_on_stats_recomputed)
+		if not s.health_changed.is_connected(_on_health_changed):
+			s.health_changed.connect(_on_health_changed)
+		if not s.mana_changed.is_connected(_on_mana_changed):
+			s.mana_changed.connect(_on_mana_changed)
+		if not s.level_up.is_connected(_on_level_up):
+			s.level_up.connect(_on_level_up)
+		if not s.experience_changed.is_connected(_on_experience_changed):
+			s.experience_changed.connect(_on_experience_changed)
+		if not s.stats_recomputed.is_connected(_on_stats_recomputed):
+			s.stats_recomputed.connect(_on_stats_recomputed)
 
 		_on_health_changed(s.current_health, s.max_health)
 		_on_mana_changed(s.current_mana, s.final_max_mana)
@@ -159,7 +164,8 @@ func bind_player(player: Player) -> void:
 
 	# Inventory binding
 	if player.inventory != null:
-		player.inventory.inventory_changed.connect(_on_inventory_changed)
+		if not player.inventory.inventory_changed.is_connected(_on_inventory_changed):
+			player.inventory.inventory_changed.connect(_on_inventory_changed)
 		_on_inventory_changed()
 
 func set_character_info(c_name: String, job: String, c_id: String) -> void:

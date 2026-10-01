@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://testworld3d001"]
+
+[ext_resource type="Script" path="res://src/entities/test_world_3d.gd" id="1_world3d"]
+[ext_resource type="PackedScene" path="res://scenes/entities/player_3d.tscn" id="2_player3d"]
+[ext_resource type="PackedScene" path="res://scenes/ui/hud.tscn" id="3_hud"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_world"]
+sky_top_color = Color(0.32, 0.58, 0.88, 1)
+sky_horizon_color = Color(0.68, 0.80, 0.94, 1)
+ground_bottom_color = Color(0.24, 0.42, 0.20, 1)
+ground_horizon_color = Color(0.68, 0.80, 0.94, 1)
+
+[sub_resource type="Sky" id="Sky_world"]
+sky_material = SubResource("ProceduralSkyMaterial_world")
+
+[sub_resource type="Environment" id="Environment_world"]
+background_mode = 2
+sky = SubResource("Sky_world")
+ambient_light_source = 3
+ambient_light_color = Color(0.72, 0.82, 0.75, 1)
+ambient_light_sky_contribution = 0.65
+tonemap_mode = 2
+tonemap_exposure = 1.05
+
+[node name="TestWorld3D" type="Node3D"]
+script = ExtResource("1_world3d")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_world")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.707107, -0.5, 0.5, 0, 0.707107, 0.707107, -0.707107, -0.5, 0.5, 0, 20, 0)
+light_color = Color(1, 0.96, 0.88, 1)
+light_energy = 1.15
+shadow_enabled = true
+shadow_bias = 0.04
+directional_shadow_max_distance = 60.0
+
+[node name="Terrain" type="Node3D" parent="."]
+
+[node name="TerrainMesh" type="MeshInstance3D" parent="Terrain"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Terrain"]
+collision_layer = 2
+collision_mask = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/StaticBody3D"]
+
+[node name="Player3D" parent="." instance=ExtResource("2_player3d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="HUD" parent="." instance=ExtResource("3_hud")]

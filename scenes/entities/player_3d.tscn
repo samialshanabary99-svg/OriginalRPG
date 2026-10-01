@@ -1,0 +1,52 @@
+[gd_scene load_steps=8 format=3 uid="uid://player3d001"]
+
+[ext_resource type="Script" path="res://src/entities/player_3d.gd" id="1_player3d"]
+[ext_resource type="SpriteFrames" path="res://assets/sprites/player/player_sprite_frames.tres" id="2_frames"]
+[ext_resource type="Script" path="res://src/components/character_stats_component.gd" id="3_stats"]
+[ext_resource type="Script" path="res://src/components/inventory_component.gd" id="4_inv"]
+[ext_resource type="Script" path="res://src/components/equipment_component.gd" id="5_equip"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p3d"]
+radius = 0.35
+height = 1.4
+
+[sub_resource type="QuadMesh" id="QuadMesh_shadow"]
+size = Vector2(0.9, 0.5)
+
+[node name="Player3D" type="CharacterBody3D"]
+collision_layer = 1
+collision_mask = 2
+script = ExtResource("1_player3d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 0)
+shape = SubResource("CapsuleShape3D_p3d")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+sprite_frames = ExtResource("2_frames")
+animation = &"idle_south"
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.02, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_shadow")
+
+[node name="CameraArm" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraArm"]
+transform = Transform3D(1, 0, 0, 0, 0.819152, 0.573576, 0, -0.573576, 0.819152, 0, 7.5, 9.5)
+fov = 38.0
+current = true
+
+[node name="CharacterStatsComponent" type="Node" parent="."]
+script = ExtResource("3_stats")
+
+[node name="InventoryComponent" type="Node" parent="."]
+script = ExtResource("4_inv")
+
+[node name="EquipmentComponent" type="Node" parent="."]
+script = ExtResource("5_equip")
