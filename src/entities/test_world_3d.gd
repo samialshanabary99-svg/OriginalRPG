@@ -27,6 +27,7 @@ func _enter_tree() -> void:
 func _ready() -> void:
 	_resolve_nodes()
 	_generate_terrain()
+	_spawn_field_decorations()
 
 	if hud != null and player != null:
 		hud.bind_player(player)
@@ -62,29 +63,33 @@ func _generate_terrain() -> void:
 			var v11: Vector3 = Vector3(x1, y11, z1)
 
 			# Triangle 1: (v00, v01, v10) in counter-clockwise order
-			var n1: Vector3 = (v01 - v00).cross(v10 - v00).normalized()
-			_add_terrain_vertex(surface_tool, v00, n1)
-			_add_terrain_vertex(surface_tool, v01, n1)
-			_add_terrain_vertex(surface_tool, v10, n1)
+			_add_terrain_vertex(surface_tool, v00)
+			_add_terrain_vertex(surface_tool, v01)
+			_add_terrain_vertex(surface_tool, v10)
 
 			# Triangle 2: (v01, v11, v10) in counter-clockwise order
-			var n2: Vector3 = (v11 - v01).cross(v10 - v01).normalized()
-			_add_terrain_vertex(surface_tool, v01, n2)
-			_add_terrain_vertex(surface_tool, v11, n2)
-			_add_terrain_vertex(surface_tool, v10, n2)
+			_add_terrain_vertex(surface_tool, v01)
+			_add_terrain_vertex(surface_tool, v11)
+			_add_terrain_vertex(surface_tool, v10)
 
-	surface_tool.generate_normals()
+	surface_tool.index()
 	var mesh: ArrayMesh = surface_tool.commit()
 
-	# Create terrain material with vertex color support and pixel art grass texture
+	# Create terrain material with triplanar pixel-art projection and anisotropic mipmapping
 	var mat: StandardMaterial3D = StandardMaterial3D.new()
 	var grass_tex: Texture2D = load("res://assets/tiles/ground/tile_grass_base.png")
 	if grass_tex != null:
 		mat.albedo_texture = grass_tex
-		mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+
+	# Triplanar mapping projects seamlessly on both flats and vertical slopes without stretching/squishing
+	mat.uv1_triplanar = true
+	mat.uv1_triplanar_sharpness = 4.0
+	mat.uv1_scale = Vector3(0.5, 0.5, 0.5)
+
 	mat.vertex_color_use_as_albedo = true
-	mat.roughness = 0.92
-	mat.metallic_specular = 0.1
+	mat.roughness = 0.88
+	mat.metallic_specular = 0.05
 	mesh.surface_set_material(0, mat)
 
 	if terrain_mesh_instance != null:
@@ -99,60 +104,150 @@ func _generate_terrain() -> void:
 
 ## Multi-tier height function creating authentic rolling hills, plateaus, and slopes
 func _calculate_height(x: float, z: float) -> float:
-	# Base rolling meadow waves (Tier 0: ~0.0m to 0.4m)
-	var h: float = sin(x * 0.14) * cos(z * 0.14) * 0.35
+	# Base rolling meadow waves (Tier 0: ~0.0m to 0.25m)
+	var h: float = (sin(x * 0.12) * 0.12 + cos(z * 0.12) * 0.12)
 
-	# Tier 1 Plateau (Northeast Hill: x in [4..18], z in [-18..-4])
-	# Plateau rises to +2.2m with a smooth walkable ramp on the South face (x ≈ 10..12, z ≈ -4)
+	# Tier 1 Plateau (Northeast Hill: x in [3..19], z in [-19..-3])
+	# Plateau rises to +2.2m with a smooth walkable ramp on the South face
 	var plateau_center: Vector2 = Vector2(11.0, -11.0)
-	var p_dist: float = sqrt(pow((x - plateau_center.x) / 7.5, 2.0) + pow((z - plateau_center.y) / 6.0, 2.0))
+	var p_dist: float = sqrt(pow((x - plateau_center.x) / 8.5, 2.0) + pow((z - plateau_center.y) / 7.0, 2.0))
 	if p_dist < 1.0:
 		var ramp_influence: float = 0.0
 		# South ramp pathway at x ≈ 11, z from -6 to -3
-		if abs(x - 11.0) < 2.0 and z > -7.0:
-			ramp_influence = clampf((z + 7.0) / 3.5, 0.0, 1.0) # Smooth grade down to valley
+		if abs(x - 11.0) < 2.4 and z > -7.5:
+			ramp_influence = clampf((z + 7.5) / 4.0, 0.0, 1.0)
 
-		var hill_lift: float = (1.0 - smoothstep(0.65, 1.0, p_dist)) * 2.2
-		h += lerpf(hill_lift, hill_lift * 0.3, ramp_influence)
+		# Smooth, natural stepped slope with flat plateau top and soft foothill blend
+		var t: float = 1.0 - smoothstep(0.42, 1.0, p_dist)
+		var hill_lift: float = t * 2.2
+		h += lerpf(hill_lift, hill_lift * 0.35, ramp_influence)
 
-	# Tier 2 Lookout Ridge (Northwest Elevation: x in [-18..-6], z in [-20..-10])
-	var ridge_dist: float = sqrt(pow((x + 12.0) / 6.0, 2.0) + pow((z + 14.0) / 4.5, 2.0))
+	# Tier 2 Lookout Ridge (Northwest Elevation: x in [-19..-5], z in [-21..-9])
+	var ridge_dist: float = sqrt(pow((x + 12.0) / 7.5, 2.0) + pow((z + 14.0) / 6.0, 2.0))
 	if ridge_dist < 1.0:
-		h += (1.0 - smoothstep(0.55, 1.0, ridge_dist)) * 3.8
+		var t2: float = 1.0 - smoothstep(0.42, 1.0, ridge_dist)
+		h += t2 * 3.6
 
-	# Boundaries: gentle rising ridges at world edges
+	# Boundaries: gentle rolling perimeter foothills that cradle the world
 	var edge_dist: float = max(abs(x), abs(z)) / HALF_SIZE
-	if edge_dist > 0.82:
-		h += pow((edge_dist - 0.82) / 0.18, 2.0) * 4.0
+	if edge_dist > 0.78:
+		h += pow((edge_dist - 0.78) / 0.22, 2.0) * 3.8
 
 	return h
 
-func _add_terrain_vertex(st: SurfaceTool, pos: Vector3, normal: Vector3) -> void:
-	# Color based on height and slope angle (normal.y):
-	# Flat surfaces (normal.y > 0.88): Natural grass meadow & sunlit plateau
-	# Slopes (0.72 < normal.y <= 0.88): Smooth blend from grass to warm earth
-	# Cliffs (normal.y <= 0.72): Rich earth / rock cliff face
-	var slope: float = clampf(normal.y, 0.0, 1.0)
+## Calculates smooth continuous analytical surface normal using finite differences
+func _calculate_normal(x: float, z: float) -> Vector3:
+	var eps: float = 0.08
+	var h_left: float = _calculate_height(x - eps, z)
+	var h_right: float = _calculate_height(x + eps, z)
+	var h_down: float = _calculate_height(x, z - eps)
+	var h_up: float = _calculate_height(x, z + eps)
+	var tangent_x: Vector3 = Vector3(2.0 * eps, h_right - h_left, 0.0)
+	var tangent_z: Vector3 = Vector3(0.0, h_up - h_down, 2.0 * eps)
+	return tangent_z.cross(tangent_x).normalized()
+
+func _add_terrain_vertex(st: SurfaceTool, pos: Vector3) -> void:
+	var norm: Vector3 = _calculate_normal(pos.x, pos.z)
+	var slope: float = clampf(norm.y, 0.0, 1.0)
 	var col: Color
 
-	if slope > 0.88:
-		# Flat surfaces
-		if pos.y > 1.5:
-			col = Color(1.08, 1.06, 0.96) # Sunlit plateau golden highlight
+	if slope > 0.82:
+		# Flat surfaces & gentle rolling meadows
+		if pos.y > 1.8:
+			col = Color(1.04, 1.03, 0.96) # Sunlit plateau meadow
 		else:
-			col = Color(1.0, 1.0, 1.0)    # Valley meadow natural vibrant pixel grass
-	elif slope > 0.72:
-		# Grassy slope transition into warm earth
-		var t: float = (0.88 - slope) / 0.16
-		col = Color(1.0, 1.0, 1.0).lerp(Color("8a6848"), t)
+			col = Color(1.0, 1.0, 1.0)    # Vibrant lush green meadow
+	elif slope > 0.65:
+		# Grassy slope transition into warm sun-baked soil
+		var t: float = (0.82 - slope) / 0.17
+		col = Color(1.0, 1.0, 1.0).lerp(Color(0.94, 0.89, 0.78), t)
 	else:
-		# Earth / rock cliff face
-		col = Color("684b34")
+		# Warm earthy cliff face (golden sandstone / rocky soil)
+		var cliff_t: float = clampf((0.65 - slope) / 0.35, 0.0, 1.0)
+		col = Color(0.94, 0.89, 0.78).lerp(Color(0.86, 0.76, 0.62), cliff_t)
 
 	st.set_color(col)
-	st.set_normal(normal)
+	st.set_normal(norm)
 	st.set_uv(Vector2(pos.x, pos.z))
 	st.add_vertex(pos)
+
+## Spawns authentic Ragnarok Online style 2.5D billboard vegetation and props
+func _spawn_field_decorations() -> void:
+	var props_node: Node3D = Node3D.new()
+	props_node.name = "Props"
+	add_child(props_node)
+
+	# 1. Bushes along hill bases and meadow contours
+	var bush_coords: Array[Vector2] = [
+		Vector2(3.5, -8.0), Vector2(18.0, -11.0), Vector2(10.0, -17.5),
+		Vector2(-5.0, -12.5), Vector2(-18.0, -13.0), Vector2(-11.0, -20.0),
+		Vector2(-4.0, 4.0), Vector2(8.0, 5.0), Vector2(-12.0, 10.0), Vector2(14.0, 9.0),
+		Vector2(1.0, -9.0), Vector2(-8.0, 3.0), Vector2(12.0, 3.0)
+	]
+	var bush_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_bush.png")
+	for coord: Vector2 in bush_coords:
+		_create_billboard_prop(props_node, bush_tex, coord, 0.038)
+
+	# 2. Wildflowers scattered across meadows and plateau tops
+	var flower_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_wildflowers.png")
+	var flower_coords: Array[Vector2] = [
+		Vector2(2.0, -2.0), Vector2(-3.0, -3.5), Vector2(5.0, -4.0),
+		Vector2(11.0, -11.0), Vector2(13.0, -9.5), Vector2(9.5, -12.5),
+		Vector2(-2.0, 3.0), Vector2(3.5, 4.5), Vector2(-5.0, 6.0),
+		Vector2(-12.0, -14.0), Vector2(-10.5, -15.5), Vector2(-13.5, -12.0),
+		Vector2(6.5, -10.0), Vector2(-1.0, -6.0), Vector2(4.0, 2.0)
+	]
+	for coord: Vector2 in flower_coords:
+		_create_billboard_prop(props_node, flower_tex, coord, 0.030)
+
+	# 3. Tall grass tufts
+	var grass_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_tall_grass.png")
+	var grass_coords: Array[Vector2] = [
+		Vector2(-1.5, -1.0), Vector2(3.0, 1.5), Vector2(-4.5, 2.0),
+		Vector2(7.0, -7.0), Vector2(-8.0, -8.0), Vector2(15.0, -6.0),
+		Vector2(6.0, 8.0), Vector2(-7.0, 12.0), Vector2(-2.5, -8.0),
+		Vector2(11.0, -14.0), Vector2(-9.0, -15.0)
+	]
+	for coord: Vector2 in grass_coords:
+		_create_billboard_prop(props_node, grass_tex, coord, 0.030)
+
+	# 4. Stepping stones along the path leading towards the plateau ramp
+	var stone_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_stepping_stones.png")
+	var stone_coords: Array[Vector2] = [
+		Vector2(2.0, -1.0), Vector2(4.5, -2.0), Vector2(7.0, -3.0),
+		Vector2(9.0, -4.0), Vector2(10.5, -5.5)
+	]
+	for coord: Vector2 in stone_coords:
+		_create_flat_prop(props_node, stone_tex, coord, 0.032)
+
+func _create_billboard_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixel_scale: float) -> void:
+	if tex == null:
+		return
+	var y: float = _calculate_height(pos2d.x, pos2d.y)
+	var sprite: Sprite3D = Sprite3D.new()
+	sprite.texture = tex
+	sprite.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+	sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
+	sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	sprite.pixel_size = pixel_scale
+	sprite.offset = Vector2(0, 16) # Anchor base of 32px sprite to ground
+	sprite.position = Vector3(pos2d.x, y, pos2d.y)
+	sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(sprite)
+
+func _create_flat_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixel_scale: float) -> void:
+	if tex == null:
+		return
+	var y: float = _calculate_height(pos2d.x, pos2d.y)
+	var sprite: Sprite3D = Sprite3D.new()
+	sprite.texture = tex
+	sprite.axis = Vector3.AXIS_Y
+	sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
+	sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	sprite.pixel_size = pixel_scale
+	sprite.position = Vector3(pos2d.x, y + 0.02, pos2d.y)
+	sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+	parent.add_child(sprite)
 
 func _on_return_to_menu() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
