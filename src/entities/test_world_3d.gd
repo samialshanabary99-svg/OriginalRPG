@@ -92,7 +92,10 @@ func _generate_terrain() -> void:
 
 	# Create 3D trimesh collision shape
 	if terrain_collision != null:
-		terrain_collision.shape = mesh.create_trimesh_shape()
+		var trimesh_shape: ConcavePolygonShape3D = mesh.create_trimesh_shape()
+		if trimesh_shape != null:
+			trimesh_shape.backface_collision = true
+			terrain_collision.shape = trimesh_shape
 
 ## Multi-tier height function creating authentic rolling hills, plateaus, and slopes
 func _calculate_height(x: float, z: float) -> float:
