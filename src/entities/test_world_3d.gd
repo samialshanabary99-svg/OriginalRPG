@@ -61,28 +61,30 @@ func _generate_terrain() -> void:
 			var v01: Vector3 = Vector3(x0, y01, z1)
 			var v11: Vector3 = Vector3(x1, y11, z1)
 
-			# Calculate normals for lighting & slopes
-			var n1: Vector3 = (v10 - v00).cross(v01 - v00).normalized()
-			var n2: Vector3 = (v01 - v10).cross(v11 - v10).normalized()
-
-			# Triangle 1: (v00, v10, v01)
+			# Triangle 1: (v00, v01, v10) in counter-clockwise order
+			var n1: Vector3 = (v01 - v00).cross(v10 - v00).normalized()
 			_add_terrain_vertex(surface_tool, v00, n1)
-			_add_terrain_vertex(surface_tool, v10, n1)
 			_add_terrain_vertex(surface_tool, v01, n1)
+			_add_terrain_vertex(surface_tool, v10, n1)
 
-			# Triangle 2: (v10, v11, v01)
-			_add_terrain_vertex(surface_tool, v10, n2)
-			_add_terrain_vertex(surface_tool, v11, n2)
+			# Triangle 2: (v01, v11, v10) in counter-clockwise order
+			var n2: Vector3 = (v11 - v01).cross(v10 - v01).normalized()
 			_add_terrain_vertex(surface_tool, v01, n2)
+			_add_terrain_vertex(surface_tool, v11, n2)
+			_add_terrain_vertex(surface_tool, v10, n2)
 
 	surface_tool.generate_normals()
 	var mesh: ArrayMesh = surface_tool.commit()
 
-	# Create terrain material with vertex color support
+	# Create terrain material with vertex color support and pixel art grass texture
 	var mat: StandardMaterial3D = StandardMaterial3D.new()
+	var grass_tex: Texture2D = load("res://assets/tiles/ground/tile_grass_base.png")
+	if grass_tex != null:
+		mat.albedo_texture = grass_tex
+		mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	mat.vertex_color_use_as_albedo = true
-	mat.roughness = 0.88
-	mat.metallic_specular = 0.15
+	mat.roughness = 0.92
+	mat.metallic_specular = 0.1
 	mesh.surface_set_material(0, mat)
 
 	if terrain_mesh_instance != null:
@@ -124,27 +126,29 @@ func _calculate_height(x: float, z: float) -> float:
 
 func _add_terrain_vertex(st: SurfaceTool, pos: Vector3, normal: Vector3) -> void:
 	# Color based on height and slope angle (normal.y):
-	# Flat surfaces (normal.y > 0.85): Lush meadow green
-	# Slopes / cliffs (normal.y < 0.85): Earth/rock bank
+	# Flat surfaces (normal.y > 0.88): Natural grass meadow & sunlit plateau
+	# Slopes (0.72 < normal.y <= 0.88): Smooth blend from grass to warm earth
+	# Cliffs (normal.y <= 0.72): Rich earth / rock cliff face
 	var slope: float = clampf(normal.y, 0.0, 1.0)
 	var col: Color
 
 	if slope > 0.88:
-		# Flat sunlit plateau vs valley meadow
+		# Flat surfaces
 		if pos.y > 1.5:
-			col = Color("5eb846") # Sunlit plateau grass
+			col = Color(1.08, 1.06, 0.96) # Sunlit plateau golden highlight
 		else:
-			col = Color("459c38") # Valley meadow grass
+			col = Color(1.0, 1.0, 1.0)    # Valley meadow natural vibrant pixel grass
 	elif slope > 0.72:
-		# Grassy slope transition
-		col = Color("38842c").lerp(Color("634d35"), (0.88 - slope) / 0.16)
+		# Grassy slope transition into warm earth
+		var t: float = (0.88 - slope) / 0.16
+		col = Color(1.0, 1.0, 1.0).lerp(Color("8a6848"), t)
 	else:
 		# Earth / rock cliff face
-		col = Color("573f2b")
+		col = Color("684b34")
 
 	st.set_color(col)
 	st.set_normal(normal)
-	st.set_uv(Vector2(pos.x * 0.25, pos.z * 0.25))
+	st.set_uv(Vector2(pos.x, pos.z))
 	st.add_vertex(pos)
 
 func _on_return_to_menu() -> void:

@@ -95,6 +95,31 @@ func _ready() -> void:
 			init_from_character_id("player_default")
 
 	_update_animation("south")
+	_setup_shadow()
+
+func _setup_shadow() -> void:
+	if shadow == null:
+		return
+	var mat: StandardMaterial3D = StandardMaterial3D.new()
+	mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	mat.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_DISABLED
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+
+	var grad: Gradient = Gradient.new()
+	grad.colors = PackedColorArray([Color(0.0, 0.0, 0.0, 0.42), Color(0.0, 0.0, 0.0, 0.0)])
+	grad.offsets = PackedFloat32Array([0.0, 1.0])
+
+	var tex: GradientTexture2D = GradientTexture2D.new()
+	tex.gradient = grad
+	tex.fill = GradientTexture2D.FILL_RADIAL
+	tex.fill_from = Vector2(0.5, 0.5)
+	tex.fill_to = Vector2(0.5, 0.0)
+	tex.width = 64
+	tex.height = 64
+
+	mat.albedo_texture = tex
+	shadow.material_override = mat
 
 func _resolve_nodes() -> void:
 	if stats == null: stats = get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
