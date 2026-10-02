@@ -188,19 +188,20 @@ func _spawn_field_decorations() -> void:
 	for coord: Vector2 in bush_coords:
 		_create_billboard_prop(props_node, bush_tex, coord, 0.038)
 
-	# 2. Wildflowers scattered across meadows and plateau tops
+	# 2. Wildflowers scattered across meadows and plateau surfaces (flat decals hugging terrain)
 	var flower_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_wildflowers.png")
 	var flower_coords: Array[Vector2] = [
 		Vector2(2.0, -2.0), Vector2(-3.0, -3.5), Vector2(5.0, -4.0),
 		Vector2(11.0, -11.0), Vector2(13.0, -9.5), Vector2(9.5, -12.5),
 		Vector2(-2.0, 3.0), Vector2(3.5, 4.5), Vector2(-5.0, 6.0),
-		Vector2(-12.0, -14.0), Vector2(-10.5, -15.5), Vector2(-13.5, -12.0),
-		Vector2(6.5, -10.0), Vector2(-1.0, -6.0), Vector2(4.0, 2.0)
+		Vector2(-10.0, -12.5), Vector2(-9.0, -15.0),
+		Vector2(6.5, -10.0), Vector2(-1.0, -6.0), Vector2(4.0, 2.0),
+		Vector2(1.5, -1.0), Vector2(-4.0, 1.0)
 	]
 	for coord: Vector2 in flower_coords:
-		_create_billboard_prop(props_node, flower_tex, coord, 0.030)
+		_create_flat_prop(props_node, flower_tex, coord, 0.035)
 
-	# 3. Tall grass tufts
+	# 3. Tall grass tufts (upright billboards)
 	var grass_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_tall_grass.png")
 	var grass_coords: Array[Vector2] = [
 		Vector2(-1.5, -1.0), Vector2(3.0, 1.5), Vector2(-4.5, 2.0),
@@ -211,7 +212,7 @@ func _spawn_field_decorations() -> void:
 	for coord: Vector2 in grass_coords:
 		_create_billboard_prop(props_node, grass_tex, coord, 0.030)
 
-	# 4. Stepping stones along the path leading towards the plateau ramp
+	# 4. Stepping stones along the path leading towards the plateau ramp (flat decals hugging terrain)
 	var stone_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_stepping_stones.png")
 	var stone_coords: Array[Vector2] = [
 		Vector2(2.0, -1.0), Vector2(4.5, -2.0), Vector2(7.0, -3.0),
@@ -230,8 +231,8 @@ func _create_billboard_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixe
 	sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
 	sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	sprite.pixel_size = pixel_scale
-	sprite.offset = Vector2(0, 16) # Anchor base of 32px sprite to ground
-	sprite.position = Vector3(pos2d.x, y, pos2d.y)
+	var sprite_height: float = float(tex.get_height()) * pixel_scale
+	sprite.position = Vector3(pos2d.x, y + sprite_height * 0.5, pos2d.y)
 	sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	parent.add_child(sprite)
 
@@ -239,13 +240,22 @@ func _create_flat_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixel_sca
 	if tex == null:
 		return
 	var y: float = _calculate_height(pos2d.x, pos2d.y)
+	var norm: Vector3 = _calculate_normal(pos2d.x, pos2d.y)
 	var sprite: Sprite3D = Sprite3D.new()
 	sprite.texture = tex
 	sprite.axis = Vector3.AXIS_Y
 	sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
 	sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	sprite.pixel_size = pixel_scale
-	sprite.position = Vector3(pos2d.x, y + 0.02, pos2d.y)
+	sprite.position = Vector3(pos2d.x, y + 0.025, pos2d.y)
+
+	# Align sprite normal with the terrain slope normal so it hugs the ground
+	if not norm.is_equal_approx(Vector3.UP):
+		var rot_axis: Vector3 = Vector3.UP.cross(norm).normalized()
+		var rot_angle: float = Vector3.UP.angle_to(norm)
+		if rot_axis.length_squared() > 0.001:
+			sprite.transform.basis = Basis(rot_axis, rot_angle)
+
 	sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	parent.add_child(sprite)
 
