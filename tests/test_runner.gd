@@ -1111,6 +1111,36 @@ func _test_multi_layer_tilemap_field() -> void:
 	_ok("TestWorld3D has 2D HUD CanvasLayer", hud3d != null)
 	_ok("HUD contains BasicInfoWindow", hud3d != null and hud3d.basic_info_window != null)
 
+	# 10. Ragnarok Online Camera Controls
+	_ok("Player3D has camera_arm Node3D", p3d.camera_arm != null)
+	_ok("Player3D camera default distance is set", p3d.camera_distance_default == 12.1)
+
+	# Test camera reset
+	p3d._target_yaw = 1.5
+	p3d._target_pitch = 0.5
+	p3d._target_zoom = 8.0
+	p3d.reset_camera_view()
+	_ok("reset_camera_view resets yaw to default", is_equal_approx(p3d._target_yaw, p3d.camera_yaw_default))
+	_ok("reset_camera_view resets pitch to default", is_equal_approx(p3d._target_pitch, p3d.camera_pitch_default))
+	_ok("reset_camera_view resets zoom to default", is_equal_approx(p3d._target_zoom, p3d.camera_distance_default))
+
+	# Test camera update applies values to transform
+	p3d._target_yaw = deg_to_rad(90.0)
+	p3d._update_camera(0.0)
+	_ok("CameraArm yaw rotation updates accurately", is_equal_approx(p3d.camera_arm.rotation.y, deg_to_rad(90.0)))
+
+	# Test camera-relative movement when rotated 90 deg clockwise
+	# With 90 deg yaw: cam_forward = (-1, 0, 0)
+	# So pressing move_up (forward into screen) should move in -X direction
+	Input.action_press("move_up")
+	p3d._physics_process(0.016)
+	_ok("Camera-relative movement: W moves into screen relative to camera angle", p3d.velocity.x < -0.1)
+	Input.action_release("move_up")
+
+	# Reset camera back to default
+	p3d.reset_camera_view()
+	p3d._update_camera(0.0)
+
 	world_3d.queue_free()
 
 

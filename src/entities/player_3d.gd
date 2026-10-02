@@ -51,11 +51,43 @@ enum CharacterState {
 			animated_sprite = get_node_or_null("AnimatedSprite3D") as AnimatedSprite3D
 		return animated_sprite
 
+@onready var camera_arm: Node3D = $CameraArm if has_node("CameraArm") else null:
+	get:
+		if camera_arm == null and has_node("CameraArm"):
+			camera_arm = get_node_or_null("CameraArm") as Node3D
+		return camera_arm
+
 @onready var camera: Camera3D = $CameraArm/Camera3D if has_node("CameraArm/Camera3D") else null:
 	get:
 		if camera == null and has_node("CameraArm/Camera3D"):
 			camera = get_node_or_null("CameraArm/Camera3D") as Camera3D
 		return camera
+
+# ── Ragnarok Online Style Orbit Camera Configuration ──────────────────────────
+@export var camera_distance_default: float = 12.1
+@export var camera_pitch_default: float = deg_to_rad(38.0)
+@export var camera_yaw_default: float = 0.0
+
+@export var zoom_min: float = 4.0
+@export var zoom_max: float = 24.0
+@export var zoom_step: float = 1.4
+
+@export var pitch_min: float = deg_to_rad(16.0)
+@export var pitch_max: float = deg_to_rad(76.0)
+
+@export var orbit_sensitivity: float = 0.005
+@export var pitch_sensitivity: float = 0.004
+@export var camera_smooth_speed: float = 14.0
+
+var _target_yaw: float = 0.0
+var _current_yaw: float = 0.0
+var _target_pitch: float = deg_to_rad(38.0)
+var _current_pitch: float = deg_to_rad(38.0)
+var _target_zoom: float = 12.1
+var _current_zoom: float = 12.1
+var _is_orbiting: bool = false
+var _last_rmb_time: float = 0.0
+const DOUBLE_CLICK_INTERVAL: float = 0.28
 
 @onready var shadow: MeshInstance3D = $Shadow if has_node("Shadow") else null:
 	get:
@@ -96,6 +128,90 @@ func _ready() -> void:
 
 	_update_animation("south")
 	_setup_shadow()
+	_update_camera(0.0)
+
+func _process(delta: float) -> void:
+	_update_camera(delta)
+
+func _update_camera(delta: float) -> void:
+	_resolve_nodes()
+	if camera_arm == null or camera == null:
+		return
+
+	if delta > 0.0:
+		_current_yaw = lerp_angle(_current_yaw, _target_yaw, camera_smooth_speed * delta)
+		_current_pitch = lerpf(_current_pitch, _target_pitch, camera_smooth_speed * delta)
+		_current_zoom = lerpf(_current_zoom, _target_zoom, camera_smooth_speed * delta)
+	else:
+		_current_yaw = _target_yaw
+		_current_pitch = _target_pitch
+		_current_zoom = _target_zoom
+
+	camera_arm.rotation.y = _current_yaw
+	camera.position = Vector3(
+		0.0,
+		sin(_current_pitch) * _current_zoom,
+		cos(_current_pitch) * _current_zoom
+	)
+	camera.rotation.x = -_current_pitch
+
+func reset_camera_view() -> void:
+	_target_yaw = camera_yaw_default
+	_target_pitch = camera_pitch_default
+	_target_zoom = camera_distance_default
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventMouseButton:
+		var mb: InputEventMouseButton = event as InputEventMouseButton
+		if mb.button_index == MOUSE_BUTTON_RIGHT or mb.button_index == MOUSE_BUTTON_MIDDLE:
+			if mb.pressed:
+				var current_time: float = Time.get_ticks_msec() / 1000.0
+				var ctrl_held: bool = Input.is_key_pressed(KEY_CTRL)
+				# Double right-click or Ctrl+RMB resets camera to default view (Ragnarok Online style)
+				if ctrl_held or (current_time - _last_rmb_time < DOUBLE_CLICK_INTERVAL):
+					reset_camera_view()
+					_is_orbiting = false
+				else:
+					_is_orbiting = true
+				_last_rmb_time = current_time
+			else:
+				_is_orbiting = false
+
+		elif mb.button_index == MOUSE_BUTTON_WHEEL_UP and mb.pressed:
+			var shift_held: bool = Input.is_key_pressed(KEY_SHIFT)
+			var ctrl_held: bool = Input.is_key_pressed(KEY_CTRL)
+			if shift_held or ctrl_held:
+				# Shift/Ctrl + Mouse Wheel adjusts vertical view angle (pitch)
+				_target_pitch = clampf(_target_pitch + deg_to_rad(3.5), pitch_min, pitch_max)
+			else:
+				# Normal Wheel zooms in
+				_target_zoom = clampf(_target_zoom - zoom_step, zoom_min, zoom_max)
+
+		elif mb.button_index == MOUSE_BUTTON_WHEEL_DOWN and mb.pressed:
+			var shift_held: bool = Input.is_key_pressed(KEY_SHIFT)
+			var ctrl_held: bool = Input.is_key_pressed(KEY_CTRL)
+			if shift_held or ctrl_held:
+				# Shift/Ctrl + Mouse Wheel adjusts vertical view angle (pitch)
+				_target_pitch = clampf(_target_pitch - deg_to_rad(3.5), pitch_min, pitch_max)
+			else:
+				# Normal Wheel zooms out
+				_target_zoom = clampf(_target_zoom + zoom_step, zoom_min, zoom_max)
+
+	elif event is InputEventMouseMotion and _is_orbiting:
+		var mm: InputEventMouseMotion = event as InputEventMouseMotion
+		var shift_held: bool = Input.is_key_pressed(KEY_SHIFT)
+		var ctrl_held: bool = Input.is_key_pressed(KEY_CTRL)
+
+		# Horizontal mouse motion rotates the camera orbit around character (Yaw)
+		_target_yaw -= mm.relative.x * orbit_sensitivity
+
+		# Vertical mouse motion adjusts the elevation angle of view (Pitch)
+		if shift_held or ctrl_held:
+			# Shift or Ctrl focuses and boosts pitch adjustment
+			_target_pitch = clampf(_target_pitch + mm.relative.y * pitch_sensitivity * 1.5, pitch_min, pitch_max)
+		else:
+			# Standard RMB drag adjusts both rotation and vertical angle
+			_target_pitch = clampf(_target_pitch + mm.relative.y * pitch_sensitivity, pitch_min, pitch_max)
 
 func _setup_shadow() -> void:
 	if shadow == null:
@@ -126,6 +242,7 @@ func _resolve_nodes() -> void:
 	if inventory == null: inventory = get_node_or_null("InventoryComponent") as InventoryComponent
 	if equipment == null: equipment = get_node_or_null("EquipmentComponent") as EquipmentComponent
 	if animated_sprite == null: animated_sprite = get_node_or_null("AnimatedSprite3D") as AnimatedSprite3D
+	if camera_arm == null: camera_arm = get_node_or_null("CameraArm") as Node3D
 	if camera == null: camera = get_node_or_null("CameraArm/Camera3D") as Camera3D
 	if shadow == null: shadow = get_node_or_null("Shadow") as MeshInstance3D
 
@@ -159,7 +276,12 @@ func _physics_process(delta: float) -> void:
 		raw_z = Input.get_axis("ui_up", "ui_down")
 	input_direction = Vector2(raw_x, raw_z)
 
-	var move_dir: Vector3 = Vector3(raw_x, 0.0, raw_z)
+	# Compute camera-relative movement vectors so WASD follows camera orientation
+	var cam_yaw: float = camera_arm.rotation.y if camera_arm != null else 0.0
+	var cam_forward: Vector3 = Vector3(-sin(cam_yaw), 0.0, -cos(cam_yaw)).normalized()
+	var cam_right: Vector3 = Vector3(cos(cam_yaw), 0.0, -sin(cam_yaw)).normalized()
+
+	var move_dir: Vector3 = cam_right * raw_x + cam_forward * (-raw_z)
 	if move_dir.length_squared() > 1.0:
 		move_dir = move_dir.normalized()
 
@@ -171,7 +293,10 @@ func _physics_process(delta: float) -> void:
 		var current_pos: Vector3 = global_position if is_inside_tree() else position
 		emit_signal("player_moved_3d", current_pos)
 
-		var dir_str: String = _vector_to_direction(move_dir)
+		# Screen-relative billboard facing (Ragnarok Online style)
+		var screen_x: float = move_dir.dot(cam_right)
+		var screen_z: float = -move_dir.dot(cam_forward)
+		var dir_str: String = _vector_to_direction(Vector3(screen_x, 0.0, screen_z))
 		_update_animation(dir_str)
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, move_speed * 8.0 * delta)
