@@ -20,9 +20,14 @@ signal return_to_menu_requested()
 
 func _ready() -> void:
 	dialogue_panel.visible = false
-	return_button.pressed.connect(_on_return_pressed)
+	if return_button != null:
+		return_button.focus_mode = Control.FOCUS_NONE
+		if not return_button.pressed.is_connected(_on_return_pressed):
+			return_button.pressed.connect(_on_return_pressed)
 	if toggle_info_button != null:
-		toggle_info_button.pressed.connect(toggle_basic_info)
+		toggle_info_button.focus_mode = Control.FOCUS_NONE
+		if not toggle_info_button.pressed.is_connected(toggle_basic_info):
+			toggle_info_button.pressed.connect(toggle_basic_info)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_character_info") or (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_V):
@@ -65,7 +70,10 @@ func hide_dialogue() -> void:
 	dialogue_panel.visible = false
 
 func _on_health_changed(current: int, maximum: int) -> void:
-	health_label.text = "HP: %d / %d" % [current, maximum]
+	if health_label == null and has_node("MarginContainer/VBoxContainer/HealthLabel"):
+		health_label = get_node_or_null("MarginContainer/VBoxContainer/HealthLabel") as Label
+	if health_label != null:
+		health_label.text = "HP: %d / %d" % [current, maximum]
 
 func _on_level_up(new_level: int) -> void:
 	if level_label != null:

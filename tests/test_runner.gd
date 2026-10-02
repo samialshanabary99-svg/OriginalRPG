@@ -1070,8 +1070,43 @@ func _test_multi_layer_tilemap_field() -> void:
 	_ok("Vector (0, 0, -1) converts to north in 3D", p3d._vector_to_direction(Vector3(0, 0, -1)) == "north")
 	_ok("Vector (1, 0, 0) converts to east in 3D", p3d._vector_to_direction(Vector3(1, 0, 0)) == "east")
 	_ok("Vector (-1, 0, 0) converts to west in 3D", p3d._vector_to_direction(Vector3(-1, 0, 0)) == "west")
+	_ok("Vector (1, 0, 1) converts to south-east in 3D", p3d._vector_to_direction(Vector3(1, 0, 1)) == "south-east")
+	_ok("Vector (-1, 0, -1) converts to north-west in 3D", p3d._vector_to_direction(Vector3(-1, 0, -1)) == "north-west")
 
-	# 8. 2D HUD on CanvasLayer over 3D world
+	# 8. Player3D Movement & Physics
+	_ok("Player3D floor_constant_speed is enabled", p3d.floor_constant_speed)
+	_ok("Player3D floor_block_on_wall is enabled", p3d.floor_block_on_wall)
+	_ok("Player3D initial is_moving is false", not p3d.is_moving())
+	p3d.velocity = Vector3(3.0, 0.0, 0.0)
+	_ok("Player3D is_moving returns true when velocity is non-zero", p3d.is_moving())
+	p3d.velocity = Vector3.ZERO
+	var attacked_emitted: Array = [false]
+	p3d.player_attacked.connect(func(): attacked_emitted[0] = true)
+	p3d.attack()
+	_ok("Player3D attack emits player_attacked signal", attacked_emitted[0])
+
+	# Test input response on Player3D
+	Input.action_press("move_right")
+	p3d._physics_process(0.016)
+	_ok("Player3D moves East (+X) on move_right (D / Right)", p3d.velocity.x > 0.0)
+	Input.action_release("move_right")
+
+	Input.action_press("move_left")
+	p3d._physics_process(0.016)
+	_ok("Player3D moves West (-X) on move_left (A / Left)", p3d.velocity.x < 0.0)
+	Input.action_release("move_left")
+
+	Input.action_press("move_up")
+	p3d._physics_process(0.016)
+	_ok("Player3D moves North (-Z) on move_up (W / Up)", p3d.velocity.z < 0.0)
+	Input.action_release("move_up")
+
+	Input.action_press("move_down")
+	p3d._physics_process(0.016)
+	_ok("Player3D moves South (+Z) on move_down (S / Down)", p3d.velocity.z > 0.0)
+	Input.action_release("move_down")
+
+	# 9. 2D HUD on CanvasLayer over 3D world
 	var hud3d: HUD = world_3d.get_node_or_null("HUD") as HUD
 	_ok("TestWorld3D has 2D HUD CanvasLayer", hud3d != null)
 	_ok("HUD contains BasicInfoWindow", hud3d != null and hud3d.basic_info_window != null)

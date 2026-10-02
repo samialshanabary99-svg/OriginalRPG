@@ -16,6 +16,9 @@ size = Vector2(0.9, 0.5)
 [node name="Player3D" type="CharacterBody3D"]
 collision_layer = 1
 collision_mask = 2
+floor_constant_speed = true
+floor_block_on_wall = true
+floor_snap_length = 0.4
 script = ExtResource("1_player3d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]

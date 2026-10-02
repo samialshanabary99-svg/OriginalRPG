@@ -74,11 +74,17 @@ var _gravity: float = 14.0
 
 func _enter_tree() -> void:
 	_resolve_nodes()
+	floor_snap_length = 0.4
+	floor_max_angle = deg_to_rad(52.0)
+	floor_constant_speed = true
+	floor_block_on_wall = true
 
 func _ready() -> void:
 	_resolve_nodes()
 	floor_snap_length = 0.4
 	floor_max_angle = deg_to_rad(52.0)
+	floor_constant_speed = true
+	floor_block_on_wall = true
 	
 	if stats != null:
 		if not stats.died.is_connected(_on_player_died):
@@ -107,18 +113,25 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0.0, move_speed * 4.0 * delta)
 		if not is_on_floor():
 			velocity.y -= _gravity * delta
-		move_and_slide()
+		if is_inside_tree():
+			move_and_slide()
+		else:
+			position += velocity * delta
 		return
 
 	# Handle gravity
 	if not is_on_floor():
 		velocity.y -= _gravity * delta
-	else:
-		velocity.y = 0.0
+	elif velocity.y < 0.0:
+		velocity.y = -0.1
 
 	# Read movement input (WASD / Arrows)
-	var raw_x: float = Input.get_axis("ui_left", "ui_right")
-	var raw_z: float = Input.get_axis("ui_up", "ui_down")
+	var raw_x: float = Input.get_axis("move_left", "move_right")
+	var raw_z: float = Input.get_axis("move_up", "move_down")
+	if is_zero_approx(raw_x):
+		raw_x = Input.get_axis("ui_left", "ui_right")
+	if is_zero_approx(raw_z):
+		raw_z = Input.get_axis("ui_up", "ui_down")
 	input_direction = Vector2(raw_x, raw_z)
 
 	var move_dir: Vector3 = Vector3(raw_x, 0.0, raw_z)
@@ -130,15 +143,22 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_dir.x * move_speed
 		velocity.z = move_dir.z * move_speed
 		emit_signal("facing_changed_3d", facing_direction)
-		emit_signal("player_moved_3d", global_position)
+		var current_pos: Vector3 = global_position if is_inside_tree() else position
+		emit_signal("player_moved_3d", current_pos)
 
 		var dir_str: String = _vector_to_direction(move_dir)
 		_update_animation(dir_str)
 	else:
-		velocity.x = move_toward(velocity.x, 0.0, move_speed * 6.0 * delta)
-		velocity.z = move_toward(velocity.z, 0.0, move_speed * 6.0 * delta)
+		velocity.x = move_toward(velocity.x, 0.0, move_speed * 8.0 * delta)
+		velocity.z = move_toward(velocity.z, 0.0, move_speed * 8.0 * delta)
 
-	move_and_slide()
+	if Input.is_action_just_pressed("attack"):
+		_try_attack()
+
+	if is_inside_tree():
+		move_and_slide()
+	else:
+		position += velocity * delta
 
 func _update_animation(dir_name: String) -> void:
 	if animated_sprite == null or animated_sprite.sprite_frames == null:
@@ -187,6 +207,18 @@ func init_from_character_id(char_id: String) -> bool:
 	stats._apply_definition()
 	stats._recompute_final_stats()
 	return true
+
+func is_moving() -> bool:
+	return Vector2(velocity.x, velocity.z).length_squared() > 0.01
+
+func attack() -> void:
+	if _attack_timer > 0.0 or character_state != CharacterState.ALIVE:
+		return
+	_attack_timer = attack_cooldown
+	emit_signal("player_attacked")
+
+func _try_attack() -> void:
+	attack()
 
 func _on_player_died() -> void:
 	character_state = CharacterState.DEAD

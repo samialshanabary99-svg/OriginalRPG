@@ -82,7 +82,7 @@ func _generate_terrain() -> void:
 	var mat: StandardMaterial3D = StandardMaterial3D.new()
 	mat.vertex_color_use_as_albedo = true
 	mat.roughness = 0.88
-	mat.specular = 0.15
+	mat.metallic_specular = 0.15
 	mesh.surface_set_material(0, mat)
 
 	if terrain_mesh_instance != null:

@@ -38,10 +38,12 @@ Info: V"
 
 [node name="ToggleInfoButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "Basic Info (V)"
 
 [node name="ReturnButton" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_mode = 0
 text = "Return to Menu"
 
 [node name="BasicInfoWindow" parent="." instance=ExtResource("2_basic_info")]
