@@ -1,0 +1,56 @@
+{
+  "group_id": "06f70e99-273a-4f41-b2aa-f1181a2105bf",
+  "objects": [
+    {
+      "id": "d9102e4e-387d-41a7-9933-16095732e1a7",
+      "name": "base",
+      "prompt": "normal tree",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/normal_tree.png"
+      },
+      "animations": {
+        "The_massive_trunk_remains_firmly_anchored_exhibit": {
+          "directions": {
+            "unknown": {
+              "frames": [
+                "animations/The_massive_trunk_remains_firmly_anchored_exhibit/unknown/frame_000.png",
+                "animations/The_massive_trunk_remains_firmly_anchored_exhibit/unknown/frame_001.png",
+                "animations/The_massive_trunk_remains_firmly_anchored_exhibit/unknown/frame_002.png",
+                "animations/The_massive_trunk_remains_firmly_anchored_exhibit/unknown/frame_003.png",
+                "animations/The_massive_trunk_remains_firmly_anchored_exhibit/unknown/frame_004.png",
+                "animations/The_massive_trunk_remains_firmly_anchored_exhibit/unknown/frame_005.png",
+                "animations/The_massive_trunk_remains_firmly_anchored_exhibit/unknown/frame_006.png",
+                "animations/The_massive_trunk_remains_firmly_anchored_exhibit/unknown/frame_007.png",
+                "animations/The_massive_trunk_remains_firmly_anchored_exhibit/unknown/frame_008.png"
+              ],
+              "frame_count": 9
+            }
+          }
+        }
+      }
+    },
+    {
+      "id": "796db788-8cbc-42b4-ac32-f7a58793caf6",
+      "name": "The idle movement of",
+      "prompt": "normal tree",
+      "size": {
+        "width": 256,
+        "height": 256
+      },
+      "directions": 1,
+      "view": "low top-down",
+      "rotations": {
+        "unknown": "rotations/The_idle_movement_of.png"
+      },
+      "animations": {}
+    }
+  ],
+  "export_version": "1.1",
+  "export_date": "2026-10-01T14:07:51.369697"
+}

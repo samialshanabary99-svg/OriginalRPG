@@ -1,0 +1,55 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/tree/animations/sway/frame_000.png" id="1_hwgty"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/tree/animations/sway/frame_001.png" id="2_0sofc"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/tree/animations/sway/frame_002.png" id="3_errj2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/tree/animations/sway/frame_003.png" id="4_ka4lq"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/tree/animations/sway/frame_004.png" id="5_wc7aw"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/tree/animations/sway/frame_005.png" id="6_uh7xp"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/tree/animations/sway/frame_006.png" id="7_5nja5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/tree/animations/sway/frame_007.png" id="8_upq1w"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/tree/animations/sway/frame_008.png" id="9_3n5t4"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/tree/rotations/normal_tree.png" id="10_b674s"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_hwgty")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0sofc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_errj2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ka4lq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_wc7aw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_uh7xp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5nja5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_upq1w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_3n5t4")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_b674s")
+}],
+"loop": 0,
+"name": &"rot_default",
+"speed": 1.0
+}]

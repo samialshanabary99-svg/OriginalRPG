@@ -546,3 +546,29 @@ license_or_usage_notes: Project-exclusive custom asset provided for OriginalRPG
 notes: 72 animated frames (9 frames x 8 directions) plus 8 static rotations and SpriteFrames resource.
 ```
 
+### 16. `env_normal_tree_sway`
+```yaml
+asset_id: env_normal_tree_sway
+name: Normal Forest Tree Animated Sway
+type: environment
+path: assets/sprites/environment/tree/
+source: user_provided
+generator_or_tool: ai_generated (Diffusion Pixel Art Pipeline)
+prompt_reference: "normal tree for a classic 2D/3D MMORPG map, inspired by the charming pixel-art aesthetic of early 2000s Korean MMORPGs. Massive sturdy trunk firmly anchored to the ground with natural root flares, broad lush leafy canopy with rich green tones, gentle foliage breeze sway, crisp hand-crafted pixel art, 256x256, transparent background."
+author: User / Diffusion Engine (metadata export 1.1)
+created_date: 2026-10-03
+modified_date: 2026-10-03
+dimensions: 256x256
+frame_size: 256x256
+animation_frames: 9
+animation: sway
+directions: 1 (billboard facing)
+format: png, tres
+transparency: rgba_alpha
+intended_use: In-game animated tree decoration billboard prop across meadows, hills, and ridgelines
+related_entity: src/entities/test_world_3d.gd
+status: approved
+license_or_usage_notes: Project-exclusive custom asset provided for OriginalRPG
+notes: 9 animated breeze sway frames plus static rotation and SpriteFrames resource.
+```
+
