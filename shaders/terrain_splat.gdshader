@@ -72,10 +72,8 @@ void fragment() {
 	float threshold = cliff_slope_threshold + edge_noise;
 
 	// Cliff steepness: 1.0 on steep walls, 0.0 on flat ground
-	float cliff_steepness = 1.0 - smoothstep(threshold - 0.10, threshold + 0.05, slope_y);
-
-	// Elevation check: rock cliffs only generate on high elevations or perimeter skirts
-	float height_eligible = (v_world_pos.y > cliff_min_height || v_world_pos.y < -0.5) ? 1.0 : 0.0;
+	// No halfway height cutoff: rock extends from the top lip all the way down to the meadow floor!
+	float cliff_steepness = 1.0 - smoothstep(threshold - 0.10, threshold + 0.04, slope_y);
 
 	// Ramp & Path masks from vertex colors:
 	// COLOR.g >= 0.7: Walkable ramp (suppresses rock, forces grass)
@@ -83,7 +81,7 @@ void fragment() {
 	float is_ramp = step(0.65, v_vertex_color.g);
 	float is_path = smoothstep(0.20, 0.55, v_vertex_color.g) * (1.0 - is_ramp);
 
-	float rock_factor = cliff_steepness * height_eligible * (1.0 - is_ramp);
+	float rock_factor = cliff_steepness * (1.0 - is_ramp);
 
 	// 4. Ground Multi-Material Blending
 	// Dry grass in hollows and subtle sun-baked patches
@@ -106,6 +104,7 @@ void fragment() {
 	final_albedo.rgb *= ao;
 
 	ALBEDO = final_albedo.rgb;
-	ROUGHNESS = 0.88;
-	SPECULAR = 0.05;
+	ROUGHNESS = 0.95;
+	SPECULAR = 0.01;
+	METALLIC = 0.0;
 }

@@ -140,11 +140,10 @@ func _generate_terrain() -> void:
 	mat.set_shader_parameter("tex_dirt_path", dirt_tex)
 
 	mat.set_shader_parameter("uv_scale_grass", 0.65)
-	mat.set_shader_parameter("uv_scale_rock", 0.22)
+	mat.set_shader_parameter("uv_scale_rock", 0.32)
 	mat.set_shader_parameter("uv_scale_dry", 0.65)
 	mat.set_shader_parameter("uv_scale_dirt", 0.65)
-	mat.set_shader_parameter("cliff_slope_threshold", 0.68)
-	mat.set_shader_parameter("cliff_min_height", 1.35)
+	mat.set_shader_parameter("cliff_slope_threshold", 0.70)
 
 	mesh.surface_set_material(0, mat)
 
