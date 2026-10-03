@@ -120,15 +120,17 @@ func _generate_terrain() -> void:
 
 	# Create terrain material with triplanar pixel-art projection and anisotropic mipmapping
 	var mat: StandardMaterial3D = StandardMaterial3D.new()
-	var grass_tex: Texture2D = load("res://assets/tiles/ground/tile_grass_base.png")
+	var grass_tex: Texture2D = load("res://assets/environment/ground/ground_grass_painterly.png")
+	if grass_tex == null:
+		grass_tex = load("res://assets/tiles/ground/tile_grass_base.png")
 	if grass_tex != null:
 		mat.albedo_texture = grass_tex
-		mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS_ANISOTROPIC
+		mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
 
 	# Triplanar mapping projects seamlessly on both flats and vertical slopes without stretching/squishing
 	mat.uv1_triplanar = true
 	mat.uv1_triplanar_sharpness = 4.0
-	mat.uv1_scale = Vector3(0.5, 0.5, 0.5)
+	mat.uv1_scale = Vector3(0.65, 0.65, 0.65)
 
 	mat.vertex_color_use_as_albedo = true
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
@@ -215,14 +217,17 @@ func _add_terrain_vertex(st: SurfaceTool, pos: Vector3) -> void:
 
 	if slope > 0.82:
 		# Flat surfaces & gentle rolling meadows
+		# Subtle low-frequency macro variation so large meadows feel organic
+		var macro_noise: float = sin(pos.x * 0.18 + 0.3) * 0.04 + cos(pos.z * 0.18 + 0.7) * 0.04
 		if pos.y > 1.8:
-			col = Color(1.04, 1.03, 0.96) # Sunlit plateau meadow
+			col = Color(1.05 + macro_noise, 1.04 + macro_noise, 0.96) # Sunlit plateau meadow
 		else:
-			col = Color(1.0, 1.0, 1.0)    # Vibrant lush green meadow
+			# Warm, lush olive-dappled field tint matching bush & tree
+			col = Color(1.0 + macro_noise, 1.01 + macro_noise, 0.98 - macro_noise * 0.5)
 	elif slope > 0.65:
 		# Grassy slope transition into warm sun-baked soil
 		var t: float = (0.82 - slope) / 0.17
-		col = Color(1.0, 1.0, 1.0).lerp(Color(0.94, 0.89, 0.78), t)
+		col = Color(1.0, 1.0, 0.98).lerp(Color(0.94, 0.89, 0.78), t)
 	else:
 		# Warm earthy cliff face (golden sandstone / rocky soil)
 		var cliff_t: float = clampf((0.65 - slope) / 0.35, 0.0, 1.0)
@@ -239,6 +244,10 @@ func _spawn_field_decorations() -> void:
 	props_node.name = "Props"
 	add_child(props_node)
 
+	# Load ground blending decals (contact shadows and tree soil/root rings)
+	var shadow_tex: Texture2D = load("res://assets/environment/shadows/shadow_oval_soft.png")
+	var root_soil_tex: Texture2D = load("res://assets/environment/ground/ground_tree_roots_soil.png")
+
 	# 1. Authentic animated green bushes (Ragnarok Online style) along hill bases and meadow contours
 	var bush_coords: Array[Vector2] = [
 		Vector2(3.5, -8.0), Vector2(18.0, -11.0), Vector2(10.0, -17.5),
@@ -249,7 +258,7 @@ func _spawn_field_decorations() -> void:
 	var bush_frames: SpriteFrames = load("res://assets/sprites/environment/bush/bush_sprite_frames.tres") as SpriteFrames
 	var bush_tex_fallback: Texture2D = load("res://assets/sprites/environment/bush/rotations/south.png") as Texture2D
 	for coord: Vector2 in bush_coords:
-		_create_animated_bush_prop(props_node, bush_frames, bush_tex_fallback, coord, 0.009)
+		_create_animated_bush_prop(props_node, bush_frames, bush_tex_fallback, coord, 0.009, shadow_tex)
 
 	# 2. Wildflowers scattered across meadows and plateau surfaces (flat decals hugging terrain)
 	var flower_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_wildflowers.png")
@@ -262,7 +271,7 @@ func _spawn_field_decorations() -> void:
 		Vector2(1.5, -1.0), Vector2(-4.0, 1.0)
 	]
 	for coord: Vector2 in flower_coords:
-		_create_flat_prop(props_node, flower_tex, coord, 0.035)
+		_create_flat_prop(props_node, flower_tex, coord, 0.035, 0.025)
 
 	# 3. Tall grass tufts (upright billboards)
 	var grass_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_tall_grass.png")
@@ -282,7 +291,7 @@ func _spawn_field_decorations() -> void:
 		Vector2(9.0, -4.0), Vector2(10.5, -5.5)
 	]
 	for coord: Vector2 in stone_coords:
-		_create_flat_prop(props_node, stone_tex, coord, 0.032)
+		_create_flat_prop(props_node, stone_tex, coord, 0.032, 0.022)
 
 	# 5. Authentic animated forest trees (Ragnarok Online style) across meadows, hilltops, and horizons
 	var tree_coords: Array[Vector2] = [
@@ -294,10 +303,14 @@ func _spawn_field_decorations() -> void:
 	var tree_frames: SpriteFrames = load("res://assets/sprites/environment/tree/tree_sprite_frames.tres") as SpriteFrames
 	var tree_tex_fallback: Texture2D = load("res://assets/sprites/environment/tree/rotations/normal_tree.png") as Texture2D
 	for coord: Vector2 in tree_coords:
-		_create_animated_tree_prop(props_node, tree_frames, tree_tex_fallback, coord, 0.015)
+		_create_animated_tree_prop(props_node, tree_frames, tree_tex_fallback, coord, 0.015, shadow_tex, root_soil_tex)
 
 
-func _create_animated_bush_prop(parent: Node3D, frames: SpriteFrames, fallback_tex: Texture2D, pos2d: Vector2, pixel_scale: float) -> void:
+func _create_animated_bush_prop(parent: Node3D, frames: SpriteFrames, fallback_tex: Texture2D, pos2d: Vector2, pixel_scale: float, shadow_tex: Texture2D = null) -> void:
+	# 1. Soft contact shadow decal hugging the terrain directly under the bush
+	if shadow_tex != null:
+		_create_flat_prop(parent, shadow_tex, pos2d, 0.016, 0.010, true)
+
 	var y: float = _calculate_height(pos2d.x, pos2d.y)
 	# The bush frame is 170x170 with center at y=85. Bottom-most foliage pixel is at y=130 (+45 px below center).
 	# Anchoring at y + 45.0 * pixel_scale touches the base of the bush foliage directly to the terrain surface.
@@ -328,7 +341,15 @@ func _create_animated_bush_prop(parent: Node3D, frames: SpriteFrames, fallback_t
 		sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		parent.add_child(sprite)
 
-func _create_animated_tree_prop(parent: Node3D, frames: SpriteFrames, fallback_tex: Texture2D, pos2d: Vector2, pixel_scale: float) -> void:
+func _create_animated_tree_prop(parent: Node3D, frames: SpriteFrames, fallback_tex: Texture2D, pos2d: Vector2, pixel_scale: float, shadow_tex: Texture2D = null, root_soil_tex: Texture2D = null) -> void:
+	# 1. Warm earthy soil & root flare transition decal
+	if root_soil_tex != null:
+		_create_flat_prop(parent, root_soil_tex, pos2d, 0.036, 0.012, true)
+
+	# 2. Deep soft canopy contact shadow decal
+	if shadow_tex != null:
+		_create_flat_prop(parent, shadow_tex, pos2d, 0.044, 0.016, true)
+
 	var y: float = _calculate_height(pos2d.x, pos2d.y)
 	# The tree frame is 256x256 with center at y=128. Bottom-most trunk pixel is at y=248 (+120 px below center).
 	# Anchoring at y + 118.0 * pixel_scale embeds root base slightly into the ground surface.
@@ -374,7 +395,7 @@ func _create_billboard_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixe
 	sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	parent.add_child(sprite)
 
-func _create_flat_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixel_scale: float) -> void:
+func _create_flat_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixel_scale: float, height_offset: float = 0.025, use_alpha_blend: bool = false) -> void:
 	if tex == null:
 		return
 	var y: float = _calculate_height(pos2d.x, pos2d.y)
@@ -382,10 +403,14 @@ func _create_flat_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixel_sca
 	var sprite: Sprite3D = Sprite3D.new()
 	sprite.texture = tex
 	sprite.axis = Vector3.AXIS_Y
-	sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
-	sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+	if use_alpha_blend:
+		sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISABLED
+		sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	else:
+		sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
+		sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
 	sprite.pixel_size = pixel_scale
-	sprite.position = Vector3(pos2d.x, y + 0.025, pos2d.y)
+	sprite.position = Vector3(pos2d.x, y + height_offset, pos2d.y)
 
 	# Align sprite normal with the terrain slope normal so it hugs the ground
 	if not norm.is_equal_approx(Vector3.UP):

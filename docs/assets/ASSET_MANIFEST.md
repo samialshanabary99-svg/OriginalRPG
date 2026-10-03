@@ -572,3 +572,82 @@ license_or_usage_notes: Project-exclusive custom asset provided for OriginalRPG
 notes: 9 animated breeze sway frames plus static rotation and SpriteFrames resource.
 ```
 
+### 17. `env_ground_grass_painterly`
+```yaml
+asset_id: env_ground_grass_painterly
+name: Harmonized Painterly Meadow Grass Surface
+type: environment
+path: assets/environment/ground/ground_grass_painterly.png
+source: human_authored
+generator_or_tool: manual
+prompt_reference: "128x128 seamless tileable RPG meadow grass texture, warm olive-green and moss tones, hand-painted pixel art aesthetic of early 2000s Korean MMORPG (Ragnarok Online style), soft clumpy grass blades, subtle shaded crevices, palette harmonized with bush and tree."
+author: Antigravity
+created_date: 2026-10-03
+modified_date: 2026-10-03
+dimensions: 64x64
+frame_size: 64x64
+animation_frames: 1
+animation: none
+directions: none
+format: png
+transparency: opaque
+intended_use: Seamless primary terrain ground albedo texture across 3D meadows and hills
+related_entity: src/entities/test_world_3d.gd
+status: approved
+license_or_usage_notes: Project-exclusive custom asset for OriginalRPG
+notes: Seamless toroidal harmonic generation matching #3d4729 and #47512d palette.
+```
+
+### 18. `env_shadow_oval_soft`
+```yaml
+asset_id: env_shadow_oval_soft
+name: Soft Oval Contact Shadow Decal
+type: environment
+path: assets/environment/shadows/shadow_oval_soft.png
+source: human_authored
+generator_or_tool: manual
+prompt_reference: "128x128 soft feathered elliptical contact shadow decal for classic MMORPG props, cubic ease-out alpha falloff, tinted towards deep ambient moss."
+author: Antigravity
+created_date: 2026-10-03
+modified_date: 2026-10-03
+dimensions: 128x128
+frame_size: 128x128
+animation_frames: 1
+animation: none
+directions: none
+format: png
+transparency: rgba_alpha
+intended_use: Contact shadow decal hugging terrain directly under trees, bushes, and props
+related_entity: src/entities/test_world_3d.gd
+status: approved
+license_or_usage_notes: Project-exclusive custom asset for OriginalRPG
+notes: 3/4 perspective elliptical ratio with feathered ambient dropoff.
+```
+
+### 19. `env_ground_tree_roots_soil`
+```yaml
+asset_id: env_ground_tree_roots_soil
+name: Tree Roots and Soil Transition Decal
+type: environment
+path: assets/environment/ground/ground_tree_roots_soil.png
+source: human_authored
+generator_or_tool: manual
+prompt_reference: "128x128 organic soil and root transition decal for tree bases, earthy walnut browns with root lobe flares fading softly into surrounding turf."
+author: Antigravity
+created_date: 2026-10-03
+modified_date: 2026-10-03
+dimensions: 128x128
+frame_size: 128x128
+animation_frames: 1
+animation: none
+directions: none
+format: png
+transparency: rgba_alpha
+intended_use: Ground contact soil patch beneath tree trunks to blend wood roots with turf
+related_entity: src/entities/test_world_3d.gd
+status: approved
+license_or_usage_notes: Project-exclusive custom asset for OriginalRPG
+notes: Multi-lobe radial root flares blending bark into grass.
+```
+
+
