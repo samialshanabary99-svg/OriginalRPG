@@ -519,3 +519,30 @@ status: planned
 license_or_usage_notes: To be generated
 notes: Interactive monument in test_world.tscn.
 ```
+
+### 15. `env_green_bush_sway`
+```yaml
+asset_id: env_green_bush_sway
+name: Small Green Bush 8-Directional Sway
+type: environment
+path: assets/sprites/environment/bush/
+source: user_provided
+generator_or_tool: ai_generated (Diffusion Pixel Art Pipeline)
+prompt_reference: "A normal small green bush for a classic 2D MMORPG map, inspired by the charming pixel-art aesthetic of early 2000s Korean MMORPGs. Compact natural shape, dense cluster of many detailed green leaves, multiple layers of foliage, small overlapping leaves with varied sizes and directions, fresh medium-green and dark-green tones, subtle lighter green highlights, soft pixel-art shading, natural uneven silhouette, transparent background."
+author: User / Diffusion Engine (metadata export 1.1)
+created_date: 2026-10-03
+modified_date: 2026-10-03
+dimensions: 170x170
+frame_size: 170x170
+animation_frames: 9
+animation: sway
+directions: 8 (south, south-east, south-west, east, west, north-east, north-west, north)
+format: png, tres
+transparency: rgba_alpha
+intended_use: In-game animated foliage decoration billboard prop across 3D meadows and hills
+related_entity: src/entities/test_world_3d.gd
+status: approved
+license_or_usage_notes: Project-exclusive custom asset provided for OriginalRPG
+notes: 72 animated frames (9 frames x 8 directions) plus 8 static rotations and SpriteFrames resource.
+```
+

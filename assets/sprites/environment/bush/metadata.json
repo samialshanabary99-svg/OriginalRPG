@@ -1,0 +1,146 @@
+{
+  "group_id": "ce42e951-311a-44db-a69c-45dd1a141112",
+  "objects": [
+    {
+      "id": "4c8868d9-f24c-4ca0-b8d5-86c63136d62c",
+      "name": "base",
+      "prompt": "A normal small green bush for a classic 2D MMORPG map, inspired by the charming pixel-art aesthetic of early 2000s Korean MMORPGs. Compact natural shape, dense cluster of many detailed green leaves, multiple layers of foliage, small overlapping leaves with varied sizes and directions, fresh medium-green and dark-green tones, subtle lighter green highlights, soft pixel-art shading, natural uneven silhouette, a few small branches partially visible between the leaves, healthy forest vegetation, simple common map decoration, NOT magical, NOT rare, NOT oversized, NOT exotic. Crisp hand-crafted pixel art, clean pixel clusters, strong readable silhouette, detailed leaves without excessive complexity, slightly top-down 3/4 perspective suitable for an isometric or RPG map, standalone environment object, centered, full object visible, transparent background.",
+      "size": {
+        "width": 170,
+        "height": 170
+      },
+      "directions": 8,
+      "view": "high top-down",
+      "rotations": {
+        "south": "rotations/south.png",
+        "south-east": "rotations/south-east.png",
+        "east": "rotations/east.png",
+        "north-east": "rotations/north-east.png",
+        "north": "rotations/north.png",
+        "north-west": "rotations/north-west.png",
+        "west": "rotations/west.png",
+        "south-west": "rotations/south-west.png"
+      },
+      "animations": {
+        "The_foliage_gently_sways_in_a_soft_natural_breeze": {
+          "directions": {
+            "south": {
+              "frames": [
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south/frame_000.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south/frame_001.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south/frame_002.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south/frame_003.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south/frame_004.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south/frame_005.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south/frame_006.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south/frame_007.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "south-east": {
+              "frames": [
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-east/frame_000.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-east/frame_001.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-east/frame_002.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-east/frame_003.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-east/frame_004.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-east/frame_005.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-east/frame_006.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-east/frame_007.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-east/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "south-west": {
+              "frames": [
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-west/frame_000.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-west/frame_001.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-west/frame_002.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-west/frame_003.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-west/frame_004.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-west/frame_005.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-west/frame_006.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-west/frame_007.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/south-west/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "east": {
+              "frames": [
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/east/frame_000.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/east/frame_001.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/east/frame_002.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/east/frame_003.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/east/frame_004.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/east/frame_005.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/east/frame_006.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/east/frame_007.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/east/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "west": {
+              "frames": [
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/west/frame_000.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/west/frame_001.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/west/frame_002.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/west/frame_003.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/west/frame_004.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/west/frame_005.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/west/frame_006.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/west/frame_007.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/west/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "north-east": {
+              "frames": [
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-east/frame_000.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-east/frame_001.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-east/frame_002.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-east/frame_003.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-east/frame_004.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-east/frame_005.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-east/frame_006.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-east/frame_007.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-east/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "north-west": {
+              "frames": [
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-west/frame_000.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-west/frame_001.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-west/frame_002.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-west/frame_003.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-west/frame_004.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-west/frame_005.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-west/frame_006.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-west/frame_007.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north-west/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "north": {
+              "frames": [
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north/frame_000.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north/frame_001.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north/frame_002.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north/frame_003.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north/frame_004.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north/frame_005.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north/frame_006.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north/frame_007.png",
+                "animations/The_foliage_gently_sways_in_a_soft_natural_breeze/north/frame_008.png"
+              ],
+              "frame_count": 9
+            }
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "1.1",
+  "export_date": "2026-10-03T04:34:51.132603"
+}

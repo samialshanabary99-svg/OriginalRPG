@@ -239,16 +239,17 @@ func _spawn_field_decorations() -> void:
 	props_node.name = "Props"
 	add_child(props_node)
 
-	# 1. Bushes along hill bases and meadow contours
+	# 1. Authentic animated green bushes (Ragnarok Online style) along hill bases and meadow contours
 	var bush_coords: Array[Vector2] = [
 		Vector2(3.5, -8.0), Vector2(18.0, -11.0), Vector2(10.0, -17.5),
 		Vector2(-5.0, -12.5), Vector2(-18.0, -13.0), Vector2(-11.0, -20.0),
 		Vector2(-4.0, 4.0), Vector2(8.0, 5.0), Vector2(-12.0, 10.0), Vector2(14.0, 9.0),
 		Vector2(1.0, -9.0), Vector2(-8.0, 3.0), Vector2(12.0, 3.0)
 	]
-	var bush_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_bush.png")
+	var bush_frames: SpriteFrames = load("res://assets/sprites/environment/bush/bush_sprite_frames.tres") as SpriteFrames
+	var bush_tex_fallback: Texture2D = load("res://assets/sprites/environment/bush/rotations/south.png") as Texture2D
 	for coord: Vector2 in bush_coords:
-		_create_billboard_prop(props_node, bush_tex, coord, 0.038)
+		_create_animated_bush_prop(props_node, bush_frames, bush_tex_fallback, coord, 0.009)
 
 	# 2. Wildflowers scattered across meadows and plateau surfaces (flat decals hugging terrain)
 	var flower_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_wildflowers.png")
@@ -282,6 +283,37 @@ func _spawn_field_decorations() -> void:
 	]
 	for coord: Vector2 in stone_coords:
 		_create_flat_prop(props_node, stone_tex, coord, 0.032)
+
+func _create_animated_bush_prop(parent: Node3D, frames: SpriteFrames, fallback_tex: Texture2D, pos2d: Vector2, pixel_scale: float) -> void:
+	var y: float = _calculate_height(pos2d.x, pos2d.y)
+	# The bush frame is 170x170 with center at y=85. Bottom-most foliage pixel is at y=130 (+45 px below center).
+	# Anchoring at y + 45.0 * pixel_scale touches the base of the bush foliage directly to the terrain surface.
+	var anchor_y: float = y + 45.0 * pixel_scale
+	if frames != null and frames.has_animation("default"):
+		var anim_sprite: AnimatedSprite3D = AnimatedSprite3D.new()
+		anim_sprite.sprite_frames = frames
+		anim_sprite.animation = "default"
+		anim_sprite.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+		anim_sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
+		anim_sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		anim_sprite.pixel_size = pixel_scale
+		anim_sprite.position = Vector3(pos2d.x, anchor_y, pos2d.y)
+		anim_sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		parent.add_child(anim_sprite)
+		anim_sprite.play("default")
+		var fc: int = frames.get_frame_count("default")
+		if fc > 0:
+			anim_sprite.frame = randi() % fc
+	elif fallback_tex != null:
+		var sprite: Sprite3D = Sprite3D.new()
+		sprite.texture = fallback_tex
+		sprite.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+		sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
+		sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		sprite.pixel_size = pixel_scale
+		sprite.position = Vector3(pos2d.x, anchor_y, pos2d.y)
+		sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		parent.add_child(sprite)
 
 func _create_billboard_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixel_scale: float) -> void:
 	if tex == null:

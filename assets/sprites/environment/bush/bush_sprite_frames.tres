@@ -1,0 +1,437 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south/frame_000.png" id="1_56p3n"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south/frame_001.png" id="2_525n8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south/frame_002.png" id="3_d2fus"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south/frame_003.png" id="4_j28o5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south/frame_004.png" id="5_ym43v"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south/frame_005.png" id="6_l1fu5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south/frame_006.png" id="7_3w0qo"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south/frame_007.png" id="8_ogmt3"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south/frame_008.png" id="9_igboi"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/rotations/east.png" id="10_xla1x"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/rotations/north.png" id="11_1qt2m"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/rotations/north-east.png" id="12_l2wo5"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/rotations/north-west.png" id="13_03cug"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/rotations/south.png" id="14_hhjgh"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/rotations/south-east.png" id="15_putal"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/rotations/south-west.png" id="16_j37yq"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/rotations/west.png" id="17_d5wel"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/east/frame_000.png" id="18_rrni2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/east/frame_001.png" id="19_y2srn"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/east/frame_002.png" id="20_2rb7f"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/east/frame_003.png" id="21_lxmpn"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/east/frame_004.png" id="22_qpbgg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/east/frame_005.png" id="23_aesay"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/east/frame_006.png" id="24_xciln"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/east/frame_007.png" id="25_o7fmi"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/east/frame_008.png" id="26_mer4s"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north/frame_000.png" id="27_ywddn"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north/frame_001.png" id="28_am37t"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north/frame_002.png" id="29_qdxmx"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north/frame_003.png" id="30_0ptjw"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north/frame_004.png" id="31_t0apt"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north/frame_005.png" id="32_7rgba"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north/frame_006.png" id="33_nulnc"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north/frame_007.png" id="34_2kg3s"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north/frame_008.png" id="35_wuv3y"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-east/frame_000.png" id="36_uky3l"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-east/frame_001.png" id="37_pldj0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-east/frame_002.png" id="38_g8v84"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-east/frame_003.png" id="39_4pejg"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-east/frame_004.png" id="40_4e8hb"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-east/frame_005.png" id="41_ewyj6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-east/frame_006.png" id="42_shr8p"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-east/frame_007.png" id="43_wqf1m"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-east/frame_008.png" id="44_v7hl2"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-west/frame_000.png" id="45_adey6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-west/frame_001.png" id="46_5fp22"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-west/frame_002.png" id="47_h5372"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-west/frame_003.png" id="48_dlpxy"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-west/frame_004.png" id="49_johfw"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-west/frame_005.png" id="50_o2dc7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-west/frame_006.png" id="51_6fcvi"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-west/frame_007.png" id="52_n3ska"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/north-west/frame_008.png" id="53_egaim"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-east/frame_000.png" id="54_xoyw6"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-east/frame_001.png" id="55_2y70g"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-east/frame_002.png" id="56_opldd"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-east/frame_003.png" id="57_epaag"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-east/frame_004.png" id="58_mrn64"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-east/frame_005.png" id="59_4cibs"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-east/frame_006.png" id="60_aixtt"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-east/frame_007.png" id="61_y3t11"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-east/frame_008.png" id="62_qeahw"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-west/frame_000.png" id="63_4otyy"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-west/frame_001.png" id="64_c7c54"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-west/frame_002.png" id="65_6u02f"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-west/frame_003.png" id="66_86x0n"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-west/frame_004.png" id="67_tneup"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-west/frame_005.png" id="68_rxywm"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-west/frame_006.png" id="69_y55o8"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-west/frame_007.png" id="70_qgehs"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/south-west/frame_008.png" id="71_nt4s0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/west/frame_000.png" id="72_mysxp"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/west/frame_001.png" id="73_4ec1l"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/west/frame_002.png" id="74_eug2a"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/west/frame_003.png" id="75_25guc"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/west/frame_004.png" id="76_qcyhx"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/west/frame_005.png" id="77_mi3p0"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/west/frame_006.png" id="78_lden7"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/west/frame_007.png" id="79_x1838"]
+[ext_resource type="Texture2D" path="res://assets/sprites/environment/bush/animations/sway/west/frame_008.png" id="80_c26my"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_56p3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_525n8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d2fus")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_j28o5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ym43v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_l1fu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3w0qo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ogmt3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_igboi")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_xla1x")
+}],
+"loop": 0,
+"name": &"rot_east",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_1qt2m")
+}],
+"loop": 0,
+"name": &"rot_north",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_l2wo5")
+}],
+"loop": 0,
+"name": &"rot_north-east",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_03cug")
+}],
+"loop": 0,
+"name": &"rot_north-west",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_hhjgh")
+}],
+"loop": 0,
+"name": &"rot_south",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_putal")
+}],
+"loop": 0,
+"name": &"rot_south-east",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_j37yq")
+}],
+"loop": 0,
+"name": &"rot_south-west",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_d5wel")
+}],
+"loop": 0,
+"name": &"rot_west",
+"speed": 1.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("18_rrni2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_y2srn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_2rb7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_lxmpn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_qpbgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_aesay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_xciln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_o7fmi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_mer4s")
+}],
+"loop": 1,
+"name": &"sway_east",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("27_ywddn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_am37t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_qdxmx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_0ptjw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_t0apt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_7rgba")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_nulnc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_2kg3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_wuv3y")
+}],
+"loop": 1,
+"name": &"sway_north",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("36_uky3l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_pldj0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_g8v84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_4pejg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_4e8hb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_ewyj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_shr8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_wqf1m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_v7hl2")
+}],
+"loop": 1,
+"name": &"sway_north-east",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("45_adey6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("46_5fp22")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_h5372")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_dlpxy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_johfw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_o2dc7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_6fcvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_n3ska")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_egaim")
+}],
+"loop": 1,
+"name": &"sway_north-west",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_56p3n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_525n8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_d2fus")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_j28o5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_ym43v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_l1fu5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_3w0qo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_ogmt3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_igboi")
+}],
+"loop": 1,
+"name": &"sway_south",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("54_xoyw6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("55_2y70g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_opldd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_epaag")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_mrn64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_4cibs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_aixtt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_y3t11")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_qeahw")
+}],
+"loop": 1,
+"name": &"sway_south-east",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("63_4otyy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("64_c7c54")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_6u02f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_86x0n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_tneup")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_rxywm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_y55o8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_qgehs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_nt4s0")
+}],
+"loop": 1,
+"name": &"sway_south-west",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("72_mysxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("73_4ec1l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_eug2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_25guc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_qcyhx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_mi3p0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_lden7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_x1838")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_c26my")
+}],
+"loop": 1,
+"name": &"sway_west",
+"speed": 6.0
+}]
