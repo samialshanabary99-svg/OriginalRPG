@@ -16,10 +16,14 @@ extends Node3D
 @onready var terrain_mesh_instance: MeshInstance3D = $Terrain/TerrainMesh if has_node("Terrain/TerrainMesh") else null
 @onready var terrain_collision: CollisionShape3D = $Terrain/StaticBody3D/CollisionShape3D if has_node("Terrain/StaticBody3D/CollisionShape3D") else null
 
-# Terrain configuration
-const GRID_SIZE: int = 50       # 50x50 quad grid
-const CELL_SIZE: float = 1.0     # 1 meter per cell -> 50m x 50m world
+# Terrain configuration: 100x100 quad grid at 0.5m cell size -> 50m x 50m world
+# Provides 4x vertex density to support crisp, vertical Ragnarok Online rock cliffs
+const GRID_SIZE: int = 100
+const CELL_SIZE: float = 0.5
 const HALF_SIZE: float = float(GRID_SIZE) * CELL_SIZE * 0.5
+
+# Cliff elevation threshold: only hills taller than this get vertical stone cliff walls
+const CLIFF_MIN_ELEVATION: float = 1.8
 
 func _enter_tree() -> void:
 	_resolve_nodes()
@@ -44,7 +48,7 @@ func _generate_terrain() -> void:
 	var surface_tool: SurfaceTool = SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	# 1. Generate height and vertex data
+	# 1. Generate height and vertex data (100x100 grid)
 	for z_idx: int in range(GRID_SIZE):
 		for x_idx: int in range(GRID_SIZE):
 			var x0: float = float(x_idx) * CELL_SIZE - HALF_SIZE
@@ -118,24 +122,30 @@ func _generate_terrain() -> void:
 	surface_tool.index()
 	var mesh: ArrayMesh = surface_tool.commit()
 
-	# Create terrain material with triplanar pixel-art projection and anisotropic mipmapping
-	var mat: StandardMaterial3D = StandardMaterial3D.new()
+	# Create terrain splat ShaderMaterial supporting triplanar rock cliffs and organic ground blending
+	var shader: Shader = load("res://shaders/terrain_splat.gdshader") as Shader
+	var mat: ShaderMaterial = ShaderMaterial.new()
+	mat.shader = shader
+
 	var grass_tex: Texture2D = load("res://assets/environment/ground/ground_grass_painterly.png")
 	if grass_tex == null:
 		grass_tex = load("res://assets/tiles/ground/tile_grass_base.png")
-	if grass_tex != null:
-		mat.albedo_texture = grass_tex
-		mat.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
+	var rock_tex: Texture2D = load("res://assets/environment/ground/rock_cliff_stone.png")
+	var dry_tex: Texture2D = load("res://assets/environment/ground/ground_dry_grass.png")
+	var dirt_tex: Texture2D = load("res://assets/environment/ground/ground_dirt_path.png")
 
-	# Triplanar mapping projects seamlessly on both flats and vertical slopes without stretching/squishing
-	mat.uv1_triplanar = true
-	mat.uv1_triplanar_sharpness = 4.0
-	mat.uv1_scale = Vector3(0.65, 0.65, 0.65)
+	mat.set_shader_parameter("tex_grass", grass_tex)
+	mat.set_shader_parameter("tex_rock", rock_tex)
+	mat.set_shader_parameter("tex_dry_grass", dry_tex)
+	mat.set_shader_parameter("tex_dirt_path", dirt_tex)
 
-	mat.vertex_color_use_as_albedo = true
-	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
-	mat.roughness = 0.88
-	mat.metallic_specular = 0.05
+	mat.set_shader_parameter("uv_scale_grass", 0.65)
+	mat.set_shader_parameter("uv_scale_rock", 0.22)
+	mat.set_shader_parameter("uv_scale_dry", 0.65)
+	mat.set_shader_parameter("uv_scale_dirt", 0.65)
+	mat.set_shader_parameter("cliff_slope_threshold", 0.68)
+	mat.set_shader_parameter("cliff_min_height", 1.35)
+
 	mesh.surface_set_material(0, mat)
 
 	if terrain_mesh_instance != null:
@@ -148,38 +158,121 @@ func _generate_terrain() -> void:
 			trimesh_shape.backface_collision = true
 			terrain_collision.shape = trimesh_shape
 
-## Multi-tier height function creating authentic rolling hills, plateaus, and slopes
+## Multi-tier height function creating authentic Ragnarok Online style mesas, cliffs, ramps, and micro-relief
 func _calculate_height(x: float, z: float) -> float:
-	# Base rolling meadow waves (Tier 0: ~0.0m to 0.25m)
-	var h: float = (sin(x * 0.12) * 0.12 + cos(z * 0.12) * 0.12)
+	# 1. Base rolling meadow waves
+	var h: float = sin(x * 0.12) * 0.08 + cos(z * 0.12) * 0.08
 
-	# Tier 1 Plateau (Northeast Hill: x in [3..19], z in [-19..-3])
-	# Plateau rises to +2.2m with a smooth walkable ramp on the South face
-	var plateau_center: Vector2 = Vector2(11.0, -11.0)
-	var p_dist: float = sqrt(pow((x - plateau_center.x) / 8.5, 2.0) + pow((z - plateau_center.y) / 7.0, 2.0))
+	# 2. Purposeful micro-relief (Reference 2: natural bowls, hollows, and grove mounds)
+	# Hollow A: Shallow dry basin / bowl in the meadow clearing
+	var d_bowl_a: float = (Vector2(x, z) - Vector2(4.0, 3.5)).length()
+	if d_bowl_a < 4.0:
+		h -= (1.0 - smoothstep(0.0, 4.0, d_bowl_a)) * 0.30
+
+	# Hollow B: Gentle depression in the south-west meadow
+	var d_bowl_b: float = (Vector2(x, z) - Vector2(-9.0, 2.5)).length()
+	if d_bowl_b < 3.5:
+		h -= (1.0 - smoothstep(0.0, 3.5, d_bowl_b)) * 0.20
+
+	# Sunken footpath trough along stepping stones from spawn towards plateau ramp
+	var p_spawn: Vector2 = Vector2(0.5, 0.0)
+	var p_ramp_foot: Vector2 = Vector2(10.5, -3.8)
+	var d_path_trough: float = _distance_to_segment_2d(Vector2(x, z), p_spawn, p_ramp_foot)
+	if d_path_trough < 1.8:
+		h -= (1.0 - smoothstep(0.0, 1.8, d_path_trough)) * 0.09
+
+	# Grove rises: gentle natural earth mounds under tree clusters (+0.22m)
+	var d_grove1: float = (Vector2(x, z) - Vector2(-6.0, 7.0)).length()
+	if d_grove1 < 4.0:
+		h += (1.0 - smoothstep(0.0, 4.0, d_grove1)) * 0.22
+	var d_grove2: float = (Vector2(x, z) - Vector2(14.0, 10.0)).length()
+	if d_grove2 < 4.0:
+		h += (1.0 - smoothstep(0.0, 4.0, d_grove2)) * 0.22
+
+	# 3. Tier 1 Plateau (Northeast Hill: center (11.0, -11.0), height +2.4m)
+	# Mesa shape with vertical rock cliff walls on all sides except the southern ramp
+	var p_center: Vector2 = Vector2(11.0, -11.0)
+	var p_dx: float = x - p_center.x
+	var p_dz: float = z - p_center.y
+	var p_angle: float = atan2(p_dz, p_dx)
+	var p_pert: float = 1.0 + 0.08 * sin(5.0 * p_angle) + 0.04 * cos(9.0 * p_angle + 0.6)
+	var p_rx: float = 8.4 * p_pert
+	var p_rz: float = 7.0 * p_pert
+	var p_dist: float = sqrt(pow(p_dx / p_rx, 2.0) + pow(p_dz / p_rz, 2.0))
+
 	if p_dist < 1.0:
-		var ramp_influence: float = 0.0
-		# South ramp pathway at x ≈ 11, z from -6 to -3
-		if abs(x - 11.0) < 2.4 and z > -7.5:
-			ramp_influence = clampf((z + 7.5) / 4.0, 0.0, 1.0)
+		var t_cliff1: float
+		if p_dist <= 0.85:
+			t_cliff1 = 1.0 # Flat plateau top
+		else:
+			t_cliff1 = 1.0 - smoothstep(0.85, 1.0, p_dist) # Sharp vertical cliff band (~70°)
 
-		# Smooth, natural stepped slope with flat plateau top and soft foothill blend
-		var t: float = 1.0 - smoothstep(0.42, 1.0, p_dist)
-		var hill_lift: float = t * 2.2
-		h += lerpf(hill_lift, hill_lift * 0.35, ramp_influence)
+		var lift1: float = t_cliff1 * 2.4
 
-	# Tier 2 Lookout Ridge (Northwest Elevation: x in [-19..-5], z in [-21..-9])
-	var ridge_dist: float = sqrt(pow((x + 12.0) / 7.5, 2.0) + pow((z + 14.0) / 6.0, 2.0))
-	if ridge_dist < 1.0:
-		var t2: float = 1.0 - smoothstep(0.42, 1.0, ridge_dist)
-		h += t2 * 3.6
+		# South walkable green ramp with central footpath (x ≈ 11, z from -3.5 to -8.5)
+		var ramp1_x_dist: float = abs(p_dx)
+		if ramp1_x_dist < 2.2 and z > -9.5 and z < -3.5:
+			var ramp1_x_factor: float = 1.0 - smoothstep(1.0, 2.2, ramp1_x_dist)
+			var ramp1_z_prog: float = clampf((-3.5 - z) / 5.0, 0.0, 1.0)
+			var ramp1_h: float = ramp1_z_prog * 2.4
+			lift1 = lerpf(lift1, ramp1_h, ramp1_x_factor)
 
-	# Boundaries: gentle rolling perimeter foothills that cradle the world
+		h += lift1
+
+	# 4. Tier 2 Lookout Ridge (Northwest Hill: center (-12.0, -14.0), height +3.8m)
+	# Dramatic high mesa with layered stone cliff walls and south-east ramp
+	var r_center: Vector2 = Vector2(-12.0, -14.0)
+	var r_dx: float = x - r_center.x
+	var r_dz: float = z - r_center.y
+	var r_angle: float = atan2(r_dz, r_dx)
+	var r_pert: float = 1.0 + 0.07 * sin(6.0 * r_angle) + 0.04 * cos(8.0 * r_angle - 0.4)
+	var r_rx: float = 7.8 * r_pert
+	var r_rz: float = 6.4 * r_pert
+	var r_dist: float = sqrt(pow(r_dx / r_rx, 2.0) + pow(r_dz / r_rz, 2.0))
+
+	if r_dist < 1.0:
+		var t_cliff2: float
+		if r_dist <= 0.85:
+			t_cliff2 = 1.0 # Flat ridge top
+		else:
+			t_cliff2 = 1.0 - smoothstep(0.85, 1.0, r_dist) # Steep vertical cliff wall
+
+		var lift2: float = t_cliff2 * 3.8
+
+		# South-East walkable green ramp (from (-6.0, -8.5) to (-9.5, -12.5))
+		var r_ramp_a: Vector2 = Vector2(-6.0, -8.5)
+		var r_ramp_b: Vector2 = Vector2(-9.5, -12.5)
+		var r_d_seg: float = _distance_to_segment_2d(Vector2(x, z), r_ramp_a, r_ramp_b)
+		if r_d_seg < 2.0:
+			var r_ramp_factor: float = 1.0 - smoothstep(1.0, 2.0, r_d_seg)
+			var r_prog: float = _segment_progress_2d(Vector2(x, z), r_ramp_a, r_ramp_b)
+			var r_ramp_h: float = r_prog * 3.8
+			lift2 = lerpf(lift2, r_ramp_h, r_ramp_factor)
+
+		h += lift2
+
+	# 5. Boundaries: gentle rolling perimeter foothills that cradle the world
 	var edge_dist: float = max(abs(x), abs(z)) / HALF_SIZE
 	if edge_dist > 0.76:
-		h += pow((edge_dist - 0.76) / 0.24, 2.0) * 4.2
+		h += pow((edge_dist - 0.76) / 0.24, 2.0) * 4.5
 
 	return h
+
+func _distance_to_segment_2d(p: Vector2, a: Vector2, b: Vector2) -> float:
+	var ab: Vector2 = b - a
+	var ab_len_sq: float = ab.length_squared()
+	if ab_len_sq < 0.0001:
+		return (p - a).length()
+	var t: float = clampf((p - a).dot(ab) / ab_len_sq, 0.0, 1.0)
+	var proj: Vector2 = a + ab * t
+	return (p - proj).length()
+
+func _segment_progress_2d(p: Vector2, a: Vector2, b: Vector2) -> float:
+	var ab: Vector2 = b - a
+	var ab_len_sq: float = ab.length_squared()
+	if ab_len_sq < 0.0001:
+		return 0.0
+	return clampf((p - a).dot(ab) / ab_len_sq, 0.0, 1.0)
 
 func _add_skirt_quad(st: SurfaceTool, top_left: Vector3, top_right: Vector3, bot_left: Vector3, bot_right: Vector3, norm: Vector3) -> void:
 	# Triangle 1 (top_right, top_left, bot_right) in CCW order
@@ -193,15 +286,16 @@ func _add_skirt_quad(st: SurfaceTool, top_left: Vector3, top_right: Vector3, bot
 	_add_skirt_vertex(st, bot_right, norm)
 
 func _add_skirt_vertex(st: SurfaceTool, pos: Vector3, norm: Vector3) -> void:
-	var col: Color = Color(0.85, 0.76, 0.62) # Warm earthy cliff tone
+	# Skirts are vertical boundary cliff walls: R=0 (no dry grass), G=0 (no ramp), B=0.85 (subtle shadow), A=0
+	var col: Color = Color(0.0, 0.0, 0.85, 0.0)
 	st.set_color(col)
 	st.set_normal(norm)
 	st.set_uv(Vector2(pos.x, pos.z))
 	st.add_vertex(pos)
 
-## Calculates smooth continuous analytical surface normal using finite differences
+## Calculates continuous analytical surface normal using finite differences
 func _calculate_normal(x: float, z: float) -> Vector3:
-	var eps: float = 0.08
+	var eps: float = 0.04
 	var h_left: float = _calculate_height(x - eps, z)
 	var h_right: float = _calculate_height(x + eps, z)
 	var h_down: float = _calculate_height(x, z - eps)
@@ -213,26 +307,69 @@ func _calculate_normal(x: float, z: float) -> Vector3:
 func _add_terrain_vertex(st: SurfaceTool, pos: Vector3) -> void:
 	var norm: Vector3 = _calculate_normal(pos.x, pos.z)
 	var slope: float = clampf(norm.y, 0.0, 1.0)
-	var col: Color
 
-	if slope > 0.82:
-		# Flat surfaces & gentle rolling meadows
-		# Subtle low-frequency macro variation so large meadows feel organic
-		var macro_noise: float = sin(pos.x * 0.18 + 0.3) * 0.04 + cos(pos.z * 0.18 + 0.7) * 0.04
-		if pos.y > 1.8:
-			col = Color(1.05 + macro_noise, 1.04 + macro_noise, 0.96) # Sunlit plateau meadow
-		else:
-			# Warm, lush olive-dappled field tint matching bush & tree
-			col = Color(1.0 + macro_noise, 1.01 + macro_noise, 0.98 - macro_noise * 0.5)
-	elif slope > 0.65:
-		# Grassy slope transition into warm sun-baked soil
-		var t: float = (0.82 - slope) / 0.17
-		col = Color(1.0, 1.0, 0.98).lerp(Color(0.94, 0.89, 0.78), t)
-	else:
-		# Warm earthy cliff face (golden sandstone / rocky soil)
-		var cliff_t: float = clampf((0.65 - slope) / 0.35, 0.0, 1.0)
-		col = Color(0.94, 0.89, 0.78).lerp(Color(0.86, 0.76, 0.62), cliff_t)
+	# 1. Ramp & Path weight (COLOR.g) and Ramp center dirt path (COLOR.a)
+	var ramp_weight: float = 0.0
+	var path_dirt_weight: float = 0.0
 
+	# Plateau south ramp
+	var p_ramp_dx: float = abs(pos.x - 11.0)
+	var is_p_ramp: bool = (p_ramp_dx < 2.0 and pos.z > -9.2 and pos.z < -3.5)
+	if is_p_ramp:
+		ramp_weight = 0.85
+		# Footpath down the middle of the ramp
+		path_dirt_weight = clampf(1.0 - p_ramp_dx / 0.8, 0.0, 1.0)
+
+	# Ridge south-east ramp
+	var r_ramp_a: Vector2 = Vector2(-6.0, -8.5)
+	var r_ramp_b: Vector2 = Vector2(-9.5, -12.5)
+	var r_d_seg: float = _distance_to_segment_2d(Vector2(pos.x, pos.z), r_ramp_a, r_ramp_b)
+	var r_prog: float = _segment_progress_2d(Vector2(pos.x, pos.z), r_ramp_a, r_ramp_b)
+	var is_r_ramp: bool = (r_d_seg < 1.8 and r_prog >= 0.0 and r_prog <= 1.0)
+	if is_r_ramp:
+		ramp_weight = 0.85
+		path_dirt_weight = clampf(1.0 - r_d_seg / 0.7, 0.0, 1.0)
+
+	# Stepping stone trail from spawn
+	var p_spawn: Vector2 = Vector2(0.5, 0.0)
+	var p_ramp_foot: Vector2 = Vector2(10.5, -3.8)
+	var d_trail: float = _distance_to_segment_2d(Vector2(pos.x, pos.z), p_spawn, p_ramp_foot)
+	if not is_p_ramp and not is_r_ramp and d_trail < 1.6:
+		ramp_weight = 0.40 * (1.0 - d_trail / 1.6)
+		path_dirt_weight = clampf(1.0 - d_trail / 0.9, 0.0, 1.0)
+
+	# 2. Dry grass weight (COLOR.r) - subtle ~15% coverage in hollows, clearings, and plateau corner
+	var dry_weight: float = 0.0
+
+	# Hollow A basin
+	var d_bowl_a: float = (Vector2(pos.x, pos.z) - Vector2(4.0, 3.5)).length()
+	if d_bowl_a < 3.8:
+		dry_weight = max(dry_weight, (1.0 - d_bowl_a / 3.8) * 0.92)
+
+	# Hollow B depression
+	var d_bowl_b: float = (Vector2(pos.x, pos.z) - Vector2(-9.0, 2.5)).length()
+	if d_bowl_b < 3.2:
+		dry_weight = max(dry_weight, (1.0 - d_bowl_b / 3.2) * 0.70)
+
+	# Plateau back-corner dry patch (as seen in Reference 1 top-left)
+	var d_plateau_dry: float = (Vector2(pos.x, pos.z) - Vector2(14.5, -13.5)).length()
+	if d_plateau_dry < 3.0:
+		dry_weight = max(dry_weight, (1.0 - d_plateau_dry / 3.0) * 0.80)
+
+	# Path shoulder dry flecks
+	if d_trail >= 0.8 and d_trail < 2.0:
+		dry_weight = max(dry_weight, 0.35 * (1.0 - abs(d_trail - 1.4) / 0.6))
+
+	# 3. Cavity AO / Shading (COLOR.b)
+	var ao: float = 1.0
+	# Shadow in hollow basins
+	if d_bowl_a < 3.8:
+		ao -= (1.0 - d_bowl_a / 3.8) * 0.12
+	# Shadow at cliff foot where slope is steep and height is low
+	if slope < 0.72 and pos.y < 1.5:
+		ao = 0.75
+
+	var col: Color = Color(dry_weight, ramp_weight, ao, path_dirt_weight)
 	st.set_color(col)
 	st.set_normal(norm)
 	st.set_uv(Vector2(pos.x, pos.z))

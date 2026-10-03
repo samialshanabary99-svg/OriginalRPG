@@ -650,4 +650,83 @@ license_or_usage_notes: Project-exclusive custom asset for OriginalRPG
 notes: Multi-lobe radial root flares blending bark into grass.
 ```
 
+### 20. `env_rock_cliff_stone`
+```yaml
+asset_id: env_rock_cliff_stone
+name: Rock Cliff Stone Strata Texture
+type: environment
+path: assets/environment/ground/rock_cliff_stone.png
+source: human_authored
+generator_or_tool: manual
+prompt_reference: "128x128 seamless grey/charcoal layered rock face texture with horizontal geological strata, vertical fractures, chiseled facets, and subtle mossy seams for MMORPG cliff walls."
+author: Antigravity
+created_date: 2026-10-03
+modified_date: 2026-10-03
+dimensions: 128x128
+frame_size: 128x128
+animation_frames: 1
+animation: none
+directions: none
+format: png
+transparency: rgba_alpha
+intended_use: Triplanar rock texture projected onto steep cliff walls and vertical skirts
+related_entity: src/entities/test_world_3d.gd
+status: approved
+license_or_usage_notes: Project-exclusive custom asset for OriginalRPG
+notes: Seamless tiling in X and Y with directional geological strata.
+```
+
+### 21. `env_ground_dry_grass`
+```yaml
+asset_id: env_ground_dry_grass
+name: Dry Meadow Grass Texture
+type: environment
+path: assets/environment/ground/ground_dry_grass.png
+source: human_authored
+generator_or_tool: manual
+prompt_reference: "64x64 seamless warm straw, golden meadow, and tan earth texture matching painterly grass pixel scale for hollows and terrain blending."
+author: Antigravity
+created_date: 2026-10-03
+modified_date: 2026-10-03
+dimensions: 64x64
+frame_size: 64x64
+animation_frames: 1
+animation: none
+directions: none
+format: png
+transparency: rgba_alpha
+intended_use: Secondary ground surface blended in hollows, clearings, and path shoulders
+related_entity: src/entities/test_world_3d.gd
+status: approved
+license_or_usage_notes: Project-exclusive custom asset for OriginalRPG
+notes: Seamless tiling in X and Y matching green turf resolution.
+```
+
+### 22. `env_ground_dirt_path`
+```yaml
+asset_id: env_ground_dirt_path
+name: Packed Dirt Footpath Texture
+type: environment
+path: assets/environment/ground/ground_dirt_path.png
+source: human_authored
+generator_or_tool: manual
+prompt_reference: "64x64 seamless packed earthy footpath with fine embedded gravel and pebbles for trail centers and hill ramps."
+author: Antigravity
+created_date: 2026-10-03
+modified_date: 2026-10-03
+dimensions: 64x64
+frame_size: 64x64
+animation_frames: 1
+animation: none
+directions: none
+format: png
+transparency: rgba_alpha
+intended_use: Footpath center and hill ramp surface
+related_entity: src/entities/test_world_3d.gd
+status: approved
+license_or_usage_notes: Project-exclusive custom asset for OriginalRPG
+notes: Seamless tiling in X and Y.
+```
+
+
 
