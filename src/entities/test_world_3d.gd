@@ -62,15 +62,58 @@ func _generate_terrain() -> void:
 			var v01: Vector3 = Vector3(x0, y01, z1)
 			var v11: Vector3 = Vector3(x1, y11, z1)
 
-			# Triangle 1: (v00, v01, v10) in counter-clockwise order
+			# Triangle 1: (v00, v10, v01) in CCW order (Normal points UP)
 			_add_terrain_vertex(surface_tool, v00)
-			_add_terrain_vertex(surface_tool, v01)
 			_add_terrain_vertex(surface_tool, v10)
+			_add_terrain_vertex(surface_tool, v01)
 
-			# Triangle 2: (v01, v11, v10) in counter-clockwise order
-			_add_terrain_vertex(surface_tool, v01)
-			_add_terrain_vertex(surface_tool, v11)
+			# Triangle 2: (v10, v11, v01) in CCW order (Normal points UP)
 			_add_terrain_vertex(surface_tool, v10)
+			_add_terrain_vertex(surface_tool, v11)
+			_add_terrain_vertex(surface_tool, v01)
+
+	# 2. Generate vertical perimeter skirts (cliff walls) dropping down to Y = -6.0m
+	var bottom_y: float = -6.0
+	var norm_north: Vector3 = Vector3(0.0, 0.0, -1.0)
+	var norm_south: Vector3 = Vector3(0.0, 0.0, 1.0)
+	var norm_west: Vector3 = Vector3(-1.0, 0.0, 0.0)
+	var norm_east: Vector3 = Vector3(1.0, 0.0, 0.0)
+
+	for i: int in range(GRID_SIZE):
+		var c0: float = float(i) * CELL_SIZE - HALF_SIZE
+		var c1: float = float(i + 1) * CELL_SIZE - HALF_SIZE
+
+		# North boundary (Z = -HALF_SIZE)
+		var ny0: float = _calculate_height(c0, -HALF_SIZE)
+		var ny1: float = _calculate_height(c1, -HALF_SIZE)
+		_add_skirt_quad(surface_tool,
+			Vector3(c1, ny1, -HALF_SIZE), Vector3(c0, ny0, -HALF_SIZE),
+			Vector3(c1, bottom_y, -HALF_SIZE), Vector3(c0, bottom_y, -HALF_SIZE),
+			norm_north)
+
+		# South boundary (Z = +HALF_SIZE)
+		var sy0: float = _calculate_height(c0, HALF_SIZE)
+		var sy1: float = _calculate_height(c1, HALF_SIZE)
+		_add_skirt_quad(surface_tool,
+			Vector3(c0, sy0, HALF_SIZE), Vector3(c1, sy1, HALF_SIZE),
+			Vector3(c0, bottom_y, HALF_SIZE), Vector3(c1, bottom_y, HALF_SIZE),
+			norm_south)
+
+		# West boundary (X = -HALF_SIZE)
+		var wy0: float = _calculate_height(-HALF_SIZE, c0)
+		var wy1: float = _calculate_height(-HALF_SIZE, c1)
+		_add_skirt_quad(surface_tool,
+			Vector3(-HALF_SIZE, wy0, c0), Vector3(-HALF_SIZE, wy1, c1),
+			Vector3(-HALF_SIZE, bottom_y, c0), Vector3(-HALF_SIZE, bottom_y, c1),
+			norm_west)
+
+		# East boundary (X = +HALF_SIZE)
+		var ey0: float = _calculate_height(HALF_SIZE, c0)
+		var ey1: float = _calculate_height(HALF_SIZE, c1)
+		_add_skirt_quad(surface_tool,
+			Vector3(HALF_SIZE, ey1, c1), Vector3(HALF_SIZE, ey0, c0),
+			Vector3(HALF_SIZE, bottom_y, c1), Vector3(HALF_SIZE, bottom_y, c0),
+			norm_east)
 
 	surface_tool.index()
 	var mesh: ArrayMesh = surface_tool.commit()
@@ -88,6 +131,7 @@ func _generate_terrain() -> void:
 	mat.uv1_scale = Vector3(0.5, 0.5, 0.5)
 
 	mat.vertex_color_use_as_albedo = true
+	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	mat.roughness = 0.88
 	mat.metallic_specular = 0.05
 	mesh.surface_set_material(0, mat)
@@ -130,10 +174,28 @@ func _calculate_height(x: float, z: float) -> float:
 
 	# Boundaries: gentle rolling perimeter foothills that cradle the world
 	var edge_dist: float = max(abs(x), abs(z)) / HALF_SIZE
-	if edge_dist > 0.78:
-		h += pow((edge_dist - 0.78) / 0.22, 2.0) * 3.8
+	if edge_dist > 0.76:
+		h += pow((edge_dist - 0.76) / 0.24, 2.0) * 4.2
 
 	return h
+
+func _add_skirt_quad(st: SurfaceTool, top_left: Vector3, top_right: Vector3, bot_left: Vector3, bot_right: Vector3, norm: Vector3) -> void:
+	# Triangle 1 (top_right, top_left, bot_right) in CCW order
+	_add_skirt_vertex(st, top_right, norm)
+	_add_skirt_vertex(st, top_left, norm)
+	_add_skirt_vertex(st, bot_right, norm)
+
+	# Triangle 2 (top_left, bot_left, bot_right) in CCW order
+	_add_skirt_vertex(st, top_left, norm)
+	_add_skirt_vertex(st, bot_left, norm)
+	_add_skirt_vertex(st, bot_right, norm)
+
+func _add_skirt_vertex(st: SurfaceTool, pos: Vector3, norm: Vector3) -> void:
+	var col: Color = Color(0.85, 0.76, 0.62) # Warm earthy cliff tone
+	st.set_color(col)
+	st.set_normal(norm)
+	st.set_uv(Vector2(pos.x, pos.z))
+	st.add_vertex(pos)
 
 ## Calculates smooth continuous analytical surface normal using finite differences
 func _calculate_normal(x: float, z: float) -> Vector3:

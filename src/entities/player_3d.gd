@@ -72,8 +72,8 @@ enum CharacterState {
 @export var zoom_max: float = 24.0
 @export var zoom_step: float = 1.4
 
-@export var pitch_min: float = deg_to_rad(16.0)
-@export var pitch_max: float = deg_to_rad(76.0)
+@export var pitch_min: float = deg_to_rad(28.0)
+@export var pitch_max: float = deg_to_rad(68.0)
 
 @export var orbit_sensitivity: float = 0.005
 @export var pitch_sensitivity: float = 0.004
@@ -148,11 +148,23 @@ func _update_camera(delta: float) -> void:
 		_current_zoom = _target_zoom
 
 	camera_arm.rotation.y = _current_yaw
-	camera.position = Vector3(
+
+	var desired_cam_pos: Vector3 = Vector3(
 		0.0,
 		sin(_current_pitch) * _current_zoom,
 		cos(_current_pitch) * _current_zoom
 	)
+
+	# Ground clearance check: prevent camera from ever sinking beneath the terrain or viewing mesh underside
+	if is_inside_tree() and get_parent() != null and get_parent().has_method("_calculate_height"):
+		var world_cam_pos: Vector3 = camera_arm.global_transform * desired_cam_pos
+		var terrain_h: float = get_parent()._calculate_height(world_cam_pos.x, world_cam_pos.z)
+		var min_world_y: float = terrain_h + 1.2
+		if world_cam_pos.y < min_world_y:
+			var diff_y: float = min_world_y - world_cam_pos.y
+			desired_cam_pos.y += diff_y
+
+	camera.position = desired_cam_pos
 	camera.rotation.x = -_current_pitch
 
 func reset_camera_view() -> void:
