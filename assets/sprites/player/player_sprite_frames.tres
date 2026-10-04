@@ -1,52 +1,1139 @@
 [gd_resource type="SpriteFrames" format=3]
 
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south/frame_000.png" id="1_birdr"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south/frame_001.png" id="2_ugqmv"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south/frame_002.png" id="3_becct"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south/frame_003.png" id="4_43x5o"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/east/frame_000.png" id="5_21ask"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/east/frame_001.png" id="6_1ylmj"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/east/frame_002.png" id="7_3bs3v"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/east/frame_003.png" id="8_hlgg7"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north/frame_000.png" id="9_u21pn"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north/frame_001.png" id="10_6htba"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north/frame_002.png" id="11_257qj"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north/frame_003.png" id="12_pkcxm"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-east/frame_000.png" id="13_arpse"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-east/frame_001.png" id="14_vtkic"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-east/frame_002.png" id="15_6ka7h"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-east/frame_003.png" id="16_16md8"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-west/frame_000.png" id="17_7rjyt"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-west/frame_001.png" id="18_r46dr"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-west/frame_002.png" id="19_xb5kh"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/north-west/frame_003.png" id="20_1hak2"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-east/frame_000.png" id="21_6b3h5"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-east/frame_001.png" id="22_l3plx"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-east/frame_002.png" id="23_3eoeh"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-east/frame_003.png" id="24_aiv65"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-west/frame_000.png" id="25_dsyp8"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-west/frame_001.png" id="26_543ky"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-west/frame_002.png" id="27_xyv84"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/south-west/frame_003.png" id="28_qrbkl"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/west/frame_000.png" id="29_810eq"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/west/frame_001.png" id="30_qfsdj"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/west/frame_002.png" id="31_okm3d"]
-[ext_resource type="Texture2D" path="res://assets/sprites/player/idle/animations/Breathing_Idle/west/frame_003.png" id="32_cuc3k"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_000.png" id="1_1o06r"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_001.png" id="2_xybsk"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_002.png" id="3_0cnc0"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_003.png" id="4_hqkov"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_004.png" id="5_0dlrg"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_005.png" id="6_71v3m"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_006.png" id="7_7vie4"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_007.png" id="8_mekqw"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_008.png" id="9_2vtgl"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_000.png" id="10_ehpso"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_001.png" id="11_vkfwd"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_002.png" id="12_ggjw4"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_003.png" id="13_xi1ui"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_004.png" id="14_ikrw1"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_005.png" id="15_4dadb"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_006.png" id="16_w08g7"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_007.png" id="17_gpeae"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_008.png" id="18_5w4o3"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_000.png" id="19_dck7t"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_001.png" id="20_b8ewj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_002.png" id="21_thmuo"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_003.png" id="22_t14t7"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_004.png" id="23_bwtfj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_005.png" id="24_572bl"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_006.png" id="25_jn6ie"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_007.png" id="26_7q0w7"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_008.png" id="27_tb65t"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_000.png" id="28_hic2q"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_001.png" id="29_7sd0s"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_002.png" id="30_secmu"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_003.png" id="31_vyby0"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_004.png" id="32_r5hw1"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_005.png" id="33_8ckx7"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_006.png" id="34_aak7u"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_007.png" id="35_72lvv"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_008.png" id="36_k0uay"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_000.png" id="37_x4e58"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_001.png" id="38_vmvwi"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_002.png" id="39_rt2oo"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_003.png" id="40_21020"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_004.png" id="41_3ywpj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_005.png" id="42_syn2h"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_006.png" id="43_3y6pr"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_007.png" id="44_7uxvt"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_008.png" id="45_3rhb6"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_000.png" id="46_wa3ig"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_001.png" id="47_tsflp"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_002.png" id="48_ocgoj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_003.png" id="49_icqim"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_004.png" id="50_felfn"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_005.png" id="51_wqgiq"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_006.png" id="52_f45jv"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_007.png" id="53_yubcb"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_008.png" id="54_jc7iq"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_000.png" id="55_flx2v"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_001.png" id="56_h5pw7"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_002.png" id="57_8hwio"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_003.png" id="58_yo5y1"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_004.png" id="59_jcyff"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_005.png" id="60_byqme"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_006.png" id="61_bewca"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_007.png" id="62_xu83s"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_008.png" id="63_chna7"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_000.png" id="64_msnpt"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_001.png" id="65_4t8wv"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_002.png" id="66_tbble"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_003.png" id="67_sh8s4"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_004.png" id="68_65icp"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_005.png" id="69_ig1by"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_006.png" id="70_2gcn6"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_007.png" id="71_1jvoe"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_008.png" id="72_l1jsl"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_000.png" id="73_qxc0c"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_001.png" id="74_wpsuw"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_002.png" id="75_bbxs2"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_003.png" id="76_2hcwe"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_004.png" id="77_dy8c7"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_005.png" id="78_0r8gr"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_006.png" id="79_ragcc"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_007.png" id="80_6su2a"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_008.png" id="81_8xjqv"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_000.png" id="82_fpana"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_001.png" id="83_bh1es"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_002.png" id="84_jbt0v"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_003.png" id="85_oqj3b"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_004.png" id="86_0451p"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_005.png" id="87_m11ym"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_006.png" id="88_8ovme"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_007.png" id="89_vt0aa"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_008.png" id="90_w6uan"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_000.png" id="91_sy5uh"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_001.png" id="92_d2iu4"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_002.png" id="93_b0bip"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_003.png" id="94_0fggj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_004.png" id="95_xuqjl"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_005.png" id="96_i0ixj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_006.png" id="97_27ped"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_007.png" id="98_neww7"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_008.png" id="99_42her"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_000.png" id="100_7dki2"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_001.png" id="101_pia3s"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_002.png" id="102_ut4s8"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_003.png" id="103_npkgg"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_004.png" id="104_bvqfc"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_005.png" id="105_22jil"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_006.png" id="106_vuvws"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_007.png" id="107_nglvi"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_008.png" id="108_7uxtj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_000.png" id="109_fq0q7"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_001.png" id="110_31srs"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_002.png" id="111_pds8o"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_003.png" id="112_7dmsp"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_004.png" id="113_vrmyl"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_005.png" id="114_v1hkr"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_006.png" id="115_20xa3"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_007.png" id="116_x212q"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_008.png" id="117_1chjk"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_000.png" id="118_yrthi"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_001.png" id="119_3haaj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_002.png" id="120_t3c0a"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_003.png" id="121_0o3fa"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_004.png" id="122_7mnrj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_005.png" id="123_steoj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_006.png" id="124_jgn02"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_007.png" id="125_uclko"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_008.png" id="126_hkd0s"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_000.png" id="127_g3g42"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_001.png" id="128_krwcb"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_002.png" id="129_3snvw"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_003.png" id="130_16ckc"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_004.png" id="131_7fsib"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_005.png" id="132_ww25e"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_006.png" id="133_45fcf"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_007.png" id="134_ev1km"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_008.png" id="135_hvegx"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_000.png" id="136_k7rfu"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_001.png" id="137_l6eod"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_002.png" id="138_a7xfs"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_003.png" id="139_kjk78"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_004.png" id="140_v125q"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_005.png" id="141_rgnrc"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_006.png" id="142_l3y3t"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_007.png" id="143_hpy0c"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_008.png" id="144_3m58s"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south/frame_006.png" id="145_nxsqq"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south/frame_000.png" id="146_baeqg"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south/frame_001.png" id="147_liu4o"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south/frame_002.png" id="148_5e5gb"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south/frame_003.png" id="149_4yvlf"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south/frame_004.png" id="150_jku0f"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south/frame_005.png" id="151_1vvm6"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/east/frame_000.png" id="152_2agvt"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/east/frame_001.png" id="153_1m8li"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/east/frame_002.png" id="154_f3uyk"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/east/frame_003.png" id="155_w8w23"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/east/frame_004.png" id="156_2cv60"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/east/frame_005.png" id="157_d1pn5"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/east/frame_006.png" id="158_i1vcn"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north/frame_000.png" id="159_7trtu"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north/frame_001.png" id="160_3gdcr"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north/frame_002.png" id="161_1637g"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north/frame_003.png" id="162_l3rvc"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north/frame_004.png" id="163_soy3a"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north/frame_005.png" id="164_66a6f"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north/frame_006.png" id="165_hrlw0"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-east/frame_000.png" id="166_8av64"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-east/frame_001.png" id="167_mn8no"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-east/frame_002.png" id="168_qt4yr"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-east/frame_003.png" id="169_820ab"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-east/frame_004.png" id="170_14jyj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-east/frame_005.png" id="171_jnajg"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-east/frame_006.png" id="172_iikf5"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-west/frame_000.png" id="173_7jjfm"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-west/frame_001.png" id="174_2o1j3"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-west/frame_002.png" id="175_aggap"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-west/frame_003.png" id="176_i3iht"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-west/frame_004.png" id="177_2m5kt"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-west/frame_005.png" id="178_h21i5"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/north-west/frame_006.png" id="179_2wty1"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-east/frame_000.png" id="180_fwm6e"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-east/frame_001.png" id="181_4onrb"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-east/frame_002.png" id="182_rxp6t"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-east/frame_003.png" id="183_ooeai"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-east/frame_004.png" id="184_alsuh"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-east/frame_005.png" id="185_1kwvu"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-east/frame_006.png" id="186_vto6t"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-west/frame_000.png" id="187_xagxv"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-west/frame_001.png" id="188_kyja5"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-west/frame_002.png" id="189_4d3tp"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-west/frame_003.png" id="190_e3ac7"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-west/frame_004.png" id="191_eqsvh"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-west/frame_005.png" id="192_tlx2i"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/south-west/frame_006.png" id="193_p7x0f"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/west/frame_000.png" id="194_s6prj"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/west/frame_001.png" id="195_up1xd"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/west/frame_002.png" id="196_cu0s0"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/west/frame_003.png" id="197_io5p0"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/west/frame_004.png" id="198_p40xi"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/west/frame_005.png" id="199_5f2iu"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Dying/animations/Falling_Back_Death/west/frame_006.png" id="200_hja6k"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south/frame_000.png" id="201_63v5f"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south/frame_001.png" id="202_qj8wd"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south/frame_002.png" id="203_ujjej"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south/frame_003.png" id="204_lphgg"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/east/frame_000.png" id="205_kmekg"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/east/frame_001.png" id="206_m4f5r"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/east/frame_002.png" id="207_7lco1"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/east/frame_003.png" id="208_e5f0v"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north/frame_000.png" id="209_0kyxy"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north/frame_001.png" id="210_inkva"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north/frame_002.png" id="211_85uoq"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north/frame_003.png" id="212_n4fwg"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north-east/frame_000.png" id="213_whjqy"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north-east/frame_001.png" id="214_o2eb8"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north-east/frame_002.png" id="215_vt6hn"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north-east/frame_003.png" id="216_pbb15"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north-west/frame_000.png" id="217_s0a2r"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north-west/frame_001.png" id="218_qwcs6"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north-west/frame_002.png" id="219_r7hf4"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/north-west/frame_003.png" id="220_3u1rq"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south-east/frame_000.png" id="221_o75m2"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south-east/frame_001.png" id="222_38ho0"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south-east/frame_002.png" id="223_0713h"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south-east/frame_003.png" id="224_xklrg"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south-west/frame_000.png" id="225_sqfu3"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south-west/frame_001.png" id="226_650cg"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south-west/frame_002.png" id="227_d4f07"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/south-west/frame_003.png" id="228_y3fty"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/west/frame_000.png" id="229_gjaae"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/west/frame_001.png" id="230_0h2wl"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/west/frame_002.png" id="231_74qch"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Idle/animations/Breathing_Idle/west/frame_003.png" id="232_y08xx"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south/frame_000.png" id="233_ihvrb"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south/frame_001.png" id="234_bvur1"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south/frame_002.png" id="235_urxb6"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south/frame_003.png" id="236_1fkmr"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south/frame_004.png" id="237_b1fjc"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south/frame_005.png" id="238_oecdc"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south/frame_006.png" id="239_sl0i8"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south/frame_007.png" id="240_trmkk"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/east/frame_000.png" id="241_cnlpn"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/east/frame_001.png" id="242_oaydi"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/east/frame_002.png" id="243_lhi84"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/east/frame_003.png" id="244_v3ghe"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/east/frame_004.png" id="245_2eyj6"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/east/frame_005.png" id="246_mkfox"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/east/frame_006.png" id="247_rxtfv"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/east/frame_007.png" id="248_pteig"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north/frame_000.png" id="249_bno0t"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north/frame_001.png" id="250_s0du4"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north/frame_002.png" id="251_gf2s6"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north/frame_003.png" id="252_ny1c5"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north/frame_004.png" id="253_uthc5"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north/frame_005.png" id="254_qeac2"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north/frame_006.png" id="255_3ii4a"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north/frame_007.png" id="256_uywll"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-east/frame_000.png" id="257_4l64r"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-east/frame_001.png" id="258_ylbrk"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-east/frame_002.png" id="259_irfx0"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-east/frame_003.png" id="260_arxcf"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-east/frame_004.png" id="261_etely"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-east/frame_005.png" id="262_pqosk"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-east/frame_006.png" id="263_lwko2"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-east/frame_007.png" id="264_5h06d"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-west/frame_000.png" id="265_8cy3h"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-west/frame_001.png" id="266_ysxw1"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-west/frame_002.png" id="267_ysmat"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-west/frame_003.png" id="268_45o4e"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-west/frame_004.png" id="269_dgspm"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-west/frame_005.png" id="270_jasix"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-west/frame_006.png" id="271_wim1c"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/north-west/frame_007.png" id="272_kn61d"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-east/frame_000.png" id="273_qx11x"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-east/frame_001.png" id="274_qhvb1"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-east/frame_002.png" id="275_7afmg"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-east/frame_003.png" id="276_b4jx1"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-east/frame_004.png" id="277_5wepk"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-east/frame_005.png" id="278_tbd8n"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-east/frame_006.png" id="279_0mr6x"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-east/frame_007.png" id="280_kf684"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-west/frame_000.png" id="281_q3a6h"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-west/frame_001.png" id="282_ysyw0"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-west/frame_002.png" id="283_b6ff2"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-west/frame_003.png" id="284_xn1i7"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-west/frame_004.png" id="285_ihksw"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-west/frame_005.png" id="286_gj278"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-west/frame_006.png" id="287_sf58l"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/south-west/frame_007.png" id="288_nwu63"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/west/frame_000.png" id="289_0q7gs"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/west/frame_001.png" id="290_q4pnk"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/west/frame_002.png" id="291_pmnkh"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/west/frame_003.png" id="292_grhxu"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/west/frame_004.png" id="293_1mn76"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/west/frame_005.png" id="294_ohfhs"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/west/frame_006.png" id="295_te5qr"]
+[ext_resource type="Texture2D" path="res://Young_male_fantasy_novice/Walking/animations/Walking/west/frame_007.png" id="296_apbrw"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_birdr")
+"texture": ExtResource("1_1o06r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_ugqmv")
+"texture": ExtResource("2_xybsk")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_becct")
+"texture": ExtResource("3_0cnc0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_43x5o")
+"texture": ExtResource("4_hqkov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0dlrg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_71v3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7vie4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mekqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2vtgl")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_ehpso")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_vkfwd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_ggjw4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_xi1ui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_ikrw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_4dadb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_w08g7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_gpeae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_5w4o3")
+}],
+"loop": 0,
+"name": &"attack_east",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_dck7t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_b8ewj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_thmuo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_t14t7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_bwtfj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_572bl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_jn6ie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_7q0w7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_tb65t")
+}],
+"loop": 0,
+"name": &"attack_north",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_hic2q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_7sd0s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_secmu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_vyby0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_r5hw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_8ckx7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_aak7u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_72lvv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_k0uay")
+}],
+"loop": 0,
+"name": &"attack_north-east",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_x4e58")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_vmvwi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_rt2oo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_21020")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_3ywpj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_syn2h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_3y6pr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_7uxvt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_3rhb6")
+}],
+"loop": 0,
+"name": &"attack_north-west",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1o06r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_xybsk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0cnc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_hqkov")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_0dlrg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_71v3m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7vie4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_mekqw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_2vtgl")
+}],
+"loop": 0,
+"name": &"attack_south",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_wa3ig")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_tsflp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_ocgoj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_icqim")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_felfn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_wqgiq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_f45jv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_yubcb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_jc7iq")
+}],
+"loop": 0,
+"name": &"attack_south-east",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_flx2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_h5pw7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_8hwio")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_yo5y1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_jcyff")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_byqme")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_bewca")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_xu83s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_chna7")
+}],
+"loop": 0,
+"name": &"attack_south-west",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("64_msnpt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_4t8wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_tbble")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_sh8s4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_65icp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_ig1by")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_2gcn6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_1jvoe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_l1jsl")
+}],
+"loop": 0,
+"name": &"attack_west",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("73_qxc0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_wpsuw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_bbxs2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_2hcwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_dy8c7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_0r8gr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_ragcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_6su2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_8xjqv")
+}],
+"loop": 0,
+"name": &"damage",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("82_fpana")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_bh1es")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_jbt0v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_oqj3b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_0451p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_m11ym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_8ovme")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_vt0aa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_w6uan")
+}],
+"loop": 0,
+"name": &"damage_east",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("91_sy5uh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_d2iu4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_b0bip")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_0fggj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_xuqjl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_i0ixj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_27ped")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_neww7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_42her")
+}],
+"loop": 0,
+"name": &"damage_north",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("100_7dki2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_pia3s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_ut4s8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_npkgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_bvqfc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_22jil")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_vuvws")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_nglvi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_7uxtj")
+}],
+"loop": 0,
+"name": &"damage_north-east",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("109_fq0q7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_31srs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("111_pds8o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("112_7dmsp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("113_vrmyl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("114_v1hkr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("115_20xa3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("116_x212q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("117_1chjk")
+}],
+"loop": 0,
+"name": &"damage_north-west",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("73_qxc0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_wpsuw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_bbxs2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_2hcwe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_dy8c7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_0r8gr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_ragcc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_6su2a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_8xjqv")
+}],
+"loop": 0,
+"name": &"damage_south",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("118_yrthi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("119_3haaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("120_t3c0a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("121_0o3fa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("122_7mnrj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("123_steoj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("124_jgn02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("125_uclko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("126_hkd0s")
+}],
+"loop": 0,
+"name": &"damage_south-east",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("127_g3g42")
+}, {
+"duration": 1.0,
+"texture": ExtResource("128_krwcb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("129_3snvw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("130_16ckc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("131_7fsib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("132_ww25e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("133_45fcf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("134_ev1km")
+}, {
+"duration": 1.0,
+"texture": ExtResource("135_hvegx")
+}],
+"loop": 0,
+"name": &"damage_south-west",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("136_k7rfu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("137_l6eod")
+}, {
+"duration": 1.0,
+"texture": ExtResource("138_a7xfs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("139_kjk78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("140_v125q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("141_rgnrc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("142_l3y3t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("143_hpy0c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("144_3m58s")
+}],
+"loop": 0,
+"name": &"damage_west",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("145_nxsqq")
+}],
+"loop": 0,
+"name": &"dead",
+"speed": 1.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("146_baeqg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_liu4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_5e5gb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_4yvlf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_jku0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("151_1vvm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_nxsqq")
+}],
+"loop": 0,
+"name": &"die",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("152_2agvt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("153_1m8li")
+}, {
+"duration": 1.0,
+"texture": ExtResource("154_f3uyk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("155_w8w23")
+}, {
+"duration": 1.0,
+"texture": ExtResource("156_2cv60")
+}, {
+"duration": 1.0,
+"texture": ExtResource("157_d1pn5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("158_i1vcn")
+}],
+"loop": 0,
+"name": &"die_east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("159_7trtu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("160_3gdcr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("161_1637g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("162_l3rvc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("163_soy3a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("164_66a6f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("165_hrlw0")
+}],
+"loop": 0,
+"name": &"die_north",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("166_8av64")
+}, {
+"duration": 1.0,
+"texture": ExtResource("167_mn8no")
+}, {
+"duration": 1.0,
+"texture": ExtResource("168_qt4yr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("169_820ab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("170_14jyj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("171_jnajg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("172_iikf5")
+}],
+"loop": 0,
+"name": &"die_north-east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("173_7jjfm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("174_2o1j3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("175_aggap")
+}, {
+"duration": 1.0,
+"texture": ExtResource("176_i3iht")
+}, {
+"duration": 1.0,
+"texture": ExtResource("177_2m5kt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("178_h21i5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("179_2wty1")
+}],
+"loop": 0,
+"name": &"die_north-west",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("146_baeqg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_liu4o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_5e5gb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_4yvlf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_jku0f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("151_1vvm6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_nxsqq")
+}],
+"loop": 0,
+"name": &"die_south",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("180_fwm6e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("181_4onrb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("182_rxp6t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("183_ooeai")
+}, {
+"duration": 1.0,
+"texture": ExtResource("184_alsuh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("185_1kwvu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("186_vto6t")
+}],
+"loop": 0,
+"name": &"die_south-east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("187_xagxv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("188_kyja5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("189_4d3tp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("190_e3ac7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("191_eqsvh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("192_tlx2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("193_p7x0f")
+}],
+"loop": 0,
+"name": &"die_south-west",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("194_s6prj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("195_up1xd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("196_cu0s0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("197_io5p0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("198_p40xi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("199_5f2iu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("200_hja6k")
+}],
+"loop": 0,
+"name": &"die_west",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("201_63v5f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("202_qj8wd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("203_ujjej")
+}, {
+"duration": 1.0,
+"texture": ExtResource("204_lphgg")
 }],
 "loop": 1,
 "name": &"idle",
@@ -54,16 +1141,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_21ask")
+"texture": ExtResource("205_kmekg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_1ylmj")
+"texture": ExtResource("206_m4f5r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_3bs3v")
+"texture": ExtResource("207_7lco1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("8_hlgg7")
+"texture": ExtResource("208_e5f0v")
 }],
 "loop": 1,
 "name": &"idle_east",
@@ -71,16 +1158,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("9_u21pn")
+"texture": ExtResource("209_0kyxy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_6htba")
+"texture": ExtResource("210_inkva")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_257qj")
+"texture": ExtResource("211_85uoq")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_pkcxm")
+"texture": ExtResource("212_n4fwg")
 }],
 "loop": 1,
 "name": &"idle_north",
@@ -88,16 +1175,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("13_arpse")
+"texture": ExtResource("213_whjqy")
 }, {
 "duration": 1.0,
-"texture": ExtResource("14_vtkic")
+"texture": ExtResource("214_o2eb8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_6ka7h")
+"texture": ExtResource("215_vt6hn")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_16md8")
+"texture": ExtResource("216_pbb15")
 }],
 "loop": 1,
 "name": &"idle_north-east",
@@ -105,16 +1192,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("17_7rjyt")
+"texture": ExtResource("217_s0a2r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("18_r46dr")
+"texture": ExtResource("218_qwcs6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("19_xb5kh")
+"texture": ExtResource("219_r7hf4")
 }, {
 "duration": 1.0,
-"texture": ExtResource("20_1hak2")
+"texture": ExtResource("220_3u1rq")
 }],
 "loop": 1,
 "name": &"idle_north-west",
@@ -122,16 +1209,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_birdr")
+"texture": ExtResource("201_63v5f")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_ugqmv")
+"texture": ExtResource("202_qj8wd")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_becct")
+"texture": ExtResource("203_ujjej")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_43x5o")
+"texture": ExtResource("204_lphgg")
 }],
 "loop": 1,
 "name": &"idle_south",
@@ -139,16 +1226,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("21_6b3h5")
+"texture": ExtResource("221_o75m2")
 }, {
 "duration": 1.0,
-"texture": ExtResource("22_l3plx")
+"texture": ExtResource("222_38ho0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("23_3eoeh")
+"texture": ExtResource("223_0713h")
 }, {
 "duration": 1.0,
-"texture": ExtResource("24_aiv65")
+"texture": ExtResource("224_xklrg")
 }],
 "loop": 1,
 "name": &"idle_south-east",
@@ -156,16 +1243,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("25_dsyp8")
+"texture": ExtResource("225_sqfu3")
 }, {
 "duration": 1.0,
-"texture": ExtResource("26_543ky")
+"texture": ExtResource("226_650cg")
 }, {
 "duration": 1.0,
-"texture": ExtResource("27_xyv84")
+"texture": ExtResource("227_d4f07")
 }, {
 "duration": 1.0,
-"texture": ExtResource("28_qrbkl")
+"texture": ExtResource("228_y3fty")
 }],
 "loop": 1,
 "name": &"idle_south-west",
@@ -173,18 +1260,279 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("29_810eq")
+"texture": ExtResource("229_gjaae")
 }, {
 "duration": 1.0,
-"texture": ExtResource("30_qfsdj")
+"texture": ExtResource("230_0h2wl")
 }, {
 "duration": 1.0,
-"texture": ExtResource("31_okm3d")
+"texture": ExtResource("231_74qch")
 }, {
 "duration": 1.0,
-"texture": ExtResource("32_cuc3k")
+"texture": ExtResource("232_y08xx")
 }],
 "loop": 1,
 "name": &"idle_west",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("233_ihvrb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("234_bvur1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("235_urxb6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("236_1fkmr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("237_b1fjc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("238_oecdc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("239_sl0i8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("240_trmkk")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("241_cnlpn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("242_oaydi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("243_lhi84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("244_v3ghe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("245_2eyj6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("246_mkfox")
+}, {
+"duration": 1.0,
+"texture": ExtResource("247_rxtfv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("248_pteig")
+}],
+"loop": 1,
+"name": &"walk_east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("249_bno0t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("250_s0du4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("251_gf2s6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("252_ny1c5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("253_uthc5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("254_qeac2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("255_3ii4a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("256_uywll")
+}],
+"loop": 1,
+"name": &"walk_north",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("257_4l64r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("258_ylbrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("259_irfx0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("260_arxcf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("261_etely")
+}, {
+"duration": 1.0,
+"texture": ExtResource("262_pqosk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("263_lwko2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("264_5h06d")
+}],
+"loop": 1,
+"name": &"walk_north-east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("265_8cy3h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("266_ysxw1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("267_ysmat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("268_45o4e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("269_dgspm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("270_jasix")
+}, {
+"duration": 1.0,
+"texture": ExtResource("271_wim1c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("272_kn61d")
+}],
+"loop": 1,
+"name": &"walk_north-west",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("233_ihvrb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("234_bvur1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("235_urxb6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("236_1fkmr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("237_b1fjc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("238_oecdc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("239_sl0i8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("240_trmkk")
+}],
+"loop": 1,
+"name": &"walk_south",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("273_qx11x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("274_qhvb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("275_7afmg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("276_b4jx1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("277_5wepk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("278_tbd8n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("279_0mr6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("280_kf684")
+}],
+"loop": 1,
+"name": &"walk_south-east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("281_q3a6h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("282_ysyw0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("283_b6ff2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("284_xn1i7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("285_ihksw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("286_gj278")
+}, {
+"duration": 1.0,
+"texture": ExtResource("287_sf58l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("288_nwu63")
+}],
+"loop": 1,
+"name": &"walk_south-west",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("289_0q7gs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("290_q4pnk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("291_pmnkh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("292_grhxu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("293_1mn76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("294_ohfhs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("295_te5qr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("296_apbrw")
+}],
+"loop": 1,
+"name": &"walk_west",
+"speed": 8.0
 }]

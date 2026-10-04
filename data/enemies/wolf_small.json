@@ -1,0 +1,16 @@
+{
+  "enemy_id": "wolf_small",
+  "display_name": "Desert Wolf",
+  "description": "A swift and fierce fantasy wolf with sharp fangs and keen predatory senses.",
+  "max_health": 45,
+  "attack": 8,
+  "defence": 2,
+  "xp_reward": 25,
+  "move_speed": 3.5,
+  "patrol_radius": 5.0,
+  "aggro_range": 8.0,
+  "attack_range": 1.8,
+  "attack_cooldown": 1.2,
+  "sprite_tint": "#ffffffff",
+  "sprite_scale": [0.012, 0.012]
+}

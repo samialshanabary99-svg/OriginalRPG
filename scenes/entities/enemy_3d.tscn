@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://enemy3d001"]
+
+[ext_resource type="Script" path="res://src/entities/enemy_3d.gd" id="1_enemy3d"]
+[ext_resource type="SpriteFrames" path="res://A_small_fantasy_wolf_monster/wolf_sprite_frames.tres" id="2_wolf_frames"]
+[ext_resource type="Script" path="res://src/components/character_stats_component.gd" id="3_stats"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_wolf"]
+height = 0.8
+radius = 0.38
+
+[sub_resource type="QuadMesh" id="QuadMesh_shadow"]
+size = Vector2(0.85, 0.55)
+
+[node name="Enemy3D" type="CharacterBody3D"]
+collision_layer = 4
+collision_mask = 3
+floor_constant_speed = true
+floor_block_on_wall = true
+floor_snap_length = 0.4
+script = ExtResource("1_enemy3d")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.42, 0)
+shape = SubResource("CylinderShape3D_wolf")
+
+[node name="AnimatedSprite3D" type="AnimatedSprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.46, 0)
+billboard = 2
+alpha_cut = 1
+texture_filter = 0
+pixel_size = 0.012
+sprite_frames = ExtResource("2_wolf_frames")
+animation = &"idle_south"
+
+[node name="Shadow" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0.02, 0)
+cast_shadow = 0
+mesh = SubResource("QuadMesh_shadow")
+
+[node name="CharacterStatsComponent" type="Node" parent="."]
+script = ExtResource("3_stats")

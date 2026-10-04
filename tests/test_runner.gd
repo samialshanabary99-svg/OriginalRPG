@@ -48,6 +48,9 @@ func _init() -> void:
 	# Multi-Layer TileMapLayer Field & Slope Systems
 	_test_multi_layer_tilemap_field()
 
+	# 8-Directional Character Animations, Wolf Monster & Green Stalks
+	_test_wolf_player_stalks_integration()
+
 	print("")
 	print("[TestRunner] ─────────────────────────────────────────")
 	print("[TestRunner] %d tests | %d failures" % [_total, _failed])
@@ -1183,6 +1186,84 @@ func _test_multi_layer_tilemap_field() -> void:
 	p3d._update_camera(0.0)
 
 	world_3d.queue_free()
+
+func _test_wolf_player_stalks_integration() -> void:
+	print("\n[Group V] 8-Directional Animations, Wolf Monster & Green Stalks")
+
+	# 1. Player 8-Directional Complete Action Animations
+	var p_scene: PackedScene = load("res://scenes/entities/player_3d.tscn")
+	_ok("Player3D scene loads", p_scene != null)
+	var p: Player3D = p_scene.instantiate() as Player3D
+	get_root().add_child(p)
+	p._ready()
+
+	var sf: SpriteFrames = p.animated_sprite.sprite_frames
+	_ok("Player SpriteFrames exists", sf != null)
+	_ok("Player has walk_south animation", sf.has_animation("walk_south"))
+	_ok("Player has walk_north animation", sf.has_animation("walk_north"))
+	_ok("Player has walk_east animation", sf.has_animation("walk_east"))
+	_ok("Player has walk_west animation", sf.has_animation("walk_west"))
+	_ok("Player has attack_south animation", sf.has_animation("attack_south"))
+	_ok("Player has damage_south animation", sf.has_animation("damage_south"))
+	_ok("Player has die_south animation", sf.has_animation("die_south"))
+	_ok("Player has dead animation", sf.has_animation("dead"))
+
+	# Test player animation state transitions
+	p.velocity = Vector3(0, 0, 4) # Moving south
+	p._update_animation("south")
+	_ok("Player moving plays walk animation", p.animated_sprite.animation == "walk_south")
+
+	p.velocity = Vector3.ZERO # Stopped
+	p._update_animation()
+	_ok("Player stopped plays idle animation", p.animated_sprite.animation == "idle_south")
+
+	p.attack()
+	p._update_animation()
+	_ok("Player attack plays attack animation", p.animated_sprite.animation == "attack_south")
+
+	p.take_damage(5)
+	p._update_animation()
+	_ok("Player damage plays damage animation", p.animated_sprite.animation == "damage_south")
+
+	p.queue_free()
+
+	# 2. Wolf Monster (Enemy3D)
+	var wolf_scene: PackedScene = load("res://scenes/entities/enemy_3d.tscn")
+	_ok("Enemy3D scene loads", wolf_scene != null)
+	var wolf: CharacterBody3D = wolf_scene.instantiate() as CharacterBody3D
+	get_root().add_child(wolf)
+	wolf._ready()
+
+	var wolf_sprite: AnimatedSprite3D = wolf.get_node_or_null("AnimatedSprite3D") as AnimatedSprite3D
+	_ok("Enemy3D has AnimatedSprite3D", wolf_sprite != null)
+	_ok("Enemy3D billboard is BILLBOARD_FIXED_Y", wolf_sprite != null and wolf_sprite.billboard == BaseMaterial3D.BILLBOARD_FIXED_Y)
+
+	var w_sf: SpriteFrames = wolf_sprite.sprite_frames if wolf_sprite != null else null
+	_ok("Wolf SpriteFrames exists", w_sf != null)
+	_ok("Wolf has idle_south animation", w_sf != null and w_sf.has_animation("idle_south"))
+	_ok("Wolf has walk_south animation", w_sf != null and w_sf.has_animation("walk_south"))
+	_ok("Wolf has attack_south animation", w_sf != null and w_sf.has_animation("attack_south"))
+	_ok("Wolf has damage_south animation", w_sf != null and w_sf.has_animation("damage_south"))
+	_ok("Wolf has die_south animation", w_sf != null and w_sf.has_animation("die_south"))
+	_ok("Wolf has dead animation", w_sf != null and w_sf.has_animation("dead"))
+
+	var wolf_stats: CharacterStatsComponent = wolf.get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
+	_ok("Wolf has CharacterStatsComponent", wolf_stats != null)
+	_ok("Wolf max_health is 45 from definition", wolf_stats != null and wolf_stats.max_health == 45)
+	_ok("Wolf attack is 8 from definition", wolf_stats != null and wolf_stats.base_attack == 8)
+	_ok("Wolf defence is 2 from definition", wolf_stats != null and wolf_stats.base_defence == 2)
+
+	wolf.take_damage(10)
+	_ok("Wolf takes damage and reduces current_health", wolf_stats != null and wolf_stats.current_health == 37)
+
+	wolf.queue_free()
+
+	# 3. Animated Green Stalks
+	var stalks_sf: SpriteFrames = load("res://green stalks/green_stalks_sprite_frames.tres") as SpriteFrames
+	_ok("Green stalks SpriteFrames loads", stalks_sf != null)
+	_ok("Green stalks has default swaying animation", stalks_sf != null and stalks_sf.has_animation("default"))
+	_ok("Green stalks swaying animation has 9 frames", stalks_sf != null and stalks_sf.get_frame_count("default") == 9)
+
 
 
 

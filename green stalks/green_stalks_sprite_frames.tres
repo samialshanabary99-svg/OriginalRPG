@@ -1,0 +1,397 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_000.png" id="1_qt33t"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_001.png" id="2_fxeyy"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_002.png" id="3_su0tg"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_003.png" id="4_yypq4"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_004.png" id="5_pftq6"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_005.png" id="6_oapqf"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_006.png" id="7_5utdg"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_007.png" id="8_rlg8x"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_008.png" id="9_yauuy"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_000.png" id="10_200p4"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_001.png" id="11_uk7vv"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_002.png" id="12_o0ynu"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_003.png" id="13_ka56b"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_004.png" id="14_vntv3"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_005.png" id="15_xt50f"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_006.png" id="16_o4wms"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_007.png" id="17_kpxuc"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_008.png" id="18_tpjnv"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_000.png" id="19_0pleq"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_001.png" id="20_7b2jl"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_002.png" id="21_vwqcv"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_003.png" id="22_cfv4a"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_004.png" id="23_viy75"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_005.png" id="24_uty3x"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_006.png" id="25_5fjy7"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_007.png" id="26_ofy74"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_008.png" id="27_lq1hl"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_000.png" id="28_27kal"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_001.png" id="29_p3gay"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_002.png" id="30_50tqd"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_003.png" id="31_ulowf"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_004.png" id="32_qb84w"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_005.png" id="33_lkvy1"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_006.png" id="34_idqww"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_007.png" id="35_6gdhl"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_008.png" id="36_yrpha"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_000.png" id="37_kdovm"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_001.png" id="38_7gqdh"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_002.png" id="39_nhvqe"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_003.png" id="40_pmpf1"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_004.png" id="41_llcuo"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_005.png" id="42_wo6l4"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_006.png" id="43_bor0p"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_007.png" id="44_c6i4h"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_008.png" id="45_bbm5d"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_000.png" id="46_6c7rg"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_001.png" id="47_mlf82"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_002.png" id="48_7q2ng"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_003.png" id="49_etwmg"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_004.png" id="50_ktukb"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_005.png" id="51_5xit0"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_006.png" id="52_vu51a"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_007.png" id="53_kj6oq"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_008.png" id="54_7oebl"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_000.png" id="55_g6eow"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_001.png" id="56_yrpqa"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_002.png" id="57_6lwb3"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_003.png" id="58_ch8hu"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_004.png" id="59_su02f"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_005.png" id="60_an3r4"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_006.png" id="61_5rdwq"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_007.png" id="62_t3ox5"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_008.png" id="63_tttsk"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_000.png" id="64_x6iqm"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_001.png" id="65_1ooks"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_002.png" id="66_627m5"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_003.png" id="67_6m6n3"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_004.png" id="68_m2lo0"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_005.png" id="69_5rnya"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_006.png" id="70_txl0y"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_007.png" id="71_o3g4f"]
+[ext_resource type="Texture2D" path="res://green stalks/2D_sprite_asset_isolated_clus/animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_008.png" id="72_jt7bo"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qt33t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fxeyy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_su0tg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yypq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pftq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_oapqf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5utdg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rlg8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yauuy")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qt33t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fxeyy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_su0tg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yypq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pftq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_oapqf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5utdg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rlg8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yauuy")
+}],
+"loop": 1,
+"name": &"sway",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_200p4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_uk7vv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_o0ynu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ka56b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_vntv3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_xt50f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_o4wms")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_kpxuc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_tpjnv")
+}],
+"loop": 1,
+"name": &"sway_east",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_0pleq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_7b2jl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_vwqcv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_cfv4a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_viy75")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_uty3x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_5fjy7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_ofy74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_lq1hl")
+}],
+"loop": 1,
+"name": &"sway_north",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_27kal")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_p3gay")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_50tqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_ulowf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_qb84w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_lkvy1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_idqww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_6gdhl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_yrpha")
+}],
+"loop": 1,
+"name": &"sway_north-east",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_kdovm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_7gqdh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_nhvqe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_pmpf1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_llcuo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_wo6l4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_bor0p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_c6i4h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_bbm5d")
+}],
+"loop": 1,
+"name": &"sway_north-west",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_qt33t")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_fxeyy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_su0tg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_yypq4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pftq6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_oapqf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_5utdg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_rlg8x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yauuy")
+}],
+"loop": 1,
+"name": &"sway_south",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_6c7rg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_mlf82")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_7q2ng")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_etwmg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_ktukb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_5xit0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_vu51a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_kj6oq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_7oebl")
+}],
+"loop": 1,
+"name": &"sway_south-east",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_g6eow")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_yrpqa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_6lwb3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_ch8hu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_su02f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_an3r4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_5rdwq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_t3ox5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_tttsk")
+}],
+"loop": 1,
+"name": &"sway_south-west",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("64_x6iqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_1ooks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_627m5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_6m6n3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_m2lo0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_5rnya")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_txl0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_o3g4f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_jt7bo")
+}],
+"loop": 1,
+"name": &"sway_west",
+"speed": 6.0
+}]

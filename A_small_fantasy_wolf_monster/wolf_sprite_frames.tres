@@ -1,0 +1,1538 @@
+[gd_resource type="SpriteFrames" format=3]
+
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_000.png" id="1_wu471"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_001.png" id="2_x43fk"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_002.png" id="3_2d3d1"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_003.png" id="4_fywvb"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_004.png" id="5_txfrk"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_005.png" id="6_6omem"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_006.png" id="7_8f5j4"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_007.png" id="8_w66q2"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_008.png" id="9_mprtn"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_000.png" id="10_0wjps"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_001.png" id="11_sup7k"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_002.png" id="12_e8b34"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_003.png" id="13_trfsy"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_004.png" id="14_2ah6c"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_005.png" id="15_ws18g"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_006.png" id="16_mn750"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_007.png" id="17_q68aq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_008.png" id="18_jmdpy"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_000.png" id="19_3dq3l"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_001.png" id="20_362bb"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_002.png" id="21_4f57r"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_003.png" id="22_bx4ww"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_004.png" id="23_elx7g"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_005.png" id="24_f2lj0"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_006.png" id="25_u86kf"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_007.png" id="26_qlxt7"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_008.png" id="27_8ycs3"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_000.png" id="28_du4v6"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_001.png" id="29_enhr1"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_002.png" id="30_cjx4w"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_003.png" id="31_rw8r0"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_004.png" id="32_u31s8"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_005.png" id="33_w7ltp"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_006.png" id="34_08kaj"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_007.png" id="35_siihq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_008.png" id="36_8dr57"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_000.png" id="37_wm08m"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_001.png" id="38_ii2ue"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_002.png" id="39_iawjr"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_003.png" id="40_4q2xm"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_004.png" id="41_knvrw"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_005.png" id="42_deiaf"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_006.png" id="43_37wes"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_007.png" id="44_rgpml"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_008.png" id="45_1jykb"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_000.png" id="46_bg5qv"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_001.png" id="47_6gvv4"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_002.png" id="48_78isj"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_003.png" id="49_rcup5"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_004.png" id="50_xakrp"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_005.png" id="51_386yn"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_006.png" id="52_pkslg"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_007.png" id="53_v18ln"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_008.png" id="54_4tfoj"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_000.png" id="55_u63cj"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_001.png" id="56_dnekc"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_002.png" id="57_lrmqt"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_003.png" id="58_p4vym"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_004.png" id="59_srqsg"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_005.png" id="60_nq1vt"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_006.png" id="61_hfwkn"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_007.png" id="62_dw1ey"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_008.png" id="63_yi6f3"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_000.png" id="64_3526w"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_001.png" id="65_tofji"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_002.png" id="66_yx0a3"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_003.png" id="67_fpry1"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_004.png" id="68_57eut"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_005.png" id="69_b0yd7"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_006.png" id="70_lh1te"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_007.png" id="71_ti2m7"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_008.png" id="72_dpaaw"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_000.png" id="73_x0j0k"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_001.png" id="74_h6uex"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_002.png" id="75_o267o"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_003.png" id="76_8xoat"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_004.png" id="77_3pjot"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_005.png" id="78_6y54q"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_006.png" id="79_30j75"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_007.png" id="80_5algu"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_008.png" id="81_xkmer"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_000.png" id="82_l6crx"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_001.png" id="83_hwrko"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_002.png" id="84_eq0kd"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_003.png" id="85_jo7ad"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_004.png" id="86_ghban"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_005.png" id="87_vsb6k"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_006.png" id="88_uc53f"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_007.png" id="89_gxbcl"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_008.png" id="90_bfu7m"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_000.png" id="91_34caq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_001.png" id="92_i2gy4"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_002.png" id="93_u2myv"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_003.png" id="94_2idui"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_004.png" id="95_t2a12"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_005.png" id="96_a3ngs"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_006.png" id="97_f6kmm"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_007.png" id="98_54xnm"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_008.png" id="99_s27tw"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_000.png" id="100_6q28j"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_001.png" id="101_1lfkf"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_002.png" id="102_s0ryu"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_003.png" id="103_lmm3k"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_004.png" id="104_tcf4i"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_005.png" id="105_44n8f"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_006.png" id="106_ylsvk"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_007.png" id="107_aykm0"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_008.png" id="108_ppk0t"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_000.png" id="109_t68dn"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_001.png" id="110_5qegt"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_002.png" id="111_mac8n"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_003.png" id="112_3i7wk"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_004.png" id="113_o2lon"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_005.png" id="114_i5m4i"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_006.png" id="115_ve3vp"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_007.png" id="116_j2am0"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_008.png" id="117_ssevx"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_000.png" id="118_ubs33"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_001.png" id="119_72585"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_002.png" id="120_cymh2"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_003.png" id="121_88uxp"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_004.png" id="122_vsqmy"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_005.png" id="123_8lqsf"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_006.png" id="124_8hyaj"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_007.png" id="125_nfkvb"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_008.png" id="126_kb6k7"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_000.png" id="127_5tyc0"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_001.png" id="128_td6mc"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_002.png" id="129_5dpp8"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_003.png" id="130_x565d"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_004.png" id="131_642o4"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_005.png" id="132_33wyn"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_006.png" id="133_llhd1"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_007.png" id="134_yhu83"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_008.png" id="135_vcapp"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_000.png" id="136_sbwmg"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_001.png" id="137_v6lae"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_002.png" id="138_h7xye"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_003.png" id="139_y084e"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_004.png" id="140_266jl"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_005.png" id="141_4iyno"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_006.png" id="142_d6j2y"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_007.png" id="143_j1fy0"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_008.png" id="144_x264s"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_006.png" id="145_r50ys"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_000.png" id="146_v2ixr"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_001.png" id="147_5sock"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_002.png" id="148_tcyqd"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_003.png" id="149_w3hl4"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_004.png" id="150_xipg3"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_005.png" id="151_lfv0j"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_000.png" id="152_uqo7o"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_001.png" id="153_ss21p"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_002.png" id="154_jo5lv"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_003.png" id="155_k8o25"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_004.png" id="156_0gfhq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_005.png" id="157_onu8i"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_006.png" id="158_ynwu7"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_000.png" id="159_26mhu"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_001.png" id="160_208fq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_002.png" id="161_a8hky"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_003.png" id="162_56wyg"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_004.png" id="163_of1jo"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_005.png" id="164_u6ndn"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_006.png" id="165_x1lrs"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_000.png" id="166_icuoe"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_001.png" id="167_rtghg"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_002.png" id="168_xeqa0"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_003.png" id="169_1yrec"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_004.png" id="170_eqdk0"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_005.png" id="171_yn4sd"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_006.png" id="172_u0n5w"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_000.png" id="173_pp2qo"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_001.png" id="174_gw15o"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_002.png" id="175_isdyp"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_003.png" id="176_a1mfv"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_004.png" id="177_ksmt8"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_005.png" id="178_yysj5"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_006.png" id="179_1nss4"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_000.png" id="180_u4u8p"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_001.png" id="181_0jiwt"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_002.png" id="182_x47gk"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_003.png" id="183_mwv6b"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_004.png" id="184_ahcnq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_005.png" id="185_cneyp"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_006.png" id="186_3q2el"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_000.png" id="187_by33q"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_001.png" id="188_xuwp5"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_002.png" id="189_sxcq2"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_003.png" id="190_n500o"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_004.png" id="191_7v7ee"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_005.png" id="192_s3f86"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_006.png" id="193_g0pr5"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_000.png" id="194_22uo6"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_001.png" id="195_ylr1b"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_002.png" id="196_based"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_003.png" id="197_3vo5u"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_004.png" id="198_n33vo"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_005.png" id="199_1ymw3"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_006.png" id="200_8g8rc"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south/frame_000.png" id="201_88rvx"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south/frame_001.png" id="202_2xttq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south/frame_002.png" id="203_nu5ab"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south/frame_003.png" id="204_42kok"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/east/frame_000.png" id="205_6wr0u"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/east/frame_001.png" id="206_gvet4"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/east/frame_002.png" id="207_0kr6j"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/east/frame_003.png" id="208_81xje"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north/frame_000.png" id="209_hs5q6"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north/frame_001.png" id="210_pvvii"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north/frame_002.png" id="211_hwicu"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north/frame_003.png" id="212_tkkxh"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north-east/frame_000.png" id="213_p2fmv"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north-east/frame_001.png" id="214_v0i5b"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north-east/frame_002.png" id="215_x3rui"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north-east/frame_003.png" id="216_qe345"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north-west/frame_000.png" id="217_74m77"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north-west/frame_001.png" id="218_7a7a5"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north-west/frame_002.png" id="219_km6ts"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/north-west/frame_003.png" id="220_nfdtq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south-east/frame_000.png" id="221_b7kua"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south-east/frame_001.png" id="222_7x1re"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south-east/frame_002.png" id="223_qqm5o"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south-east/frame_003.png" id="224_s4xu4"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south-west/frame_000.png" id="225_w2gav"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south-west/frame_001.png" id="226_g4eor"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south-west/frame_002.png" id="227_so5h4"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/south-west/frame_003.png" id="228_wd38p"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/west/frame_000.png" id="229_oinvf"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/west/frame_001.png" id="230_3b6fh"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/west/frame_002.png" id="231_orbh2"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Idle/animations/Idle/west/frame_003.png" id="232_ux2r8"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south/frame_000.png" id="233_uhv7l"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south/frame_001.png" id="234_fci4h"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south/frame_002.png" id="235_3ttcq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south/frame_003.png" id="236_2ntkm"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south/frame_004.png" id="237_ri2hc"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south/frame_005.png" id="238_gbyjq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south/frame_006.png" id="239_ervr1"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south/frame_007.png" id="240_g66kp"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/east/frame_000.png" id="241_de5eo"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/east/frame_001.png" id="242_lmavm"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/east/frame_002.png" id="243_cnfao"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/east/frame_003.png" id="244_vo5x4"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/east/frame_004.png" id="245_w84wv"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/east/frame_005.png" id="246_jayab"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/east/frame_006.png" id="247_b030w"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/east/frame_007.png" id="248_hkec7"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north/frame_000.png" id="249_xja2f"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north/frame_001.png" id="250_aqtpb"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north/frame_002.png" id="251_s2uxg"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north/frame_003.png" id="252_ijgsi"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north/frame_004.png" id="253_3no0a"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north/frame_005.png" id="254_65w2s"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north/frame_006.png" id="255_jc80r"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north/frame_007.png" id="256_6v4di"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-east/frame_000.png" id="257_28v2i"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-east/frame_001.png" id="258_jd85s"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-east/frame_002.png" id="259_5wgnt"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-east/frame_003.png" id="260_jcoy0"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-east/frame_004.png" id="261_xk5tk"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-east/frame_005.png" id="262_1csbn"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-east/frame_006.png" id="263_t7bii"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-east/frame_007.png" id="264_r45nj"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-west/frame_000.png" id="265_0f6ds"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-west/frame_001.png" id="266_qs8uq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-west/frame_002.png" id="267_2u5og"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-west/frame_003.png" id="268_68yte"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-west/frame_004.png" id="269_q1v7p"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-west/frame_005.png" id="270_v7p6o"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-west/frame_006.png" id="271_gkymc"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/north-west/frame_007.png" id="272_p4pvk"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-east/frame_000.png" id="273_n1jci"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-east/frame_001.png" id="274_ooov7"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-east/frame_002.png" id="275_pup85"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-east/frame_003.png" id="276_1plvm"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-east/frame_004.png" id="277_ynr8u"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-east/frame_005.png" id="278_bd0s1"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-east/frame_006.png" id="279_ct32x"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-east/frame_007.png" id="280_lxbv3"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-west/frame_000.png" id="281_lv1fx"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-west/frame_001.png" id="282_2mh5a"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-west/frame_002.png" id="283_x2kpp"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-west/frame_003.png" id="284_whjv0"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-west/frame_004.png" id="285_4il0v"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-west/frame_005.png" id="286_hnnph"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-west/frame_006.png" id="287_jqfvx"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/south-west/frame_007.png" id="288_ebqww"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/west/frame_000.png" id="289_iip4p"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/west/frame_001.png" id="290_vf3i3"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/west/frame_002.png" id="291_xnk41"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/west/frame_003.png" id="292_xvhxs"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/west/frame_004.png" id="293_p8deq"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/west/frame_005.png" id="294_sb57k"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/west/frame_006.png" id="295_4awdm"]
+[ext_resource type="Texture2D" path="res://A_small_fantasy_wolf_monster/Walking/animations/Walking/west/frame_007.png" id="296_65ss1"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wu471")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_x43fk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2d3d1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fywvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_txfrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6omem")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8f5j4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_w66q2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mprtn")
+}],
+"loop": 0,
+"name": &"attack",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_0wjps")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_sup7k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_e8b34")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_trfsy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_2ah6c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_ws18g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_mn750")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_q68aq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_jmdpy")
+}],
+"loop": 0,
+"name": &"attack_east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_3dq3l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_362bb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_4f57r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_bx4ww")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_elx7g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_f2lj0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_u86kf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_qlxt7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_8ycs3")
+}],
+"loop": 0,
+"name": &"attack_north",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("28_du4v6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_enhr1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_cjx4w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_rw8r0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_u31s8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_w7ltp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_08kaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_siihq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_8dr57")
+}],
+"loop": 0,
+"name": &"attack_north-east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("37_wm08m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("38_ii2ue")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_iawjr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("40_4q2xm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("41_knvrw")
+}, {
+"duration": 1.0,
+"texture": ExtResource("42_deiaf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("43_37wes")
+}, {
+"duration": 1.0,
+"texture": ExtResource("44_rgpml")
+}, {
+"duration": 1.0,
+"texture": ExtResource("45_1jykb")
+}],
+"loop": 0,
+"name": &"attack_north-west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_wu471")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_x43fk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_2d3d1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_fywvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_txfrk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_6omem")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_8f5j4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_w66q2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_mprtn")
+}],
+"loop": 0,
+"name": &"attack_south",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("46_bg5qv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("47_6gvv4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("48_78isj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("49_rcup5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("50_xakrp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("51_386yn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("52_pkslg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("53_v18ln")
+}, {
+"duration": 1.0,
+"texture": ExtResource("54_4tfoj")
+}],
+"loop": 0,
+"name": &"attack_south-east",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("55_u63cj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("56_dnekc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("57_lrmqt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("58_p4vym")
+}, {
+"duration": 1.0,
+"texture": ExtResource("59_srqsg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("60_nq1vt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("61_hfwkn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("62_dw1ey")
+}, {
+"duration": 1.0,
+"texture": ExtResource("63_yi6f3")
+}],
+"loop": 0,
+"name": &"attack_south-west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("64_3526w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("65_tofji")
+}, {
+"duration": 1.0,
+"texture": ExtResource("66_yx0a3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("67_fpry1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("68_57eut")
+}, {
+"duration": 1.0,
+"texture": ExtResource("69_b0yd7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("70_lh1te")
+}, {
+"duration": 1.0,
+"texture": ExtResource("71_ti2m7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("72_dpaaw")
+}],
+"loop": 0,
+"name": &"attack_west",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("73_x0j0k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_h6uex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_o267o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_8xoat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_3pjot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_6y54q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_30j75")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_5algu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_xkmer")
+}],
+"loop": 0,
+"name": &"damage",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("82_l6crx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("83_hwrko")
+}, {
+"duration": 1.0,
+"texture": ExtResource("84_eq0kd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("85_jo7ad")
+}, {
+"duration": 1.0,
+"texture": ExtResource("86_ghban")
+}, {
+"duration": 1.0,
+"texture": ExtResource("87_vsb6k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("88_uc53f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("89_gxbcl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("90_bfu7m")
+}],
+"loop": 0,
+"name": &"damage_east",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("91_34caq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("92_i2gy4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("93_u2myv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("94_2idui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("95_t2a12")
+}, {
+"duration": 1.0,
+"texture": ExtResource("96_a3ngs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("97_f6kmm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("98_54xnm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("99_s27tw")
+}],
+"loop": 0,
+"name": &"damage_north",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("100_6q28j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("101_1lfkf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("102_s0ryu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("103_lmm3k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("104_tcf4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("105_44n8f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("106_ylsvk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("107_aykm0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("108_ppk0t")
+}],
+"loop": 0,
+"name": &"damage_north-east",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("109_t68dn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("110_5qegt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("111_mac8n")
+}, {
+"duration": 1.0,
+"texture": ExtResource("112_3i7wk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("113_o2lon")
+}, {
+"duration": 1.0,
+"texture": ExtResource("114_i5m4i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("115_ve3vp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("116_j2am0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("117_ssevx")
+}],
+"loop": 0,
+"name": &"damage_north-west",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("73_x0j0k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("74_h6uex")
+}, {
+"duration": 1.0,
+"texture": ExtResource("75_o267o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("76_8xoat")
+}, {
+"duration": 1.0,
+"texture": ExtResource("77_3pjot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("78_6y54q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("79_30j75")
+}, {
+"duration": 1.0,
+"texture": ExtResource("80_5algu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("81_xkmer")
+}],
+"loop": 0,
+"name": &"damage_south",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("118_ubs33")
+}, {
+"duration": 1.0,
+"texture": ExtResource("119_72585")
+}, {
+"duration": 1.0,
+"texture": ExtResource("120_cymh2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("121_88uxp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("122_vsqmy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("123_8lqsf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("124_8hyaj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("125_nfkvb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("126_kb6k7")
+}],
+"loop": 0,
+"name": &"damage_south-east",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("127_5tyc0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("128_td6mc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("129_5dpp8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("130_x565d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("131_642o4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("132_33wyn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("133_llhd1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("134_yhu83")
+}, {
+"duration": 1.0,
+"texture": ExtResource("135_vcapp")
+}],
+"loop": 0,
+"name": &"damage_south-west",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("136_sbwmg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("137_v6lae")
+}, {
+"duration": 1.0,
+"texture": ExtResource("138_h7xye")
+}, {
+"duration": 1.0,
+"texture": ExtResource("139_y084e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("140_266jl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("141_4iyno")
+}, {
+"duration": 1.0,
+"texture": ExtResource("142_d6j2y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("143_j1fy0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("144_x264s")
+}],
+"loop": 0,
+"name": &"damage_west",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("145_r50ys")
+}],
+"loop": 0,
+"name": &"dead",
+"speed": 1.0
+}, {
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("146_v2ixr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_5sock")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_tcyqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_w3hl4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_xipg3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("151_lfv0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_r50ys")
+}],
+"loop": 0,
+"name": &"die",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("152_uqo7o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("153_ss21p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("154_jo5lv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("155_k8o25")
+}, {
+"duration": 1.0,
+"texture": ExtResource("156_0gfhq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("157_onu8i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("158_ynwu7")
+}],
+"loop": 0,
+"name": &"die_east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("159_26mhu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("160_208fq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("161_a8hky")
+}, {
+"duration": 1.0,
+"texture": ExtResource("162_56wyg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("163_of1jo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("164_u6ndn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("165_x1lrs")
+}],
+"loop": 0,
+"name": &"die_north",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("166_icuoe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("167_rtghg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("168_xeqa0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("169_1yrec")
+}, {
+"duration": 1.0,
+"texture": ExtResource("170_eqdk0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("171_yn4sd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("172_u0n5w")
+}],
+"loop": 0,
+"name": &"die_north-east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("173_pp2qo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("174_gw15o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("175_isdyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("176_a1mfv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("177_ksmt8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("178_yysj5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("179_1nss4")
+}],
+"loop": 0,
+"name": &"die_north-west",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("146_v2ixr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("147_5sock")
+}, {
+"duration": 1.0,
+"texture": ExtResource("148_tcyqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("149_w3hl4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("150_xipg3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("151_lfv0j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("145_r50ys")
+}],
+"loop": 0,
+"name": &"die_south",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("180_u4u8p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("181_0jiwt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("182_x47gk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("183_mwv6b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("184_ahcnq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("185_cneyp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("186_3q2el")
+}],
+"loop": 0,
+"name": &"die_south-east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("187_by33q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("188_xuwp5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("189_sxcq2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("190_n500o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("191_7v7ee")
+}, {
+"duration": 1.0,
+"texture": ExtResource("192_s3f86")
+}, {
+"duration": 1.0,
+"texture": ExtResource("193_g0pr5")
+}],
+"loop": 0,
+"name": &"die_south-west",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("194_22uo6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("195_ylr1b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("196_based")
+}, {
+"duration": 1.0,
+"texture": ExtResource("197_3vo5u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("198_n33vo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("199_1ymw3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("200_8g8rc")
+}],
+"loop": 0,
+"name": &"die_west",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("201_88rvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("202_2xttq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("203_nu5ab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("204_42kok")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("205_6wr0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("206_gvet4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("207_0kr6j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("208_81xje")
+}],
+"loop": 1,
+"name": &"idle_east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("209_hs5q6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("210_pvvii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("211_hwicu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("212_tkkxh")
+}],
+"loop": 1,
+"name": &"idle_north",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("213_p2fmv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("214_v0i5b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("215_x3rui")
+}, {
+"duration": 1.0,
+"texture": ExtResource("216_qe345")
+}],
+"loop": 1,
+"name": &"idle_north-east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("217_74m77")
+}, {
+"duration": 1.0,
+"texture": ExtResource("218_7a7a5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("219_km6ts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("220_nfdtq")
+}],
+"loop": 1,
+"name": &"idle_north-west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("201_88rvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("202_2xttq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("203_nu5ab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("204_42kok")
+}],
+"loop": 1,
+"name": &"idle_south",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("221_b7kua")
+}, {
+"duration": 1.0,
+"texture": ExtResource("222_7x1re")
+}, {
+"duration": 1.0,
+"texture": ExtResource("223_qqm5o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("224_s4xu4")
+}],
+"loop": 1,
+"name": &"idle_south-east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("225_w2gav")
+}, {
+"duration": 1.0,
+"texture": ExtResource("226_g4eor")
+}, {
+"duration": 1.0,
+"texture": ExtResource("227_so5h4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("228_wd38p")
+}],
+"loop": 1,
+"name": &"idle_south-west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("229_oinvf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("230_3b6fh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("231_orbh2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("232_ux2r8")
+}],
+"loop": 1,
+"name": &"idle_west",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("233_uhv7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("234_fci4h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("235_3ttcq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("236_2ntkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("237_ri2hc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("238_gbyjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("239_ervr1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("240_g66kp")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("241_de5eo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("242_lmavm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("243_cnfao")
+}, {
+"duration": 1.0,
+"texture": ExtResource("244_vo5x4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("245_w84wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("246_jayab")
+}, {
+"duration": 1.0,
+"texture": ExtResource("247_b030w")
+}, {
+"duration": 1.0,
+"texture": ExtResource("248_hkec7")
+}],
+"loop": 1,
+"name": &"walk_east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("249_xja2f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("250_aqtpb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("251_s2uxg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("252_ijgsi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("253_3no0a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("254_65w2s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("255_jc80r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("256_6v4di")
+}],
+"loop": 1,
+"name": &"walk_north",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("257_28v2i")
+}, {
+"duration": 1.0,
+"texture": ExtResource("258_jd85s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("259_5wgnt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("260_jcoy0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("261_xk5tk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("262_1csbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("263_t7bii")
+}, {
+"duration": 1.0,
+"texture": ExtResource("264_r45nj")
+}],
+"loop": 1,
+"name": &"walk_north-east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("265_0f6ds")
+}, {
+"duration": 1.0,
+"texture": ExtResource("266_qs8uq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("267_2u5og")
+}, {
+"duration": 1.0,
+"texture": ExtResource("268_68yte")
+}, {
+"duration": 1.0,
+"texture": ExtResource("269_q1v7p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("270_v7p6o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("271_gkymc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("272_p4pvk")
+}],
+"loop": 1,
+"name": &"walk_north-west",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("233_uhv7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("234_fci4h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("235_3ttcq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("236_2ntkm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("237_ri2hc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("238_gbyjq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("239_ervr1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("240_g66kp")
+}],
+"loop": 1,
+"name": &"walk_south",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("273_n1jci")
+}, {
+"duration": 1.0,
+"texture": ExtResource("274_ooov7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("275_pup85")
+}, {
+"duration": 1.0,
+"texture": ExtResource("276_1plvm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("277_ynr8u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("278_bd0s1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("279_ct32x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("280_lxbv3")
+}],
+"loop": 1,
+"name": &"walk_south-east",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("281_lv1fx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("282_2mh5a")
+}, {
+"duration": 1.0,
+"texture": ExtResource("283_x2kpp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("284_whjv0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("285_4il0v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("286_hnnph")
+}, {
+"duration": 1.0,
+"texture": ExtResource("287_jqfvx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("288_ebqww")
+}],
+"loop": 1,
+"name": &"walk_south-west",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("289_iip4p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("290_vf3i3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("291_xnk41")
+}, {
+"duration": 1.0,
+"texture": ExtResource("292_xvhxs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("293_p8deq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("294_sb57k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("295_4awdm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("296_65ss1")
+}],
+"loop": 1,
+"name": &"walk_west",
+"speed": 8.0
+}]

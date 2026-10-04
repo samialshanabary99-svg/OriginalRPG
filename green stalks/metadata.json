@@ -1,0 +1,146 @@
+{
+  "group_id": "41d09fee-69de-4dc2-935a-6fdaaf3d76c2",
+  "objects": [
+    {
+      "id": "2cd44c6f-4021-43ba-82a0-3e2c00ca4260",
+      "name": "base",
+      "prompt": "2D sprite asset, isolated cluster of 5 elongated tall grass stalks, marsh reeds, top-down isometric RPG angle, crisp pixel art, defined outlines, vibrant spring green and olive tones, high contrast, clean transparent or solid flat color background, pixel-perfect, game development asset",
+      "size": {
+        "width": 68,
+        "height": 68
+      },
+      "directions": 8,
+      "view": "low top-down",
+      "rotations": {
+        "south": "rotations/south.png",
+        "south-east": "rotations/south-east.png",
+        "east": "rotations/east.png",
+        "north-east": "rotations/north-east.png",
+        "north": "rotations/north.png",
+        "north-west": "rotations/north-west.png",
+        "west": "rotations/west.png",
+        "south-west": "rotations/south-west.png"
+      },
+      "animations": {
+        "The_tall_green_blades_sway_rhythmically_in_a_fluid": {
+          "directions": {
+            "south": {
+              "frames": [
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_000.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_001.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_002.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_003.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_004.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_005.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_006.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_007.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "north": {
+              "frames": [
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_000.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_001.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_002.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_003.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_004.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_005.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_006.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_007.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "south-east": {
+              "frames": [
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_000.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_001.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_002.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_003.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_004.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_005.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_006.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_007.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-east/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "east": {
+              "frames": [
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_000.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_001.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_002.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_003.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_004.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_005.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_006.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_007.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/east/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "west": {
+              "frames": [
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_000.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_001.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_002.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_003.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_004.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_005.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_006.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_007.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/west/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "south-west": {
+              "frames": [
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_000.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_001.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_002.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_003.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_004.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_005.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_006.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_007.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/south-west/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "north-east": {
+              "frames": [
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_000.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_001.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_002.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_003.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_004.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_005.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_006.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_007.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-east/frame_008.png"
+              ],
+              "frame_count": 9
+            },
+            "north-west": {
+              "frames": [
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_000.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_001.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_002.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_003.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_004.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_005.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_006.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_007.png",
+                "animations/The_tall_green_blades_sway_rhythmically_in_a_fluid/north-west/frame_008.png"
+              ],
+              "frame_count": 9
+            }
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "1.1",
+  "export_date": "2026-10-04T05:43:42.728661"
+}

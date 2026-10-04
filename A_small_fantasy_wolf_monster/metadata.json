@@ -1,0 +1,591 @@
+{
+  "group_id": "31f0f695-2590-4ad8-9869-af75db567f3e",
+  "states": [
+    {
+      "character": {
+        "id": "773e5de4-bec8-479c-902f-3c3bd2642ea4",
+        "name": "Idle",
+        "prompt": "A small fantasy wolf monster for a classic 2D MMORPG, inspired by the charming pixel-art aesthetic of early 2000s Korean MMORPGs. Compact body, slightly oversized head, short sturdy legs, medium-sized pointed ears, fluffy tail, sharp but simple teeth, dark gray and brown fur with subtle lighter patches, fierce but low-level creature expression, slightly hunched aggressive stance, simple fantasy design, clearly a weak beginner-area monster, NOT massive, NOT muscular, NOT a boss, NOT oversized. Full body, centered character, side-facing 3/4 view, clear silhouette, detailed pixel art, clean pixel clusters, strong readable outline, limited color palette, subtle highlights and shadows, cute-but-dangerous appearance, suitable for an MMORPG monster sprite, transparent background.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "dog",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-10-01T13:17:27.683728+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {
+          "Idle": {
+            "south-west": [
+              "Idle/animations/Idle/south-west/frame_000.png",
+              "Idle/animations/Idle/south-west/frame_001.png",
+              "Idle/animations/Idle/south-west/frame_002.png",
+              "Idle/animations/Idle/south-west/frame_003.png",
+              "Idle/animations/Idle/south-west/frame_004.png",
+              "Idle/animations/Idle/south-west/frame_005.png",
+              "Idle/animations/Idle/south-west/frame_006.png",
+              "Idle/animations/Idle/south-west/frame_007.png"
+            ],
+            "west": [
+              "Idle/animations/Idle/west/frame_000.png",
+              "Idle/animations/Idle/west/frame_001.png",
+              "Idle/animations/Idle/west/frame_002.png",
+              "Idle/animations/Idle/west/frame_003.png",
+              "Idle/animations/Idle/west/frame_004.png",
+              "Idle/animations/Idle/west/frame_005.png",
+              "Idle/animations/Idle/west/frame_006.png",
+              "Idle/animations/Idle/west/frame_007.png"
+            ],
+            "north": [
+              "Idle/animations/Idle/north/frame_000.png",
+              "Idle/animations/Idle/north/frame_001.png",
+              "Idle/animations/Idle/north/frame_002.png",
+              "Idle/animations/Idle/north/frame_003.png",
+              "Idle/animations/Idle/north/frame_004.png",
+              "Idle/animations/Idle/north/frame_005.png",
+              "Idle/animations/Idle/north/frame_006.png",
+              "Idle/animations/Idle/north/frame_007.png"
+            ],
+            "north-west": [
+              "Idle/animations/Idle/north-west/frame_000.png",
+              "Idle/animations/Idle/north-west/frame_001.png",
+              "Idle/animations/Idle/north-west/frame_002.png",
+              "Idle/animations/Idle/north-west/frame_003.png",
+              "Idle/animations/Idle/north-west/frame_004.png",
+              "Idle/animations/Idle/north-west/frame_005.png",
+              "Idle/animations/Idle/north-west/frame_006.png",
+              "Idle/animations/Idle/north-west/frame_007.png"
+            ],
+            "east": [
+              "Idle/animations/Idle/east/frame_000.png",
+              "Idle/animations/Idle/east/frame_001.png",
+              "Idle/animations/Idle/east/frame_002.png",
+              "Idle/animations/Idle/east/frame_003.png",
+              "Idle/animations/Idle/east/frame_004.png",
+              "Idle/animations/Idle/east/frame_005.png",
+              "Idle/animations/Idle/east/frame_006.png",
+              "Idle/animations/Idle/east/frame_007.png"
+            ],
+            "south": [
+              "Idle/animations/Idle/south/frame_000.png",
+              "Idle/animations/Idle/south/frame_001.png",
+              "Idle/animations/Idle/south/frame_002.png",
+              "Idle/animations/Idle/south/frame_003.png",
+              "Idle/animations/Idle/south/frame_004.png",
+              "Idle/animations/Idle/south/frame_005.png",
+              "Idle/animations/Idle/south/frame_006.png",
+              "Idle/animations/Idle/south/frame_007.png"
+            ],
+            "south-east": [
+              "Idle/animations/Idle/south-east/frame_000.png",
+              "Idle/animations/Idle/south-east/frame_001.png",
+              "Idle/animations/Idle/south-east/frame_002.png",
+              "Idle/animations/Idle/south-east/frame_003.png",
+              "Idle/animations/Idle/south-east/frame_004.png",
+              "Idle/animations/Idle/south-east/frame_005.png",
+              "Idle/animations/Idle/south-east/frame_006.png",
+              "Idle/animations/Idle/south-east/frame_007.png"
+            ],
+            "north-east": [
+              "Idle/animations/Idle/north-east/frame_000.png",
+              "Idle/animations/Idle/north-east/frame_001.png",
+              "Idle/animations/Idle/north-east/frame_002.png",
+              "Idle/animations/Idle/north-east/frame_003.png",
+              "Idle/animations/Idle/north-east/frame_004.png",
+              "Idle/animations/Idle/north-east/frame_005.png",
+              "Idle/animations/Idle/north-east/frame_006.png",
+              "Idle/animations/Idle/north-east/frame_007.png"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "character": {
+        "id": "23b60d03-4feb-4f71-b55f-76e83e3aadf8",
+        "name": "Walking",
+        "prompt": "A small fantasy wolf monster for a classic 2D MMORPG, inspired by the charming pixel-art aesthetic of early 2000s Korean MMORPGs. Compact body, slightly oversized head, short sturdy legs, medium-sized pointed ears, fluffy tail, sharp but simple teeth, dark gray and brown fur with subtle lighter patches, fierce but low-level creature expression, slightly hunched aggressive stance, simple fantasy design, clearly a weak beginner-area monster, NOT massive, NOT muscular, NOT a boss, NOT oversized. Full body, centered character, side-facing 3/4 view, clear silhouette, detailed pixel art, clean pixel clusters, strong readable outline, limited color palette, subtle highlights and shadows, cute-but-dangerous appearance, suitable for an MMORPG monster sprite, transparent background.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "dog",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-10-01T13:47:36.840034+00:00"
+      },
+      "folder": "Walking",
+      "frames": {
+        "rotations": {
+          "south": "Walking/rotations/south.png",
+          "south-east": "Walking/rotations/south-east.png",
+          "east": "Walking/rotations/east.png",
+          "north-east": "Walking/rotations/north-east.png",
+          "north": "Walking/rotations/north.png",
+          "north-west": "Walking/rotations/north-west.png",
+          "west": "Walking/rotations/west.png",
+          "south-west": "Walking/rotations/south-west.png"
+        },
+        "animations": {
+          "Walking": {
+            "south-west": [
+              "Walking/animations/Walking/south-west/frame_000.png",
+              "Walking/animations/Walking/south-west/frame_001.png",
+              "Walking/animations/Walking/south-west/frame_002.png",
+              "Walking/animations/Walking/south-west/frame_003.png",
+              "Walking/animations/Walking/south-west/frame_004.png",
+              "Walking/animations/Walking/south-west/frame_005.png",
+              "Walking/animations/Walking/south-west/frame_006.png",
+              "Walking/animations/Walking/south-west/frame_007.png"
+            ],
+            "west": [
+              "Walking/animations/Walking/west/frame_000.png",
+              "Walking/animations/Walking/west/frame_001.png",
+              "Walking/animations/Walking/west/frame_002.png",
+              "Walking/animations/Walking/west/frame_003.png",
+              "Walking/animations/Walking/west/frame_004.png",
+              "Walking/animations/Walking/west/frame_005.png",
+              "Walking/animations/Walking/west/frame_006.png",
+              "Walking/animations/Walking/west/frame_007.png"
+            ],
+            "north-east": [
+              "Walking/animations/Walking/north-east/frame_000.png",
+              "Walking/animations/Walking/north-east/frame_001.png",
+              "Walking/animations/Walking/north-east/frame_002.png",
+              "Walking/animations/Walking/north-east/frame_003.png",
+              "Walking/animations/Walking/north-east/frame_004.png",
+              "Walking/animations/Walking/north-east/frame_005.png",
+              "Walking/animations/Walking/north-east/frame_006.png",
+              "Walking/animations/Walking/north-east/frame_007.png"
+            ],
+            "south": [
+              "Walking/animations/Walking/south/frame_000.png",
+              "Walking/animations/Walking/south/frame_001.png",
+              "Walking/animations/Walking/south/frame_002.png",
+              "Walking/animations/Walking/south/frame_003.png",
+              "Walking/animations/Walking/south/frame_004.png",
+              "Walking/animations/Walking/south/frame_005.png",
+              "Walking/animations/Walking/south/frame_006.png",
+              "Walking/animations/Walking/south/frame_007.png"
+            ],
+            "south-east": [
+              "Walking/animations/Walking/south-east/frame_000.png",
+              "Walking/animations/Walking/south-east/frame_001.png",
+              "Walking/animations/Walking/south-east/frame_002.png",
+              "Walking/animations/Walking/south-east/frame_003.png",
+              "Walking/animations/Walking/south-east/frame_004.png",
+              "Walking/animations/Walking/south-east/frame_005.png",
+              "Walking/animations/Walking/south-east/frame_006.png",
+              "Walking/animations/Walking/south-east/frame_007.png"
+            ],
+            "north-west": [
+              "Walking/animations/Walking/north-west/frame_000.png",
+              "Walking/animations/Walking/north-west/frame_001.png",
+              "Walking/animations/Walking/north-west/frame_002.png",
+              "Walking/animations/Walking/north-west/frame_003.png",
+              "Walking/animations/Walking/north-west/frame_004.png",
+              "Walking/animations/Walking/north-west/frame_005.png",
+              "Walking/animations/Walking/north-west/frame_006.png",
+              "Walking/animations/Walking/north-west/frame_007.png"
+            ],
+            "east": [
+              "Walking/animations/Walking/east/frame_000.png",
+              "Walking/animations/Walking/east/frame_001.png",
+              "Walking/animations/Walking/east/frame_002.png",
+              "Walking/animations/Walking/east/frame_003.png",
+              "Walking/animations/Walking/east/frame_004.png",
+              "Walking/animations/Walking/east/frame_005.png",
+              "Walking/animations/Walking/east/frame_006.png",
+              "Walking/animations/Walking/east/frame_007.png"
+            ],
+            "north": [
+              "Walking/animations/Walking/north/frame_000.png",
+              "Walking/animations/Walking/north/frame_001.png",
+              "Walking/animations/Walking/north/frame_002.png",
+              "Walking/animations/Walking/north/frame_003.png",
+              "Walking/animations/Walking/north/frame_004.png",
+              "Walking/animations/Walking/north/frame_005.png",
+              "Walking/animations/Walking/north/frame_006.png",
+              "Walking/animations/Walking/north/frame_007.png"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "character": {
+        "id": "48e104b1-4c5c-48f4-9aa0-3bfc9e31beab",
+        "name": "Attacking",
+        "prompt": "A small fantasy wolf monster for a classic 2D MMORPG, inspired by the charming pixel-art aesthetic of early 2000s Korean MMORPGs. Compact body, slightly oversized head, short sturdy legs, medium-sized pointed ears, fluffy tail, sharp but simple teeth, dark gray and brown fur with subtle lighter patches, fierce but low-level creature expression, slightly hunched aggressive stance, simple fantasy design, clearly a weak beginner-area monster, NOT massive, NOT muscular, NOT a boss, NOT oversized. Full body, centered character, side-facing 3/4 view, clear silhouette, detailed pixel art, clean pixel clusters, strong readable outline, limited color palette, subtle highlights and shadows, cute-but-dangerous appearance, suitable for an MMORPG monster sprite, transparent background.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "dog",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-10-01T15:07:57.998932+00:00"
+      },
+      "folder": "Attacking",
+      "frames": {
+        "rotations": {
+          "south": "Attacking/rotations/south.png",
+          "south-east": "Attacking/rotations/south-east.png",
+          "east": "Attacking/rotations/east.png",
+          "north-east": "Attacking/rotations/north-east.png",
+          "north": "Attacking/rotations/north.png",
+          "north-west": "Attacking/rotations/north-west.png",
+          "west": "Attacking/rotations/west.png",
+          "south-west": "Attacking/rotations/south-west.png"
+        },
+        "animations": {
+          "The_wolf_crouches_low_tightening_its_muscles_befor": {
+            "west": [
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_000.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_001.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_002.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_003.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_004.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_005.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_006.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_007.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/west/frame_008.png"
+            ],
+            "north-west": [
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_000.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_001.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_002.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_003.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_004.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_005.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_006.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_007.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-west/frame_008.png"
+            ],
+            "south": [
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_000.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_001.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_002.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_003.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_004.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_005.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_006.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_007.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south/frame_008.png"
+            ],
+            "north": [
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_000.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_001.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_002.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_003.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_004.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_005.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_006.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_007.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north/frame_008.png"
+            ],
+            "south-east": [
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_000.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_001.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_002.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_003.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_004.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_005.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_006.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_007.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-east/frame_008.png"
+            ],
+            "south-west": [
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_000.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_001.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_002.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_003.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_004.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_005.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_006.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_007.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/south-west/frame_008.png"
+            ],
+            "east": [
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_000.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_001.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_002.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_003.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_004.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_005.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_006.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_007.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/east/frame_008.png"
+            ],
+            "north-east": [
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_000.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_001.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_002.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_003.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_004.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_005.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_006.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_007.png",
+              "Attacking/animations/The_wolf_crouches_low_tightening_its_muscles_befor/north-east/frame_008.png"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "character": {
+        "id": "55237b68-8c28-4202-88f3-e14c2bb9cda0",
+        "name": "Take Damage",
+        "prompt": "A small fantasy wolf monster for a classic 2D MMORPG, inspired by the charming pixel-art aesthetic of early 2000s Korean MMORPGs. Compact body, slightly oversized head, short sturdy legs, medium-sized pointed ears, fluffy tail, sharp but simple teeth, dark gray and brown fur with subtle lighter patches, fierce but low-level creature expression, slightly hunched aggressive stance, simple fantasy design, clearly a weak beginner-area monster, NOT massive, NOT muscular, NOT a boss, NOT oversized. Full body, centered character, side-facing 3/4 view, clear silhouette, detailed pixel art, clean pixel clusters, strong readable outline, limited color palette, subtle highlights and shadows, cute-but-dangerous appearance, suitable for an MMORPG monster sprite, transparent background.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "dog",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-10-01T21:39:27.397187+00:00"
+      },
+      "folder": "Take_Damage",
+      "frames": {
+        "rotations": {
+          "south": "Take_Damage/rotations/south.png",
+          "south-east": "Take_Damage/rotations/south-east.png",
+          "east": "Take_Damage/rotations/east.png",
+          "north-east": "Take_Damage/rotations/north-east.png",
+          "north": "Take_Damage/rotations/north.png",
+          "north-west": "Take_Damage/rotations/north-west.png",
+          "west": "Take_Damage/rotations/west.png",
+          "south-west": "Take_Damage/rotations/south-west.png"
+        },
+        "animations": {
+          "The_character_recoils_sharply_as_the_torso_snaps_b": {
+            "west": [
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_000.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_001.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_002.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_003.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_004.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_005.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_006.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_007.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/west/frame_008.png"
+            ],
+            "north-east": [
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_000.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_001.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_002.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_003.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_004.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_005.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_006.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_007.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-east/frame_008.png"
+            ],
+            "north-west": [
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_000.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_001.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_002.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_003.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_004.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_005.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_006.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_007.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north-west/frame_008.png"
+            ],
+            "south-east": [
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_000.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_001.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_002.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_003.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_004.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_005.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_006.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_007.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-east/frame_008.png"
+            ],
+            "south-west": [
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_000.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_001.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_002.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_003.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_004.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_005.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_006.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_007.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south-west/frame_008.png"
+            ],
+            "north": [
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_000.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_001.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_002.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_003.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_004.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_005.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_006.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_007.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/north/frame_008.png"
+            ],
+            "east": [
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_000.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_001.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_002.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_003.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_004.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_005.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_006.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_007.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/east/frame_008.png"
+            ],
+            "south": [
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_000.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_001.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_002.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_003.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_004.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_005.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_006.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_007.png",
+              "Take_Damage/animations/The_character_recoils_sharply_as_the_torso_snaps_b/south/frame_008.png"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "character": {
+        "id": "d3da7552-b333-42bd-a9e7-b2d0982a4018",
+        "name": "Dying",
+        "prompt": "A small fantasy wolf monster for a classic 2D MMORPG, inspired by the charming pixel-art aesthetic of early 2000s Korean MMORPGs. Compact body, slightly oversized head, short sturdy legs, medium-sized pointed ears, fluffy tail, sharp but simple teeth, dark gray and brown fur with subtle lighter patches, fierce but low-level creature expression, slightly hunched aggressive stance, simple fantasy design, clearly a weak beginner-area monster, NOT massive, NOT muscular, NOT a boss, NOT oversized. Full body, centered character, side-facing 3/4 view, clear silhouette, detailed pixel art, clean pixel clusters, strong readable outline, limited color palette, subtle highlights and shadows, cute-but-dangerous appearance, suitable for an MMORPG monster sprite, transparent background.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "dog",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-10-01T22:12:41.930687+00:00"
+      },
+      "folder": "Dying",
+      "frames": {
+        "rotations": {
+          "south": "Dying/rotations/south.png",
+          "south-east": "Dying/rotations/south-east.png",
+          "east": "Dying/rotations/east.png",
+          "north-east": "Dying/rotations/north-east.png",
+          "north": "Dying/rotations/north.png",
+          "north-west": "Dying/rotations/north-west.png",
+          "west": "Dying/rotations/west.png",
+          "south-west": "Dying/rotations/south-west.png"
+        },
+        "animations": {
+          "The_creature_s_knees_buckle_and_collapse_under_its": {
+            "south": [
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_000.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_001.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_002.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_003.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_004.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_005.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_006.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_007.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south/frame_008.png"
+            ],
+            "south-east": [
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_000.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_001.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_002.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_003.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_004.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_005.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_006.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_007.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-east/frame_008.png"
+            ],
+            "north": [
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_000.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_001.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_002.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_003.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_004.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_005.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_006.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_007.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north/frame_008.png"
+            ],
+            "south-west": [
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_000.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_001.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_002.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_003.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_004.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_005.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_006.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_007.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/south-west/frame_008.png"
+            ],
+            "north-west": [
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_000.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_001.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_002.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_003.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_004.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_005.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_006.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_007.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-west/frame_008.png"
+            ],
+            "west": [
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_000.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_001.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_002.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_003.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_004.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_005.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_006.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_007.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/west/frame_008.png"
+            ],
+            "east": [
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_000.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_001.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_002.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_003.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_004.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_005.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_006.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_007.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/east/frame_008.png"
+            ],
+            "north-east": [
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_000.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_001.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_002.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_003.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_004.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_005.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_006.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_007.png",
+              "Dying/animations/The_creature_s_knees_buckle_and_collapse_under_its/north-east/frame_008.png"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-10-04T05:45:18.830234"
+}

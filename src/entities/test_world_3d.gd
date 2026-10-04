@@ -32,6 +32,7 @@ func _ready() -> void:
 	_resolve_nodes()
 	_generate_terrain()
 	_spawn_field_decorations()
+	_spawn_monsters()
 
 	if hud != null and player != null:
 		hud.bind_player(player)
@@ -377,6 +378,29 @@ func _add_terrain_vertex(st: SurfaceTool, pos: Vector3) -> void:
 	st.set_uv(Vector2(pos.x, pos.z))
 	st.add_vertex(pos)
 
+## Spawns fantasy monsters (e.g. Desert Wolf) across open meadow grounds
+func _spawn_monsters() -> void:
+	var monsters_node: Node3D = Node3D.new()
+	monsters_node.name = "Monsters"
+	add_child(monsters_node)
+
+	var wolf_scene: PackedScene = load("res://scenes/entities/enemy_3d.tscn") as PackedScene
+	if wolf_scene == null:
+		return
+
+	# Carefully placed on flat meadow areas (height ~ 0.0, slope normal.y >= 0.98)
+	var spawn_coords: Array[Vector2] = [
+		Vector2(-6.0, 3.5),
+		Vector2(7.5, -3.0),
+		Vector2(-3.0, 8.5)
+	]
+
+	for pos2d: Vector2 in spawn_coords:
+		var wolf: CharacterBody3D = wolf_scene.instantiate() as CharacterBody3D
+		var y: float = _calculate_height(pos2d.x, pos2d.y)
+		wolf.position = Vector3(pos2d.x, y + 0.1, pos2d.y)
+		monsters_node.add_child(wolf)
+
 ## Spawns authentic Ragnarok Online style 2.5D billboard vegetation and props
 func _spawn_field_decorations() -> void:
 	var props_node: Node3D = Node3D.new()
@@ -412,16 +436,18 @@ func _spawn_field_decorations() -> void:
 	for coord: Vector2 in flower_coords:
 		_create_flat_prop(props_node, flower_tex, coord, 0.035, 0.025)
 
-	# 3. Tall grass tufts (upright billboards)
-	var grass_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_tall_grass.png")
+	# 3. Animated green stalks (Ragnarok Online style fluid swaying blades)
+	var stalks_frames: SpriteFrames = load("res://green stalks/green_stalks_sprite_frames.tres") as SpriteFrames
+	var grass_tex_fallback: Texture2D = load("res://assets/tiles/ground/tile_deco_tall_grass.png")
 	var grass_coords: Array[Vector2] = [
 		Vector2(-1.5, -1.0), Vector2(3.0, 1.5), Vector2(-4.5, 2.0),
 		Vector2(5.0, -6.0), Vector2(-6.5, -6.5), Vector2(13.5, -8.0),
 		Vector2(6.0, 8.0), Vector2(-7.0, 12.0), Vector2(-2.5, -8.0),
-		Vector2(11.0, -14.0), Vector2(-9.0, -15.0)
+		Vector2(11.0, -14.0), Vector2(-9.0, -15.0),
+		Vector2(1.0, 3.5), Vector2(-3.5, 4.0), Vector2(4.5, -2.5)
 	]
 	for coord: Vector2 in grass_coords:
-		_create_billboard_prop(props_node, grass_tex, coord, 0.030)
+		_create_animated_stalks_prop(props_node, stalks_frames, grass_tex_fallback, coord, 0.014)
 
 	# 4. Stepping stones along the path leading towards the plateau ramp (flat decals hugging terrain)
 	var stone_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_stepping_stones.png")
@@ -561,6 +587,39 @@ func _create_billboard_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixe
 	sprite.position = Vector3(pos2d.x, y + sprite_height * 0.5, pos2d.y)
 	sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	parent.add_child(sprite)
+
+func _create_animated_stalks_prop(parent: Node3D, frames: SpriteFrames, fallback_tex: Texture2D, pos2d: Vector2, pixel_scale: float) -> void:
+	var y: float = _calculate_height(pos2d.x, pos2d.y)
+	# The stalks frame is 68x68 with center at y=34. The base of the stalks touches y=64 (+30 px below center).
+	# Anchoring at y + 30.0 * pixel_scale touches stalks base directly to the terrain surface.
+	var anchor_y: float = y + 30.0 * pixel_scale
+	if frames != null and (frames.has_animation("default") or frames.has_animation("sway")):
+		var anim_sprite: AnimatedSprite3D = AnimatedSprite3D.new()
+		anim_sprite.sprite_frames = frames
+		var anim_name: String = "default" if frames.has_animation("default") else "sway"
+		anim_sprite.animation = anim_name
+		anim_sprite.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+		anim_sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
+		anim_sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		anim_sprite.pixel_size = pixel_scale
+		anim_sprite.position = Vector3(pos2d.x, anchor_y, pos2d.y)
+		anim_sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		parent.add_child(anim_sprite)
+		anim_sprite.play(anim_name)
+		var fc: int = frames.get_frame_count(anim_name)
+		if fc > 0:
+			anim_sprite.frame = randi() % fc
+	elif fallback_tex != null:
+		var sprite: Sprite3D = Sprite3D.new()
+		sprite.texture = fallback_tex
+		sprite.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
+		sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
+		sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		sprite.pixel_size = pixel_scale
+		var sprite_height: float = float(fallback_tex.get_height()) * pixel_scale
+		sprite.position = Vector3(pos2d.x, y + sprite_height * 0.5, pos2d.y)
+		sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		parent.add_child(sprite)
 
 func _create_flat_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixel_scale: float, height_offset: float = 0.025, use_alpha_blend: bool = false) -> void:
 	if tex == null:

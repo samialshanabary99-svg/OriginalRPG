@@ -1,0 +1,747 @@
+{
+  "group_id": "f8abef0e-dddd-41d6-a840-23b6ce1139e2",
+  "states": [
+    {
+      "character": {
+        "id": "36e4ddc9-e887-4918-81ba-7717aa79984e",
+        "name": "Idle",
+        "prompt": "Young male fantasy novice adventurer, inspired by classic 2D MMORPG beginner characters, full-body standing character, 3/4 view facing slightly left, youthful face, short messy dark brown hair, large expressive anime-style eyes, simple friendly appearance. Wearing a loose off-white long-sleeve linen tunic with a small V-neck and subtle stitching, brown leather shoulder strap crossing the chest, wide brown leather utility belt with several small leather pouches, simple cloth and leather gloves, dark brown fitted trousers, rugged brown leather ankle boots. Small beginner sword and simple equipment attached to the belt, lightweight adventurer gear, no heavy armor, no cape, no elaborate decorations. Slightly slim young male body proportions, natural relaxed stance, arms slightly away from body, detailed clothing folds, layered leather accessories, small buckles and straps, practical low-level adventurer equipment. Classic fantasy RPG aesthetic, highly detailed pixel art, crisp pixel clusters, carefully shaded pixels, strong silhouette, detailed face and hair, rich texture, warm natural earthy colors, clean outlines, polished 2D MMORPG character sprite, transparent background, centered character, full body, no environment.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-09-25T19:21:57.154848+00:00"
+      },
+      "folder": "Idle",
+      "frames": {
+        "rotations": {
+          "south": "Idle/rotations/south.png",
+          "south-east": "Idle/rotations/south-east.png",
+          "east": "Idle/rotations/east.png",
+          "north-east": "Idle/rotations/north-east.png",
+          "north": "Idle/rotations/north.png",
+          "north-west": "Idle/rotations/north-west.png",
+          "west": "Idle/rotations/west.png",
+          "south-west": "Idle/rotations/south-west.png"
+        },
+        "animations": {
+          "Breathing_Idle": {
+            "east": [
+              "Idle/animations/Breathing_Idle/east/frame_000.png",
+              "Idle/animations/Breathing_Idle/east/frame_001.png",
+              "Idle/animations/Breathing_Idle/east/frame_002.png",
+              "Idle/animations/Breathing_Idle/east/frame_003.png"
+            ],
+            "north-west": [
+              "Idle/animations/Breathing_Idle/north-west/frame_000.png",
+              "Idle/animations/Breathing_Idle/north-west/frame_001.png",
+              "Idle/animations/Breathing_Idle/north-west/frame_002.png",
+              "Idle/animations/Breathing_Idle/north-west/frame_003.png"
+            ],
+            "north": [
+              "Idle/animations/Breathing_Idle/north/frame_000.png",
+              "Idle/animations/Breathing_Idle/north/frame_001.png",
+              "Idle/animations/Breathing_Idle/north/frame_002.png",
+              "Idle/animations/Breathing_Idle/north/frame_003.png"
+            ],
+            "north-east": [
+              "Idle/animations/Breathing_Idle/north-east/frame_000.png",
+              "Idle/animations/Breathing_Idle/north-east/frame_001.png",
+              "Idle/animations/Breathing_Idle/north-east/frame_002.png",
+              "Idle/animations/Breathing_Idle/north-east/frame_003.png"
+            ],
+            "south": [
+              "Idle/animations/Breathing_Idle/south/frame_000.png",
+              "Idle/animations/Breathing_Idle/south/frame_001.png",
+              "Idle/animations/Breathing_Idle/south/frame_002.png",
+              "Idle/animations/Breathing_Idle/south/frame_003.png"
+            ],
+            "south-west": [
+              "Idle/animations/Breathing_Idle/south-west/frame_000.png",
+              "Idle/animations/Breathing_Idle/south-west/frame_001.png",
+              "Idle/animations/Breathing_Idle/south-west/frame_002.png",
+              "Idle/animations/Breathing_Idle/south-west/frame_003.png"
+            ],
+            "south-east": [
+              "Idle/animations/Breathing_Idle/south-east/frame_000.png",
+              "Idle/animations/Breathing_Idle/south-east/frame_001.png",
+              "Idle/animations/Breathing_Idle/south-east/frame_002.png",
+              "Idle/animations/Breathing_Idle/south-east/frame_003.png"
+            ],
+            "west": [
+              "Idle/animations/Breathing_Idle/west/frame_000.png",
+              "Idle/animations/Breathing_Idle/west/frame_001.png",
+              "Idle/animations/Breathing_Idle/west/frame_002.png",
+              "Idle/animations/Breathing_Idle/west/frame_003.png"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "character": {
+        "id": "36bc9d1f-3689-42a8-800f-fb4c25e4ab8b",
+        "name": "Walking",
+        "prompt": "Young male fantasy novice adventurer, inspired by classic 2D MMORPG beginner characters, full-body standing character, 3/4 view facing slightly left, youthful face, short messy dark brown hair, large expressive anime-style eyes, simple friendly appearance. Wearing a loose off-white long-sleeve linen tunic with a small V-neck and subtle stitching, brown leather shoulder strap crossing the chest, wide brown leather utility belt with several small leather pouches, simple cloth and leather gloves, dark brown fitted trousers, rugged brown leather ankle boots. Small beginner sword and simple equipment attached to the belt, lightweight adventurer gear, no heavy armor, no cape, no elaborate decorations. Slightly slim young male body proportions, natural relaxed stance, arms slightly away from body, detailed clothing folds, layered leather accessories, small buckles and straps, practical low-level adventurer equipment. Classic fantasy RPG aesthetic, highly detailed pixel art, crisp pixel clusters, carefully shaded pixels, strong silhouette, detailed face and hair, rich texture, warm natural earthy colors, clean outlines, polished 2D MMORPG character sprite, transparent background, centered character, full body, no environment.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-10-01T10:53:33.726166+00:00"
+      },
+      "folder": "Walking",
+      "frames": {
+        "rotations": {
+          "south": "Walking/rotations/south.png",
+          "south-east": "Walking/rotations/south-east.png",
+          "east": "Walking/rotations/east.png",
+          "north-east": "Walking/rotations/north-east.png",
+          "north": "Walking/rotations/north.png",
+          "north-west": "Walking/rotations/north-west.png",
+          "west": "Walking/rotations/west.png",
+          "south-west": "Walking/rotations/south-west.png"
+        },
+        "animations": {
+          "Walking": {
+            "north-west": [
+              "Walking/animations/Walking/north-west/frame_000.png",
+              "Walking/animations/Walking/north-west/frame_001.png",
+              "Walking/animations/Walking/north-west/frame_002.png",
+              "Walking/animations/Walking/north-west/frame_003.png",
+              "Walking/animations/Walking/north-west/frame_004.png",
+              "Walking/animations/Walking/north-west/frame_005.png",
+              "Walking/animations/Walking/north-west/frame_006.png",
+              "Walking/animations/Walking/north-west/frame_007.png"
+            ],
+            "east": [
+              "Walking/animations/Walking/east/frame_000.png",
+              "Walking/animations/Walking/east/frame_001.png",
+              "Walking/animations/Walking/east/frame_002.png",
+              "Walking/animations/Walking/east/frame_003.png",
+              "Walking/animations/Walking/east/frame_004.png",
+              "Walking/animations/Walking/east/frame_005.png",
+              "Walking/animations/Walking/east/frame_006.png",
+              "Walking/animations/Walking/east/frame_007.png"
+            ],
+            "south-west": [
+              "Walking/animations/Walking/south-west/frame_000.png",
+              "Walking/animations/Walking/south-west/frame_001.png",
+              "Walking/animations/Walking/south-west/frame_002.png",
+              "Walking/animations/Walking/south-west/frame_003.png",
+              "Walking/animations/Walking/south-west/frame_004.png",
+              "Walking/animations/Walking/south-west/frame_005.png",
+              "Walking/animations/Walking/south-west/frame_006.png",
+              "Walking/animations/Walking/south-west/frame_007.png"
+            ],
+            "north": [
+              "Walking/animations/Walking/north/frame_000.png",
+              "Walking/animations/Walking/north/frame_001.png",
+              "Walking/animations/Walking/north/frame_002.png",
+              "Walking/animations/Walking/north/frame_003.png",
+              "Walking/animations/Walking/north/frame_004.png",
+              "Walking/animations/Walking/north/frame_005.png",
+              "Walking/animations/Walking/north/frame_006.png",
+              "Walking/animations/Walking/north/frame_007.png"
+            ],
+            "west": [
+              "Walking/animations/Walking/west/frame_000.png",
+              "Walking/animations/Walking/west/frame_001.png",
+              "Walking/animations/Walking/west/frame_002.png",
+              "Walking/animations/Walking/west/frame_003.png",
+              "Walking/animations/Walking/west/frame_004.png",
+              "Walking/animations/Walking/west/frame_005.png",
+              "Walking/animations/Walking/west/frame_006.png",
+              "Walking/animations/Walking/west/frame_007.png"
+            ],
+            "south-east": [
+              "Walking/animations/Walking/south-east/frame_000.png",
+              "Walking/animations/Walking/south-east/frame_001.png",
+              "Walking/animations/Walking/south-east/frame_002.png",
+              "Walking/animations/Walking/south-east/frame_003.png",
+              "Walking/animations/Walking/south-east/frame_004.png",
+              "Walking/animations/Walking/south-east/frame_005.png",
+              "Walking/animations/Walking/south-east/frame_006.png",
+              "Walking/animations/Walking/south-east/frame_007.png"
+            ],
+            "south": [
+              "Walking/animations/Walking/south/frame_000.png",
+              "Walking/animations/Walking/south/frame_001.png",
+              "Walking/animations/Walking/south/frame_002.png",
+              "Walking/animations/Walking/south/frame_003.png",
+              "Walking/animations/Walking/south/frame_004.png",
+              "Walking/animations/Walking/south/frame_005.png",
+              "Walking/animations/Walking/south/frame_006.png",
+              "Walking/animations/Walking/south/frame_007.png"
+            ],
+            "north-east": [
+              "Walking/animations/Walking/north-east/frame_000.png",
+              "Walking/animations/Walking/north-east/frame_001.png",
+              "Walking/animations/Walking/north-east/frame_002.png",
+              "Walking/animations/Walking/north-east/frame_003.png",
+              "Walking/animations/Walking/north-east/frame_004.png",
+              "Walking/animations/Walking/north-east/frame_005.png",
+              "Walking/animations/Walking/north-east/frame_006.png",
+              "Walking/animations/Walking/north-east/frame_007.png"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "character": {
+        "id": "29c9c6c1-6e30-4868-a9d9-c3b324f3b8f6",
+        "name": "Picking up",
+        "prompt": "Young male fantasy novice adventurer, inspired by classic 2D MMORPG beginner characters, full-body standing character, 3/4 view facing slightly left, youthful face, short messy dark brown hair, large expressive anime-style eyes, simple friendly appearance. Wearing a loose off-white long-sleeve linen tunic with a small V-neck and subtle stitching, brown leather shoulder strap crossing the chest, wide brown leather utility belt with several small leather pouches, simple cloth and leather gloves, dark brown fitted trousers, rugged brown leather ankle boots. Small beginner sword and simple equipment attached to the belt, lightweight adventurer gear, no heavy armor, no cape, no elaborate decorations. Slightly slim young male body proportions, natural relaxed stance, arms slightly away from body, detailed clothing folds, layered leather accessories, small buckles and straps, practical low-level adventurer equipment. Classic fantasy RPG aesthetic, highly detailed pixel art, crisp pixel clusters, carefully shaded pixels, strong silhouette, detailed face and hair, rich texture, warm natural earthy colors, clean outlines, polished 2D MMORPG character sprite, transparent background, centered character, full body, no environment.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-10-01T12:44:13.982950+00:00"
+      },
+      "folder": "Picking_up",
+      "frames": {
+        "rotations": {
+          "south": "Picking_up/rotations/south.png",
+          "south-east": "Picking_up/rotations/south-east.png",
+          "east": "Picking_up/rotations/east.png",
+          "north-east": "Picking_up/rotations/north-east.png",
+          "north": "Picking_up/rotations/north.png",
+          "north-west": "Picking_up/rotations/north-west.png",
+          "west": "Picking_up/rotations/west.png",
+          "south-west": "Picking_up/rotations/south-west.png"
+        },
+        "animations": {
+          "Picking_Up": {
+            "south-east": [
+              "Picking_up/animations/Picking_Up/south-east/frame_000.png",
+              "Picking_up/animations/Picking_Up/south-east/frame_001.png",
+              "Picking_up/animations/Picking_Up/south-east/frame_002.png",
+              "Picking_up/animations/Picking_Up/south-east/frame_003.png",
+              "Picking_up/animations/Picking_Up/south-east/frame_004.png"
+            ],
+            "south": [
+              "Picking_up/animations/Picking_Up/south/frame_000.png",
+              "Picking_up/animations/Picking_Up/south/frame_001.png",
+              "Picking_up/animations/Picking_Up/south/frame_002.png",
+              "Picking_up/animations/Picking_Up/south/frame_003.png",
+              "Picking_up/animations/Picking_Up/south/frame_004.png"
+            ],
+            "south-west": [
+              "Picking_up/animations/Picking_Up/south-west/frame_000.png",
+              "Picking_up/animations/Picking_Up/south-west/frame_001.png",
+              "Picking_up/animations/Picking_Up/south-west/frame_002.png",
+              "Picking_up/animations/Picking_Up/south-west/frame_003.png",
+              "Picking_up/animations/Picking_Up/south-west/frame_004.png"
+            ],
+            "east": [
+              "Picking_up/animations/Picking_Up/east/frame_000.png",
+              "Picking_up/animations/Picking_Up/east/frame_001.png",
+              "Picking_up/animations/Picking_Up/east/frame_002.png",
+              "Picking_up/animations/Picking_Up/east/frame_003.png",
+              "Picking_up/animations/Picking_Up/east/frame_004.png"
+            ],
+            "north-d9b31c47": [
+              "Picking_up/animations/Picking_Up/north-d9b31c47/frame_000.png",
+              "Picking_up/animations/Picking_Up/north-d9b31c47/frame_001.png",
+              "Picking_up/animations/Picking_Up/north-d9b31c47/frame_002.png",
+              "Picking_up/animations/Picking_Up/north-d9b31c47/frame_003.png",
+              "Picking_up/animations/Picking_Up/north-d9b31c47/frame_004.png"
+            ],
+            "west": [
+              "Picking_up/animations/Picking_Up/west/frame_000.png",
+              "Picking_up/animations/Picking_Up/west/frame_001.png",
+              "Picking_up/animations/Picking_Up/west/frame_002.png",
+              "Picking_up/animations/Picking_Up/west/frame_003.png",
+              "Picking_up/animations/Picking_Up/west/frame_004.png"
+            ],
+            "north-e6644347": [
+              "Picking_up/animations/Picking_Up/north-e6644347/frame_000.png",
+              "Picking_up/animations/Picking_Up/north-e6644347/frame_001.png",
+              "Picking_up/animations/Picking_Up/north-e6644347/frame_002.png",
+              "Picking_up/animations/Picking_Up/north-e6644347/frame_003.png",
+              "Picking_up/animations/Picking_Up/north-e6644347/frame_004.png"
+            ],
+            "north-west": [
+              "Picking_up/animations/Picking_Up/north-west/frame_000.png",
+              "Picking_up/animations/Picking_Up/north-west/frame_001.png",
+              "Picking_up/animations/Picking_Up/north-west/frame_002.png",
+              "Picking_up/animations/Picking_Up/north-west/frame_003.png",
+              "Picking_up/animations/Picking_Up/north-west/frame_004.png"
+            ],
+            "north-east": [
+              "Picking_up/animations/Picking_Up/north-east/frame_000.png",
+              "Picking_up/animations/Picking_Up/north-east/frame_001.png",
+              "Picking_up/animations/Picking_Up/north-east/frame_002.png",
+              "Picking_up/animations/Picking_Up/north-east/frame_003.png",
+              "Picking_up/animations/Picking_Up/north-east/frame_004.png"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "character": {
+        "id": "4f3bdf1c-1f34-4d39-9e24-481820dcd5c7",
+        "name": "Taking Damage",
+        "prompt": "Young male fantasy novice adventurer, inspired by classic 2D MMORPG beginner characters, full-body standing character, 3/4 view facing slightly left, youthful face, short messy dark brown hair, large expressive anime-style eyes, simple friendly appearance. Wearing a loose off-white long-sleeve linen tunic with a small V-neck and subtle stitching, brown leather shoulder strap crossing the chest, wide brown leather utility belt with several small leather pouches, simple cloth and leather gloves, dark brown fitted trousers, rugged brown leather ankle boots. Small beginner sword and simple equipment attached to the belt, lightweight adventurer gear, no heavy armor, no cape, no elaborate decorations. Slightly slim young male body proportions, natural relaxed stance, arms slightly away from body, detailed clothing folds, layered leather accessories, small buckles and straps, practical low-level adventurer equipment. Classic fantasy RPG aesthetic, highly detailed pixel art, crisp pixel clusters, carefully shaded pixels, strong silhouette, detailed face and hair, rich texture, warm natural earthy colors, clean outlines, polished 2D MMORPG character sprite, transparent background, centered character, full body, no environment.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-10-01T14:04:03.038968+00:00"
+      },
+      "folder": "Taking_Damage",
+      "frames": {
+        "rotations": {
+          "south": "Taking_Damage/rotations/south.png",
+          "south-east": "Taking_Damage/rotations/south-east.png",
+          "east": "Taking_Damage/rotations/east.png",
+          "north-east": "Taking_Damage/rotations/north-east.png",
+          "north": "Taking_Damage/rotations/north.png",
+          "north-west": "Taking_Damage/rotations/north-west.png",
+          "west": "Taking_Damage/rotations/west.png",
+          "south-west": "Taking_Damage/rotations/south-west.png"
+        },
+        "animations": {
+          "The_character_recoils_sharply_as_the_torso_jerks_b": {
+            "north-west": [
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_000.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_001.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_002.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_003.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_004.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_005.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_006.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_007.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-west/frame_008.png"
+            ],
+            "south": [
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_000.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_001.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_002.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_003.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_004.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_005.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_006.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_007.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south/frame_008.png"
+            ],
+            "west": [
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_000.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_001.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_002.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_003.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_004.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_005.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_006.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_007.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/west/frame_008.png"
+            ],
+            "south-west": [
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_000.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_001.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_002.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_003.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_004.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_005.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_006.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_007.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-west/frame_008.png"
+            ],
+            "north-east": [
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_000.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_001.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_002.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_003.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_004.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_005.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_006.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_007.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north-east/frame_008.png"
+            ],
+            "east": [
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_000.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_001.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_002.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_003.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_004.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_005.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_006.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_007.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/east/frame_008.png"
+            ],
+            "south-east": [
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_000.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_001.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_002.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_003.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_004.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_005.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_006.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_007.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/south-east/frame_008.png"
+            ],
+            "north": [
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_000.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_001.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_002.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_003.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_004.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_005.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_006.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_007.png",
+              "Taking_Damage/animations/The_character_recoils_sharply_as_the_torso_jerks_b/north/frame_008.png"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "character": {
+        "id": "38047ab1-4894-44bf-9e1d-5edf5e4d0153",
+        "name": "Dying",
+        "prompt": "Young male fantasy novice adventurer, inspired by classic 2D MMORPG beginner characters, full-body standing character, 3/4 view facing slightly left, youthful face, short messy dark brown hair, large expressive anime-style eyes, simple friendly appearance. Wearing a loose off-white long-sleeve linen tunic with a small V-neck and subtle stitching, brown leather shoulder strap crossing the chest, wide brown leather utility belt with several small leather pouches, simple cloth and leather gloves, dark brown fitted trousers, rugged brown leather ankle boots. Small beginner sword and simple equipment attached to the belt, lightweight adventurer gear, no heavy armor, no cape, no elaborate decorations. Slightly slim young male body proportions, natural relaxed stance, arms slightly away from body, detailed clothing folds, layered leather accessories, small buckles and straps, practical low-level adventurer equipment. Classic fantasy RPG aesthetic, highly detailed pixel art, crisp pixel clusters, carefully shaded pixels, strong silhouette, detailed face and hair, rich texture, warm natural earthy colors, clean outlines, polished 2D MMORPG character sprite, transparent background, centered character, full body, no environment.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-10-01T21:48:51.607189+00:00"
+      },
+      "folder": "Dying",
+      "frames": {
+        "rotations": {
+          "south": "Dying/rotations/south.png",
+          "south-east": "Dying/rotations/south-east.png",
+          "east": "Dying/rotations/east.png",
+          "north-east": "Dying/rotations/north-east.png",
+          "north": "Dying/rotations/north.png",
+          "north-west": "Dying/rotations/north-west.png",
+          "west": "Dying/rotations/west.png",
+          "south-west": "Dying/rotations/south-west.png"
+        },
+        "animations": {
+          "Falling_Back_Death": {
+            "west": [
+              "Dying/animations/Falling_Back_Death/west/frame_000.png",
+              "Dying/animations/Falling_Back_Death/west/frame_001.png",
+              "Dying/animations/Falling_Back_Death/west/frame_002.png",
+              "Dying/animations/Falling_Back_Death/west/frame_003.png",
+              "Dying/animations/Falling_Back_Death/west/frame_004.png",
+              "Dying/animations/Falling_Back_Death/west/frame_005.png",
+              "Dying/animations/Falling_Back_Death/west/frame_006.png"
+            ],
+            "south": [
+              "Dying/animations/Falling_Back_Death/south/frame_000.png",
+              "Dying/animations/Falling_Back_Death/south/frame_001.png",
+              "Dying/animations/Falling_Back_Death/south/frame_002.png",
+              "Dying/animations/Falling_Back_Death/south/frame_003.png",
+              "Dying/animations/Falling_Back_Death/south/frame_004.png",
+              "Dying/animations/Falling_Back_Death/south/frame_005.png",
+              "Dying/animations/Falling_Back_Death/south/frame_006.png"
+            ],
+            "south-east": [
+              "Dying/animations/Falling_Back_Death/south-east/frame_000.png",
+              "Dying/animations/Falling_Back_Death/south-east/frame_001.png",
+              "Dying/animations/Falling_Back_Death/south-east/frame_002.png",
+              "Dying/animations/Falling_Back_Death/south-east/frame_003.png",
+              "Dying/animations/Falling_Back_Death/south-east/frame_004.png",
+              "Dying/animations/Falling_Back_Death/south-east/frame_005.png",
+              "Dying/animations/Falling_Back_Death/south-east/frame_006.png"
+            ],
+            "north-east": [
+              "Dying/animations/Falling_Back_Death/north-east/frame_000.png",
+              "Dying/animations/Falling_Back_Death/north-east/frame_001.png",
+              "Dying/animations/Falling_Back_Death/north-east/frame_002.png",
+              "Dying/animations/Falling_Back_Death/north-east/frame_003.png",
+              "Dying/animations/Falling_Back_Death/north-east/frame_004.png",
+              "Dying/animations/Falling_Back_Death/north-east/frame_005.png",
+              "Dying/animations/Falling_Back_Death/north-east/frame_006.png"
+            ],
+            "north-west": [
+              "Dying/animations/Falling_Back_Death/north-west/frame_000.png",
+              "Dying/animations/Falling_Back_Death/north-west/frame_001.png",
+              "Dying/animations/Falling_Back_Death/north-west/frame_002.png",
+              "Dying/animations/Falling_Back_Death/north-west/frame_003.png",
+              "Dying/animations/Falling_Back_Death/north-west/frame_004.png",
+              "Dying/animations/Falling_Back_Death/north-west/frame_005.png",
+              "Dying/animations/Falling_Back_Death/north-west/frame_006.png"
+            ],
+            "south-west": [
+              "Dying/animations/Falling_Back_Death/south-west/frame_000.png",
+              "Dying/animations/Falling_Back_Death/south-west/frame_001.png",
+              "Dying/animations/Falling_Back_Death/south-west/frame_002.png",
+              "Dying/animations/Falling_Back_Death/south-west/frame_003.png",
+              "Dying/animations/Falling_Back_Death/south-west/frame_004.png",
+              "Dying/animations/Falling_Back_Death/south-west/frame_005.png",
+              "Dying/animations/Falling_Back_Death/south-west/frame_006.png"
+            ],
+            "east": [
+              "Dying/animations/Falling_Back_Death/east/frame_000.png",
+              "Dying/animations/Falling_Back_Death/east/frame_001.png",
+              "Dying/animations/Falling_Back_Death/east/frame_002.png",
+              "Dying/animations/Falling_Back_Death/east/frame_003.png",
+              "Dying/animations/Falling_Back_Death/east/frame_004.png",
+              "Dying/animations/Falling_Back_Death/east/frame_005.png",
+              "Dying/animations/Falling_Back_Death/east/frame_006.png"
+            ],
+            "north": [
+              "Dying/animations/Falling_Back_Death/north/frame_000.png",
+              "Dying/animations/Falling_Back_Death/north/frame_001.png",
+              "Dying/animations/Falling_Back_Death/north/frame_002.png",
+              "Dying/animations/Falling_Back_Death/north/frame_003.png",
+              "Dying/animations/Falling_Back_Death/north/frame_004.png",
+              "Dying/animations/Falling_Back_Death/north/frame_005.png",
+              "Dying/animations/Falling_Back_Death/north/frame_006.png"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "character": {
+        "id": "3c5b6986-fb86-4c19-acd8-5af5f2c4ed8a",
+        "name": "fighting pose",
+        "prompt": "Young male fantasy novice adventurer, inspired by classic 2D MMORPG beginner characters, full-body standing character, 3/4 view facing slightly left, youthful face, short messy dark brown hair, large expressive anime-style eyes, simple friendly appearance. Wearing a loose off-white long-sleeve linen tunic with a small V-neck and subtle stitching, brown leather shoulder strap crossing the chest, wide brown leather utility belt with several small leather pouches, simple cloth and leather gloves, dark brown fitted trousers, rugged brown leather ankle boots. Small beginner sword and simple equipment attached to the belt, lightweight adventurer gear, no heavy armor, no cape, no elaborate decorations. Slightly slim young male body proportions, natural relaxed stance, arms slightly away from body, detailed clothing folds, layered leather accessories, small buckles and straps, practical low-level adventurer equipment. Classic fantasy RPG aesthetic, highly detailed pixel art, crisp pixel clusters, carefully shaded pixels, strong silhouette, detailed face and hair, rich texture, warm natural earthy colors, clean outlines, polished 2D MMORPG character sprite, transparent background, centered character, full body, no environment.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-10-03T12:31:29.634195+00:00"
+      },
+      "folder": "fighting_pose",
+      "frames": {
+        "rotations": {
+          "south": "fighting_pose/rotations/south.png",
+          "south-east": "fighting_pose/rotations/south-east.png",
+          "east": "fighting_pose/rotations/east.png",
+          "north-east": "fighting_pose/rotations/north-east.png",
+          "north": "fighting_pose/rotations/north.png",
+          "north-west": "fighting_pose/rotations/north-west.png",
+          "west": "fighting_pose/rotations/west.png",
+          "south-west": "fighting_pose/rotations/south-west.png"
+        },
+        "animations": {
+          "The_character_maintains_a_combat-ready_stance_whil": {
+            "north-east": [
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north-east/frame_000.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north-east/frame_001.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north-east/frame_002.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north-east/frame_003.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north-east/frame_004.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north-east/frame_005.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north-east/frame_006.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north-east/frame_007.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north-east/frame_008.png"
+            ],
+            "south-west": [
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-west/frame_000.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-west/frame_001.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-west/frame_002.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-west/frame_003.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-west/frame_004.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-west/frame_005.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-west/frame_006.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-west/frame_007.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-west/frame_008.png"
+            ],
+            "east": [
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/east/frame_000.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/east/frame_001.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/east/frame_002.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/east/frame_003.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/east/frame_004.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/east/frame_005.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/east/frame_006.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/east/frame_007.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/east/frame_008.png"
+            ],
+            "south": [
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south/frame_000.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south/frame_001.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south/frame_002.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south/frame_003.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south/frame_004.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south/frame_005.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south/frame_006.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south/frame_007.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south/frame_008.png"
+            ],
+            "south-east": [
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-east/frame_000.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-east/frame_001.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-east/frame_002.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-east/frame_003.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-east/frame_004.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-east/frame_005.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-east/frame_006.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-east/frame_007.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/south-east/frame_008.png"
+            ],
+            "north": [
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north/frame_000.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north/frame_001.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north/frame_002.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north/frame_003.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north/frame_004.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north/frame_005.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north/frame_006.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north/frame_007.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/north/frame_008.png"
+            ],
+            "west": [
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/west/frame_000.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/west/frame_001.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/west/frame_002.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/west/frame_003.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/west/frame_004.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/west/frame_005.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/west/frame_006.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/west/frame_007.png",
+              "fighting_pose/animations/The_character_maintains_a_combat-ready_stance_whil/west/frame_008.png"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "character": {
+        "id": "e2000178-7286-4b3a-ae9a-2eeabd66c070",
+        "name": "fighting action... a",
+        "prompt": "Young male fantasy novice adventurer, inspired by classic 2D MMORPG beginner characters, full-body standing character, 3/4 view facing slightly left, youthful face, short messy dark brown hair, large expressive anime-style eyes, simple friendly appearance. Wearing a loose off-white long-sleeve linen tunic with a small V-neck and subtle stitching, brown leather shoulder strap crossing the chest, wide brown leather utility belt with several small leather pouches, simple cloth and leather gloves, dark brown fitted trousers, rugged brown leather ankle boots. Small beginner sword and simple equipment attached to the belt, lightweight adventurer gear, no heavy armor, no cape, no elaborate decorations. Slightly slim young male body proportions, natural relaxed stance, arms slightly away from body, detailed clothing folds, layered leather accessories, small buckles and straps, practical low-level adventurer equipment. Classic fantasy RPG aesthetic, highly detailed pixel art, crisp pixel clusters, carefully shaded pixels, strong silhouette, detailed face and hair, rich texture, warm natural earthy colors, clean outlines, polished 2D MMORPG character sprite, transparent background, centered character, full body, no environment.",
+        "size": {
+          "width": 128,
+          "height": 128
+        },
+        "template_id": "mannequin",
+        "directions": 8,
+        "view": "low top-down",
+        "created_at": "2026-10-03T15:11:59.276544+00:00"
+      },
+      "folder": "fighting_action..._a",
+      "frames": {
+        "rotations": {
+          "south": "fighting_action..._a/rotations/south.png",
+          "south-east": "fighting_action..._a/rotations/south-east.png",
+          "east": "fighting_action..._a/rotations/east.png",
+          "north-east": "fighting_action..._a/rotations/north-east.png",
+          "north": "fighting_action..._a/rotations/north.png",
+          "north-west": "fighting_action..._a/rotations/north-west.png",
+          "west": "fighting_action..._a/rotations/west.png",
+          "south-west": "fighting_action..._a/rotations/south-west.png"
+        },
+        "animations": {
+          "The_character_pulls_the_sword_back_behind_the_righ": {
+            "south": [
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_000.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_001.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_002.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_003.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_004.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_005.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_006.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_007.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south/frame_008.png"
+            ],
+            "south-west": [
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_000.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_001.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_002.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_003.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_004.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_005.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_006.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_007.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-west/frame_008.png"
+            ],
+            "east": [
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_000.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_001.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_002.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_003.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_004.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_005.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_006.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_007.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/east/frame_008.png"
+            ],
+            "north": [
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_000.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_001.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_002.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_003.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_004.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_005.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_006.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_007.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north/frame_008.png"
+            ],
+            "north-west": [
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_000.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_001.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_002.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_003.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_004.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_005.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_006.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_007.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-west/frame_008.png"
+            ],
+            "west": [
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_000.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_001.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_002.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_003.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_004.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_005.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_006.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_007.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/west/frame_008.png"
+            ],
+            "south-east": [
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_000.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_001.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_002.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_003.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_004.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_005.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_006.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_007.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/south-east/frame_008.png"
+            ],
+            "north-east": [
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_000.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_001.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_002.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_003.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_004.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_005.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_006.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_007.png",
+              "fighting_action..._a/animations/The_character_pulls_the_sword_back_behind_the_righ/north-east/frame_008.png"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "export_version": "3.1",
+  "export_date": "2026-10-04T05:44:43.487429"
+}

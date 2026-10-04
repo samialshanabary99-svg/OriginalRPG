@@ -102,6 +102,8 @@ var current_target: Node = null
 var last_combat_result: CombatResult = null
 
 var _attack_timer: float = 0.0
+var _damage_timer: float = 0.0
+var _current_direction: String = "south"
 var _gravity: float = 14.0
 var _cam_clearance_y: float = 0.0
 
@@ -114,6 +116,7 @@ func _enter_tree() -> void:
 	floor_stop_on_slope = true
 
 func _ready() -> void:
+	add_to_group("player")
 	_resolve_nodes()
 	floor_snap_length = 0.45
 	floor_max_angle = deg_to_rad(55.0)
@@ -266,7 +269,9 @@ func _resolve_nodes() -> void:
 
 func _physics_process(delta: float) -> void:
 	if _attack_timer > 0.0:
-		_attack_timer = max(0.0, _attack_timer - delta)
+		_attack_timer = maxf(0.0, _attack_timer - delta)
+	if _damage_timer > 0.0:
+		_damage_timer = maxf(0.0, _damage_timer - delta)
 
 	if character_state == CharacterState.DEAD:
 		velocity.x = move_toward(velocity.x, 0.0, move_speed * 4.0 * delta)
@@ -277,6 +282,7 @@ func _physics_process(delta: float) -> void:
 			move_and_slide()
 		else:
 			position += velocity * delta
+		_update_animation()
 		return
 
 	# Handle gravity
@@ -315,7 +321,7 @@ func _physics_process(delta: float) -> void:
 		var screen_x: float = move_dir.dot(cam_right)
 		var screen_z: float = -move_dir.dot(cam_forward)
 		var dir_str: String = _vector_to_direction(Vector3(screen_x, 0.0, screen_z))
-		_update_animation(dir_str)
+		_current_direction = dir_str
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, move_speed * 8.0 * delta)
 		velocity.z = move_toward(velocity.z, 0.0, move_speed * 8.0 * delta)
@@ -328,13 +334,41 @@ func _physics_process(delta: float) -> void:
 	else:
 		position += velocity * delta
 
-func _update_animation(dir_name: String) -> void:
+	_update_animation()
+
+func _update_animation(dir_name: String = "") -> void:
 	if animated_sprite == null or animated_sprite.sprite_frames == null:
 		return
-	var anim_name: String = "idle_" + dir_name
+	if not dir_name.is_empty():
+		_current_direction = dir_name
+
+	var anim_prefix: String = "idle"
+	if character_state == CharacterState.DEAD:
+		anim_prefix = "die"
+	elif _damage_timer > 0.0:
+		anim_prefix = "damage"
+	elif _attack_timer > 0.0:
+		anim_prefix = "attack"
+	elif is_moving():
+		anim_prefix = "walk"
+	else:
+		anim_prefix = "idle"
+
+	# If dead and death animation finished, switch to static "dead" frame
+	if character_state == CharacterState.DEAD and animated_sprite.animation.begins_with("die") and not animated_sprite.is_playing():
+		if animated_sprite.sprite_frames.has_animation("dead"):
+			animated_sprite.play("dead")
+			return
+
+	var anim_name: String = "%s_%s" % [anim_prefix, _current_direction]
 	if animated_sprite.sprite_frames.has_animation(anim_name):
 		if animated_sprite.animation != anim_name or not animated_sprite.is_playing():
 			animated_sprite.play(anim_name)
+	elif animated_sprite.sprite_frames.has_animation(anim_prefix):
+		if animated_sprite.animation != anim_prefix or not animated_sprite.is_playing():
+			animated_sprite.play(anim_prefix)
+	elif animated_sprite.sprite_frames.has_animation("idle_" + _current_direction):
+		animated_sprite.play("idle_" + _current_direction)
 	elif animated_sprite.sprite_frames.has_animation("idle"):
 		animated_sprite.play("idle")
 
@@ -385,11 +419,48 @@ func attack() -> void:
 	_attack_timer = attack_cooldown
 	emit_signal("player_attacked")
 
+	var target_enemy: Node = current_target
+	if target_enemy == null or not is_instance_valid(target_enemy):
+		target_enemy = _find_nearest_enemy_in_reach(2.2)
+
+	if target_enemy != null and is_instance_valid(target_enemy) and target_enemy.has_method("take_damage"):
+		var dmg: int = stats.final_attack if stats != null else 10
+		target_enemy.take_damage(dmg, self)
+
+func _find_nearest_enemy_in_reach(reach_dist: float) -> Node:
+	if not is_inside_tree():
+		return null
+	var enemies: Array[Node] = get_tree().get_nodes_in_group("enemies")
+	var best_enemy: Node = null
+	var best_dist: float = reach_dist
+	for e: Node in enemies:
+		if e is Node3D and is_instance_valid(e):
+			var e3d: Node3D = e as Node3D
+			var to_e: Vector3 = e3d.global_position - global_position
+			to_e.y = 0.0
+			var dist: float = to_e.length()
+			if dist <= best_dist:
+				best_dist = dist
+				best_enemy = e
+	return best_enemy
+
+func take_damage(amount: int, _attacker: Node = null) -> void:
+	if character_state != CharacterState.ALIVE:
+		return
+	var def_val: int = stats.final_defence if stats != null else 0
+	var final_dmg: int = maxi(1, amount - def_val)
+	if stats != null:
+		stats.current_health = maxi(0, stats.current_health - final_dmg)
+		if stats.current_health <= 0:
+			_on_player_died()
+			return
+	_damage_timer = 0.40
+
 func _try_attack() -> void:
 	attack()
 
 func _on_player_died() -> void:
 	character_state = CharacterState.DEAD
 	velocity = Vector3.ZERO
-	if animated_sprite != null and animated_sprite.sprite_frames != null and animated_sprite.sprite_frames.has_animation("dead"):
-		animated_sprite.play("dead")
+	_update_animation()
+
