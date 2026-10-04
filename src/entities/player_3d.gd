@@ -319,6 +319,9 @@ func _resolve_nodes() -> void:
 func _physics_process(delta: float) -> void:
 	if _attack_timer > 0.0:
 		_attack_timer = maxf(0.0, _attack_timer - delta)
+		# Hit apex timing guarantee (~0.25s into attack swing)
+		if not _attack_has_hit and _attack_timer <= attack_cooldown - 0.25:
+			_apply_attack_hit()
 	if _damage_timer > 0.0:
 		_damage_timer = maxf(0.0, _damage_timer - delta)
 
@@ -687,8 +690,8 @@ func face_target(target_pos: Vector3) -> void:
 	var self_pos: Vector3 = global_position if is_inside_tree() else position
 	var diff: Vector3 = target_pos - self_pos
 	diff.y = 0.0
-	if diff.length_squared() < 0.001:
-		return
+	if diff.length() < 0.15:
+		return # Dead zone: prevent direction jitter/flicker when entities touch
 	var dir_norm: Vector3 = diff.normalized()
 	facing_direction = dir_norm
 
@@ -725,7 +728,7 @@ func attack() -> void:
 
 	var target_enemy: Node = target_enemy_node if target_enemy_node != null else current_target
 	if target_enemy == null or not is_instance_valid(target_enemy):
-		target_enemy = _find_nearest_enemy_in_reach(melee_attack_range + 0.3)
+		target_enemy = _find_nearest_enemy_in_reach(melee_attack_range + 0.4)
 
 	_attack_target_node = target_enemy
 	if _attack_target_node != null and is_instance_valid(_attack_target_node) and _attack_target_node is Node3D:
@@ -743,7 +746,7 @@ func _on_sprite_frame_changed() -> void:
 
 	var cur_frame: int = animated_sprite.frame
 
-	# Wind-up lunge on frames 1-3 toward target (~0.12m)
+	# Wind-up lunge on frames 1-3 toward target (~0.08m, clamped to maintain gap)
 	if (cur_frame >= 1 and cur_frame <= 3) and not _attack_lunge_done:
 		_attack_lunge_done = true
 		if _attack_target_node != null and is_instance_valid(_attack_target_node) and _attack_target_node is Node3D:
@@ -751,29 +754,34 @@ func _on_sprite_frame_changed() -> void:
 			var tgt_pos: Vector3 = (_attack_target_node as Node3D).global_position if (_attack_target_node as Node3D).is_inside_tree() else (_attack_target_node as Node3D).position
 			var to_t: Vector3 = tgt_pos - self_pos
 			to_t.y = 0.0
-			if to_t.length_squared() > 0.001:
-				var lunge_vec: Vector3 = to_t.normalized() * 0.12
-				if is_inside_tree():
-					global_position += lunge_vec
-				else:
-					position += lunge_vec
+			var edge_dist: float = get_edge_distance_to(_attack_target_node as Node3D)
+			if to_t.length_squared() > 0.001 and edge_dist > 0.12:
+				var lunge_dist: float = minf(0.08, edge_dist - 0.08)
+				if lunge_dist > 0.0:
+					var lunge_vec: Vector3 = to_t.normalized() * lunge_dist
+					if is_inside_tree():
+						global_position += lunge_vec
+					else:
+						position += lunge_vec
 
-	# Hit frame at frame 4
-	if cur_frame == 4 and not _attack_has_hit:
+	# Hit frame at frame 4 (or later frame if frame 4 was stepped over)
+	if cur_frame >= 4 and not _attack_has_hit:
 		_apply_attack_hit()
 
 func _apply_attack_hit() -> void:
+	if _attack_has_hit:
+		return
 	_attack_has_hit = true
 	var target_enemy: Node = _attack_target_node
 	if target_enemy == null or not is_instance_valid(target_enemy):
 		target_enemy = target_enemy_node if target_enemy_node != null else current_target
 	if target_enemy == null or not is_instance_valid(target_enemy):
-		target_enemy = _find_nearest_enemy_in_reach(melee_attack_range + 0.3)
+		target_enemy = _find_nearest_enemy_in_reach(melee_attack_range + 0.4)
 
 	if target_enemy != null and is_instance_valid(target_enemy) and target_enemy is Node3D:
 		var edge_dist: float = get_edge_distance_to(target_enemy as Node3D)
-		# Melee contact check: must be in range at hit frame (with 1.5x buffer)
-		if edge_dist <= melee_attack_range * 1.5:
+		# Melee contact check: generous buffer (up to 0.75m) so close melee hits connect reliably
+		if edge_dist <= melee_attack_range + 0.35:
 			if target_enemy.has_method("take_damage"):
 				var dmg: int = stats.final_attack if stats != null else 10
 				target_enemy.take_damage(dmg, self)

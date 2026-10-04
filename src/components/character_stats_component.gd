@@ -155,6 +155,9 @@ func gain_experience(amount: int) -> void:
 		experience -= xp_to_next_level()
 		_level_up()
 
+func gain_xp(amount: int) -> void:
+	gain_experience(amount)
+
 func _level_up() -> void:
 	level += 1
 	# Grow base stats from definition if available, else use fixed increments
