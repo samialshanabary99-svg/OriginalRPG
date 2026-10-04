@@ -700,11 +700,8 @@ func face_target(target_pos: Vector3) -> void:
 	emit_signal("facing_changed_3d", facing_direction)
 	_update_animation()
 
-func apply_knockback(impulse: Vector3) -> void:
-	if character_state == CharacterState.DEAD:
-		return
-	impulse.y = 0.0
-	position += impulse
+func apply_knockback(_impulse: Vector3) -> void:
+	pass
 
 func attack() -> void:
 	if _attack_timer > 0.0 or character_state != CharacterState.ALIVE:
@@ -768,12 +765,6 @@ func _apply_attack_hit() -> void:
 			if target_enemy.has_method("take_damage"):
 				var dmg: int = stats.final_attack if stats != null else 10
 				target_enemy.take_damage(dmg, self)
-			var self_pos: Vector3 = global_position if is_inside_tree() else position
-			var tgt_pos: Vector3 = (target_enemy as Node3D).global_position if (target_enemy as Node3D).is_inside_tree() else (target_enemy as Node3D).position
-			var to_t: Vector3 = tgt_pos - self_pos
-			to_t.y = 0.0
-			if to_t.length_squared() > 0.001 and target_enemy.has_method("apply_knockback"):
-				target_enemy.apply_knockback(to_t.normalized() * 0.15)
 
 func _find_nearest_enemy_in_reach(reach_dist: float) -> Node:
 	if not is_inside_tree():

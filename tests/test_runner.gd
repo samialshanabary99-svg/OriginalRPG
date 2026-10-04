@@ -1351,11 +1351,11 @@ func _test_mouse_controls_and_combat() -> void:
 	# Frame 0 of attack animation does not deal damage yet (damage sync on frame 4)
 	_ok("Attack wind-up frame does not deal damage immediately", wolf.stats.current_health == hp_before)
 
-	# Advancing to hit frame (frame 4) triggers damage and knockback
+	# Advancing to hit frame (frame 4) triggers damage without knockback
 	var wolf_x_before: float = wolf.position.x
 	player.animated_sprite.frame = 4
 	_ok("Target enemy takes damage on hit frame 4", wolf.stats.current_health < hp_before)
-	_ok("Target enemy experiences knockback on hit", wolf.position.x > wolf_x_before)
+	_ok("No knockback on hit for target enemy", is_equal_approx(wolf.position.x, wolf_x_before))
 
 	# Whiff verification: if target moves out of range, attack frame 4 deals no damage
 	wolf.position = player.position + Vector3(4.0, 0.0, 0.0)
@@ -1370,12 +1370,14 @@ func _test_mouse_controls_and_combat() -> void:
 	wolf.face_target(player.position)
 	_ok("Wolf faces player West when player is to its left", wolf._current_direction == "west")
 
-	# Player hit while idle turns to face attacker
+	# Player hit while idle turns to face attacker without knockback
 	player.stop_moving()
 	player.face_target(player.position + Vector3(0.0, 0.0, 2.0))
 	wolf.position = player.position + Vector3(0.0, 0.0, -1.0)
+	var player_pos_before: Vector3 = player.position
 	player.take_damage(5, wolf)
 	_ok("Player turns to face attacker when damaged while idle", player._current_direction == "north")
+	_ok("No knockback on hit for player", player.position.is_equal_approx(player_pos_before))
 
 	# Shadow verification: real directional light shadow disabled on 2D sprite billboards
 	_ok("Player AnimatedSprite3D cast_shadow disabled", player.animated_sprite.cast_shadow == GeometryInstance3D.SHADOW_CASTING_SETTING_OFF)

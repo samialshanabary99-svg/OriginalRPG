@@ -388,11 +388,8 @@ func face_target(target_pos: Vector3) -> void:
 	_current_direction = _vector_to_direction(Vector3(screen_x, 0.0, screen_z))
 	_update_animation()
 
-func apply_knockback(impulse: Vector3) -> void:
-	if current_state == State.DEAD:
-		return
-	impulse.y = 0.0
-	position += impulse
+func apply_knockback(_impulse: Vector3) -> void:
+	pass
 
 func _perform_attack() -> void:
 	_attack_timer = attack_cooldown
@@ -443,12 +440,6 @@ func _apply_attack_hit() -> void:
 			if target.has_method("take_damage"):
 				var atk_power: int = stats.final_attack if stats != null else (definition.attack if definition != null else 8)
 				target.take_damage(atk_power, self)
-			var self_pos: Vector3 = global_position if is_inside_tree() else position
-			var tgt_pos: Vector3 = target.global_position if target.is_inside_tree() else target.position
-			var to_t: Vector3 = tgt_pos - self_pos
-			to_t.y = 0.0
-			if to_t.length_squared() > 0.001 and target.has_method("apply_knockback"):
-				target.apply_knockback(to_t.normalized() * 0.15)
 
 func take_damage(amount: int, attacker: Node3D = null) -> void:
 	if current_state == State.DEAD:
