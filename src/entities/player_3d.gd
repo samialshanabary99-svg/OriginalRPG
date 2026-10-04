@@ -95,6 +95,18 @@ const DOUBLE_CLICK_INTERVAL: float = 0.28
 			shadow = get_node_or_null("Shadow") as MeshInstance3D
 		return shadow
 
+# ── Mouse Click-to-Move & Aim Targeting (Ragnarok Online Style) ───────────────
+@export var stop_threshold: float = 0.25
+@export var attack_reach: float = 2.0
+
+var move_target_position: Vector3 = Vector3.ZERO
+var has_move_target: bool = false
+var target_enemy_node: Node3D = null
+var cell_cursor: CellCursor3D = null
+
+var _is_lmb_down: bool = false
+var _hovered_enemy: Enemy3D = null
+
 var input_direction: Vector2 = Vector2.ZERO
 var facing_direction: Vector3 = Vector3(0, 0, 1) # Default facing South (+Z)
 var character_state: CharacterState = CharacterState.ALIVE
@@ -114,6 +126,12 @@ func _enter_tree() -> void:
 	floor_constant_speed = true
 	floor_block_on_wall = true
 	floor_stop_on_slope = true
+
+func _exit_tree() -> void:
+	clear_target_enemy()
+	if cell_cursor != null and is_instance_valid(cell_cursor) and cell_cursor.get_parent() != self:
+		cell_cursor.queue_free()
+		cell_cursor = null
 
 func _ready() -> void:
 	add_to_group("player")
@@ -135,6 +153,7 @@ func _ready() -> void:
 	_update_animation("south")
 	_setup_shadow()
 	_update_camera(0.0)
+	_ensure_cell_cursor()
 
 func _process(delta: float) -> void:
 	_update_camera(delta)
@@ -184,7 +203,16 @@ func reset_camera_view() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var mb: InputEventMouseButton = event as InputEventMouseButton
-		if mb.button_index == MOUSE_BUTTON_RIGHT or mb.button_index == MOUSE_BUTTON_MIDDLE:
+		if mb.button_index == MOUSE_BUTTON_LEFT:
+			if mb.pressed:
+				if _is_mouse_over_ui():
+					return
+				_is_lmb_down = true
+				_handle_mouse_click(mb.position)
+			else:
+				_is_lmb_down = false
+
+		elif mb.button_index == MOUSE_BUTTON_RIGHT or mb.button_index == MOUSE_BUTTON_MIDDLE:
 			if mb.pressed:
 				var current_time: float = Time.get_ticks_msec() / 1000.0
 				var ctrl_held: bool = Input.is_key_pressed(KEY_CTRL)
@@ -218,21 +246,25 @@ func _unhandled_input(event: InputEvent) -> void:
 				# Normal Wheel zooms out
 				_target_zoom = clampf(_target_zoom + zoom_step, zoom_min, zoom_max)
 
-	elif event is InputEventMouseMotion and _is_orbiting:
+	elif event is InputEventMouseMotion:
 		var mm: InputEventMouseMotion = event as InputEventMouseMotion
-		var shift_held: bool = Input.is_key_pressed(KEY_SHIFT)
-		var ctrl_held: bool = Input.is_key_pressed(KEY_CTRL)
+		if _is_orbiting:
+			var shift_held: bool = Input.is_key_pressed(KEY_SHIFT)
+			var ctrl_held: bool = Input.is_key_pressed(KEY_CTRL)
 
-		# Horizontal mouse motion rotates the camera orbit around character (Yaw)
-		_target_yaw -= mm.relative.x * orbit_sensitivity
+			# Horizontal mouse motion rotates the camera orbit around character (Yaw)
+			_target_yaw -= mm.relative.x * orbit_sensitivity
 
-		# Vertical mouse motion adjusts the elevation angle of view (Pitch)
-		if shift_held or ctrl_held:
-			# Shift or Ctrl focuses and boosts pitch adjustment
-			_target_pitch = clampf(_target_pitch + mm.relative.y * pitch_sensitivity * 1.5, pitch_min, pitch_max)
+			# Vertical mouse motion adjusts the elevation angle of view (Pitch)
+			if shift_held or ctrl_held:
+				_target_pitch = clampf(_target_pitch + mm.relative.y * pitch_sensitivity * 1.5, pitch_min, pitch_max)
+			else:
+				_target_pitch = clampf(_target_pitch + mm.relative.y * pitch_sensitivity, pitch_min, pitch_max)
+		elif _is_lmb_down:
+			if not _is_mouse_over_ui():
+				_handle_mouse_drag(mm.position)
 		else:
-			# Standard RMB drag adjusts both rotation and vertical angle
-			_target_pitch = clampf(_target_pitch + mm.relative.y * pitch_sensitivity, pitch_min, pitch_max)
+			_update_enemy_hover(mm.position)
 
 func _setup_shadow() -> void:
 	if shadow == null:
@@ -291,43 +323,84 @@ func _physics_process(delta: float) -> void:
 	elif velocity.y < 0.0:
 		velocity.y = -0.1
 
-	# Read movement input (WASD / Arrows)
-	var raw_x: float = Input.get_axis("move_left", "move_right")
-	var raw_z: float = Input.get_axis("move_up", "move_down")
-	if is_zero_approx(raw_x):
-		raw_x = Input.get_axis("ui_left", "ui_right")
-	if is_zero_approx(raw_z):
-		raw_z = Input.get_axis("ui_up", "ui_down")
-	input_direction = Vector2(raw_x, raw_z)
-
-	# Compute camera-relative movement vectors so WASD follows camera orientation
 	var cam_yaw: float = camera_arm.rotation.y if camera_arm != null else 0.0
 	var cam_forward: Vector3 = Vector3(-sin(cam_yaw), 0.0, -cos(cam_yaw)).normalized()
 	var cam_right: Vector3 = Vector3(cos(cam_yaw), 0.0, -sin(cam_yaw)).normalized()
 
-	var move_dir: Vector3 = cam_right * raw_x + cam_forward * (-raw_z)
-	if move_dir.length_squared() > 1.0:
-		move_dir = move_dir.normalized()
+	# ── Priority 1: Target Enemy Pursuit & Auto-Attack Loop ────────────────────
+	if target_enemy_node != null and is_instance_valid(target_enemy_node):
+		var enemy_dead: bool = false
+		if "current_state" in target_enemy_node and target_enemy_node.current_state == Enemy3D.State.DEAD:
+			enemy_dead = true
+		elif target_enemy_node.has_method("is_dead") and target_enemy_node.is_dead():
+			enemy_dead = true
 
-	if move_dir.length_squared() > 0.01:
-		facing_direction = move_dir
-		velocity.x = move_dir.x * move_speed
-		velocity.z = move_dir.z * move_speed
-		emit_signal("facing_changed_3d", facing_direction)
-		var current_pos: Vector3 = global_position if is_inside_tree() else position
-		emit_signal("player_moved_3d", current_pos)
+		if enemy_dead:
+			clear_target_enemy()
+			velocity.x = move_toward(velocity.x, 0.0, move_speed * 8.0 * delta)
+			velocity.z = move_toward(velocity.z, 0.0, move_speed * 8.0 * delta)
+			input_direction = Vector2.ZERO
+		else:
+			var self_pos: Vector3 = global_position if is_inside_tree() else position
+			var enemy_pos: Vector3 = target_enemy_node.global_position if target_enemy_node.is_inside_tree() else target_enemy_node.position
+			var diff: Vector3 = enemy_pos - self_pos
+			diff.y = 0.0
+			var dist: float = diff.length()
 
-		# Screen-relative billboard facing (Ragnarok Online style)
-		var screen_x: float = move_dir.dot(cam_right)
-		var screen_z: float = -move_dir.dot(cam_forward)
-		var dir_str: String = _vector_to_direction(Vector3(screen_x, 0.0, screen_z))
-		_current_direction = dir_str
+			if dist > 0.01:
+				facing_direction = diff.normalized()
+				var screen_x: float = facing_direction.dot(cam_right)
+				var screen_z: float = -facing_direction.dot(cam_forward)
+				_current_direction = _vector_to_direction(Vector3(screen_x, 0.0, screen_z))
+				emit_signal("facing_changed_3d", facing_direction)
+
+			if dist > attack_reach:
+				# Chase towards enemy
+				var move_dir: Vector3 = diff.normalized()
+				velocity.x = move_dir.x * move_speed
+				velocity.z = move_dir.z * move_speed
+				input_direction = Vector2(velocity.x, velocity.z).normalized()
+				emit_signal("player_moved_3d", self_pos)
+			else:
+				# In melee range - halt immediately and auto-attack
+				velocity.x = 0.0
+				velocity.z = 0.0
+				input_direction = Vector2.ZERO
+				if _attack_timer <= 0.0:
+					attack()
+
+	# ── Priority 2: Ground Destination Movement ───────────────────────────────
+	elif has_move_target:
+		var self_pos: Vector3 = global_position if is_inside_tree() else position
+		var to_dest: Vector3 = move_target_position - self_pos
+		to_dest.y = 0.0
+		var dist_to_dest: float = to_dest.length()
+
+		if dist_to_dest <= stop_threshold:
+			has_move_target = false
+			velocity.x = 0.0
+			velocity.z = 0.0
+			input_direction = Vector2.ZERO
+			if cell_cursor != null and is_instance_valid(cell_cursor):
+				cell_cursor.hide_target()
+		else:
+			var move_dir: Vector3 = to_dest.normalized()
+			facing_direction = move_dir
+			velocity.x = move_dir.x * move_speed
+			velocity.z = move_dir.z * move_speed
+			input_direction = Vector2(velocity.x, velocity.z).normalized()
+			emit_signal("facing_changed_3d", facing_direction)
+			emit_signal("player_moved_3d", self_pos)
+
+			var screen_x: float = move_dir.dot(cam_right)
+			var screen_z: float = -move_dir.dot(cam_forward)
+			_current_direction = _vector_to_direction(Vector3(screen_x, 0.0, screen_z))
+
+	# ── Idle Deceleration ─────────────────────────────────────────────────────
 	else:
 		velocity.x = move_toward(velocity.x, 0.0, move_speed * 8.0 * delta)
 		velocity.z = move_toward(velocity.z, 0.0, move_speed * 8.0 * delta)
-
-	if Input.is_action_just_pressed("attack"):
-		_try_attack()
+		input_direction = Vector2.ZERO
 
 	if is_inside_tree():
 		move_and_slide()
@@ -335,6 +408,160 @@ func _physics_process(delta: float) -> void:
 		position += velocity * delta
 
 	_update_animation()
+
+func _is_mouse_over_ui() -> bool:
+	var vp: Viewport = get_viewport()
+	if vp != null:
+		var hovered: Control = vp.gui_get_hovered_control()
+		if hovered != null and hovered.mouse_filter != Control.MOUSE_FILTER_IGNORE:
+			return true
+	return false
+
+func _raycast_from_mouse(mouse_pos: Vector2, mask_val: int = 6) -> Dictionary:
+	_resolve_nodes()
+	if camera == null or not is_inside_tree():
+		return {}
+	var w3d: World3D = get_world_3d()
+	if w3d == null:
+		return {}
+	var space_state: PhysicsDirectSpaceState3D = w3d.direct_space_state
+	var ray_origin: Vector3 = camera.project_ray_origin(mouse_pos)
+	var ray_normal: Vector3 = camera.project_ray_normal(mouse_pos)
+	var ray_length: float = 300.0
+
+	var query: PhysicsRayQueryParameters3D = PhysicsRayQueryParameters3D.create(
+		ray_origin,
+		ray_origin + ray_normal * ray_length,
+		mask_val
+	)
+	query.collide_with_areas = true
+	query.collide_with_bodies = true
+	query.exclude = [get_rid()]
+	return space_state.intersect_ray(query)
+
+func _extract_enemy(collider: Object) -> Enemy3D:
+	if collider == null:
+		return null
+	if collider is Enemy3D:
+		return collider as Enemy3D
+	if collider is Node:
+		var node: Node = collider as Node
+		if node.get_parent() is Enemy3D:
+			return node.get_parent() as Enemy3D
+		if node.is_in_group("enemies") and node is CharacterBody3D:
+			return node as Enemy3D
+	return null
+
+func _handle_mouse_click(mouse_pos: Vector2) -> void:
+	if character_state == CharacterState.DEAD:
+		return
+	# Raycast mask 6 = 2 (terrain) + 4 (enemies)
+	var hit: Dictionary = _raycast_from_mouse(mouse_pos, 6)
+	if hit.is_empty():
+		return
+
+	var collider: Object = hit.get("collider")
+	var hit_enemy: Enemy3D = _extract_enemy(collider)
+
+	if hit_enemy != null and is_instance_valid(hit_enemy) and hit_enemy.current_state != Enemy3D.State.DEAD:
+		target_enemy(hit_enemy)
+	else:
+		var hit_pos: Vector3 = hit.get("position", Vector3.ZERO)
+		var hit_normal: Vector3 = hit.get("normal", Vector3.UP)
+		if get_parent() != null and get_parent().has_method("_calculate_height"):
+			hit_pos.y = get_parent()._calculate_height(hit_pos.x, hit_pos.z)
+		clear_target_enemy()
+		set_move_destination(hit_pos, hit_normal)
+
+func _handle_mouse_drag(mouse_pos: Vector2) -> void:
+	if character_state == CharacterState.DEAD:
+		return
+	if target_enemy_node != null and is_instance_valid(target_enemy_node):
+		return
+	var hit: Dictionary = _raycast_from_mouse(mouse_pos, 2)
+	if hit.is_empty():
+		return
+	var hit_pos: Vector3 = hit.get("position", Vector3.ZERO)
+	var hit_normal: Vector3 = hit.get("normal", Vector3.UP)
+	if get_parent() != null and get_parent().has_method("_calculate_height"):
+		hit_pos.y = get_parent()._calculate_height(hit_pos.x, hit_pos.z)
+	set_move_destination(hit_pos, hit_normal)
+
+func _update_enemy_hover(mouse_pos: Vector2) -> void:
+	if _is_mouse_over_ui():
+		_clear_hovered_enemy()
+		return
+	var hit: Dictionary = _raycast_from_mouse(mouse_pos, 4)
+	var new_hover: Enemy3D = null
+	if not hit.is_empty():
+		new_hover = _extract_enemy(hit.get("collider"))
+		if new_hover != null and (!is_instance_valid(new_hover) or new_hover.current_state == Enemy3D.State.DEAD):
+			new_hover = null
+
+	if new_hover != _hovered_enemy:
+		_clear_hovered_enemy()
+		_hovered_enemy = new_hover
+		if _hovered_enemy != null and is_instance_valid(_hovered_enemy):
+			if _hovered_enemy != target_enemy_node:
+				_hovered_enemy.set_hovered(true)
+
+func _clear_hovered_enemy() -> void:
+	if _hovered_enemy != null and is_instance_valid(_hovered_enemy):
+		if _hovered_enemy != target_enemy_node:
+			_hovered_enemy.set_hovered(false)
+	_hovered_enemy = null
+
+func target_enemy(enemy: Enemy3D) -> void:
+	if target_enemy_node != null and is_instance_valid(target_enemy_node) and target_enemy_node != enemy:
+		if target_enemy_node.has_method("set_targeted"):
+			target_enemy_node.set_targeted(false)
+
+	target_enemy_node = enemy
+	current_target = enemy
+	has_move_target = false
+
+	if cell_cursor != null and is_instance_valid(cell_cursor):
+		cell_cursor.hide_target()
+
+	if target_enemy_node != null and is_instance_valid(target_enemy_node):
+		if target_enemy_node.has_method("set_targeted"):
+			target_enemy_node.set_targeted(true)
+		emit_signal("target_changed", target_enemy_node)
+
+func clear_target_enemy() -> void:
+	if target_enemy_node != null and is_instance_valid(target_enemy_node):
+		if target_enemy_node.has_method("set_targeted"):
+			target_enemy_node.set_targeted(false)
+	target_enemy_node = null
+	current_target = null
+	emit_signal("target_changed", null)
+
+func set_move_destination(pos: Vector3, normal: Vector3 = Vector3.UP) -> void:
+	clear_target_enemy()
+	move_target_position = pos
+	has_move_target = true
+	_ensure_cell_cursor()
+	if cell_cursor != null and is_instance_valid(cell_cursor):
+		cell_cursor.set_target_cell(pos, normal)
+
+func stop_moving() -> void:
+	has_move_target = false
+	velocity.x = 0.0
+	velocity.z = 0.0
+	input_direction = Vector2.ZERO
+	if cell_cursor != null and is_instance_valid(cell_cursor):
+		cell_cursor.hide_target()
+
+func _ensure_cell_cursor() -> void:
+	if cell_cursor != null and is_instance_valid(cell_cursor):
+		return
+	var scene: PackedScene = load("res://scenes/entities/cell_cursor_3d.tscn") as PackedScene
+	if scene != null:
+		cell_cursor = scene.instantiate() as CellCursor3D
+		if get_parent() != null:
+			get_parent().add_child(cell_cursor)
+		elif is_inside_tree():
+			get_tree().root.add_child(cell_cursor)
 
 func _update_animation(dir_name: String = "") -> void:
 	if animated_sprite == null or animated_sprite.sprite_frames == null:
@@ -421,7 +648,7 @@ func attack() -> void:
 
 	var target_enemy: Node = current_target
 	if target_enemy == null or not is_instance_valid(target_enemy):
-		target_enemy = _find_nearest_enemy_in_reach(2.2)
+		target_enemy = _find_nearest_enemy_in_reach(attack_reach + 0.5)
 
 	if target_enemy != null and is_instance_valid(target_enemy) and target_enemy.has_method("take_damage"):
 		var dmg: int = stats.final_attack if stats != null else 10
@@ -462,5 +689,8 @@ func _try_attack() -> void:
 func _on_player_died() -> void:
 	character_state = CharacterState.DEAD
 	velocity = Vector3.ZERO
+	clear_target_enemy()
+	if cell_cursor != null and is_instance_valid(cell_cursor):
+		cell_cursor.hide_target()
 	_update_animation()
 

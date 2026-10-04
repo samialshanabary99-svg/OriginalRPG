@@ -202,6 +202,32 @@ license_or_usage_notes: Project UI icons (icon_hp.png, icon_sp.png, icon_stamina
 notes: Set of 6 standard 32x32 RGBA icons with transparent backgrounds.
 ```
 
+### 7. `ui_cursors`
+```yaml
+asset_id: ui_cursors
+name: Ragnarok Online Cell Target Cursor & Monster Aim Reticle
+type: ui
+path: assets/ui/cursors/
+source: human_authored
+generator_or_tool: godot
+prompt_reference: Ragnarok Online ground cell target cursor and monster aim reticle
+author: Antigravity (Agent)
+created_date: 2026-10-04
+modified_date: 2026-10-04
+dimensions: 64x64
+frame_size: 64x64
+animation_frames: 2
+animation: none
+directions: 1
+format: png
+transparency: rgba_alpha
+intended_use: Mouse click-to-move cell square preview and monster aim indicator
+related_entity: src/entities/player_3d.gd
+status: approved
+license_or_usage_notes: In-game targeting and navigation cursors
+notes: Includes cell_target_cursor.png and target_aim_reticle.png with RGBA transparency.
+```
+
 ### 7. `tiles_field_ground`
 ```yaml
 asset_id: tiles_field_ground

@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://src/entities/enemy_3d.gd" id="1_enemy3d"]
 [ext_resource type="SpriteFrames" path="res://A_small_fantasy_wolf_monster/wolf_sprite_frames.tres" id="2_wolf_frames"]
 [ext_resource type="Script" path="res://src/components/character_stats_component.gd" id="3_stats"]
+[ext_resource type="Texture2D" path="res://assets/ui/cursors/target_aim_reticle.png" id="4_reticle"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_wolf"]
 height = 0.8
@@ -39,3 +40,14 @@ mesh = SubResource("QuadMesh_shadow")
 
 [node name="CharacterStatsComponent" type="Node" parent="."]
 script = ExtResource("3_stats")
+
+[node name="AimIndicator" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+visible = false
+billboard = 1
+alpha_cut = 1
+texture_filter = 0
+pixel_size = 0.012
+cast_shadow = 0
+texture = ExtResource("4_reticle")
+

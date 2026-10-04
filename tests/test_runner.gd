@@ -51,6 +51,9 @@ func _init() -> void:
 	# 8-Directional Character Animations, Wolf Monster & Green Stalks
 	_test_wolf_player_stalks_integration()
 
+	# Mouse Click-to-Move, Cell Target Preview & Aim Reticle Combat
+	_test_mouse_controls_and_combat()
+
 	print("")
 	print("[TestRunner] ─────────────────────────────────────────")
 	print("[TestRunner] %d tests | %d failures" % [_total, _failed])
@@ -1129,26 +1132,40 @@ func _test_multi_layer_tilemap_field() -> void:
 	p3d.attack()
 	_ok("Player3D attack emits player_attacked signal", attacked_emitted[0])
 
-	# Test input response on Player3D
+	# Verify keyboard WASD movement is disabled (removed per user specification)
 	Input.action_press("move_right")
 	p3d._physics_process(0.016)
-	_ok("Player3D moves East (+X) on move_right (D / Right)", p3d.velocity.x > 0.0)
+	_ok("WASD disabled: Player3D ignores move_right key", is_zero_approx(p3d.velocity.x))
 	Input.action_release("move_right")
-
-	Input.action_press("move_left")
-	p3d._physics_process(0.016)
-	_ok("Player3D moves West (-X) on move_left (A / Left)", p3d.velocity.x < 0.0)
-	Input.action_release("move_left")
 
 	Input.action_press("move_up")
 	p3d._physics_process(0.016)
-	_ok("Player3D moves North (-Z) on move_up (W / Up)", p3d.velocity.z < 0.0)
+	_ok("WASD disabled: Player3D ignores move_up key", is_zero_approx(p3d.velocity.z))
 	Input.action_release("move_up")
 
-	Input.action_press("move_down")
+	# Test Mouse Click-to-Move destination navigation
+	var p3d_pos: Vector3 = p3d.global_position if p3d.is_inside_tree() else p3d.position
+	p3d.set_move_destination(p3d_pos + Vector3(5.0, 0.0, 0.0))
 	p3d._physics_process(0.016)
-	_ok("Player3D moves South (+Z) on move_down (S / Down)", p3d.velocity.z > 0.0)
-	Input.action_release("move_down")
+	_ok("Player3D navigates East (+X) on mouse move destination", p3d.velocity.x > 0.0)
+	_ok("Player3D has_move_target is true", p3d.has_move_target)
+
+	p3d.set_move_destination(p3d_pos + Vector3(-5.0, 0.0, 0.0))
+	p3d._physics_process(0.016)
+	_ok("Player3D navigates West (-X) on mouse move destination", p3d.velocity.x < 0.0)
+
+	p3d.set_move_destination(p3d_pos + Vector3(0.0, 0.0, -5.0))
+	p3d._physics_process(0.016)
+	_ok("Player3D navigates North (-Z) on mouse move destination", p3d.velocity.z < 0.0)
+
+	p3d.set_move_destination(p3d_pos + Vector3(0.0, 0.0, 5.0))
+	p3d._physics_process(0.016)
+	_ok("Player3D navigates South (+Z) on mouse move destination", p3d.velocity.z > 0.0)
+
+	# Test stopping when arriving at destination
+	p3d.set_move_destination(p3d_pos + Vector3(0.1, 0.0, 0.0))
+	p3d._physics_process(0.016)
+	_ok("Player3D stops upon reaching destination", not p3d.has_move_target and is_zero_approx(p3d.velocity.x))
 
 	# 9. 2D HUD on CanvasLayer over 3D world
 	var hud3d: HUD = world_3d.get_node_or_null("HUD") as HUD
@@ -1173,13 +1190,12 @@ func _test_multi_layer_tilemap_field() -> void:
 	p3d._update_camera(0.0)
 	_ok("CameraArm yaw rotation updates accurately", is_equal_approx(p3d.camera_arm.rotation.y, deg_to_rad(90.0)))
 
-	# Test camera-relative movement when rotated 90 deg clockwise
-	# With 90 deg yaw: cam_forward = (-1, 0, 0)
-	# So pressing move_up (forward into screen) should move in -X direction
-	Input.action_press("move_up")
+	# Test billboard facing relative to camera orientation
+	var p3d_cam_pos: Vector3 = p3d.global_position if p3d.is_inside_tree() else p3d.position
+	p3d.set_move_destination(p3d_cam_pos + Vector3(0.0, 0.0, 5.0))
 	p3d._physics_process(0.016)
-	_ok("Camera-relative movement: W moves into screen relative to camera angle", p3d.velocity.x < -0.1)
-	Input.action_release("move_up")
+	_ok("Screen-relative billboard facing updates with camera angle", !p3d._current_direction.is_empty())
+	p3d.stop_moving()
 
 	# Reset camera back to default
 	p3d.reset_camera_view()
@@ -1263,6 +1279,79 @@ func _test_wolf_player_stalks_integration() -> void:
 	_ok("Green stalks SpriteFrames loads", stalks_sf != null)
 	_ok("Green stalks has default swaying animation", stalks_sf != null and stalks_sf.has_animation("default"))
 	_ok("Green stalks swaying animation has 9 frames", stalks_sf != null and stalks_sf.get_frame_count("default") == 9)
+
+func _test_mouse_controls_and_combat() -> void:
+	print("\n[Group W] Mouse Click-to-Move, Cell Target Preview & Aim Reticle Combat")
+
+	# 1. Cell Target Preview Cursor (CellCursor3D)
+	var cursor_scene: PackedScene = load("res://scenes/entities/cell_cursor_3d.tscn")
+	_ok("CellCursor3D scene loads successfully", cursor_scene != null)
+	var cursor: CellCursor3D = cursor_scene.instantiate() as CellCursor3D
+	get_root().add_child(cursor)
+	cursor._ready()
+	_ok("CellCursor3D initially hidden", not cursor.visible)
+	cursor.set_target_cell(Vector3(5.0, 1.2, 8.0), Vector3.UP)
+	_ok("CellCursor3D becomes visible on set_target_cell", cursor.visible)
+	var c_pos: Vector3 = cursor.global_position if cursor.is_inside_tree() else cursor.position
+	_ok("CellCursor3D position matches targeted cell", is_equal_approx(c_pos.x, 5.0) and is_equal_approx(c_pos.z, 8.0))
+	cursor.hide_target()
+	_ok("CellCursor3D begins fading upon hide_target", not cursor._is_active)
+	cursor.queue_free()
+
+	# 2. Enemy3D Aim Indicator
+	var wolf_scene: PackedScene = load("res://scenes/entities/enemy_3d.tscn")
+	_ok("Enemy3D scene loads for combat tests", wolf_scene != null)
+	var wolf: Enemy3D = wolf_scene.instantiate() as Enemy3D
+	get_root().add_child(wolf)
+	wolf._ready()
+	_ok("Enemy3D has AimIndicator Sprite3D", wolf.aim_indicator != null)
+	_ok("Enemy3D aim indicator is initially hidden", not wolf.aim_indicator.visible)
+
+	# Hovering enemy sets aim indicator preview
+	wolf.set_hovered(true)
+	_ok("Enemy3D aim indicator visible on hover", wolf.aim_indicator.visible)
+	_ok("Enemy3D aim indicator modulate alpha is 0.65 on hover", is_equal_approx(wolf.aim_indicator.modulate.a, 0.65))
+
+	wolf.set_hovered(false)
+	_ok("Enemy3D aim indicator hides when hover ends", not wolf.aim_indicator.visible)
+
+	# Targeting enemy locks aim indicator
+	wolf.set_targeted(true)
+	_ok("Enemy3D aim indicator visible on targeted", wolf.aim_indicator.visible)
+	_ok("Enemy3D aim indicator modulate alpha is 1.0 on targeted", is_equal_approx(wolf.aim_indicator.modulate.a, 1.0))
+
+	# 3. Player3D Mouse Targeting & Auto-Attack Loop
+	var player_scene: PackedScene = load("res://scenes/entities/player_3d.tscn")
+	_ok("Player3D scene loads for combat tests", player_scene != null)
+	var player: Player3D = player_scene.instantiate() as Player3D
+	get_root().add_child(player)
+	player._ready()
+
+	wolf.position = player.position + Vector3(4.0, 0.0, 0.0)
+	player.target_enemy(wolf)
+	_ok("Player3D target_enemy sets target_enemy_node", player.target_enemy_node == wolf)
+	_ok("Enemy3D is_targeted is true", wolf.is_targeted)
+	_ok("Player3D has_move_target is false during combat target", not player.has_move_target)
+
+	# Player chases target enemy towards melee reach
+	player._physics_process(0.016)
+	_ok("Player3D moves toward targeted enemy", player.velocity.x > 0.0)
+
+	# In melee attack reach: player halts and attacks
+	wolf.position = player.position + Vector3(1.0, 0.0, 0.0)
+	var hp_before: int = wolf.stats.current_health
+	player._physics_process(0.016)
+	_ok("Player3D stops moving when in melee range of target", is_zero_approx(player.velocity.x))
+	_ok("Target enemy takes damage from player auto-attack", wolf.stats.current_health < hp_before)
+
+	# Enemy death auto-clears player target
+	wolf._on_died()
+	player._physics_process(0.016)
+	_ok("Player3D auto-clears target when enemy dies", player.target_enemy_node == null)
+	_ok("Dead enemy hides aim indicator", not wolf.aim_indicator.visible)
+
+	player.queue_free()
+	wolf.queue_free()
 
 
 

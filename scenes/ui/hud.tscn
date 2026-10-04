@@ -31,12 +31,12 @@ text = "XP: 0 / 100"
 
 [node name="ControlsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Move: WASD / Arrows
+text = "Move: Left Click Ground
+Attack: Left Click Monster
 Rotate: RMB Drag
 Angle/Pitch: Shift/Ctrl + RMB
 Zoom: Mouse Wheel
 Reset Cam: Ctrl+RMB
-Interact: E / Space | Attack: J
 Info: V"
 
 [node name="ToggleInfoButton" type="Button" parent="MarginContainer/VBoxContainer"]

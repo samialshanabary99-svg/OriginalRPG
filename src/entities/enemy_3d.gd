@@ -50,6 +50,15 @@ enum State {
 			shadow = get_node_or_null("Shadow") as MeshInstance3D
 		return shadow
 
+@onready var aim_indicator: Sprite3D = $AimIndicator if has_node("AimIndicator") else null:
+	get:
+		if aim_indicator == null and has_node("AimIndicator"):
+			aim_indicator = get_node_or_null("AimIndicator") as Sprite3D
+		return aim_indicator
+
+var is_targeted: bool = false
+var is_hovered: bool = false
+
 var current_state: State = State.IDLE
 var current_target: Node3D = null
 
@@ -95,11 +104,36 @@ func _ready() -> void:
 	_setup_shadow()
 	_update_animation("south")
 
+func _process(_delta: float) -> void:
+	if aim_indicator != null and aim_indicator.visible:
+		aim_indicator.position.y = 0.95 + sin(Time.get_ticks_msec() * 0.006) * 0.05
+
+func set_targeted(active: bool) -> void:
+	is_targeted = active
+	_update_aim_indicator()
+
+func set_hovered(active: bool) -> void:
+	is_hovered = active
+	_update_aim_indicator()
+
+func _update_aim_indicator() -> void:
+	if aim_indicator == null:
+		return
+	if current_state == State.DEAD:
+		aim_indicator.visible = false
+		return
+	aim_indicator.visible = is_targeted or is_hovered
+	if is_targeted:
+		aim_indicator.modulate = Color(1.0, 1.0, 1.0, 1.0)
+	elif is_hovered:
+		aim_indicator.modulate = Color(1.0, 1.0, 1.0, 0.65)
+
 func _resolve_nodes() -> void:
 	if stats == null: stats = get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
 	if animated_sprite == null: animated_sprite = get_node_or_null("AnimatedSprite3D") as AnimatedSprite3D
 	if collision_shape == null: collision_shape = get_node_or_null("CollisionShape3D") as CollisionShape3D
 	if shadow == null: shadow = get_node_or_null("Shadow") as MeshInstance3D
+	if aim_indicator == null: aim_indicator = get_node_or_null("AimIndicator") as Sprite3D
 
 func init_from_id(id: String) -> bool:
 	_resolve_nodes()
@@ -319,12 +353,16 @@ func take_damage(amount: int, attacker: Node3D = null) -> void:
 func _on_died() -> void:
 	current_state = State.DEAD
 	velocity = Vector3.ZERO
+	is_targeted = false
+	is_hovered = false
+	if aim_indicator != null:
+		aim_indicator.visible = false
 	if collision_shape != null:
 		collision_shape.disabled = true
 
 	# Reward XP to attacker / player if present
 	var xp: int = definition.xp_reward if definition != null else 25
-	var players: Array[Node] = get_tree().get_nodes_in_group("player") if is_inside_tree() else []
+	var players: Array = get_tree().get_nodes_in_group("player") if is_inside_tree() else []
 	for p: Node in players:
 		if p.has_node("CharacterStatsComponent"):
 			var p_stats: CharacterStatsComponent = p.get_node("CharacterStatsComponent") as CharacterStatsComponent
