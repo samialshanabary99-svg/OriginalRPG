@@ -274,6 +274,7 @@ func _setup_shadow() -> void:
 	mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	mat.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_DISABLED
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
+	mat.render_priority = 2
 
 	var grad: Gradient = Gradient.new()
 	grad.colors = PackedColorArray([Color(0.0, 0.0, 0.0, 0.42), Color(0.0, 0.0, 0.0, 0.0)])
@@ -406,6 +407,23 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 	else:
 		position += velocity * delta
+
+	# Align ground shadow flush with terrain surface and slope
+	if shadow != null and is_inside_tree():
+		if is_on_floor():
+			var fn: Vector3 = get_floor_normal()
+			if fn.length_squared() > 0.1 and not fn.is_equal_approx(Vector3.UP):
+				var v_up: Vector3 = fn.normalized()
+				var v_fwd: Vector3 = Vector3.FORWARD
+				if abs(v_up.dot(v_fwd)) > 0.9:
+					v_fwd = Vector3.RIGHT
+				var v_right: Vector3 = v_fwd.cross(v_up).normalized()
+				v_fwd = v_up.cross(v_right).normalized()
+				shadow.global_basis = Basis(v_right, v_up, v_fwd)
+				shadow.global_position = global_position + v_up * 0.02
+			else:
+				shadow.position = Vector3(0.0, 0.02, 0.0)
+				shadow.rotation = Vector3(deg_to_rad(-90.0), 0.0, 0.0)
 
 	_update_animation()
 

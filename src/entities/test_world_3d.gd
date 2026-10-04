@@ -34,6 +34,10 @@ func _ready() -> void:
 	_spawn_field_decorations()
 	_spawn_monsters()
 
+	if player != null:
+		var init_y: float = _calculate_height(player.position.x, player.position.z)
+		player.position.y = init_y
+
 	if hud != null and player != null:
 		hud.bind_player(player)
 		if not hud.return_to_menu_requested.is_connected(_on_return_to_menu):
