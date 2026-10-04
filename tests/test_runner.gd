@@ -54,6 +54,9 @@ func _init() -> void:
 	# Mouse Click-to-Move, Cell Target Preview & Aim Reticle Combat
 	_test_mouse_controls_and_combat()
 
+	# Health and SP Overhead Bars & HUD Status Bars
+	_test_health_and_sp_bars()
+
 	print("")
 	print("[TestRunner] ─────────────────────────────────────────")
 	print("[TestRunner] %d tests | %d failures" % [_total, _failed])
@@ -1391,6 +1394,107 @@ func _test_mouse_controls_and_combat() -> void:
 
 	player.queue_free()
 	wolf.queue_free()
+
+func _test_health_and_sp_bars() -> void:
+	print("\n[Group X] Overhead Health & SP Bars and HUD Status Bars")
+
+	# 1. OverheadBar3D component standalone tests
+	var bar: OverheadBar3D = OverheadBar3D.new()
+	bar.bar_width = 0.70
+	bar.bar_height = 0.09
+	bar.show_sp = true
+	bar._ready()
+	_ok("OverheadBar3D instantiates with default HP ratio 1.0", is_equal_approx(bar.get_hp_ratio(), 1.0))
+	_ok("OverheadBar3D instantiates with default SP ratio 1.0", is_equal_approx(bar.get_sp_ratio(), 1.0))
+	_ok("OverheadBar3D show_sp is enabled", bar.show_sp)
+	_ok("OverheadBar3D cast_shadow disabled", bar.cast_shadow == GeometryInstance3D.SHADOW_CASTING_SETTING_OFF)
+
+	bar.set_health(50, 100)
+	_ok("OverheadBar3D set_health updates hp_ratio to 0.5", is_equal_approx(bar.get_hp_ratio(), 0.5))
+
+	bar.set_mana(25, 100)
+	_ok("OverheadBar3D set_mana updates sp_ratio to 0.25", is_equal_approx(bar.get_sp_ratio(), 0.25))
+
+	bar.set_show_sp(false)
+	_ok("OverheadBar3D set_show_sp toggles show_sp flag", not bar.show_sp)
+	bar.queue_free()
+
+	# 2. Player3D OverheadBar integration (Dual HP & SP bar)
+	var player_scene: PackedScene = load("res://scenes/entities/player_3d.tscn") as PackedScene
+	_ok("Player3D scene loads for overhead bar test", player_scene != null)
+	var player: Player3D = player_scene.instantiate() as Player3D
+	root.add_child(player)
+	player._ready()
+
+	_ok("Player3D has OverheadBar child node", player.overhead_bar != null)
+	_ok("Player3D OverheadBar has show_sp enabled", player.overhead_bar.show_sp)
+	_ok("Player3D OverheadBar positioned above head (y >= 1.4)", player.overhead_bar.position.y >= 1.4)
+	_ok("Player3D OverheadBar initially full HP", is_equal_approx(player.overhead_bar.get_hp_ratio(), 1.0))
+	_ok("Player3D OverheadBar initially full SP", is_equal_approx(player.overhead_bar.get_sp_ratio(), 1.0))
+
+	# Player taking damage updates overhead HP bar ratio
+	player.take_damage(20)
+	_ok("Player taking damage reduces OverheadBar HP ratio", player.overhead_bar.get_hp_ratio() < 1.0)
+
+	# Player spending mana updates overhead SP bar ratio
+	if player.stats != null:
+		player.stats.current_mana = int(player.stats.final_max_mana * 0.4)
+		player.overhead_bar.set_mana(player.stats.current_mana, player.stats.final_max_mana)
+		_ok("Player spending mana updates OverheadBar SP ratio", is_equal_approx(player.overhead_bar.get_sp_ratio(), 0.4))
+
+	# Player death hides overhead bar
+	player._on_player_died()
+	_ok("Player death hides OverheadBar", not player.overhead_bar.visible)
+
+	# 3. Enemy3D OverheadBar integration (Single HP bar, no SP)
+	var enemy_scene: PackedScene = load("res://scenes/entities/enemy_3d.tscn") as PackedScene
+	_ok("Enemy3D scene loads for overhead bar test", enemy_scene != null)
+	var wolf: Enemy3D = enemy_scene.instantiate() as Enemy3D
+	root.add_child(wolf)
+	wolf._ready()
+
+	_ok("Enemy3D has OverheadBar child node", wolf.overhead_bar != null)
+	_ok("Enemy3D OverheadBar has show_sp disabled", not wolf.overhead_bar.show_sp)
+	_ok("Enemy3D OverheadBar positioned above wolf back/head (y >= 1.0)", wolf.overhead_bar.position.y >= 1.0)
+	_ok("Enemy3D OverheadBar initially full HP", is_equal_approx(wolf.overhead_bar.get_hp_ratio(), 1.0))
+
+	# Monster taking damage updates overhead HP bar ratio
+	wolf.take_damage(15)
+	_ok("Enemy taking damage reduces OverheadBar HP ratio", wolf.overhead_bar.get_hp_ratio() < 1.0)
+
+	# Monster death hides overhead bar
+	wolf._on_died()
+	_ok("Enemy death hides OverheadBar", not wolf.overhead_bar.visible)
+
+	# 4. HUD status bar elements and bindings
+	var hud_scene: PackedScene = load("res://scenes/ui/hud.tscn") as PackedScene
+	_ok("HUD scene loads for HP/SP bar test", hud_scene != null)
+	var hud: HUD = hud_scene.instantiate() as HUD
+	root.add_child(hud)
+	hud._ready()
+
+	_ok("HUD has HealthBar ProgressBar", hud.health_bar != null)
+	_ok("HUD has ManaBar ProgressBar", hud.mana_bar != null)
+	_ok("HUD has HealthLabel", hud.health_label != null)
+	_ok("HUD has ManaLabel", hud.mana_label != null)
+
+	# Bind player and test dynamic updates
+	hud.bind_player(player)
+	_ok("HUD HealthBar max_value matches player max_health", int(hud.health_bar.max_value) == player.stats.max_health)
+	_ok("HUD ManaBar max_value matches player max_mana", int(hud.mana_bar.max_value) == player.stats.final_max_mana)
+
+	hud._on_health_changed(50, 100)
+	_ok("HUD _on_health_changed updates health_bar value", is_equal_approx(hud.health_bar.value, 50.0))
+	_ok("HUD _on_health_changed updates health_label text", hud.health_label.text == "HP: 50 / 100")
+
+	hud._on_mana_changed(30, 60)
+	_ok("HUD _on_mana_changed updates mana_bar value", is_equal_approx(hud.mana_bar.value, 30.0))
+	_ok("HUD _on_mana_changed updates mana_label text", hud.mana_label.text == "SP: 30 / 60")
+
+	player.queue_free()
+	wolf.queue_free()
+	hud.queue_free()
+
 
 
 

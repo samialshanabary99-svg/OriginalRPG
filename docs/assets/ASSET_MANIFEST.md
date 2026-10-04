@@ -754,5 +754,32 @@ license_or_usage_notes: Project-exclusive custom asset for OriginalRPG
 notes: Seamless tiling in X and Y.
 ```
 
+### 23. `shader_overhead_bar`
+```yaml
+asset_id: shader_overhead_bar
+name: Overhead HP and SP Billboard Shader
+type: effect
+path: assets/shaders/overhead_bar.gdshader
+source: human_authored
+generator_or_tool: manual
+prompt_reference: n/a
+author: Antigravity
+created_date: 2026-10-04
+modified_date: 2026-10-04
+dimensions: n/a
+frame_size: n/a
+animation_frames: 0
+animation: none
+directions: none
+format: gdshader
+transparency: rgba_alpha
+intended_use: Unshaded camera-facing billboard health and SP bar rendered above character and monster heads
+related_entity: src/ui/overhead_bar_3d.gd
+status: approved
+license_or_usage_notes: OriginalRPG internal asset
+notes: Unshaded, depth-disabled, spherical billboard transform with gradient fill
+```
+
+
 
 

@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://player3d001"]
+[gd_scene load_steps=9 format=3 uid="uid://player3d001"]
 
 [ext_resource type="Script" path="res://src/entities/player_3d.gd" id="1_player3d"]
 [ext_resource type="SpriteFrames" path="res://assets/sprites/player/player_sprite_frames.tres" id="2_frames"]
 [ext_resource type="Script" path="res://src/components/character_stats_component.gd" id="3_stats"]
 [ext_resource type="Script" path="res://src/components/inventory_component.gd" id="4_inv"]
 [ext_resource type="Script" path="res://src/components/equipment_component.gd" id="5_equip"]
+[ext_resource type="Script" path="res://src/ui/overhead_bar_3d.gd" id="6_bar"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_p3d"]
 radius = 0.35
@@ -55,3 +56,11 @@ script = ExtResource("4_inv")
 
 [node name="EquipmentComponent" type="Node" parent="."]
 script = ExtResource("5_equip")
+
+[node name="OverheadBar" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.48, 0)
+cast_shadow = 0
+script = ExtResource("6_bar")
+bar_width = 0.7
+bar_height = 0.09
+show_sp = true

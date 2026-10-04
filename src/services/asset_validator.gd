@@ -10,7 +10,7 @@ extends RefCounted
 ##   5. Manifest registration (assets recorded in docs/assets/ASSET_MANIFEST.md)
 
 const ALLOWED_IMAGE_EXTENSIONS: Array[String] = ["png", "svg"]
-const ALLOWED_DATA_EXTENSIONS: Array[String] = ["tres", "res", "json"]
+const ALLOWED_DATA_EXTENSIONS: Array[String] = ["tres", "res", "json", "gdshader"]
 
 ## Standard size tiers for raster assets (width or height)
 const VALID_ICON_SIZES: Array[int] = [16, 24, 32, 48, 64, 128]

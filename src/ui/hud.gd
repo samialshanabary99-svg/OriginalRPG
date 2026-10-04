@@ -1,16 +1,19 @@
 class_name HUD
 extends CanvasLayer
 
-## In-game HUD displaying HP, level, XP, interaction dialogue, and return option.
+## In-game HUD displaying HP, SP, level, XP, interaction dialogue, and return option.
 
 signal return_to_menu_requested()
 
-@onready var health_label: Label = $MarginContainer/VBoxContainer/HealthLabel
-@onready var level_label: Label  = $MarginContainer/VBoxContainer/LevelLabel
-@onready var xp_label: Label     = $MarginContainer/VBoxContainer/XPLabel
+@onready var health_bar: ProgressBar = $MarginContainer/VBoxContainer/HealthBar if has_node("MarginContainer/VBoxContainer/HealthBar") else null
+@onready var health_label: Label     = $MarginContainer/VBoxContainer/HealthLabel if has_node("MarginContainer/VBoxContainer/HealthLabel") else null
+@onready var mana_bar: ProgressBar   = $MarginContainer/VBoxContainer/ManaBar if has_node("MarginContainer/VBoxContainer/ManaBar") else null
+@onready var mana_label: Label       = $MarginContainer/VBoxContainer/ManaLabel if has_node("MarginContainer/VBoxContainer/ManaLabel") else null
+@onready var level_label: Label      = $MarginContainer/VBoxContainer/LevelLabel if has_node("MarginContainer/VBoxContainer/LevelLabel") else null
+@onready var xp_label: Label         = $MarginContainer/VBoxContainer/XPLabel if has_node("MarginContainer/VBoxContainer/XPLabel") else null
 @onready var dialogue_panel: PanelContainer = $DialoguePanel
-@onready var dialogue_label: Label = $DialoguePanel/MarginContainer/DialogueLabel
-@onready var return_button: Button = $MarginContainer/VBoxContainer/ReturnButton
+@onready var dialogue_label: Label   = $DialoguePanel/MarginContainer/DialogueLabel
+@onready var return_button: Button   = $MarginContainer/VBoxContainer/ReturnButton if has_node("MarginContainer/VBoxContainer/ReturnButton") else null
 @onready var toggle_info_button: Button = $MarginContainer/VBoxContainer/ToggleInfoButton if has_node("MarginContainer/VBoxContainer/ToggleInfoButton") else null
 @onready var basic_info_window: Control = $BasicInfoWindow if has_node("BasicInfoWindow") else null:
 	get:
@@ -59,8 +62,11 @@ func bind_player(player: Node) -> void:
 				cs.level_up.connect(_on_level_up)
 			if not cs.experience_changed.is_connected(_on_experience_changed):
 				cs.experience_changed.connect(_on_experience_changed)
+			if not cs.mana_changed.is_connected(_on_mana_changed):
+				cs.mana_changed.connect(_on_mana_changed)
 			_on_level_up(cs.level)
 			_on_experience_changed(cs.experience, cs.xp_to_next_level())
+			_on_mana_changed(cs.current_mana, cs.final_max_mana)
 
 func show_dialogue(text: String) -> void:
 	dialogue_label.text = text
@@ -74,6 +80,22 @@ func _on_health_changed(current: int, maximum: int) -> void:
 		health_label = get_node_or_null("MarginContainer/VBoxContainer/HealthLabel") as Label
 	if health_label != null:
 		health_label.text = "HP: %d / %d" % [current, maximum]
+	if health_bar == null and has_node("MarginContainer/VBoxContainer/HealthBar"):
+		health_bar = get_node_or_null("MarginContainer/VBoxContainer/HealthBar") as ProgressBar
+	if health_bar != null:
+		health_bar.max_value = float(maximum)
+		health_bar.value = float(current)
+
+func _on_mana_changed(current: int, maximum: int) -> void:
+	if mana_label == null and has_node("MarginContainer/VBoxContainer/ManaLabel"):
+		mana_label = get_node_or_null("MarginContainer/VBoxContainer/ManaLabel") as Label
+	if mana_label != null:
+		mana_label.text = "SP: %d / %d" % [current, maximum]
+	if mana_bar == null and has_node("MarginContainer/VBoxContainer/ManaBar"):
+		mana_bar = get_node_or_null("MarginContainer/VBoxContainer/ManaBar") as ProgressBar
+	if mana_bar != null:
+		mana_bar.max_value = float(maximum)
+		mana_bar.value = float(current)
 
 func _on_level_up(new_level: int) -> void:
 	if level_label != null:

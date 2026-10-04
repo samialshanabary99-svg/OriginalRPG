@@ -95,6 +95,12 @@ const DOUBLE_CLICK_INTERVAL: float = 0.28
 			shadow = get_node_or_null("Shadow") as MeshInstance3D
 		return shadow
 
+@onready var overhead_bar: OverheadBar3D = $OverheadBar if has_node("OverheadBar") else null:
+	get:
+		if overhead_bar == null and has_node("OverheadBar"):
+			overhead_bar = get_node_or_null("OverheadBar") as OverheadBar3D
+		return overhead_bar
+
 # ── Mouse Click-to-Move & Aim Targeting (Ragnarok Online Style) ───────────────
 @export var stop_threshold: float = 0.25
 @export var attack_reach: float = 2.0 # Legacy fallback
@@ -156,10 +162,15 @@ func _ready() -> void:
 	if stats != null:
 		if not stats.died.is_connected(_on_player_died):
 			stats.died.connect(_on_player_died)
+		if not stats.health_changed.is_connected(_on_health_changed):
+			stats.health_changed.connect(_on_health_changed)
+		if not stats.mana_changed.is_connected(_on_mana_changed):
+			stats.mana_changed.connect(_on_mana_changed)
 		ContentRegistry.ensure_initialized()
 		var default_char: CharacterDefinition = ContentRegistry.get_character("player_default")
 		if default_char != null:
 			init_from_character_id("player_default")
+		_update_overhead_bar()
 
 	_update_animation("south")
 	_setup_shadow()
@@ -303,6 +314,7 @@ func _resolve_nodes() -> void:
 	if camera_arm == null: camera_arm = get_node_or_null("CameraArm") as Node3D
 	if camera == null: camera = get_node_or_null("CameraArm/Camera3D") as Camera3D
 	if shadow == null: shadow = get_node_or_null("Shadow") as MeshInstance3D
+	if overhead_bar == null: overhead_bar = get_node_or_null("OverheadBar") as OverheadBar3D
 
 func _physics_process(delta: float) -> void:
 	if _attack_timer > 0.0:
@@ -787,7 +799,8 @@ func take_damage(amount: int, attacker: Node = null) -> void:
 	var def_val: int = stats.final_defence if stats != null else 0
 	var final_dmg: int = maxi(1, amount - def_val)
 	if stats != null:
-		stats.current_health = maxi(0, stats.current_health - final_dmg)
+		stats.apply_damage(final_dmg)
+		_update_overhead_bar()
 		if stats.current_health <= 0:
 			_on_player_died()
 			return
@@ -808,7 +821,22 @@ func _on_player_died() -> void:
 	clear_target_enemy()
 	if cell_cursor != null and is_instance_valid(cell_cursor):
 		cell_cursor.hide_target()
+	if overhead_bar != null:
+		overhead_bar.visible = false
 	_update_animation()
+
+func _on_health_changed(current: int, maximum: int) -> void:
+	if overhead_bar != null:
+		overhead_bar.set_health(current, maximum)
+
+func _on_mana_changed(current: int, maximum: int) -> void:
+	if overhead_bar != null:
+		overhead_bar.set_mana(current, maximum)
+
+func _update_overhead_bar() -> void:
+	if overhead_bar != null and stats != null:
+		overhead_bar.set_health(stats.current_health, stats.max_health)
+		overhead_bar.set_mana(stats.current_mana, stats.final_max_mana)
 
 func _update_debug_gizmos() -> void:
 	if not debug_combat_gizmos:

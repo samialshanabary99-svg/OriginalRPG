@@ -123,6 +123,12 @@ func has_modifier(source_id: String) -> bool:
 	return _modifiers.has(source_id)
 
 # ── Mana API ──────────────────────────────────────────────────────────────────
+func set_mana(value: int) -> void:
+	var clamped: int = clampi(value, 0, final_max_mana)
+	if clamped != current_mana:
+		current_mana = clamped
+		mana_changed.emit(current_mana, final_max_mana)
+
 func spend_mana(amount: int) -> bool:
 	if amount <= 0 or current_mana < amount:
 		return false

@@ -59,6 +59,12 @@ enum State {
 			aim_indicator = get_node_or_null("AimIndicator") as Sprite3D
 		return aim_indicator
 
+@onready var overhead_bar: OverheadBar3D = $OverheadBar if has_node("OverheadBar") else null:
+	get:
+		if overhead_bar == null and has_node("OverheadBar"):
+			overhead_bar = get_node_or_null("OverheadBar") as OverheadBar3D
+		return overhead_bar
+
 var is_targeted: bool = false
 var is_hovered: bool = false
 
@@ -99,13 +105,18 @@ func _ready() -> void:
 	if animated_sprite != null and not animated_sprite.frame_changed.is_connected(_on_sprite_frame_changed):
 		animated_sprite.frame_changed.connect(_on_sprite_frame_changed)
 
-	if stats != null and not stats.died.is_connected(_on_died):
-		stats.died.connect(_on_died)
+	if stats != null:
+		if not stats.died.is_connected(_on_died):
+			stats.died.connect(_on_died)
+		if not stats.health_changed.is_connected(_on_health_changed):
+			stats.health_changed.connect(_on_health_changed)
 
 	if definition != null:
 		init_from_definition(definition)
 	elif not enemy_id.is_empty():
 		init_from_id(enemy_id)
+
+	_update_overhead_bar()
 
 	if is_inside_tree():
 		_patrol_origin = global_position
@@ -146,6 +157,7 @@ func _resolve_nodes() -> void:
 	if collision_shape == null: collision_shape = get_node_or_null("CollisionShape3D") as CollisionShape3D
 	if shadow == null: shadow = get_node_or_null("Shadow") as MeshInstance3D
 	if aim_indicator == null: aim_indicator = get_node_or_null("AimIndicator") as Sprite3D
+	if overhead_bar == null: overhead_bar = get_node_or_null("OverheadBar") as OverheadBar3D
 
 func init_from_id(id: String) -> bool:
 	_resolve_nodes()
@@ -183,6 +195,7 @@ func init_from_definition(def: EnemyDefinition) -> bool:
 		stats.base_attack = def.attack
 		stats.base_defence = def.defence
 		stats._recompute_final_stats()
+	_update_overhead_bar()
 	return true
 
 func _setup_shadow() -> void:
@@ -449,7 +462,8 @@ func take_damage(amount: int, attacker: Node3D = null) -> void:
 	var final_dmg: int = maxi(1, amount - def_val)
 
 	if stats != null:
-		stats.current_health = maxi(0, stats.current_health - final_dmg)
+		stats.apply_damage(final_dmg)
+		_update_overhead_bar()
 		if stats.current_health <= 0:
 			_on_died()
 			return
@@ -467,6 +481,8 @@ func _on_died() -> void:
 	is_hovered = false
 	if aim_indicator != null:
 		aim_indicator.visible = false
+	if overhead_bar != null:
+		overhead_bar.visible = false
 	if collision_shape != null:
 		collision_shape.disabled = true
 
@@ -480,6 +496,14 @@ func _on_died() -> void:
 				p_stats.gain_xp(xp)
 
 	emit_signal("enemy_died", self)
+
+func _on_health_changed(current: int, maximum: int) -> void:
+	if overhead_bar != null:
+		overhead_bar.set_health(current, maximum)
+
+func _update_overhead_bar() -> void:
+	if overhead_bar != null and stats != null:
+		overhead_bar.set_health(stats.current_health, stats.max_health)
 
 func is_moving() -> bool:
 	return Vector2(velocity.x, velocity.z).length_squared() > 0.04
