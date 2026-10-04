@@ -1,106 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://hudview001"]
+[gd_scene load_steps=3 format=3 uid="uid://hudview001"]
 
 [ext_resource type="Script" path="res://src/ui/hud.gd" id="1_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/basic_info_window.tscn" id="2_basic_info"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud_bg"]
-bg_color = Color(0.12, 0.12, 0.16, 0.85)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.04, 0.04, 0.06, 0.95)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud_hp"]
-bg_color = Color(0.2, 0.75, 0.32, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hud_sp"]
-bg_color = Color(0.16, 0.52, 0.92, 1)
-corner_radius_top_left = 2
-corner_radius_top_right = 2
-corner_radius_bottom_right = 2
-corner_radius_bottom_left = 2
-
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_hud")
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-anchors_preset = 0
-offset_right = 240.0
-offset_bottom = 120.0
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="HealthBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(180, 14)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_hud_bg")
-theme_override_styles/fill = SubResource("StyleBoxFlat_hud_hp")
-max_value = 100.0
-value = 100.0
-show_percentage = false
-
-[node name="HealthLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "HP: 100 / 100"
-
-[node name="ManaBar" type="ProgressBar" parent="MarginContainer/VBoxContainer"]
-custom_minimum_size = Vector2(180, 14)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_hud_bg")
-theme_override_styles/fill = SubResource("StyleBoxFlat_hud_sp")
-max_value = 50.0
-value = 50.0
-show_percentage = false
-
-[node name="ManaLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "SP: 50 / 50"
-
-[node name="LevelLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Lv 1"
-
-[node name="XPLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "XP: 0 / 100"
-
-[node name="ControlsLabel" type="Label" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-text = "Move: Left Click Ground
-Attack: Left Click Monster
-Rotate: RMB Drag
-Angle/Pitch: Shift/Ctrl + RMB
-Zoom: Mouse Wheel
-Reset Cam: Ctrl+RMB
-Info: V"
-
-[node name="ToggleInfoButton" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-focus_mode = 0
-text = "Basic Info (V)"
-
-[node name="ReturnButton" type="Button" parent="MarginContainer/VBoxContainer"]
-layout_mode = 2
-focus_mode = 0
-text = "Return to Menu"
-
 [node name="BasicInfoWindow" parent="." instance=ExtResource("2_basic_info")]
-offset_left = 910.0
+offset_left = 20.0
 offset_top = 20.0
-offset_right = 1250.0
+offset_right = 360.0
 offset_bottom = 450.0
 
 [node name="DialoguePanel" type="PanelContainer" parent="."]

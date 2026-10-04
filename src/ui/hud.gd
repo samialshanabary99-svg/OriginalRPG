@@ -1,28 +1,102 @@
 class_name HUD
 extends CanvasLayer
 
-## In-game HUD displaying HP, SP, level, XP, interaction dialogue, and return option.
+## In-game HUD displaying Basic Info Window, dialogue panel, and status bindings.
 
 signal return_to_menu_requested()
 
-@onready var health_bar: ProgressBar = $MarginContainer/VBoxContainer/HealthBar if has_node("MarginContainer/VBoxContainer/HealthBar") else null
-@onready var health_label: Label     = $MarginContainer/VBoxContainer/HealthLabel if has_node("MarginContainer/VBoxContainer/HealthLabel") else null
-@onready var mana_bar: ProgressBar   = $MarginContainer/VBoxContainer/ManaBar if has_node("MarginContainer/VBoxContainer/ManaBar") else null
-@onready var mana_label: Label       = $MarginContainer/VBoxContainer/ManaLabel if has_node("MarginContainer/VBoxContainer/ManaLabel") else null
-@onready var level_label: Label      = $MarginContainer/VBoxContainer/LevelLabel if has_node("MarginContainer/VBoxContainer/LevelLabel") else null
-@onready var xp_label: Label         = $MarginContainer/VBoxContainer/XPLabel if has_node("MarginContainer/VBoxContainer/XPLabel") else null
-@onready var dialogue_panel: PanelContainer = $DialoguePanel
-@onready var dialogue_label: Label   = $DialoguePanel/MarginContainer/DialogueLabel
-@onready var return_button: Button   = $MarginContainer/VBoxContainer/ReturnButton if has_node("MarginContainer/VBoxContainer/ReturnButton") else null
-@onready var toggle_info_button: Button = $MarginContainer/VBoxContainer/ToggleInfoButton if has_node("MarginContainer/VBoxContainer/ToggleInfoButton") else null
+@onready var dialogue_panel: PanelContainer = $DialoguePanel if has_node("DialoguePanel") else null
+@onready var dialogue_label: Label   = $DialoguePanel/MarginContainer/DialogueLabel if has_node("DialoguePanel/MarginContainer/DialogueLabel") else null
+
 @onready var basic_info_window: Control = $BasicInfoWindow if has_node("BasicInfoWindow") else null:
 	get:
 		if basic_info_window == null and has_node("BasicInfoWindow"):
 			basic_info_window = get_node_or_null("BasicInfoWindow") as Control
 		return basic_info_window
 
+var health_bar: ProgressBar:
+	get:
+		if basic_info_window != null:
+			if basic_info_window.get("bar_hp") != null:
+				return basic_info_window.bar_hp
+			var n = basic_info_window.get_node_or_null("WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/HpRow/BarHP")
+			if n is ProgressBar:
+				return n as ProgressBar
+		if has_node("MarginContainer/VBoxContainer/HealthBar"):
+			return get_node("MarginContainer/VBoxContainer/HealthBar") as ProgressBar
+		return null
+
+var health_label: Label:
+	get:
+		if basic_info_window != null:
+			if basic_info_window.get("label_hp") != null:
+				return basic_info_window.label_hp
+			var n = basic_info_window.get_node_or_null("WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/HpRow/BarHP/LabelHP")
+			if n is Label:
+				return n as Label
+		if has_node("MarginContainer/VBoxContainer/HealthLabel"):
+			return get_node("MarginContainer/VBoxContainer/HealthLabel") as Label
+		return null
+
+var mana_bar: ProgressBar:
+	get:
+		if basic_info_window != null:
+			if basic_info_window.get("bar_sp") != null:
+				return basic_info_window.bar_sp
+			var n = basic_info_window.get_node_or_null("WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/SpRow/BarSP")
+			if n is ProgressBar:
+				return n as ProgressBar
+		if has_node("MarginContainer/VBoxContainer/ManaBar"):
+			return get_node("MarginContainer/VBoxContainer/ManaBar") as ProgressBar
+		return null
+
+var mana_label: Label:
+	get:
+		if basic_info_window != null:
+			if basic_info_window.get("label_sp") != null:
+				return basic_info_window.label_sp
+			var n = basic_info_window.get_node_or_null("WindowFrame/MainPanel/Margin/ContentVBox/StatsSection/SpRow/BarSP/LabelSP")
+			if n is Label:
+				return n as Label
+		if has_node("MarginContainer/VBoxContainer/ManaLabel"):
+			return get_node("MarginContainer/VBoxContainer/ManaLabel") as Label
+		return null
+
+var level_label: Label:
+	get:
+		if has_node("MarginContainer/VBoxContainer/LevelLabel"):
+			return get_node("MarginContainer/VBoxContainer/LevelLabel") as Label
+		return null
+
+var xp_label: Label:
+	get:
+		if basic_info_window != null:
+			if basic_info_window.get("label_lvl_exp") != null:
+				return basic_info_window.label_lvl_exp
+			var n = basic_info_window.get_node_or_null("WindowFrame/MainPanel/Margin/ContentVBox/HeaderHBox/ProfileInfo/LvlExpRow/BarLvlExp/LabelLvlExp")
+			if n is Label:
+				return n as Label
+		if has_node("MarginContainer/VBoxContainer/XPLabel"):
+			return get_node("MarginContainer/VBoxContainer/XPLabel") as Label
+		return null
+
+var return_button: Button:
+	get:
+		if has_node("MarginContainer/VBoxContainer/ReturnButton"):
+			return get_node("MarginContainer/VBoxContainer/ReturnButton") as Button
+		return null
+
+var toggle_info_button: Button:
+	get:
+		if has_node("MarginContainer/VBoxContainer/ToggleInfoButton"):
+			return get_node("MarginContainer/VBoxContainer/ToggleInfoButton") as Button
+		return null
+
 func _ready() -> void:
-	dialogue_panel.visible = false
+	if basic_info_window != null and not basic_info_window.is_node_ready():
+		basic_info_window._ready()
+	if dialogue_panel != null:
+		dialogue_panel.visible = false
 	if return_button != null:
 		return_button.focus_mode = Control.FOCUS_NONE
 		if not return_button.pressed.is_connected(_on_return_pressed):
@@ -35,6 +109,8 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_character_info") or (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_V):
 		toggle_basic_info()
+	elif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
+		_on_return_pressed()
 
 func toggle_basic_info() -> void:
 	if basic_info_window != null:
@@ -69,40 +145,41 @@ func bind_player(player: Node) -> void:
 			_on_mana_changed(cs.current_mana, cs.final_max_mana)
 
 func show_dialogue(text: String) -> void:
-	dialogue_label.text = text
-	dialogue_panel.visible = true
+	if dialogue_label != null:
+		dialogue_label.text = text
+	if dialogue_panel != null:
+		dialogue_panel.visible = true
 
 func hide_dialogue() -> void:
-	dialogue_panel.visible = false
+	if dialogue_panel != null:
+		dialogue_panel.visible = false
 
 func _on_health_changed(current: int, maximum: int) -> void:
-	if health_label == null and has_node("MarginContainer/VBoxContainer/HealthLabel"):
-		health_label = get_node_or_null("MarginContainer/VBoxContainer/HealthLabel") as Label
-	if health_label != null:
-		health_label.text = "HP: %d / %d" % [current, maximum]
-	if health_bar == null and has_node("MarginContainer/VBoxContainer/HealthBar"):
-		health_bar = get_node_or_null("MarginContainer/VBoxContainer/HealthBar") as ProgressBar
-	if health_bar != null:
+	if basic_info_window != null and basic_info_window.has_method("update_hp"):
+		basic_info_window.update_hp(current, maximum)
+	elif health_bar != null:
 		health_bar.max_value = float(maximum)
 		health_bar.value = float(current)
+		if health_label != null:
+			health_label.text = "%d / %d" % [current, maximum]
 
 func _on_mana_changed(current: int, maximum: int) -> void:
-	if mana_label == null and has_node("MarginContainer/VBoxContainer/ManaLabel"):
-		mana_label = get_node_or_null("MarginContainer/VBoxContainer/ManaLabel") as Label
-	if mana_label != null:
-		mana_label.text = "SP: %d / %d" % [current, maximum]
-	if mana_bar == null and has_node("MarginContainer/VBoxContainer/ManaBar"):
-		mana_bar = get_node_or_null("MarginContainer/VBoxContainer/ManaBar") as ProgressBar
-	if mana_bar != null:
+	if basic_info_window != null and basic_info_window.has_method("update_sp"):
+		basic_info_window.update_sp(current, maximum)
+	elif mana_bar != null:
 		mana_bar.max_value = float(maximum)
 		mana_bar.value = float(current)
+		if mana_label != null:
+			mana_label.text = "%d / %d" % [current, maximum]
 
 func _on_level_up(new_level: int) -> void:
 	if level_label != null:
 		level_label.text = "Lv %d" % new_level
 
 func _on_experience_changed(current_xp: int, xp_to_next: int) -> void:
-	if xp_label != null:
+	if basic_info_window != null and basic_info_window.has_method("update_lvl_exp"):
+		basic_info_window.update_lvl_exp(current_xp, xp_to_next)
+	elif xp_label != null:
 		xp_label.text = "XP: %d / %d" % [current_xp, xp_to_next]
 
 func _on_return_pressed() -> void:

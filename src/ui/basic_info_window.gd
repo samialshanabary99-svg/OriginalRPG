@@ -71,11 +71,11 @@ var job_exp: int = 900
 var job_max_exp: int = 1800
 
 func _ready() -> void:
-	if btn_minimize != null:
+	if btn_minimize != null and not btn_minimize.pressed.is_connected(_on_minimize_pressed):
 		btn_minimize.pressed.connect(_on_minimize_pressed)
-	if btn_close != null:
+	if btn_close != null and not btn_close.pressed.is_connected(_on_close_pressed):
 		btn_close.pressed.connect(_on_close_pressed)
-	if title_bar != null:
+	if title_bar != null and not title_bar.gui_input.is_connected(_on_title_bar_gui_input):
 		title_bar.gui_input.connect(_on_title_bar_gui_input)
 
 	# Initial refresh with default/fallback data

@@ -1485,11 +1485,11 @@ func _test_health_and_sp_bars() -> void:
 
 	hud._on_health_changed(50, 100)
 	_ok("HUD _on_health_changed updates health_bar value", is_equal_approx(hud.health_bar.value, 50.0))
-	_ok("HUD _on_health_changed updates health_label text", hud.health_label.text == "HP: 50 / 100")
+	_ok("HUD _on_health_changed updates health_label text", hud.health_label.text.contains("50 / 100"))
 
 	hud._on_mana_changed(30, 60)
 	_ok("HUD _on_mana_changed updates mana_bar value", is_equal_approx(hud.mana_bar.value, 30.0))
-	_ok("HUD _on_mana_changed updates mana_label text", hud.mana_label.text == "SP: 30 / 60")
+	_ok("HUD _on_mana_changed updates mana_label text", hud.mana_label.text.contains("30 / 60"))
 
 	player.queue_free()
 	wolf.queue_free()
