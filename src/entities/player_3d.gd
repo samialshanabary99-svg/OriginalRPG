@@ -97,7 +97,10 @@ const DOUBLE_CLICK_INTERVAL: float = 0.28
 
 # ── Mouse Click-to-Move & Aim Targeting (Ragnarok Online Style) ───────────────
 @export var stop_threshold: float = 0.25
-@export var attack_reach: float = 2.0
+@export var attack_reach: float = 2.0 # Legacy fallback
+@export var body_radius: float = 0.35
+@export var melee_attack_range: float = 0.40
+@export var debug_combat_gizmos: bool = false
 
 var move_target_position: Vector3 = Vector3.ZERO
 var has_move_target: bool = false
@@ -118,6 +121,11 @@ var _damage_timer: float = 0.0
 var _current_direction: String = "south"
 var _gravity: float = 14.0
 var _cam_clearance_y: float = 0.0
+
+var _attack_target_node: Node = null
+var _attack_has_hit: bool = false
+var _attack_lunge_done: bool = false
+var _debug_mesh_instance: MeshInstance3D = null
 
 func _enter_tree() -> void:
 	_resolve_nodes()
@@ -142,6 +150,9 @@ func _ready() -> void:
 	floor_block_on_wall = true
 	floor_stop_on_slope = true
 	
+	if animated_sprite != null and not animated_sprite.frame_changed.is_connected(_on_sprite_frame_changed):
+		animated_sprite.frame_changed.connect(_on_sprite_frame_changed)
+
 	if stats != null:
 		if not stats.died.is_connected(_on_player_died):
 			stats.died.connect(_on_player_died)
@@ -157,6 +168,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	_update_camera(delta)
+	_update_debug_gizmos()
 
 func _update_camera(delta: float) -> void:
 	_resolve_nodes()
@@ -275,21 +287,13 @@ func _setup_shadow() -> void:
 	mat.depth_draw_mode = BaseMaterial3D.DEPTH_DRAW_DISABLED
 	mat.cull_mode = BaseMaterial3D.CULL_DISABLED
 	mat.render_priority = 2
+	mat.albedo_color = Color(0.0, 0.0, 0.0, 0.35)
 
-	var grad: Gradient = Gradient.new()
-	grad.colors = PackedColorArray([Color(0.0, 0.0, 0.0, 0.42), Color(0.0, 0.0, 0.0, 0.0)])
-	grad.offsets = PackedFloat32Array([0.0, 1.0])
-
-	var tex: GradientTexture2D = GradientTexture2D.new()
-	tex.gradient = grad
-	tex.fill = GradientTexture2D.FILL_RADIAL
-	tex.fill_from = Vector2(0.5, 0.5)
-	tex.fill_to = Vector2(0.5, 0.0)
-	tex.width = 64
-	tex.height = 64
-
-	mat.albedo_texture = tex
+	var tex: Texture2D = load("res://assets/environment/shadows/shadow_oval_soft.png") as Texture2D
+	if tex != null:
+		mat.albedo_texture = tex
 	shadow.material_override = mat
+	shadow.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 
 func _resolve_nodes() -> void:
 	if stats == null: stats = get_node_or_null("CharacterStatsComponent") as CharacterStatsComponent
@@ -344,26 +348,22 @@ func _physics_process(delta: float) -> void:
 		else:
 			var self_pos: Vector3 = global_position if is_inside_tree() else position
 			var enemy_pos: Vector3 = target_enemy_node.global_position if target_enemy_node.is_inside_tree() else target_enemy_node.position
-			var diff: Vector3 = enemy_pos - self_pos
-			diff.y = 0.0
-			var dist: float = diff.length()
+			var edge_dist: float = get_edge_distance_to(target_enemy_node)
 
-			if dist > 0.01:
-				facing_direction = diff.normalized()
-				var screen_x: float = facing_direction.dot(cam_right)
-				var screen_z: float = -facing_direction.dot(cam_forward)
-				_current_direction = _vector_to_direction(Vector3(screen_x, 0.0, screen_z))
-				emit_signal("facing_changed_3d", facing_direction)
+			# Face target enemy at all times while engaging in combat
+			face_target(enemy_pos)
 
-			if dist > attack_reach:
+			if edge_dist > melee_attack_range:
 				# Chase towards enemy
+				var diff: Vector3 = enemy_pos - self_pos
+				diff.y = 0.0
 				var move_dir: Vector3 = diff.normalized()
 				velocity.x = move_dir.x * move_speed
 				velocity.z = move_dir.z * move_speed
 				input_direction = Vector2(velocity.x, velocity.z).normalized()
 				emit_signal("player_moved_3d", self_pos)
 			else:
-				# In melee range - halt immediately and auto-attack
+				# In melee range - halt immediately and attack
 				velocity.x = 0.0
 				velocity.z = 0.0
 				input_direction = Vector2.ZERO
@@ -577,9 +577,9 @@ func _ensure_cell_cursor() -> void:
 	if scene != null:
 		cell_cursor = scene.instantiate() as CellCursor3D
 		if get_parent() != null:
-			get_parent().add_child(cell_cursor)
+			get_parent().add_child.call_deferred(cell_cursor)
 		elif is_inside_tree():
-			get_tree().root.add_child(cell_cursor)
+			get_tree().root.add_child.call_deferred(cell_cursor)
 
 func _update_animation(dir_name: String = "") -> void:
 	if animated_sprite == null or animated_sprite.sprite_frames == null:
@@ -658,19 +658,122 @@ func init_from_character_id(char_id: String) -> bool:
 func is_moving() -> bool:
 	return Vector2(velocity.x, velocity.z).length_squared() > 0.01
 
+func get_edge_distance_to(target: Node3D) -> float:
+	if target == null:
+		return 999.0
+	var self_pos: Vector3 = global_position if is_inside_tree() else position
+	var target_pos: Vector3 = target.global_position if target.is_inside_tree() else target.position
+	var diff: Vector3 = target_pos - self_pos
+	diff.y = 0.0
+	var center_dist: float = diff.length()
+	var target_radius: float = 0.35
+	if "body_radius" in target:
+		target_radius = target.body_radius
+	return maxf(0.0, center_dist - (body_radius + target_radius))
+
+func face_target(target_pos: Vector3) -> void:
+	var self_pos: Vector3 = global_position if is_inside_tree() else position
+	var diff: Vector3 = target_pos - self_pos
+	diff.y = 0.0
+	if diff.length_squared() < 0.001:
+		return
+	var dir_norm: Vector3 = diff.normalized()
+	facing_direction = dir_norm
+
+	var cam: Camera3D = null
+	if camera != null and camera.is_inside_tree():
+		cam = camera
+	elif is_inside_tree() and get_viewport() != null:
+		cam = get_viewport().get_camera_3d()
+
+	var screen_x: float = dir_norm.x
+	var screen_z: float = dir_norm.z
+
+	if cam != null and cam.is_inside_tree():
+		var cam_yaw: float = cam.global_rotation.y
+		var cam_forward: Vector3 = Vector3(-sin(cam_yaw), 0.0, -cos(cam_yaw)).normalized()
+		var cam_right: Vector3 = Vector3(cos(cam_yaw), 0.0, -sin(cam_yaw)).normalized()
+		screen_x = dir_norm.dot(cam_right)
+		screen_z = -dir_norm.dot(cam_forward)
+
+	_current_direction = _vector_to_direction(Vector3(screen_x, 0.0, screen_z))
+	emit_signal("facing_changed_3d", facing_direction)
+	_update_animation()
+
+func apply_knockback(impulse: Vector3) -> void:
+	if character_state == CharacterState.DEAD:
+		return
+	impulse.y = 0.0
+	position += impulse
+
 func attack() -> void:
 	if _attack_timer > 0.0 or character_state != CharacterState.ALIVE:
 		return
 	_attack_timer = attack_cooldown
+	_attack_has_hit = false
+	_attack_lunge_done = false
 	emit_signal("player_attacked")
 
-	var target_enemy: Node = current_target
+	var target_enemy: Node = target_enemy_node if target_enemy_node != null else current_target
 	if target_enemy == null or not is_instance_valid(target_enemy):
-		target_enemy = _find_nearest_enemy_in_reach(attack_reach + 0.5)
+		target_enemy = _find_nearest_enemy_in_reach(melee_attack_range + 0.3)
 
-	if target_enemy != null and is_instance_valid(target_enemy) and target_enemy.has_method("take_damage"):
-		var dmg: int = stats.final_attack if stats != null else 10
-		target_enemy.take_damage(dmg, self)
+	_attack_target_node = target_enemy
+	if _attack_target_node != null and is_instance_valid(_attack_target_node) and _attack_target_node is Node3D:
+		var t_pos: Vector3 = (_attack_target_node as Node3D).global_position if (_attack_target_node as Node3D).is_inside_tree() else (_attack_target_node as Node3D).position
+		face_target(t_pos)
+
+	_update_animation()
+
+func _on_sprite_frame_changed() -> void:
+	if animated_sprite == null:
+		return
+	var anim: String = animated_sprite.animation
+	if not anim.begins_with("attack"):
+		return
+
+	var cur_frame: int = animated_sprite.frame
+
+	# Wind-up lunge on frames 1-3 toward target (~0.12m)
+	if (cur_frame >= 1 and cur_frame <= 3) and not _attack_lunge_done:
+		_attack_lunge_done = true
+		if _attack_target_node != null and is_instance_valid(_attack_target_node) and _attack_target_node is Node3D:
+			var self_pos: Vector3 = global_position if is_inside_tree() else position
+			var tgt_pos: Vector3 = (_attack_target_node as Node3D).global_position if (_attack_target_node as Node3D).is_inside_tree() else (_attack_target_node as Node3D).position
+			var to_t: Vector3 = tgt_pos - self_pos
+			to_t.y = 0.0
+			if to_t.length_squared() > 0.001:
+				var lunge_vec: Vector3 = to_t.normalized() * 0.12
+				if is_inside_tree():
+					global_position += lunge_vec
+				else:
+					position += lunge_vec
+
+	# Hit frame at frame 4
+	if cur_frame == 4 and not _attack_has_hit:
+		_apply_attack_hit()
+
+func _apply_attack_hit() -> void:
+	_attack_has_hit = true
+	var target_enemy: Node = _attack_target_node
+	if target_enemy == null or not is_instance_valid(target_enemy):
+		target_enemy = target_enemy_node if target_enemy_node != null else current_target
+	if target_enemy == null or not is_instance_valid(target_enemy):
+		target_enemy = _find_nearest_enemy_in_reach(melee_attack_range + 0.3)
+
+	if target_enemy != null and is_instance_valid(target_enemy) and target_enemy is Node3D:
+		var edge_dist: float = get_edge_distance_to(target_enemy as Node3D)
+		# Melee contact check: must be in range at hit frame (with 1.5x buffer)
+		if edge_dist <= melee_attack_range * 1.5:
+			if target_enemy.has_method("take_damage"):
+				var dmg: int = stats.final_attack if stats != null else 10
+				target_enemy.take_damage(dmg, self)
+			var self_pos: Vector3 = global_position if is_inside_tree() else position
+			var tgt_pos: Vector3 = (target_enemy as Node3D).global_position if (target_enemy as Node3D).is_inside_tree() else (target_enemy as Node3D).position
+			var to_t: Vector3 = tgt_pos - self_pos
+			to_t.y = 0.0
+			if to_t.length_squared() > 0.001 and target_enemy.has_method("apply_knockback"):
+				target_enemy.apply_knockback(to_t.normalized() * 0.15)
 
 func _find_nearest_enemy_in_reach(reach_dist: float) -> Node:
 	if not is_inside_tree():
@@ -681,15 +784,13 @@ func _find_nearest_enemy_in_reach(reach_dist: float) -> Node:
 	for e: Node in enemies:
 		if e is Node3D and is_instance_valid(e):
 			var e3d: Node3D = e as Node3D
-			var to_e: Vector3 = e3d.global_position - global_position
-			to_e.y = 0.0
-			var dist: float = to_e.length()
-			if dist <= best_dist:
-				best_dist = dist
+			var edge_dist: float = get_edge_distance_to(e3d)
+			if edge_dist <= best_dist:
+				best_dist = edge_dist
 				best_enemy = e
 	return best_enemy
 
-func take_damage(amount: int, _attacker: Node = null) -> void:
+func take_damage(amount: int, attacker: Node = null) -> void:
 	if character_state != CharacterState.ALIVE:
 		return
 	var def_val: int = stats.final_defence if stats != null else 0
@@ -701,6 +802,12 @@ func take_damage(amount: int, _attacker: Node = null) -> void:
 			return
 	_damage_timer = 0.40
 
+	# Turn to face attacker if idle or fighting
+	if attacker != null and is_instance_valid(attacker) and not is_moving():
+		if attacker is Node3D:
+			var atk_pos: Vector3 = (attacker as Node3D).global_position if (attacker as Node3D).is_inside_tree() else (attacker as Node3D).position
+			face_target(atk_pos)
+
 func _try_attack() -> void:
 	attack()
 
@@ -711,4 +818,52 @@ func _on_player_died() -> void:
 	if cell_cursor != null and is_instance_valid(cell_cursor):
 		cell_cursor.hide_target()
 	_update_animation()
+
+func _update_debug_gizmos() -> void:
+	if not debug_combat_gizmos:
+		if _debug_mesh_instance != null:
+			_debug_mesh_instance.visible = false
+		return
+
+	if _debug_mesh_instance == null:
+		_debug_mesh_instance = MeshInstance3D.new()
+		var mat := StandardMaterial3D.new()
+		mat.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+		mat.vertex_color_use_as_albedo = true
+		_debug_mesh_instance.material_override = mat
+		add_child(_debug_mesh_instance)
+
+	_debug_mesh_instance.visible = true
+	var imm := ImmediateMesh.new()
+	imm.surface_begin(Mesh.PRIMITIVE_LINES)
+
+	var segs := 16
+	for i in range(segs):
+		var a1 := (TAU / segs) * i
+		var a2 := (TAU / segs) * (i + 1)
+		imm.surface_set_color(Color.CYAN)
+		imm.surface_add_vertex(Vector3(cos(a1) * body_radius, 0.05, sin(a1) * body_radius))
+		imm.surface_add_vertex(Vector3(cos(a2) * body_radius, 0.05, sin(a2) * body_radius))
+
+	var total_range := body_radius + melee_attack_range
+	for i in range(segs):
+		var a1 := (TAU / segs) * i
+		var a2 := (TAU / segs) * (i + 1)
+		imm.surface_set_color(Color.ORANGE)
+		imm.surface_add_vertex(Vector3(cos(a1) * total_range, 0.05, sin(a1) * total_range))
+		imm.surface_add_vertex(Vector3(cos(a2) * total_range, 0.05, sin(a2) * total_range))
+
+	if target_enemy_node != null and is_instance_valid(target_enemy_node):
+		var to_tgt: Vector3 = target_enemy_node.global_position - global_position
+		to_tgt.y = 0.05
+		var edge_dist: float = get_edge_distance_to(target_enemy_node)
+		var in_range: bool = edge_dist <= melee_attack_range
+		var line_col: Color = Color.GREEN if in_range else Color.RED
+		imm.surface_set_color(line_col)
+		imm.surface_add_vertex(Vector3(0.0, 0.05, 0.0))
+		imm.surface_add_vertex(to_tgt)
+		print("[%s] -> [%s] edge_dist=%.2f, facing=%s, in_range=%s" % [name, target_enemy_node.name, edge_dist, _current_direction, in_range])
+
+	imm.surface_end()
+	_debug_mesh_instance.mesh = imm
 

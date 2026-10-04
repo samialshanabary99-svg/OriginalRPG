@@ -1339,10 +1339,47 @@ func _test_mouse_controls_and_combat() -> void:
 
 	# In melee attack reach: player halts and attacks
 	wolf.position = player.position + Vector3(1.0, 0.0, 0.0)
+	var edge_d: float = player.get_edge_distance_to(wolf)
+	_ok("Edge distance calculation subtracts both body radii", is_equal_approx(edge_d, 0.25))
+	_ok("Both combatants in melee range (edge <= 0.40)", edge_d <= player.melee_attack_range)
+
 	var hp_before: int = wolf.stats.current_health
 	player._physics_process(0.016)
 	_ok("Player3D stops moving when in melee range of target", is_zero_approx(player.velocity.x))
-	_ok("Target enemy takes damage from player auto-attack", wolf.stats.current_health < hp_before)
+	_ok("Player faces target East during combat", player._current_direction == "east")
+
+	# Frame 0 of attack animation does not deal damage yet (damage sync on frame 4)
+	_ok("Attack wind-up frame does not deal damage immediately", wolf.stats.current_health == hp_before)
+
+	# Advancing to hit frame (frame 4) triggers damage and knockback
+	var wolf_x_before: float = wolf.position.x
+	player.animated_sprite.frame = 4
+	_ok("Target enemy takes damage on hit frame 4", wolf.stats.current_health < hp_before)
+	_ok("Target enemy experiences knockback on hit", wolf.position.x > wolf_x_before)
+
+	# Whiff verification: if target moves out of range, attack frame 4 deals no damage
+	wolf.position = player.position + Vector3(4.0, 0.0, 0.0)
+	var hp_whiff_before: int = wolf.stats.current_health
+	player._attack_timer = 0.0
+	player.attack()
+	player.animated_sprite.frame = 4
+	_ok("Attack whiffs without dealing damage if target is out of range", wolf.stats.current_health == hp_whiff_before)
+
+	# Wolf auto-facing towards player
+	wolf.position = player.position + Vector3(1.0, 0.0, 0.0)
+	wolf.face_target(player.position)
+	_ok("Wolf faces player West when player is to its left", wolf._current_direction == "west")
+
+	# Player hit while idle turns to face attacker
+	player.stop_moving()
+	player.face_target(player.position + Vector3(0.0, 0.0, 2.0))
+	wolf.position = player.position + Vector3(0.0, 0.0, -1.0)
+	player.take_damage(5, wolf)
+	_ok("Player turns to face attacker when damaged while idle", player._current_direction == "north")
+
+	# Shadow verification: real directional light shadow disabled on 2D sprite billboards
+	_ok("Player AnimatedSprite3D cast_shadow disabled", player.animated_sprite.cast_shadow == GeometryInstance3D.SHADOW_CASTING_SETTING_OFF)
+	_ok("Wolf AnimatedSprite3D cast_shadow disabled", wolf.animated_sprite.cast_shadow == GeometryInstance3D.SHADOW_CASTING_SETTING_OFF)
 
 	# Enemy death auto-clears player target
 	wolf._on_died()
