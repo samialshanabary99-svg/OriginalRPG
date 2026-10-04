@@ -1,0 +1,253 @@
+[gd_scene load_steps=5 format=3 uid="uid://charstatswin001"]
+
+[ext_resource type="Script" path="res://src/ui/character_stats_window.gd" id="1_script"]
+[ext_resource type="PackedScene" path="res://scenes/ui/attribute_row.tscn" id="2_row"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_window"]
+bg_color = Color(0.11, 0.12, 0.15, 0.95)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.38, 0.35, 0.28, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+shadow_size = 6
+shadow_offset = Vector2(0, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn_close"]
+bg_color = Color(0.4, 0.15, 0.15, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.6, 0.25, 0.25, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="CharacterStatsWindow" type="PanelContainer"]
+custom_minimum_size = Vector2(490, 350)
+offset_left = 400.0
+offset_top = 100.0
+offset_right = 890.0
+offset_bottom = 450.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_window")
+script = ExtResource("1_script")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 14
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 14
+theme_override_constants/margin_bottom = 14
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer/TitleBar"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.88, 0.55, 1)
+theme_override_font_sizes/font_size = 15
+text = "Character"
+
+[node name="LevelLabel" type="Label" parent="MarginContainer/VBoxContainer/TitleBar"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.78, 0.82, 0.9, 1)
+theme_override_font_sizes/font_size = 13
+text = "Lv. 1 / 1"
+horizontal_alignment = 2
+
+[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer/TitleBar"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(22, 20)
+layout_mode = 2
+focus_mode = 0
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn_close")
+text = "X"
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+current_tab = 0
+
+[node name="Basic Info" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+metadata/_tab_index = 0
+
+[node name="CombatStats" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info"]
+custom_minimum_size = Vector2(160, 0)
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="CombatHeader" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.7, 1)
+theme_override_font_sizes/font_size = 12
+text = "Combat Stats"
+
+[node name="HSeparator1" type="HSeparator" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats"]
+layout_mode = 2
+
+[node name="HPRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/HPRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 12
+text = "HP"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/HPRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HPLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/HPRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.9, 0.5, 1)
+theme_override_font_sizes/font_size = 12
+text = "100 / 100"
+
+[node name="StaminaRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/StaminaRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 12
+text = "Stamina"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/StaminaRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StaminaLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/StaminaRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.7, 0.3, 1)
+theme_override_font_sizes/font_size = 12
+text = "100 / 100"
+
+[node name="AttackRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/AttackRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 12
+text = "Attack"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/AttackRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AttackLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/AttackRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.45, 0.45, 1)
+theme_override_font_sizes/font_size = 12
+text = "10"
+
+[node name="DefenseRow" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/DefenseRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.85, 0.85, 0.85, 1)
+theme_override_font_sizes/font_size = 12
+text = "Defense"
+
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/DefenseRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DefenseLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/CombatStats/DefenseRow"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_colors/font_color = Color(0.45, 0.7, 1, 1)
+theme_override_font_sizes/font_size = 12
+text = "5"
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info"]
+layout_mode = 2
+
+[node name="Attributes" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="AttrHeader" type="HBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/Attributes"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/Attributes/AttrHeader"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.9, 0.85, 0.7, 1)
+theme_override_font_sizes/font_size = 12
+text = "Attributes"
+
+[node name="PointsLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/Attributes/AttrHeader"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.4, 0.95, 0.5, 1)
+theme_override_font_sizes/font_size = 12
+text = "Points: 48"
+horizontal_alignment = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/Attributes"]
+layout_mode = 2
+
+[node name="AttributeRow_STR" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/Attributes" instance=ExtResource("2_row")]
+layout_mode = 2
+stat_name = "STR"
+
+[node name="AttributeRow_AGI" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/Attributes" instance=ExtResource("2_row")]
+layout_mode = 2
+stat_name = "AGI"
+
+[node name="AttributeRow_VIT" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/Attributes" instance=ExtResource("2_row")]
+layout_mode = 2
+stat_name = "VIT"
+
+[node name="AttributeRow_INT" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/Attributes" instance=ExtResource("2_row")]
+layout_mode = 2
+stat_name = "INT"
+
+[node name="AttributeRow_DEX" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/Attributes" instance=ExtResource("2_row")]
+layout_mode = 2
+stat_name = "DEX"
+
+[node name="AttributeRow_LUK" parent="MarginContainer/VBoxContainer/TabContainer/Basic Info/Attributes" instance=ExtResource("2_row")]
+layout_mode = 2
+stat_name = "LUK"
+
+[node name="More Info" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+metadata/_tab_index = 1
+
+[node name="PlaceholderLabel" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/More Info"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.65, 0.65, 0.65, 1)
+theme_override_font_sizes/font_size = 12
+text = "Additional derived statistics, resistances, and secondary attributes will appear here as mechanics expand."
+autowrap_mode = 2

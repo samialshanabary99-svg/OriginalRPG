@@ -57,6 +57,9 @@ func _init() -> void:
 	# Health and SP Overhead Bars & HUD Status Bars
 	_test_health_and_sp_bars()
 
+	# Character Stats Window & GameState Attribute Point Economy
+	_test_character_stats_and_game_state()
+
 	print("")
 	print("[TestRunner] ─────────────────────────────────────────")
 	print("[TestRunner] %d tests | %d failures" % [_total, _failed])
@@ -1494,6 +1497,108 @@ func _test_health_and_sp_bars() -> void:
 	player.queue_free()
 	wolf.queue_free()
 	hud.queue_free()
+
+func _test_character_stats_and_game_state() -> void:
+	print("\n[Group Y] Character Stats Window & GameState Attribute Point Economy")
+
+	# 1. GameState baseline and stat increase cost formula
+	GameState.reset_to_defaults()
+	_ok("GameState base_level is 1", GameState.base_level == 1)
+	_ok("GameState job_level is 1", GameState.job_level == 1)
+	_ok("GameState stat_points starts at 48", GameState.stat_points == 48)
+	_ok("GameState has all 6 core attributes", GameState.stats.size() == 6)
+	_ok("GameState initial STR is 1", GameState.stats["STR"] == 1)
+
+	# Cost curve checks: 1-10 -> 2, 11-20 -> 3, 21-30 -> 4
+	_ok("Stat cost at 1 is 2", GameState.stat_increase_cost(1) == 2)
+	_ok("Stat cost at 10 is 2", GameState.stat_increase_cost(10) == 2)
+	_ok("Stat cost at 11 is 3", GameState.stat_increase_cost(11) == 3)
+	_ok("Stat cost at 20 is 3", GameState.stat_increase_cost(20) == 3)
+	_ok("Stat cost at 21 is 4", GameState.stat_increase_cost(21) == 4)
+
+	# 2. Attribute allocation logic
+	var ok_str := GameState.try_increase_stat("STR")
+	_ok("try_increase_stat('STR') succeeds", ok_str)
+	_ok("STR increased to 2", GameState.stats["STR"] == 2)
+	_ok("stat_points deducted by cost 2 (48 -> 46)", GameState.stat_points == 46)
+
+	# Insufficient points check
+	GameState.stat_points = 1
+	var fail_str := GameState.try_increase_stat("STR")
+	_ok("try_increase_stat fails when points insufficient", not fail_str)
+	_ok("STR unchanged after failed increase", GameState.stats["STR"] == 2)
+
+	# 3. AttributeRow scene instantiation and behavior
+	var row_scene: PackedScene = load("res://scenes/ui/attribute_row.tscn") as PackedScene
+	_ok("AttributeRow scene loads", row_scene != null)
+	var row: AttributeRow = row_scene.instantiate() as AttributeRow
+	row.stat_name = "VIT"
+	get_root().add_child(row)
+	row._ready()
+
+	_ok("AttributeRow NameLabel is VIT", row.name_label.text == "VIT")
+	_ok("AttributeRow ValueLabel is 1", row.value_label.text == "1")
+	_ok("AttributeRow CostLabel is Cost: 2", row.cost_label.text == "Cost: 2")
+	_ok("AttributeRow MinusButton is disabled", row.minus_button.disabled)
+	_ok("AttributeRow PlusButton disabled when points < cost", row.plus_button.disabled)
+
+	# Grant points and spend via PlusButton
+	GameState.stat_points = 10
+	GameState.stat_points_changed.emit(10)
+	_ok("AttributeRow PlusButton enabled when affordable", not row.plus_button.disabled)
+
+	row._on_plus_pressed()
+	_ok("AttributeRow PlusButton increases stat", GameState.stats["VIT"] == 2)
+	_ok("AttributeRow ValueLabel refreshed to 2", row.value_label.text == "2")
+	_ok("AttributeRow points deducted (10 -> 8)", GameState.stat_points == 8)
+
+	row.queue_free()
+
+	# 4. CharacterStatsWindow controller and live updates
+	var win_scene: PackedScene = load("res://scenes/ui/character_stats_window.tscn") as PackedScene
+	_ok("CharacterStatsWindow scene loads", win_scene != null)
+	var win: CharacterStatsWindow = win_scene.instantiate() as CharacterStatsWindow
+	get_root().add_child(win)
+	win._ready()
+
+	_ok("CharacterStatsWindow has LevelLabel", win.level_label != null)
+	_ok("CharacterStatsWindow has PointsLabel", win.points_label != null)
+	_ok("CharacterStatsWindow has HPLabel", win.hp_label != null)
+	_ok("CharacterStatsWindow has StaminaLabel", win.stamina_label != null)
+	_ok("LevelLabel displays initial levels", win.level_label.text == "Lv. 1 / 1")
+	_ok("PointsLabel displays current points", win.points_label.text == "Points: 8")
+	_ok("HPLabel displays max hp with VIT bonus", win.hp_label.text == "110 / 110")
+	_ok("StaminaLabel displays 100 / 100", win.stamina_label.text == "100 / 100")
+
+	# Live update on level up
+	GameState.level_up_base(1)
+	_ok("LevelLabel updates live on leveled_up", win.level_label.text == "Lv. 2 / 1")
+	_ok("PointsLabel updates live on stat_points_changed", win.points_label.text == "Points: 13")
+
+	# Window toggle and close button
+	win._on_close_button_pressed()
+	_ok("Close button hides stats window", not win.visible)
+	win.toggle_window()
+	_ok("toggle_window shows stats window", win.visible)
+
+	win.queue_free()
+
+	# 5. HUD integration with CharacterStatsWindow
+	var hud_scene: PackedScene = load("res://scenes/ui/hud.tscn") as PackedScene
+	var hud: HUD = hud_scene.instantiate() as HUD
+	get_root().add_child(hud)
+	hud._ready()
+
+	_ok("HUD contains CharacterStatsWindow", hud.character_stats_window != null)
+	_ok("CharacterStatsWindow initially hidden in HUD", not hud.character_stats_window.visible)
+	hud.toggle_character_stats()
+	_ok("toggle_character_stats shows window", hud.character_stats_window.visible)
+	hud.toggle_character_stats()
+	_ok("toggle_character_stats hides window", not hud.character_stats_window.visible)
+
+	hud.queue_free()
+	GameState.reset_to_defaults()
+
 
 
 

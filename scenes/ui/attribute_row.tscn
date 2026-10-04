@@ -1,0 +1,50 @@
+[gd_scene load_steps=2 format=3 uid="uid://attributerow001"]
+
+[ext_resource type="Script" path="res://src/ui/attribute_row.gd" id="1_row"]
+
+[node name="AttributeRow" type="HBoxContainer"]
+custom_minimum_size = Vector2(240, 28)
+theme_override_constants/separation = 8
+alignment = 1
+script = ExtResource("1_row")
+
+[node name="NameLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(45, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_font_sizes/font_size = 13
+text = "STR"
+vertical_alignment = 1
+
+[node name="ValueLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.85, 0.4, 1)
+theme_override_font_sizes/font_size = 14
+text = "1"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CostLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+theme_override_font_sizes/font_size = 11
+text = "Cost: 2"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="MinusButton" type="Button" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+disabled = true
+text = "-"
+
+[node name="PlusButton" type="Button" parent="."]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+size_flags_vertical = 4
+focus_mode = 0
+text = "+"

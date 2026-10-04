@@ -1,7 +1,7 @@
 class_name HUD
 extends CanvasLayer
 
-## In-game HUD displaying Basic Info Window, dialogue panel, and status bindings.
+## In-game HUD displaying Basic Info Window, Character Stats Window, dialogue panel, and status bindings.
 
 signal return_to_menu_requested()
 
@@ -13,6 +13,12 @@ signal return_to_menu_requested()
 		if basic_info_window == null and has_node("BasicInfoWindow"):
 			basic_info_window = get_node_or_null("BasicInfoWindow") as Control
 		return basic_info_window
+
+@onready var character_stats_window: CharacterStatsWindow = $CharacterStatsWindow if has_node("CharacterStatsWindow") else null:
+	get:
+		if character_stats_window == null and has_node("CharacterStatsWindow"):
+			character_stats_window = get_node_or_null("CharacterStatsWindow") as CharacterStatsWindow
+		return character_stats_window
 
 var health_bar: ProgressBar:
 	get:
@@ -109,8 +115,13 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_character_info") or (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_V):
 		toggle_basic_info()
+	elif event.is_action_pressed("toggle_stats_window") or (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_C):
+		toggle_character_stats()
 	elif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
-		_on_return_pressed()
+		if character_stats_window != null and character_stats_window.visible:
+			character_stats_window.hide()
+		else:
+			_on_return_pressed()
 
 func toggle_basic_info() -> void:
 	if basic_info_window != null:
@@ -119,11 +130,17 @@ func toggle_basic_info() -> void:
 		else:
 			basic_info_window.visible = not basic_info_window.visible
 
+func toggle_character_stats() -> void:
+	if character_stats_window != null:
+		character_stats_window.toggle_window()
+
 func bind_player(player: Node) -> void:
 	if player == null:
 		return
 	if basic_info_window != null and basic_info_window.has_method("bind_player"):
 		basic_info_window.bind_player(player)
+	GameState.bind_player(player)
+
 	# Support both CharacterStatsComponent and plain StatsComponent
 	var s: StatsComponent = player.get_node_or_null("CharacterStatsComponent") as StatsComponent
 	if s == null:
