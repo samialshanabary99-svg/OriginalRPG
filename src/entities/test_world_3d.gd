@@ -387,10 +387,10 @@ func _spawn_field_decorations() -> void:
 	var shadow_tex: Texture2D = load("res://assets/environment/shadows/shadow_oval_soft.png")
 	var root_soil_tex: Texture2D = load("res://assets/environment/ground/ground_tree_roots_soil.png")
 
-	# 1. Authentic animated green bushes (Ragnarok Online style) along hill bases and meadow contours
+	# 1. Authentic animated green bushes (Ragnarok Online style) along meadow contours and hilltops
 	var bush_coords: Array[Vector2] = [
-		Vector2(3.5, -8.0), Vector2(18.0, -11.0), Vector2(10.0, -17.5),
-		Vector2(-5.0, -12.5), Vector2(-18.0, -13.0), Vector2(-11.0, -20.0),
+		Vector2(2.0, -7.0), Vector2(14.5, -10.5), Vector2(1.5, -15.0),
+		Vector2(-3.5, -10.5), Vector2(-14.5, -14.5), Vector2(-11.5, -12.5),
 		Vector2(-4.0, 4.0), Vector2(8.0, 5.0), Vector2(-12.0, 10.0), Vector2(14.0, 9.0),
 		Vector2(1.0, -9.0), Vector2(-8.0, 3.0), Vector2(12.0, 3.0)
 	]
@@ -416,7 +416,7 @@ func _spawn_field_decorations() -> void:
 	var grass_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_tall_grass.png")
 	var grass_coords: Array[Vector2] = [
 		Vector2(-1.5, -1.0), Vector2(3.0, 1.5), Vector2(-4.5, 2.0),
-		Vector2(7.0, -7.0), Vector2(-8.0, -8.0), Vector2(15.0, -6.0),
+		Vector2(5.0, -6.0), Vector2(-6.5, -6.5), Vector2(13.5, -8.0),
 		Vector2(6.0, 8.0), Vector2(-7.0, 12.0), Vector2(-2.5, -8.0),
 		Vector2(11.0, -14.0), Vector2(-9.0, -15.0)
 	]
@@ -436,8 +436,8 @@ func _spawn_field_decorations() -> void:
 	var tree_coords: Array[Vector2] = [
 		Vector2(-6.0, 7.0), Vector2(6.0, 9.0), Vector2(-14.0, 5.0),
 		Vector2(16.0, -4.0), Vector2(-8.0, -6.0), Vector2(6.5, -1.5),
-		Vector2(15.0, -15.0), Vector2(6.0, -16.0), Vector2(-16.0, -10.0),
-		Vector2(-5.0, -16.0), Vector2(-12.0, 14.0), Vector2(14.0, 12.0)
+		Vector2(15.0, -15.0), Vector2(8.5, -11.5), Vector2(-13.0, -13.0),
+		Vector2(-2.5, -15.5), Vector2(-12.0, 14.0), Vector2(14.0, 12.0)
 	]
 	var tree_frames: SpriteFrames = load("res://assets/sprites/environment/tree/tree_sprite_frames.tres") as SpriteFrames
 	var tree_tex_fallback: Texture2D = load("res://assets/sprites/environment/tree/rotations/normal_tree.png") as Texture2D
