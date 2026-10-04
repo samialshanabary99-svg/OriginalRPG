@@ -1048,6 +1048,47 @@ func _test_multi_layer_tilemap_field() -> void:
 	_ok("Plateau tier 1 is significantly higher than valley", h_plateau > 1.8)
 	_ok("Lookout ridge tier 2 is highest elevation", h_ridge > 3.0)
 
+	# Validate continuous walkable ramps
+	var max_step_p: float = 0.0
+	var last_h_p: float = world_3d._calculate_height(11.0, -2.6)
+	for i in range(1, 30):
+		var z: float = -2.6 - float(i) * 0.25
+		var h: float = world_3d._calculate_height(11.0, z)
+		max_step_p = maxf(max_step_p, abs(h - last_h_p))
+		last_h_p = h
+	_ok("Plateau ramp is continuous and smoothly walkable without vertical steps", max_step_p < 0.20)
+
+	var max_step_r: float = 0.0
+	var last_h_r: float = world_3d._calculate_height(-5.2, -8.0)
+	for i in range(1, 30):
+		var t: float = float(i) / 29.0
+		var pos2d: Vector2 = Vector2(-5.2, -8.0).lerp(Vector2(-9.8, -12.6), t)
+		var h: float = world_3d._calculate_height(pos2d.x, pos2d.y)
+		max_step_r = maxf(max_step_r, abs(h - last_h_r))
+		last_h_r = h
+	_ok("Lookout ridge ramp is continuous and smoothly walkable without vertical steps", max_step_r < 0.25)
+
+	# Validate cliff edge fall-prevention barriers
+	var cliff_barriers: StaticBody3D = world_3d.get_node_or_null("Terrain/CliffBarriers") as StaticBody3D
+	_ok("CliffBarriers StaticBody3D exists", cliff_barriers != null)
+	_ok("CliffBarriers is on collision layer 2", cliff_barriers != null and (cliff_barriers.collision_layer & 2) != 0)
+	_ok("CliffBarriers has barrier shapes protecting cliff edges", cliff_barriers != null and cliff_barriers.get_child_count() >= 40)
+
+	# Validate tree and bush physical collision shapes
+	var props_node: Node3D = world_3d.get_node_or_null("Props") as Node3D
+	var tree_col_found: bool = false
+	var bush_col_found: bool = false
+	if props_node != null:
+		for child in props_node.get_children():
+			if child is StaticBody3D:
+				var sb: StaticBody3D = child as StaticBody3D
+				if sb.name.begins_with("TreeCollision") and (sb.collision_layer & 2) != 0:
+					tree_col_found = true
+				elif sb.name.begins_with("BushCollision") and (sb.collision_layer & 2) != 0:
+					bush_col_found = true
+	_ok("Animated tree props have StaticBody3D physical collision", tree_col_found)
+	_ok("Animated bush props have StaticBody3D physical collision", bush_col_found)
+
 	# 4. Player3D and Billboard
 	var p3d: Player3D = world_3d.get_node_or_null("Player3D") as Player3D
 	_ok("TestWorld3D has Player3D instance", p3d != null)

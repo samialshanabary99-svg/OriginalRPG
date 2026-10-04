@@ -103,20 +103,23 @@ var last_combat_result: CombatResult = null
 
 var _attack_timer: float = 0.0
 var _gravity: float = 14.0
+var _cam_clearance_y: float = 0.0
 
 func _enter_tree() -> void:
 	_resolve_nodes()
-	floor_snap_length = 0.4
-	floor_max_angle = deg_to_rad(52.0)
+	floor_snap_length = 0.45
+	floor_max_angle = deg_to_rad(55.0)
 	floor_constant_speed = true
 	floor_block_on_wall = true
+	floor_stop_on_slope = true
 
 func _ready() -> void:
 	_resolve_nodes()
-	floor_snap_length = 0.4
-	floor_max_angle = deg_to_rad(52.0)
+	floor_snap_length = 0.45
+	floor_max_angle = deg_to_rad(55.0)
 	floor_constant_speed = true
 	floor_block_on_wall = true
+	floor_stop_on_slope = true
 	
 	if stats != null:
 		if not stats.died.is_connected(_on_player_died):
@@ -160,9 +163,12 @@ func _update_camera(delta: float) -> void:
 		var world_cam_pos: Vector3 = camera_arm.global_transform * desired_cam_pos
 		var terrain_h: float = get_parent()._calculate_height(world_cam_pos.x, world_cam_pos.z)
 		var min_world_y: float = terrain_h + 1.2
-		if world_cam_pos.y < min_world_y:
-			var diff_y: float = min_world_y - world_cam_pos.y
-			desired_cam_pos.y += diff_y
+		var target_diff: float = maxf(0.0, min_world_y - world_cam_pos.y)
+		if delta > 0.0:
+			_cam_clearance_y = lerpf(_cam_clearance_y, target_diff, clampf(camera_smooth_speed * delta, 0.0, 1.0))
+		else:
+			_cam_clearance_y = target_diff
+		desired_cam_pos.y += _cam_clearance_y
 
 	camera.position = desired_cam_pos
 	camera.rotation.x = -_current_pitch

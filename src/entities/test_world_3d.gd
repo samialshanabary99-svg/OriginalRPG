@@ -157,6 +157,9 @@ func _generate_terrain() -> void:
 			trimesh_shape.backface_collision = true
 			terrain_collision.shape = trimesh_shape
 
+	# Generate invisible physical barriers along cliff rims and ramp flanks to prevent falling
+	_create_cliff_barriers()
+
 ## Multi-tier height function creating authentic Ragnarok Online style mesas, cliffs, ramps, and micro-relief
 func _calculate_height(x: float, z: float) -> float:
 	# 1. Base rolling meadow waves
@@ -175,7 +178,7 @@ func _calculate_height(x: float, z: float) -> float:
 
 	# Sunken footpath trough along stepping stones from spawn towards plateau ramp
 	var p_spawn: Vector2 = Vector2(0.5, 0.0)
-	var p_ramp_foot: Vector2 = Vector2(10.5, -3.8)
+	var p_ramp_foot: Vector2 = Vector2(11.0, -2.6)
 	var d_path_trough: float = _distance_to_segment_2d(Vector2(x, z), p_spawn, p_ramp_foot)
 	if d_path_trough < 1.8:
 		h -= (1.0 - smoothstep(0.0, 1.8, d_path_trough)) * 0.09
@@ -199,24 +202,24 @@ func _calculate_height(x: float, z: float) -> float:
 	var p_rz: float = 7.0 * p_pert
 	var p_dist: float = sqrt(pow(p_dx / p_rx, 2.0) + pow(p_dz / p_rz, 2.0))
 
+	var mesa1: float = 0.0
 	if p_dist < 1.0:
-		var t_cliff1: float
 		if p_dist <= 0.85:
-			t_cliff1 = 1.0 # Flat plateau top
+			mesa1 = 2.4 # Flat plateau top
 		else:
-			t_cliff1 = 1.0 - smoothstep(0.85, 1.0, p_dist) # Sharp vertical cliff band (~70°)
+			mesa1 = (1.0 - smoothstep(0.85, 1.0, p_dist)) * 2.4 # Sharp vertical cliff band (~70°)
 
-		var lift1: float = t_cliff1 * 2.4
+	# South walkable green ramp with central footpath (x ≈ 11.0, z from -2.6 to -9.5)
+	# Continuous non-truncated ramp function: blends seamlessly from meadow floor into plateau top
+	var ramp1_x_dist: float = abs(x - 11.0)
+	var lift1: float = mesa1
+	if ramp1_x_dist < 2.4 and z >= -9.5 and z <= -2.6:
+		var ramp1_z_prog: float = clampf((-2.6 - z) / 6.6, 0.0, 1.0)
+		var ramp1_h: float = ramp1_z_prog * 2.4
+		var ramp1_x_factor: float = (1.0 - smoothstep(1.0, 2.4, ramp1_x_dist)) * smoothstep(0.0, 0.10, ramp1_z_prog)
+		lift1 = lerpf(mesa1, ramp1_h, ramp1_x_factor)
 
-		# South walkable green ramp with central footpath (x ≈ 11, z from -3.5 to -8.5)
-		var ramp1_x_dist: float = abs(p_dx)
-		if ramp1_x_dist < 2.2 and z > -9.5 and z < -3.5:
-			var ramp1_x_factor: float = 1.0 - smoothstep(1.0, 2.2, ramp1_x_dist)
-			var ramp1_z_prog: float = clampf((-3.5 - z) / 5.0, 0.0, 1.0)
-			var ramp1_h: float = ramp1_z_prog * 2.4
-			lift1 = lerpf(lift1, ramp1_h, ramp1_x_factor)
-
-		h += lift1
+	h += lift1
 
 	# 4. Tier 2 Lookout Ridge (Northwest Hill: center (-12.0, -14.0), height +3.8m)
 	# Dramatic high mesa with layered stone cliff walls and south-east ramp
@@ -229,26 +232,26 @@ func _calculate_height(x: float, z: float) -> float:
 	var r_rz: float = 6.4 * r_pert
 	var r_dist: float = sqrt(pow(r_dx / r_rx, 2.0) + pow(r_dz / r_rz, 2.0))
 
+	var mesa2: float = 0.0
 	if r_dist < 1.0:
-		var t_cliff2: float
 		if r_dist <= 0.85:
-			t_cliff2 = 1.0 # Flat ridge top
+			mesa2 = 3.8 # Flat ridge top
 		else:
-			t_cliff2 = 1.0 - smoothstep(0.85, 1.0, r_dist) # Steep vertical cliff wall
+			mesa2 = (1.0 - smoothstep(0.85, 1.0, r_dist)) * 3.8 # Steep vertical cliff wall
 
-		var lift2: float = t_cliff2 * 3.8
+	# South-East walkable green ramp (from (-5.2, -8.0) to (-9.8, -12.6))
+	# Continuous non-truncated ramp function: smooth silky grade from meadow (h=0) to ridge summit
+	var r_ramp_a: Vector2 = Vector2(-5.2, -8.0)
+	var r_ramp_b: Vector2 = Vector2(-9.8, -12.6)
+	var r_d_seg: float = _distance_to_segment_2d(Vector2(x, z), r_ramp_a, r_ramp_b)
+	var r_prog: float = _segment_progress_2d(Vector2(x, z), r_ramp_a, r_ramp_b)
+	var lift2: float = mesa2
+	if r_d_seg < 2.4 and r_prog >= 0.0 and r_prog <= 1.0:
+		var r_ramp_h: float = r_prog * 3.8
+		var r_ramp_factor: float = (1.0 - smoothstep(1.0, 2.4, r_d_seg)) * smoothstep(0.0, 0.10, r_prog)
+		lift2 = lerpf(mesa2, r_ramp_h, r_ramp_factor)
 
-		# South-East walkable green ramp (from (-6.0, -8.5) to (-9.5, -12.5))
-		var r_ramp_a: Vector2 = Vector2(-6.0, -8.5)
-		var r_ramp_b: Vector2 = Vector2(-9.5, -12.5)
-		var r_d_seg: float = _distance_to_segment_2d(Vector2(x, z), r_ramp_a, r_ramp_b)
-		if r_d_seg < 2.0:
-			var r_ramp_factor: float = 1.0 - smoothstep(1.0, 2.0, r_d_seg)
-			var r_prog: float = _segment_progress_2d(Vector2(x, z), r_ramp_a, r_ramp_b)
-			var r_ramp_h: float = r_prog * 3.8
-			lift2 = lerpf(lift2, r_ramp_h, r_ramp_factor)
-
-		h += lift2
+	h += lift2
 
 	# 5. Boundaries: gentle rolling perimeter foothills that cradle the world
 	var edge_dist: float = max(abs(x), abs(z)) / HALF_SIZE
@@ -311,27 +314,27 @@ func _add_terrain_vertex(st: SurfaceTool, pos: Vector3) -> void:
 	var ramp_weight: float = 0.0
 	var path_dirt_weight: float = 0.0
 
-	# Plateau south ramp
+	# Plateau south ramp (x ≈ 11.0, z from -2.6 to -9.5)
 	var p_ramp_dx: float = abs(pos.x - 11.0)
-	var is_p_ramp: bool = (p_ramp_dx < 2.0 and pos.z > -9.2 and pos.z < -3.5)
+	var is_p_ramp: bool = (p_ramp_dx < 2.2 and pos.z >= -9.5 and pos.z <= -2.6)
 	if is_p_ramp:
 		ramp_weight = 0.85
 		# Footpath down the middle of the ramp
 		path_dirt_weight = clampf(1.0 - p_ramp_dx / 0.8, 0.0, 1.0)
 
-	# Ridge south-east ramp
-	var r_ramp_a: Vector2 = Vector2(-6.0, -8.5)
-	var r_ramp_b: Vector2 = Vector2(-9.5, -12.5)
+	# Ridge south-east ramp (from (-5.2, -8.0) to (-9.8, -12.6))
+	var r_ramp_a: Vector2 = Vector2(-5.2, -8.0)
+	var r_ramp_b: Vector2 = Vector2(-9.8, -12.6)
 	var r_d_seg: float = _distance_to_segment_2d(Vector2(pos.x, pos.z), r_ramp_a, r_ramp_b)
 	var r_prog: float = _segment_progress_2d(Vector2(pos.x, pos.z), r_ramp_a, r_ramp_b)
-	var is_r_ramp: bool = (r_d_seg < 1.8 and r_prog >= 0.0 and r_prog <= 1.0)
+	var is_r_ramp: bool = (r_d_seg < 2.0 and r_prog >= 0.0 and r_prog <= 1.0)
 	if is_r_ramp:
 		ramp_weight = 0.85
 		path_dirt_weight = clampf(1.0 - r_d_seg / 0.7, 0.0, 1.0)
 
-	# Stepping stone trail from spawn
+	# Stepping stone trail from spawn to plateau ramp foot
 	var p_spawn: Vector2 = Vector2(0.5, 0.0)
-	var p_ramp_foot: Vector2 = Vector2(10.5, -3.8)
+	var p_ramp_foot: Vector2 = Vector2(11.0, -2.6)
 	var d_trail: float = _distance_to_segment_2d(Vector2(pos.x, pos.z), p_spawn, p_ramp_foot)
 	if not is_p_ramp and not is_r_ramp and d_trail < 1.6:
 		ramp_weight = 0.40 * (1.0 - d_trail / 1.6)
@@ -423,8 +426,8 @@ func _spawn_field_decorations() -> void:
 	# 4. Stepping stones along the path leading towards the plateau ramp (flat decals hugging terrain)
 	var stone_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_stepping_stones.png")
 	var stone_coords: Array[Vector2] = [
-		Vector2(2.0, -1.0), Vector2(4.5, -2.0), Vector2(7.0, -3.0),
-		Vector2(9.0, -4.0), Vector2(10.5, -5.5)
+		Vector2(2.0, -0.6), Vector2(4.5, -1.1), Vector2(7.0, -1.6),
+		Vector2(9.0, -2.1), Vector2(11.0, -2.6)
 	]
 	for coord: Vector2 in stone_coords:
 		_create_flat_prop(props_node, stone_tex, coord, 0.032, 0.022)
@@ -477,6 +480,20 @@ func _create_animated_bush_prop(parent: Node3D, frames: SpriteFrames, fallback_t
 		sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		parent.add_child(sprite)
 
+	# 2. Solid bush physical collision (CylinderShape3D preventing player overlap)
+	var bush_body: StaticBody3D = StaticBody3D.new()
+	bush_body.name = "BushCollision_%d_%d" % [int(pos2d.x * 10), int(pos2d.y * 10)]
+	bush_body.collision_layer = 2
+	bush_body.collision_mask = 0
+	var bush_col: CollisionShape3D = CollisionShape3D.new()
+	var bush_cyl: CylinderShape3D = CylinderShape3D.new()
+	bush_cyl.radius = 0.40
+	bush_cyl.height = 0.90
+	bush_col.shape = bush_cyl
+	bush_col.position = Vector3(pos2d.x, y + 0.45, pos2d.y)
+	bush_body.add_child(bush_col)
+	parent.add_child(bush_body)
+
 func _create_animated_tree_prop(parent: Node3D, frames: SpriteFrames, fallback_tex: Texture2D, pos2d: Vector2, pixel_scale: float, shadow_tex: Texture2D = null, root_soil_tex: Texture2D = null) -> void:
 	# 1. Warm earthy soil & root flare transition decal
 	if root_soil_tex != null:
@@ -515,6 +532,20 @@ func _create_animated_tree_prop(parent: Node3D, frames: SpriteFrames, fallback_t
 		sprite.position = Vector3(pos2d.x, anchor_y, pos2d.y)
 		sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		parent.add_child(sprite)
+
+	# 3. Solid tree trunk physical collision (CylinderShape3D preventing player overlap)
+	var tree_body: StaticBody3D = StaticBody3D.new()
+	tree_body.name = "TreeCollision_%d_%d" % [int(pos2d.x * 10), int(pos2d.y * 10)]
+	tree_body.collision_layer = 2
+	tree_body.collision_mask = 0
+	var tree_col: CollisionShape3D = CollisionShape3D.new()
+	var tree_cyl: CylinderShape3D = CylinderShape3D.new()
+	tree_cyl.radius = 0.55
+	tree_cyl.height = 2.40
+	tree_col.shape = tree_cyl
+	tree_col.position = Vector3(pos2d.x, y + 1.20, pos2d.y)
+	tree_body.add_child(tree_col)
+	parent.add_child(tree_body)
 
 func _create_billboard_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixel_scale: float) -> void:
 	if tex == null:
@@ -557,6 +588,107 @@ func _create_flat_prop(parent: Node3D, tex: Texture2D, pos2d: Vector2, pixel_sca
 
 	sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	parent.add_child(sprite)
+
+## Generates invisible vertical physical collision barriers along cliff rims and ramp flanks
+func _create_cliff_barriers() -> void:
+	var terrain_node: Node3D = get_node_or_null("Terrain")
+	if terrain_node == null:
+		terrain_node = self
+
+	var barrier_body: StaticBody3D = StaticBody3D.new()
+	barrier_body.name = "CliffBarriers"
+	barrier_body.collision_layer = 2
+	barrier_body.collision_mask = 0
+	terrain_node.add_child(barrier_body)
+
+	# 1. Tier 1 Plateau (Northeast Hill) Cliff Rim & Ramp Flank Barriers
+	var p_center: Vector2 = Vector2(11.0, -11.0)
+	var p_steps: int = 24
+	var p_a_start: float = 0.64 * PI
+	var p_a_end: float = 2.36 * PI
+	var p_pts: Array[Vector2] = []
+	for i: int in range(p_steps + 1):
+		var t: float = float(i) / float(p_steps)
+		var angle: float = lerpf(p_a_start, p_a_end, t)
+		var pert: float = 1.0 + 0.08 * sin(5.0 * angle) + 0.04 * cos(9.0 * angle + 0.6)
+		var rx: float = 8.4 * pert * 0.85
+		var rz: float = 7.0 * pert * 0.85
+		p_pts.append(p_center + Vector2(rx * cos(angle), rz * sin(angle)))
+
+	for i: int in range(p_steps):
+		_add_barrier_wall(barrier_body, p_pts[i], p_pts[i + 1], 2.1, 2.8)
+
+	# Plateau ramp side flanks (corridor guides player safely up ramp without falling off sides)
+	# West flank: from p_pts[0] down to (8.6, -2.6)
+	var p_west_foot: Vector2 = Vector2(8.6, -2.6)
+	var p_west_rim: Vector2 = p_pts[0]
+	var p_flank_steps: int = 4
+	for k: int in range(p_flank_steps):
+		var pt_a: Vector2 = p_west_foot.lerp(p_west_rim, float(k) / float(p_flank_steps))
+		var pt_b: Vector2 = p_west_foot.lerp(p_west_rim, float(k + 1) / float(p_flank_steps))
+		var y_mid: float = (_calculate_height(pt_a.x, pt_a.y) + _calculate_height(pt_b.x, pt_b.y)) * 0.5
+		_add_barrier_wall(barrier_body, pt_a, pt_b, y_mid - 0.2, 2.6)
+
+	# East flank: from p_pts[p_steps] down to (13.4, -2.6)
+	var p_east_foot: Vector2 = Vector2(13.4, -2.6)
+	var p_east_rim: Vector2 = p_pts[p_steps]
+	for k: int in range(p_flank_steps):
+		var pt_a: Vector2 = p_east_foot.lerp(p_east_rim, float(k) / float(p_flank_steps))
+		var pt_b: Vector2 = p_east_foot.lerp(p_east_rim, float(k + 1) / float(p_flank_steps))
+		var y_mid: float = (_calculate_height(pt_a.x, pt_a.y) + _calculate_height(pt_b.x, pt_b.y)) * 0.5
+		_add_barrier_wall(barrier_body, pt_a, pt_b, y_mid - 0.2, 2.6)
+
+	# 2. Tier 2 Lookout Ridge (Northwest Hill) Cliff Rim & Ramp Flank Barriers
+	var r_center: Vector2 = Vector2(-12.0, -14.0)
+	var r_steps: int = 24
+	var r_a_start: float = 1.05
+	var r_a_end: float = 2.0 * PI + 0.12
+	var r_pts: Array[Vector2] = []
+	for i: int in range(r_steps + 1):
+		var t: float = float(i) / float(r_steps)
+		var angle: float = lerpf(r_a_start, r_a_end, t)
+		var pert: float = 1.0 + 0.07 * sin(6.0 * angle) + 0.04 * cos(8.0 * angle - 0.4)
+		var rx: float = 7.8 * pert * 0.85
+		var rz: float = 6.4 * pert * 0.85
+		r_pts.append(r_center + Vector2(rx * cos(angle), rz * sin(angle)))
+
+	for i: int in range(r_steps):
+		_add_barrier_wall(barrier_body, r_pts[i], r_pts[i + 1], 3.5, 3.0)
+
+	# Lookout ridge ramp side flanks (from meadow ramp foot to summit gateway)
+	var r_ramp_foot: Vector2 = Vector2(-5.2, -8.0)
+	var r_perp: Vector2 = Vector2(-0.707, 0.707) * 1.8
+	var r_flank1_foot: Vector2 = r_ramp_foot + r_perp
+	var r_flank1_rim: Vector2 = r_pts[0]
+	var r_flank2_foot: Vector2 = r_ramp_foot - r_perp
+	var r_flank2_rim: Vector2 = r_pts[r_steps]
+	var r_flank_steps: int = 4
+	for k: int in range(r_flank_steps):
+		var pt_a: Vector2 = r_flank1_foot.lerp(r_flank1_rim, float(k) / float(r_flank_steps))
+		var pt_b: Vector2 = r_flank1_foot.lerp(r_flank1_rim, float(k + 1) / float(r_flank_steps))
+		var y_mid: float = (_calculate_height(pt_a.x, pt_a.y) + _calculate_height(pt_b.x, pt_b.y)) * 0.5
+		_add_barrier_wall(barrier_body, pt_a, pt_b, y_mid - 0.2, 2.6)
+
+		var pt_c: Vector2 = r_flank2_foot.lerp(r_flank2_rim, float(k) / float(r_flank_steps))
+		var pt_d: Vector2 = r_flank2_foot.lerp(r_flank2_rim, float(k + 1) / float(r_flank_steps))
+		var y_mid2: float = (_calculate_height(pt_c.x, pt_c.y) + _calculate_height(pt_d.x, pt_d.y)) * 0.5
+		_add_barrier_wall(barrier_body, pt_c, pt_d, y_mid2 - 0.2, 2.6)
+
+func _add_barrier_wall(body: StaticBody3D, p1: Vector2, p2: Vector2, y_bottom: float, wall_height: float, thickness: float = 0.6) -> void:
+	var seg: Vector2 = p2 - p1
+	var seg_len: float = seg.length()
+	if seg_len < 0.05:
+		return
+	var mid: Vector2 = (p1 + p2) * 0.5
+	var angle: float = atan2(seg.y, seg.x)
+
+	var col: CollisionShape3D = CollisionShape3D.new()
+	var box: BoxShape3D = BoxShape3D.new()
+	box.size = Vector3(seg_len + 0.15, wall_height, thickness)
+	col.shape = box
+	col.position = Vector3(mid.x, y_bottom + wall_height * 0.5, mid.y)
+	col.rotation.y = -angle
+	body.add_child(col)
 
 func _on_return_to_menu() -> void:
 	get_tree().change_scene_to_file("res://scenes/ui/main_menu.tscn")
