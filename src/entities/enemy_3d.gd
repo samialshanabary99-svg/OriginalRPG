@@ -6,6 +6,7 @@ extends CharacterBody3D
 ## terrain elevation navigation, and state-machine AI (Patrol -> Aggro -> Attack -> Die).
 
 signal enemy_died(enemy: Enemy3D)
+signal enemy_respawned(enemy: Enemy3D)
 signal targeted(enemy: Enemy3D)
 signal attack_performed(target: Node3D)
 
@@ -28,6 +29,13 @@ enum State {
 @export var attack_cooldown: float = 1.2
 @export var debug_combat_gizmos: bool = false
 @export var definition: EnemyDefinition = null
+
+# Respawn configuration
+@export var auto_respawn: bool = true
+@export var corpse_linger_time: float = 2.0
+@export var corpse_fade_duration: float = 0.8
+@export var respawn_delay: float = 4.0
+@export var spawn_position: Vector3 = Vector3.ZERO
 
 @onready var stats: CharacterStatsComponent = $CharacterStatsComponent:
 	get:
@@ -85,6 +93,10 @@ var _attack_has_hit: bool = false
 var _attack_lunge_done: bool = false
 var _debug_mesh_instance: MeshInstance3D = null
 
+var _dead_timer: float = 0.0
+var _is_corpse_faded: bool = false
+var _corpse_tween: Tween = null
+
 func _enter_tree() -> void:
 	floor_snap_length = 0.45
 	floor_max_angle = deg_to_rad(55.0)
@@ -117,6 +129,9 @@ func _ready() -> void:
 		init_from_id(enemy_id)
 
 	_update_overhead_bar()
+
+	if spawn_position == Vector3.ZERO:
+		spawn_position = global_position if is_inside_tree() else position
 
 	if is_inside_tree():
 		_patrol_origin = global_position
@@ -233,6 +248,14 @@ func _physics_process(delta: float) -> void:
 		if is_inside_tree():
 			move_and_slide()
 		_update_animation()
+
+		# Automatic respawn cycle
+		if auto_respawn:
+			_dead_timer += delta
+			if _dead_timer >= corpse_linger_time and not _is_corpse_faded:
+				_fade_out_corpse()
+			if _dead_timer >= (corpse_linger_time + corpse_fade_duration + respawn_delay):
+				respawn()
 		return
 
 	if not is_on_floor():
@@ -492,6 +515,12 @@ func _on_died() -> void:
 	velocity = Vector3.ZERO
 	is_targeted = false
 	is_hovered = false
+	_dead_timer = 0.0
+	_is_corpse_faded = false
+	if _corpse_tween != null and is_instance_valid(_corpse_tween):
+		_corpse_tween.kill()
+		_corpse_tween = null
+
 	if aim_indicator != null:
 		aim_indicator.visible = false
 	if overhead_bar != null:
@@ -512,6 +541,88 @@ func _on_died() -> void:
 					p_stats.gain_xp(xp)
 
 	emit_signal("enemy_died", self)
+
+## Fades out the fallen corpse and shadow before respawning.
+func _fade_out_corpse() -> void:
+	_is_corpse_faded = true
+	if _corpse_tween != null and is_instance_valid(_corpse_tween):
+		_corpse_tween.kill()
+		_corpse_tween = null
+	if not is_inside_tree():
+		if animated_sprite != null:
+			animated_sprite.modulate.a = 0.0
+		if shadow != null:
+			shadow.visible = false
+		return
+	_corpse_tween = create_tween()
+	if _corpse_tween == null:
+		if animated_sprite != null:
+			animated_sprite.modulate.a = 0.0
+		if shadow != null:
+			shadow.visible = false
+		return
+	_corpse_tween.set_parallel(true)
+	if animated_sprite != null:
+		_corpse_tween.tween_property(animated_sprite, "modulate:a", 0.0, corpse_fade_duration)
+	if shadow != null:
+		_corpse_tween.tween_property(shadow, "transparency", 1.0, corpse_fade_duration)
+
+## Respawns the enemy, restoring health, collision, and placing it at spawn_position.
+func respawn(at_position: Vector3 = Vector3.INF) -> void:
+	if _corpse_tween != null and is_instance_valid(_corpse_tween):
+		_corpse_tween.kill()
+		_corpse_tween = null
+
+	var target_pos: Vector3 = spawn_position
+	if at_position != Vector3.INF:
+		target_pos = at_position
+
+	position = target_pos
+	if is_inside_tree():
+		global_position = target_pos
+	velocity = Vector3.ZERO
+	_patrol_origin = target_pos
+	_dead_timer = 0.0
+	_is_corpse_faded = false
+	current_target = null
+	_attack_target = null
+	_attack_timer = 0.0
+	_damage_timer = 0.0
+	_attack_duration = 0.0
+	_attack_has_hit = false
+	_attack_lunge_done = false
+	_idle_timer = randf_range(1.5, 3.0)
+
+	is_targeted = false
+	is_hovered = false
+	_update_aim_indicator()
+
+	# Restore visual opacity immediately
+	if animated_sprite != null:
+		animated_sprite.modulate = Color(1.0, 1.0, 1.0, 1.0)
+		animated_sprite.visible = true
+
+	if shadow != null:
+		shadow.visible = true
+		shadow.transparency = 0.0
+
+	# Restore health and components
+	if stats != null:
+		stats.current_health = stats.max_health
+	if overhead_bar != null:
+		overhead_bar.visible = true
+		_update_overhead_bar()
+	if collision_shape != null:
+		collision_shape.disabled = false
+
+	current_state = State.IDLE
+	_update_animation("south")
+	_pick_new_patrol_target()
+
+	emit_signal("enemy_respawned", self)
+
+func is_dead() -> bool:
+	return current_state == State.DEAD
 
 func _on_health_changed(current: int, maximum: int) -> void:
 	if overhead_bar != null:

@@ -402,7 +402,10 @@ func _spawn_monsters() -> void:
 	for pos2d: Vector2 in spawn_coords:
 		var wolf: CharacterBody3D = wolf_scene.instantiate() as CharacterBody3D
 		var y: float = _calculate_height(pos2d.x, pos2d.y)
-		wolf.position = Vector3(pos2d.x, y + 0.1, pos2d.y)
+		var spawn_pos: Vector3 = Vector3(pos2d.x, y + 0.1, pos2d.y)
+		wolf.position = spawn_pos
+		if "spawn_position" in wolf:
+			wolf.spawn_position = spawn_pos
 		monsters_node.add_child(wolf)
 
 ## Spawns authentic Ragnarok Online style 2.5D billboard vegetation and props

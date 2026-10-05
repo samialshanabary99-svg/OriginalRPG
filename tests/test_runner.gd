@@ -1684,6 +1684,79 @@ func _test_character_stats_and_game_state() -> void:
 	# Cleanup test nodes
 	test_parent.queue_free()
 
+	# ─────────────────────────────────────────────────────────────────────────
+	# [Group AA] Monster Respawn System (Enemy3D Lifecycle & Respawn)
+	# ─────────────────────────────────────────────────────────────────────────
+	print("\n[Group AA] Monster Respawn System (Enemy3D Lifecycle & Respawn)")
+
+	var respawn_parent: Node3D = Node3D.new()
+	get_root().add_child(respawn_parent)
+
+	var w_res_scene: PackedScene = load("res://scenes/entities/enemy_3d.tscn") as PackedScene
+	var respawn_wolf: Enemy3D = w_res_scene.instantiate() as Enemy3D
+	respawn_wolf.position = Vector3(4.0, 1.0, 4.0)
+	respawn_parent.add_child(respawn_wolf)
+	respawn_wolf._ready()
+
+	# 1. Baseline configuration
+	_ok("Enemy3D auto_respawn is true by default", respawn_wolf.auto_respawn)
+	_ok("Enemy3D corpse_linger_time is configured (> 0)", respawn_wolf.corpse_linger_time > 0.0)
+	_ok("Enemy3D respawn_delay is configured (> 0)", respawn_wolf.respawn_delay > 0.0)
+	_ok("Enemy3D spawn_position initialized to starting position", respawn_wolf.spawn_position.is_equal_approx(Vector3(4.0, 1.0, 4.0)))
+	_ok("Enemy3D is_dead() is false initially", not respawn_wolf.is_dead())
+
+	# 2. Death state
+	respawn_wolf.take_damage(999, null)
+	_ok("Enemy3D current_state is DEAD after fatal damage", respawn_wolf.current_state == Enemy3D.State.DEAD)
+	_ok("Enemy3D is_dead() is true after fatal damage", respawn_wolf.is_dead())
+	_ok("Enemy3D collision_shape disabled on death", respawn_wolf.collision_shape.disabled)
+	_ok("Enemy3D overhead_bar hidden on death", not respawn_wolf.overhead_bar.visible)
+
+	# 3. Manual respawn() method
+	var respawn_events: Array[Enemy3D] = []
+	respawn_wolf.enemy_respawned.connect(func(e: Enemy3D): respawn_events.append(e))
+
+	respawn_wolf.respawn()
+	_ok("Enemy3D respawn() fires enemy_respawned signal", respawn_events.size() == 1 and respawn_events[0] == respawn_wolf)
+	_ok("Enemy3D current_state returns to IDLE after respawn", respawn_wolf.current_state == Enemy3D.State.IDLE)
+	_ok("Enemy3D is_dead() returns false after respawn", not respawn_wolf.is_dead())
+	_ok("Enemy3D health restored to max_health after respawn", respawn_wolf.stats.current_health == respawn_wolf.stats.max_health)
+	_ok("Enemy3D overhead_bar visible after respawn", respawn_wolf.overhead_bar.visible)
+	_ok("Enemy3D overhead_bar ratio is 1.0 after respawn", is_equal_approx(respawn_wolf.overhead_bar.get_hp_ratio(), 1.0))
+	_ok("Enemy3D collision_shape re-enabled after respawn", not respawn_wolf.collision_shape.disabled)
+	_ok("Enemy3D position restored to spawn_position", respawn_wolf.position.is_equal_approx(Vector3(4.0, 1.0, 4.0)))
+
+	# 4. Custom spawn position override
+	respawn_wolf.respawn(Vector3(10.0, 2.0, -5.0))
+	_ok("Enemy3D respawn(pos) positions at custom coordinates", respawn_wolf.position.is_equal_approx(Vector3(10.0, 2.0, -5.0)))
+
+	# 5. Automated delta-time respawn cycle
+	respawn_wolf.spawn_position = Vector3(4.0, 1.0, 4.0)
+	respawn_wolf.position = Vector3(8.0, 1.0, 8.0) # Moved away in combat
+	respawn_wolf.take_damage(999, null)
+	_ok("Enemy3D dead again after combat kill", respawn_wolf.is_dead())
+	_ok("Enemy3D corpse rests at location of death", respawn_wolf.position.is_equal_approx(Vector3(8.0, 1.0, 8.0)))
+	_ok("Enemy3D corpse not faded yet initially", not respawn_wolf._is_corpse_faded)
+
+	# Advance physics beyond corpse_linger_time -> triggers corpse fadeout
+	respawn_wolf._physics_process(respawn_wolf.corpse_linger_time + 0.1)
+	_ok("Enemy3D corpse starts fading after corpse_linger_time", respawn_wolf._is_corpse_faded)
+	_ok("Enemy3D still dead during fadeout", respawn_wolf.is_dead())
+
+	# Advance physics beyond corpse_fade_duration + respawn_delay -> triggers automatic respawn
+	respawn_wolf._physics_process(respawn_wolf.corpse_fade_duration + respawn_wolf.respawn_delay + 0.1)
+	_ok("Enemy3D automatically respawns after full delay", respawn_wolf.current_state == Enemy3D.State.IDLE)
+	_ok("Enemy3D returned home to spawn_position", respawn_wolf.position.is_equal_approx(Vector3(4.0, 1.0, 4.0)))
+	_ok("Enemy3D full HP after automatic respawn", respawn_wolf.stats.current_health == respawn_wolf.stats.max_health)
+
+	# 6. auto_respawn toggle
+	respawn_wolf.auto_respawn = false
+	respawn_wolf.take_damage(999, null)
+	respawn_wolf._physics_process(100.0) # long time passes
+	_ok("Enemy3D remains dead when auto_respawn is false", respawn_wolf.is_dead())
+
+	respawn_parent.queue_free()
+
 
 
 
