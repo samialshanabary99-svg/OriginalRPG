@@ -187,19 +187,19 @@ generator_or_tool: manual_extraction
 prompt_reference: Ragnarok Online Basic Info UI icons (HP, SP, Stamina, Power, Weight, Money)
 author: Antigravity (Agent)
 created_date: 2026-10-01
-modified_date: 2026-10-01
+modified_date: 2026-10-05
 dimensions: 32x32
 frame_size: 32x32
-animation_frames: 6
+animation_frames: 10
 animation: none
 directions: 1
 format: png
 transparency: rgba_alpha
-intended_use: Attribute and resource row icons for Basic Info Window
-related_entity: scenes/ui/basic_info_window.tscn
+intended_use: Attribute and resource row icons for Basic Info Window and category placeholder icons for Inventory Window
+related_entity: scenes/ui/basic_info_window.tscn, scenes/ui/inventory_window.tscn
 status: approved
-license_or_usage_notes: Project UI icons (icon_hp.png, icon_sp.png, icon_stamina.png, icon_power.png, icon_weight.png, icon_money.png)
-notes: Set of 6 standard 32x32 RGBA icons with transparent backgrounds.
+license_or_usage_notes: Project UI icons (icon_hp.png, icon_sp.png, icon_stamina.png, icon_power.png, icon_weight.png, icon_money.png, icon_item_consumable.png, icon_item_gear.png, icon_item_etc.png, icon_item_fav.png)
+notes: Set of standard 32x32 RGBA icons with transparent backgrounds including item category placeholders.
 ```
 
 ### 7. `ui_cursors`

@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://hudview001"]
+[gd_scene load_steps=6 format=3 uid="uid://hudview001"]
 
 [ext_resource type="Script" path="res://src/ui/hud.gd" id="1_hud"]
 [ext_resource type="PackedScene" path="res://scenes/ui/basic_info_window.tscn" id="2_basic_info"]
 [ext_resource type="PackedScene" path="res://scenes/ui/character_stats_window.tscn" id="3_char_stats"]
+[ext_resource type="PackedScene" path="res://scenes/ui/inventory_window.tscn" id="4_inventory"]
+[ext_resource type="PackedScene" path="res://scenes/ui/item_info_window.tscn" id="5_item_info"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_hud")
@@ -19,6 +21,49 @@ offset_left = 380.0
 offset_top = 20.0
 offset_right = 870.0
 offset_bottom = 370.0
+
+[node name="InventoryWindow" parent="." instance=ExtResource("4_inventory")]
+visible = false
+offset_left = 380.0
+offset_top = 20.0
+offset_right = 800.0
+offset_bottom = 380.0
+
+[node name="ItemInfoWindow" parent="." instance=ExtResource("5_item_info")]
+visible = false
+offset_left = 810.0
+offset_top = 20.0
+offset_right = 1110.0
+offset_bottom = 380.0
+
+[node name="HUDMenuBar" type="HBoxContainer" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -260.0
+offset_top = -45.0
+offset_right = -20.0
+offset_bottom = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/separation = 6
+
+[node name="ToggleInfoBtn" type="Button" parent="HUDMenuBar"]
+custom_minimum_size = Vector2(72, 28)
+layout_mode = 2
+text = "Info (V)"
+
+[node name="ToggleStatsBtn" type="Button" parent="HUDMenuBar"]
+custom_minimum_size = Vector2(72, 28)
+layout_mode = 2
+text = "Stats (C)"
+
+[node name="ToggleInventoryBtn" type="Button" parent="HUDMenuBar"]
+custom_minimum_size = Vector2(72, 28)
+layout_mode = 2
+text = "Bag (I)"
 
 [node name="DialoguePanel" type="PanelContainer" parent="."]
 anchors_preset = 7

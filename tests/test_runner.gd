@@ -1886,6 +1886,249 @@ func _test_character_stats_and_game_state() -> void:
 	tw3d_inst.queue_free()
 	prop_root.queue_free()
 
+	# ─────────────────────────────────────────────────────────────────────────
+	# [Group CC] Inventory Window & Item Information Window System
+	# ─────────────────────────────────────────────────────────────────────────
+	print("\n[Group CC] Inventory Window & Item Information Window System")
+
+	# 1. ItemSlot scene & component
+	var slot_scene: PackedScene = load("res://scenes/ui/item_slot.tscn") as PackedScene
+	_ok("ItemSlot scene loads", slot_scene != null)
+	var slot: ItemSlot = slot_scene.instantiate() as ItemSlot
+	root.add_child(slot)
+	slot._ready()
+
+	_ok("ItemSlot mouse_filter is MOUSE_FILTER_STOP", slot.mouse_filter == Control.MOUSE_FILTER_STOP)
+	_ok("ItemSlot starts empty with icon hidden", slot.icon_rect != null and not slot.icon_rect.visible)
+	_ok("ItemSlot starts with qty badge hidden", slot.qty_badge != null and not slot.qty_badge.visible)
+
+	var test_potion := ItemDefinition.new()
+	test_potion.item_id = "test_pot"
+	test_potion.display_name = "Red Potion"
+	test_potion.category = ItemDefinition.Category.CONSUMABLE
+	test_potion.heal_amount = 50
+	test_potion.weight = 5
+	test_potion.stackable = true
+
+	slot.set_item(test_potion, 15, true)
+	_ok("ItemSlot set_item shows icon", slot.icon_rect.visible)
+	_ok("ItemSlot set_item shows qty badge for quantity > 1", slot.qty_badge.visible)
+	_ok("ItemSlot qty label displays 15", slot.qty_label.text == "15")
+	_ok("ItemSlot shows favorite star when is_favorite is true", slot.fav_icon.visible)
+
+	slot.set_selected(true)
+	_ok("ItemSlot is_selected is true", slot.is_selected)
+
+	var clicked_slot: Array = []
+	slot.slot_clicked.connect(func(s: ItemSlot): clicked_slot.append(s))
+	var fake_click := InputEventMouseButton.new()
+	fake_click.button_index = MOUSE_BUTTON_LEFT
+	fake_click.pressed = true
+	slot._on_gui_input(fake_click)
+	_ok("ItemSlot click emits slot_clicked", clicked_slot.size() == 1 and clicked_slot[0] == slot)
+
+	slot.clear_item()
+	_ok("ItemSlot clear_item resets item_data", slot.item_data == null)
+	_ok("ItemSlot clear_item hides icon", not slot.icon_rect.visible)
+	slot.queue_free()
+
+	# 2. InventoryWindow scene & components
+	var inv_win_scene: PackedScene = load("res://scenes/ui/inventory_window.tscn") as PackedScene
+	_ok("InventoryWindow scene loads", inv_win_scene != null)
+	var inv_win: InventoryWindow = inv_win_scene.instantiate() as InventoryWindow
+	root.add_child(inv_win)
+	inv_win._ready()
+
+	_ok("InventoryWindow mouse_filter is MOUSE_FILTER_STOP", inv_win.mouse_filter == Control.MOUSE_FILTER_STOP)
+	_ok("InventoryWindow title_bar mouse_filter is MOUSE_FILTER_STOP", inv_win.title_bar.mouse_filter == Control.MOUSE_FILTER_STOP)
+	_ok("InventoryWindow main_panel mouse_filter is MOUSE_FILTER_STOP", inv_win.main_panel.mouse_filter == Control.MOUSE_FILTER_STOP)
+	_ok("InventoryWindow has 35 slots in 7x5 grid", inv_win.slots.size() == 35)
+
+	# 3. ItemInfoWindow scene & components
+	var info_win_scene: PackedScene = load("res://scenes/ui/item_info_window.tscn") as PackedScene
+	_ok("ItemInfoWindow scene loads", info_win_scene != null)
+	var info_win: ItemInfoWindow = info_win_scene.instantiate() as ItemInfoWindow
+	root.add_child(info_win)
+	info_win._ready()
+
+	_ok("ItemInfoWindow mouse_filter is MOUSE_FILTER_STOP", info_win.mouse_filter == Control.MOUSE_FILTER_STOP)
+	_ok("ItemInfoWindow title_bar mouse_filter is MOUSE_FILTER_STOP", info_win.title_bar.mouse_filter == Control.MOUSE_FILTER_STOP)
+
+	# 4. Inventory Data Binding & Tab Filtering
+	var test_inv := InventoryComponent.new()
+	test_inv.base_weight = 1200
+	test_inv.max_weight = 2900
+
+	var sword_item := ItemDefinition.new()
+	sword_item.item_id = "test_sword"
+	sword_item.display_name = "Training Sword"
+	sword_item.category = ItemDefinition.Category.WEAPON
+	sword_item.equip_slot = "weapon"
+	sword_item.stat_modifiers = {"attack": 8}
+	sword_item.weight = 80
+	sword_item.stackable = false
+
+	var herb_item := ItemDefinition.new()
+	herb_item.item_id = "test_herb"
+	herb_item.display_name = "Green Herb"
+	herb_item.category = ItemDefinition.Category.CONSUMABLE
+	herb_item.heal_amount = 20
+	herb_item.weight = 3
+	herb_item.stackable = true
+
+	var feather_item := ItemDefinition.new()
+	feather_item.item_id = "test_feather"
+	feather_item.display_name = "Starlight Feather"
+	feather_item.category = ItemDefinition.Category.MISC
+	feather_item.weight = 1
+	feather_item.stackable = true
+
+	# Add items
+	test_inv.add_item(sword_item)
+	test_inv.add_item(herb_item)
+	test_inv.add_item(herb_item) # stacked
+	test_inv.add_item(feather_item)
+
+	inv_win.bind_inventory(test_inv)
+	info_win.bind_inventory(test_inv)
+
+	# Tab: Item (Consumables)
+	inv_win.switch_tab("item")
+	_ok("Item tab active", inv_win.current_tab == "item")
+	_ok("Slot 0 in Item tab is Herb", inv_win.slots[0].item_data != null and inv_win.slots[0].item_data.item_id == "test_herb")
+	_ok("Slot 0 in Item tab has stacked quantity 2", inv_win.slots[0].quantity == 2)
+	_ok("Slot 1 in Item tab is empty", inv_win.slots[1].item_data == null)
+
+	# Tab: Gear
+	inv_win.switch_tab("gear")
+	_ok("Gear tab active", inv_win.current_tab == "gear")
+	_ok("Slot 0 in Gear tab is Sword", inv_win.slots[0].item_data != null and inv_win.slots[0].item_data.item_id == "test_sword")
+	_ok("Slot 1 in Gear tab is empty", inv_win.slots[1].item_data == null)
+
+	# Tab: Etc
+	inv_win.switch_tab("etc")
+	_ok("Etc tab active", inv_win.current_tab == "etc")
+	_ok("Slot 0 in Etc tab is Feather", inv_win.slots[0].item_data != null and inv_win.slots[0].item_data.item_id == "test_feather")
+	_ok("Slot 1 in Etc tab is empty", inv_win.slots[1].item_data == null)
+
+	# Favorite Flag & Tab: Fav
+	_ok("Fav tab initially empty", true)
+	test_inv.set_favorite("test_sword", true)
+	_ok("test_sword is marked favorite", test_inv.is_favorite("test_sword"))
+	inv_win.switch_tab("fav")
+	_ok("Slot 0 in Fav tab is favorite sword", inv_win.slots[0].item_data != null and inv_win.slots[0].item_data.item_id == "test_sword")
+	_ok("Fav tab slot shows star badge", inv_win.slots[0].is_favorite)
+
+	# 5. Weight Encumbrance Calculation
+	# Weight = base 1200 + sword (80) + 2 herbs (2*3=6) + feather (1) = 1287
+	var total_w: int = test_inv.get_total_weight()
+	_ok("Total weight calculated correctly (1287)", total_w == 1287)
+	_ok("Inventory weight label contains 1,287", inv_win.label_weight.text.contains("1,287"))
+	_ok("Inventory weight bar matches calculated weight", int(inv_win.weight_bar.value) == 1287)
+
+	# 6. Selection & ItemInfoWindow Population
+	inv_win.switch_tab("gear")
+	info_win.set_item(inv_win.slots[0].item_data, inv_win.slots[0].quantity, inv_win.slots[0].is_favorite)
+	_ok("ItemInfoWindow name is Training Sword", info_win.label_name.text == "Training Sword")
+	_ok("ItemInfoWindow type is Weapon (Weapon)", info_win.label_type.text.contains("Weapon"))
+	_ok("ItemInfoWindow weight is 80", info_win.label_weight.text.contains("80"))
+	_ok("ItemInfoWindow stat text contains ATTACK +8", info_win.label_stats.text.contains("ATTACK +8"))
+	_ok("ItemInfoWindow Use button displays Equip for weapons", info_win.btn_use.text == "Equip")
+
+	# 7. Consumable Use Behavior
+	var inv_dummy_player: Node = Node.new()
+	var inv_dummy_stats: CharacterStatsComponent = CharacterStatsComponent.new()
+	inv_dummy_stats.name = "CharacterStatsComponent"
+	test_inv.name = "InventoryComponent"
+	inv_dummy_stats.max_health = 100
+	inv_dummy_player.name = "Player"
+	inv_dummy_player.add_child(inv_dummy_stats)
+	inv_dummy_player.add_child(test_inv)
+	root.add_child(inv_dummy_player)
+	inv_dummy_stats._ready()
+	inv_dummy_stats.set_health(40)
+
+	info_win.bind_player(inv_dummy_player)
+	info_win.set_item(herb_item, 2, false)
+	_ok("Dummy player current HP is 40", inv_dummy_stats.current_health == 40)
+	info_win._on_use_pressed()
+	_ok("Using herb heals player by 20 (40 -> 60)", inv_dummy_stats.current_health == 60)
+	_ok("Using herb reduces inventory herb count to 1", test_inv.count_item("test_herb") == 1)
+
+	# 8. Lock Item Drop & Drop Behavior
+	inv_win.lock_drop_checkbox.button_pressed = true
+	inv_win._on_lock_drop_toggled(true)
+	info_win.set_drop_locked(true)
+	_ok("is_drop_locked is true", inv_win.is_drop_locked)
+	_ok("Drop button disabled when drop is locked", info_win.btn_drop.disabled)
+
+	# Attempt drop while locked
+	info_win._on_drop_pressed()
+	_ok("Herb not dropped while locked (count still 1)", test_inv.count_item("test_herb") == 1)
+
+	# Unlock and drop
+	inv_win.lock_drop_checkbox.button_pressed = false
+	inv_win._on_lock_drop_toggled(false)
+	info_win.set_drop_locked(false)
+	_ok("Drop button enabled when drop unlocked", not info_win.btn_drop.disabled)
+	info_win._on_drop_pressed()
+	_ok("Dropping herb removes it from inventory (count == 0)", test_inv.count_item("test_herb") == 0)
+
+	# 9. UI Click Does Not Trigger World Input
+	var p3d_scene: PackedScene = load("res://scenes/entities/player_3d.tscn") as PackedScene
+	_ok("Player3D scene loads for UI input isolation test", p3d_scene != null)
+	var p3d_inst: Player3D = p3d_scene.instantiate() as Player3D
+	root.add_child(p3d_inst)
+	p3d_inst._ready()
+	var initial_player_pos: Vector3 = p3d_inst.position
+
+	# Simulate dragging window title bar
+	var initial_win_pos: Vector2 = inv_win.global_position
+	var drag_event := InputEventMouseButton.new()
+	drag_event.button_index = MOUSE_BUTTON_LEFT
+	drag_event.pressed = true
+	inv_win._on_title_bar_gui_input(drag_event)
+	_ok("Inventory window starts dragging", inv_win._is_dragging)
+
+	# Dragging never triggers player movement or changes move destination
+	_ok("Player3D has_move_target is false during window drag", not p3d_inst.has_move_target)
+	_ok("Player3D position unchanged during window drag", p3d_inst.position == initial_player_pos)
+
+	# End drag
+	drag_event.pressed = false
+	inv_win._on_title_bar_gui_input(drag_event)
+	_ok("Inventory window ends dragging", not inv_win._is_dragging)
+
+	# 10. HUD Integration for Inventory & Item Info Windows
+	var hud_scene2: PackedScene = load("res://scenes/ui/hud.tscn") as PackedScene
+	_ok("HUD scene loads for inventory integration test", hud_scene2 != null)
+	var hud_inst: HUD = hud_scene2.instantiate() as HUD
+	root.add_child(hud_inst)
+	hud_inst._ready()
+
+	_ok("HUD has InventoryWindow", hud_inst.inventory_window != null)
+	_ok("HUD has ItemInfoWindow", hud_inst.item_info_window != null)
+	_ok("InventoryWindow initially hidden in HUD", not hud_inst.inventory_window.visible)
+	_ok("ItemInfoWindow initially hidden in HUD", not hud_inst.item_info_window.visible)
+
+	hud_inst.toggle_inventory()
+	_ok("toggle_inventory shows InventoryWindow", hud_inst.inventory_window.visible)
+	_ok("toggle_inventory shows ItemInfoWindow", hud_inst.item_info_window.visible)
+
+	hud_inst.toggle_inventory()
+	_ok("toggle_inventory hides InventoryWindow", not hud_inst.inventory_window.visible)
+	_ok("toggle_inventory hides ItemInfoWindow", not hud_inst.item_info_window.visible)
+
+	_ok("HUD has toggle_inventory_button", hud_inst.toggle_inventory_button != null)
+
+	# Cleanup
+	hud_inst.queue_free()
+	p3d_inst.queue_free()
+	inv_dummy_player.queue_free()
+	inv_win.queue_free()
+	info_win.queue_free()
+
+
 
 
 

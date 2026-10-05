@@ -60,6 +60,7 @@ The player architecture follows a modular composition pattern using a `Character
   - Serves as the bridge to `CharacterStatsComponent.add_modifier()`.
 - **`InventoryComponent`** (`src/components/inventory_component.gd`):
   - Capacity-bounded collection of `ItemDefinition` resources.
+  - Stack aggregation (`get_stacks()`), stack favorite tracking (`favorites`), dynamic total weight computation (`get_total_weight()`), consumable execution (`use_item()`), and item dropping (`drop_item()`).
   - Emits `item_added`, `item_removed`, `inventory_changed`.
 
 ### 4. Controller & State Management
@@ -147,6 +148,25 @@ All game assets adhere to strict pipeline standards documented in `docs/assets/A
   - Power-of-two or standard dimension tiers (icons: 16/24/32/48/64/128; sprites: 16px grid multiples).
   - Transparency integrity (RGBA8 alpha channel present).
   - 100% manifest registration coverage.
+
+## User Interface Architecture & Windows (Ragnarok Online Style)
+All user interface windows adhere to a cohesive Ragnarok Online wood-and-parchment aesthetic:
+- **`HUD` (`src/ui/hud.gd`, `scenes/ui/hud.tscn`):**
+  - Root `CanvasLayer` orchestrating in-game windows (`BasicInfoWindow`, `CharacterStatsWindow`, `InventoryWindow`, `ItemInfoWindow`) and gameplay status bindings (`bind_player()`).
+  - Hotkey handling: `V` toggles Basic Info, `C` toggles Stats, `I` toggles Inventory & Item Info, `ESC` dismisses active windows sequentially.
+  - HUD Menu Bar (`HUDMenuBar`): Quick access buttons (`Info (V)`, `Stats (C)`, `Bag (I)`).
+- **`InventoryWindow` (`src/ui/inventory_window.gd`, `scenes/ui/inventory_window.tscn`):
+  - 35-slot 7x5 item grid with vertical category filtering tabs (`Item`, `Gear`, `Etc.`, `Fav.`).
+  - Real-time weight tracking progress bar and numerical capacity readouts (`InventoryComponent.get_total_weight()`).
+  - "Lock Item Drop" toggle preventing accidental item loss.
+  - Title bar dragging, minimize toggle `[-]`, and close button `[X]`.
+- **`ItemInfoWindow` (`src/ui/item_info_window.gd`, `scenes/ui/item_info_window.tscn`):
+  - Inset detail panel displaying item icon, name, category, weight, quantity, lore description, and stat modifiers.
+  - Contextual action buttons: `Use` (invoking consumable healing/mana recovery via `InventoryComponent.use_item()`), `Drop` (subject to drop lock state), and `Fav` (toggling favorite status).
+- **`ItemSlot` (`src/ui/item_slot.gd`, `scenes/ui/item_slot.tscn`):
+  - Reusable 42x42 UI component with rarity border tints (Common, Rare, Epic, Legendary), selection highlights, stacked quantity badges, and favorite stars.
+- **Input Isolation & Safety:**
+  - Every UI window panel, title bar, tab, and slot sets `mouse_filter = Control.MOUSE_FILTER_STOP` so clicks, drags, and scrolling never leak through to 3D world navigation (click-to-move) or combat targeting.
 
 ### 4. Future Multiplayer & Networking (Exploratory / Deferred)
 - **Status:** Deferred until single-player core mechanics prove stable.

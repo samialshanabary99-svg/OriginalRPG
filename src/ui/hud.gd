@@ -20,6 +20,18 @@ signal return_to_menu_requested()
 			character_stats_window = get_node_or_null("CharacterStatsWindow") as CharacterStatsWindow
 		return character_stats_window
 
+@onready var inventory_window: InventoryWindow = $InventoryWindow if has_node("InventoryWindow") else null:
+	get:
+		if inventory_window == null and has_node("InventoryWindow"):
+			inventory_window = get_node_or_null("InventoryWindow") as InventoryWindow
+		return inventory_window
+
+@onready var item_info_window: ItemInfoWindow = $ItemInfoWindow if has_node("ItemInfoWindow") else null:
+	get:
+		if item_info_window == null and has_node("ItemInfoWindow"):
+			item_info_window = get_node_or_null("ItemInfoWindow") as ItemInfoWindow
+		return item_info_window
+
 var health_bar: ProgressBar:
 	get:
 		if basic_info_window != null:
@@ -94,8 +106,26 @@ var return_button: Button:
 
 var toggle_info_button: Button:
 	get:
+		if has_node("HUDMenuBar/ToggleInfoBtn"):
+			return get_node("HUDMenuBar/ToggleInfoBtn") as Button
 		if has_node("MarginContainer/VBoxContainer/ToggleInfoButton"):
 			return get_node("MarginContainer/VBoxContainer/ToggleInfoButton") as Button
+		return null
+
+var toggle_stats_button: Button:
+	get:
+		if has_node("HUDMenuBar/ToggleStatsBtn"):
+			return get_node("HUDMenuBar/ToggleStatsBtn") as Button
+		if has_node("MarginContainer/VBoxContainer/ToggleStatsButton"):
+			return get_node("MarginContainer/VBoxContainer/ToggleStatsButton") as Button
+		return null
+
+var toggle_inventory_button: Button:
+	get:
+		if has_node("HUDMenuBar/ToggleInventoryBtn"):
+			return get_node("HUDMenuBar/ToggleInventoryBtn") as Button
+		if has_node("MarginContainer/VBoxContainer/ToggleInventoryButton"):
+			return get_node("MarginContainer/VBoxContainer/ToggleInventoryButton") as Button
 		return null
 
 func _ready() -> void:
@@ -111,14 +141,41 @@ func _ready() -> void:
 		toggle_info_button.focus_mode = Control.FOCUS_NONE
 		if not toggle_info_button.pressed.is_connected(toggle_basic_info):
 			toggle_info_button.pressed.connect(toggle_basic_info)
+	if toggle_stats_button != null:
+		toggle_stats_button.focus_mode = Control.FOCUS_NONE
+		if not toggle_stats_button.pressed.is_connected(toggle_character_stats):
+			toggle_stats_button.pressed.connect(toggle_character_stats)
+	if toggle_inventory_button != null:
+		toggle_inventory_button.focus_mode = Control.FOCUS_NONE
+		if not toggle_inventory_button.pressed.is_connected(toggle_inventory):
+			toggle_inventory_button.pressed.connect(toggle_inventory)
+
+	# Wire inventory and item info windows
+	if inventory_window != null and item_info_window != null:
+		if not inventory_window.item_selected.is_connected(_on_inventory_item_selected):
+			inventory_window.item_selected.connect(_on_inventory_item_selected)
+		if not inventory_window.lock_drop_toggled.is_connected(_on_inventory_lock_drop_toggled):
+			inventory_window.lock_drop_toggled.connect(_on_inventory_lock_drop_toggled)
+		if not item_info_window.item_used.is_connected(_on_item_used_or_dropped):
+			item_info_window.item_used.connect(_on_item_used_or_dropped)
+		if not item_info_window.item_dropped.is_connected(_on_item_used_or_dropped):
+			item_info_window.item_dropped.connect(_on_item_used_or_dropped)
+		if not item_info_window.favorite_toggled.is_connected(_on_item_favorite_toggled):
+			item_info_window.favorite_toggled.connect(_on_item_favorite_toggled)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("toggle_character_info") or (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_V):
 		toggle_basic_info()
 	elif event.is_action_pressed("toggle_stats_window") or (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_C):
 		toggle_character_stats()
+	elif event.is_action_pressed("toggle_inventory") or (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_I):
+		toggle_inventory()
 	elif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
-		if character_stats_window != null and character_stats_window.visible:
+		if item_info_window != null and item_info_window.visible:
+			item_info_window.hide()
+		elif inventory_window != null and inventory_window.visible:
+			inventory_window.hide()
+		elif character_stats_window != null and character_stats_window.visible:
 			character_stats_window.hide()
 		else:
 			_on_return_pressed()
@@ -134,11 +191,47 @@ func toggle_character_stats() -> void:
 	if character_stats_window != null:
 		character_stats_window.toggle_window()
 
+func toggle_inventory() -> void:
+	if inventory_window != null:
+		inventory_window.toggle_window()
+		if inventory_window.visible:
+			if item_info_window != null:
+				item_info_window.show()
+		else:
+			if item_info_window != null:
+				item_info_window.hide()
+
+func toggle_item_info() -> void:
+	if item_info_window != null:
+		item_info_window.toggle_window()
+
+func _on_inventory_item_selected(item: ItemDefinition, qty: int, fav: bool) -> void:
+	if item_info_window != null:
+		item_info_window.set_item(item, qty, fav)
+		if item != null and inventory_window != null and inventory_window.visible:
+			item_info_window.show()
+
+func _on_inventory_lock_drop_toggled(locked: bool) -> void:
+	if item_info_window != null:
+		item_info_window.set_drop_locked(locked)
+
+func _on_item_used_or_dropped(_item: ItemDefinition) -> void:
+	if inventory_window != null:
+		inventory_window.refresh_grid()
+
+func _on_item_favorite_toggled(_item: ItemDefinition, _fav: bool) -> void:
+	if inventory_window != null:
+		inventory_window.refresh_grid()
+
 func bind_player(player: Node) -> void:
 	if player == null:
 		return
 	if basic_info_window != null and basic_info_window.has_method("bind_player"):
 		basic_info_window.bind_player(player)
+	if inventory_window != null and inventory_window.has_method("bind_player"):
+		inventory_window.bind_player(player)
+	if item_info_window != null and item_info_window.has_method("bind_player"):
+		item_info_window.bind_player(player)
 	GameState.bind_player(player)
 
 	# Support both CharacterStatsComponent and plain StatsComponent

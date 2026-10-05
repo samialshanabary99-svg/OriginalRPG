@@ -13,5 +13,3 @@ None
 
 ## Scope
 None
-
-

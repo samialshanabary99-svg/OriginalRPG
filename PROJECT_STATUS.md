@@ -1,7 +1,7 @@
 # Project Status
 
 ## Current Phase
-**Hybrid 3D Terrain + 2D Billboard Presentation Implemented (ADR-006) — 323/323 automated tests passing across 21 test groups.**
+**Ragnarok-Style Inventory & Item Information Windows Implemented (ADR-007) — 646/646 automated tests passing across 29 test groups.**
 
 ## Working Systems
 - All Phase 1 systems (Main Menu, Test World, Player, Camera, Interaction, HUD, scene transitions).
@@ -43,9 +43,20 @@
   - 4 status bars (HP, SP, Stamina, Power) and footer stats (Weight, formatted Zeny).
   - Draggable window via title bar, minimize foldout toggle, close button `[X]`, and hotkey (`V`) / HUD button toggle.
   - Live signal binding to `CharacterStatsComponent` and `InventoryComponent`.
+- **`Ragnarok-Style Inventory & Item Information Windows`** (`src/ui/inventory_window.gd`, `src/ui/item_info_window.gd`, `src/ui/item_slot.gd`, `scenes/ui/`):
+  - 35-slot (7x5 grid) Inventory Window and Item Information Window matching wood and parchment aesthetic.
+  - Vertical category tabs: `Item`, `Gear`, `Etc.`, `Fav.`.
+  - Reusable `ItemSlot` component with dynamic rarity borders, quantity badge, selection frame, and favorite star.
+  - Live weight tracking against max carry capacity with progress bar and formatted readout.
+  - "Lock Item Drop" safety protection preventing accidental loss of items.
+  - Consumable item usage (`use_item()`) healing HP or restoring SP directly on the player.
+  - Item drop functionality (`drop_item()`) when drop lock is disabled.
+  - Draggable window title bars with safe viewport boundaries, minimize toggle `[-]`, close button `[X]`.
+  - HUD integration: hotkey `I` (`KEY_I`), HUD menu bar button `Bag (I)`, and `ESC` dismissal.
+  - Strict UI input isolation (`mouse_filter = MOUSE_FILTER_STOP`) preventing window dragging or clicking from triggering 3D character movement or combat actions.
 
 ## In Progress
-- None. Phase 2 & UI systems stable. Awaiting next user request.
+- None. Inventory and Item Info window systems verified. Awaiting next user request.
 
 ## Planned (Phase 3 — Save/Load & Persistence)
 - JSON save/load service (`SaveService`) for player stats + inventory
@@ -69,4 +80,4 @@ Not implemented. Architecture intentionally decoupled to support future headless
 - Damaging skills do not award XP on defeat (addressed in proposed ADR-005).
 
 ## Last Updated
-2026-10-01 (Antigravity — Multi-Layer TileMapLayer Field Complete & Verified)
+2026-10-05 (Antigravity — Inventory & Item Information Window Complete & Verified)

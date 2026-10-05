@@ -23,9 +23,41 @@ enum Category { MISC, WEAPON, ARMOUR, CONSUMABLE, QUEST }
 @export var heal_amount: int = 0
 @export var mana_amount: int = 0
 
+## Item weight (for inventory encumbrance)
+@export var weight: int = 10
+
 ## Helper returning stat bonuses for EquipmentComponent integration.
 func get_stat_bonuses() -> Dictionary:
 	return stat_modifiers
+
+## Formatted type string for UI presentation.
+func get_type_text() -> String:
+	match category:
+		Category.WEAPON:
+			return "Weapon (%s)" % equip_slot.capitalize() if not equip_slot.is_empty() else "Weapon"
+		Category.ARMOUR:
+			return "Armor (%s)" % equip_slot.capitalize() if not equip_slot.is_empty() else "Armor"
+		Category.CONSUMABLE:
+			return "Usable (Consumable)"
+		Category.QUEST:
+			return "Quest Item"
+		_:
+			return "Etc"
+
+## Formatted stat/effect text for UI presentation.
+func get_stat_text() -> String:
+	var parts: Array[String] = []
+	if heal_amount > 0:
+		parts.append("Restores %d HP" % heal_amount)
+	if mana_amount > 0:
+		parts.append("Restores %d SP" % mana_amount)
+	for k in stat_modifiers:
+		var val: int = int(stat_modifiers[k])
+		var sign_str: String = "+" if val >= 0 else ""
+		parts.append("%s %s%d" % [k.to_upper(), sign_str, val])
+	if parts.is_empty():
+		return "No special effects"
+	return ", ".join(parts)
 
 # ── Serialization (for InventoryComponent save/load) ─────────────────────────
 
@@ -41,6 +73,7 @@ func serialize() -> Dictionary:
 		"stat_modifiers": stat_modifiers,
 		"heal_amount": heal_amount,
 		"mana_amount": mana_amount,
+		"weight": weight,
 	}
 
 func deserialize(data: Dictionary) -> void:
@@ -59,6 +92,7 @@ func deserialize(data: Dictionary) -> void:
 		stat_modifiers = (data["stat_modifiers"] as Dictionary).duplicate()
 	if data.has("heal_amount"):    heal_amount    = int(data["heal_amount"])
 	if data.has("mana_amount"):    mana_amount    = int(data["mana_amount"])
+	if data.has("weight"):         weight         = int(data["weight"])
 
 func validate() -> Array[String]:
 	var errors: Array[String] = []
