@@ -137,9 +137,13 @@ func _generate_terrain() -> void:
 	var grass_tex: Texture2D = load("res://assets/environment/ground/ground_grass_painterly.png")
 	if grass_tex == null:
 		grass_tex = load("res://assets/tiles/ground/tile_grass_base.png")
-	var rock_tex: Texture2D = load("res://assets/environment/ground/rock_cliff_stone.png")
+	var rock_tex: Texture2D = load("res://assets/tiles/ground/tile_stone_cliff_strata.png")
+	if rock_tex == null:
+		rock_tex = load("res://assets/environment/ground/rock_cliff_stone.png")
 	var dry_tex: Texture2D = load("res://assets/environment/ground/ground_dry_grass.png")
-	var dirt_tex: Texture2D = load("res://assets/environment/ground/ground_dirt_path.png")
+	var dirt_tex: Texture2D = load("res://assets/tiles/ground/tile_dirt_rutted_trail.png")
+	if dirt_tex == null:
+		dirt_tex = load("res://assets/environment/ground/ground_dirt_path.png")
 
 	mat.set_shader_parameter("tex_grass", grass_tex)
 	mat.set_shader_parameter("tex_rock", rock_tex)
