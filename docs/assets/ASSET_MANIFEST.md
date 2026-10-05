@@ -780,6 +780,33 @@ license_or_usage_notes: OriginalRPG internal asset
 notes: Unshaded, depth-disabled, spherical billboard transform with gradient fill
 ```
 
+### 24. `tiles_ground_pack_64`
+```yaml
+asset_id: tiles_ground_pack_64
+name: Meadow Grass, Dirt Paths, Rock Cliffs & Town Pavers 64x64 Tile Pack
+type: tile
+path: assets/tiles/ground/
+source: ai_generated (Pixel Lab Map Workshop)
+generator_or_tool: pixel_lab
+prompt_reference: User prompt with style guidance referencing OriginalRPG grass and dirt tiles
+author: User (SAMI) & Antigravity
+created_date: 2026-10-05
+modified_date: 2026-10-05
+dimensions: 64x64
+frame_size: 64x64
+animation_frames: 1
+animation: none
+directions: none
+format: png
+transparency: rgba_alpha
+intended_use: 64x64 ground, path, cliff, and town paving tiles for 2D/3D tilemaps and terrain splat shaders
+related_entity: assets/tiles/ground/
+status: approved
+license_or_usage_notes: 16 individual 64x64 RGBA8 tiles: tile_grass_meadow_plain.png, tile_grass_meadow_flowers.png, tile_grass_moss_mound.png, tile_grass_sunlit_patch.png, tile_dirt_path_edge.png, tile_dirt_puddle_patch.png, tile_dirt_pebble_ground.png, tile_dirt_rutted_trail.png, tile_stone_cliff_strata.png, tile_stone_wall_masonry.png, tile_stone_block_chiseled.png, tile_stone_fractured_bedrock.png, tile_paver_square_cobble.png, tile_paver_rustic_flagstone.png, tile_paver_weathered_sand.png, tile_paver_earth_embedded.png
+notes: Generated via Pixel Lab Map Workshop in 4x4 grid (64x64 tiles with 1px black separators), cleanly sliced and imported into Godot 4 without border artifacts.
+```
+
+
 
 
 
