@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://damagenumber3d001"]
+
+[ext_resource type="Script" path="res://src/ui/damage_number_3d.gd" id="1_dmg"]
+
+[node name="DamageNumber3D" type="Label3D"]
+billboard = 1
+double_sided = false
+no_depth_test = true
+render_priority = 30
+outline_render_priority = 29
+outline_size = 10
+outline_modulate = Color(0, 0, 0, 1)
+text = "0"
+font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("1_dmg")

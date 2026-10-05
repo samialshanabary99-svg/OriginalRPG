@@ -785,6 +785,9 @@ func _apply_attack_hit() -> void:
 			if target_enemy.has_method("take_damage"):
 				var dmg: int = stats.final_attack if stats != null else 10
 				target_enemy.take_damage(dmg, self)
+		else:
+			# Target moved out of range mid-attack: show MISS over target
+			DamageNumber3D.spawn(target_enemy, "MISS", DamageNumber3D.Type.MISS)
 
 func _find_nearest_enemy_in_reach(reach_dist: float) -> Node:
 	if not is_inside_tree():
@@ -806,6 +809,10 @@ func take_damage(amount: int, attacker: Node = null) -> void:
 		return
 	var def_val: int = stats.final_defence if stats != null else 0
 	var final_dmg: int = maxi(1, amount - def_val)
+
+	# Ragnarok Online style floating damage number: Red for damage taken by player
+	DamageNumber3D.spawn(self, final_dmg, DamageNumber3D.Type.DAMAGE_TO_PLAYER)
+
 	if stats != null:
 		stats.apply_damage(final_dmg)
 		_update_overhead_bar()

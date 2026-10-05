@@ -460,6 +460,9 @@ func _apply_attack_hit() -> void:
 			if target.has_method("take_damage"):
 				var atk_power: int = stats.final_attack if stats != null else (definition.attack if definition != null else 8)
 				target.take_damage(atk_power, self)
+		else:
+			# Target moved out of range: show MISS over player
+			DamageNumber3D.spawn(target, "MISS", DamageNumber3D.Type.MISS)
 
 func take_damage(amount: int, attacker: Node3D = null) -> void:
 	if current_state == State.DEAD:
@@ -467,6 +470,9 @@ func take_damage(amount: int, attacker: Node3D = null) -> void:
 
 	var def_val: int = stats.final_defence if stats != null else (definition.defence if definition != null else 2)
 	var final_dmg: int = maxi(1, amount - def_val)
+
+	# Ragnarok Online style floating damage number: White for damage dealt to enemy
+	DamageNumber3D.spawn(self, final_dmg, DamageNumber3D.Type.DAMAGE_TO_ENEMY)
 
 	if stats != null:
 		stats.apply_damage(final_dmg)

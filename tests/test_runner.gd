@@ -1599,6 +1599,91 @@ func _test_character_stats_and_game_state() -> void:
 	hud.queue_free()
 	GameState.reset_to_defaults()
 
+	# ─────────────────────────────────────────────────────────────────────────
+	# [Group Z] Ragnarok Online Floating Combat Damage Numbers (DamageNumber3D)
+	# ─────────────────────────────────────────────────────────────────────────
+	print("\n[Group Z] Ragnarok Online Floating Combat Damage Numbers (DamageNumber3D)")
+
+	var dmg_scene: PackedScene = load("res://scenes/ui/damage_number_3d.tscn") as PackedScene
+	_ok("DamageNumber3D scene loads", dmg_scene != null)
+
+	var d1: DamageNumber3D = DamageNumber3D.new()
+	d1.setup("45", DamageNumber3D.Type.DAMAGE_TO_ENEMY, Vector3(0.0, 1.0, 0.0))
+	_ok("DamageNumber3D text is 45", d1.text == "45")
+	_ok("DamageNumber3D billboard is BILLBOARD_ENABLED", d1.billboard == BaseMaterial3D.BILLBOARD_ENABLED)
+	_ok("DamageNumber3D no_depth_test is true", d1.no_depth_test)
+	_ok("DamageNumber3D render_priority is 30", d1.render_priority == 30)
+	_ok("DamageNumber3D outline_size is 10", d1.outline_size == 10)
+	_ok("DamageNumber3D outline_modulate is Color.BLACK", d1.outline_modulate == Color.BLACK)
+	_ok("DamageNumber3D enemy damage modulate is white", d1.modulate == Color.WHITE)
+	_ok("DamageNumber3D font_size is 32", d1.font_size == 32)
+	d1.free()
+
+	# Player damage styling (Ragnarok red)
+	var d2: DamageNumber3D = DamageNumber3D.new()
+	d2.setup("18", DamageNumber3D.Type.DAMAGE_TO_PLAYER, Vector3(0.0, 1.0, 0.0))
+	_ok("DamageNumber3D player damage text is 18", d2.text == "18")
+	_ok("DamageNumber3D player damage modulate is red", is_equal_approx(d2.modulate.r, 1.0) and is_equal_approx(d2.modulate.g, 0.22))
+	d2.free()
+
+	# Critical damage styling (Ragnarok gold/yellow, larger font)
+	var d3: DamageNumber3D = DamageNumber3D.new()
+	d3.setup("99", DamageNumber3D.Type.CRITICAL, Vector3(0.0, 1.0, 0.0))
+	_ok("DamageNumber3D critical modulate is gold", is_equal_approx(d3.modulate.r, 1.0) and is_equal_approx(d3.modulate.g, 0.88))
+	_ok("DamageNumber3D critical font_size is 38", d3.font_size == 38)
+	d3.free()
+
+	# Miss text styling
+	var d4: DamageNumber3D = DamageNumber3D.new()
+	d4.setup("MISS", DamageNumber3D.Type.MISS, Vector3(0.0, 1.0, 0.0))
+	_ok("DamageNumber3D miss text is MISS", d4.text == "MISS")
+	_ok("DamageNumber3D miss modulate is cyan-white", is_equal_approx(d4.modulate.b, 1.0) and d4.modulate.r < 1.0)
+	d4.free()
+
+	# Static factory spawning over entity
+	var test_parent: Node3D = Node3D.new()
+	get_root().add_child(test_parent)
+
+	var w_scene: PackedScene = load("res://scenes/entities/enemy_3d.tscn") as PackedScene
+	var dummy_wolf: Enemy3D = w_scene.instantiate() as Enemy3D
+	test_parent.add_child(dummy_wolf)
+	dummy_wolf._ready()
+	dummy_wolf.position = Vector3(5.0, 0.0, 5.0)
+
+	var spawned_dmg: DamageNumber3D = DamageNumber3D.spawn(dummy_wolf, 30, DamageNumber3D.Type.DAMAGE_TO_ENEMY)
+	_ok("DamageNumber3D.spawn returns instance", spawned_dmg != null)
+	_ok("Spawned damage number has text 30", spawned_dmg.text == "30")
+	_ok("Spawned damage number added to parent", spawned_dmg.get_parent() == test_parent)
+	_ok("Spawned damage number elevated over wolf head", spawned_dmg.position.y >= dummy_wolf.position.y + 0.9)
+
+	# Direct Enemy3D take_damage integration
+	dummy_wolf.take_damage(12, null)
+	var latest_child: Node = test_parent.get_child(test_parent.get_child_count() - 1)
+	_ok("Enemy3D take_damage automatically spawns DamageNumber3D", latest_child is DamageNumber3D)
+	if latest_child is DamageNumber3D:
+		var ld: DamageNumber3D = latest_child as DamageNumber3D
+		_ok("Enemy3D damage number text matches calculated damage", ld.text == "10") # 12 - 2 def = 10
+		_ok("Enemy3D damage number color is white", ld.modulate == Color.WHITE)
+
+	# Direct Player3D take_damage integration
+	var p_scene: PackedScene = load("res://scenes/entities/player_3d.tscn") as PackedScene
+	var dummy_player: Player3D = p_scene.instantiate() as Player3D
+	test_parent.add_child(dummy_player)
+	dummy_player._ready()
+	dummy_player.position = Vector3(0.0, 0.0, 0.0)
+
+	dummy_player.take_damage(15, null)
+	var player_dmg_child: Node = test_parent.get_child(test_parent.get_child_count() - 1)
+	_ok("Player3D take_damage automatically spawns DamageNumber3D", player_dmg_child is DamageNumber3D)
+	if player_dmg_child is DamageNumber3D:
+		var pd: DamageNumber3D = player_dmg_child as DamageNumber3D
+		_ok("Player3D damage number text matches calculated damage", pd.text == "10") # 15 - 5 def = 10
+		_ok("Player3D damage number color is red", is_equal_approx(pd.modulate.r, 1.0) and is_equal_approx(pd.modulate.g, 0.22))
+		_ok("Player3D damage number elevated over head (y >= 1.3)", pd.position.y >= 1.3)
+
+	# Cleanup test nodes
+	test_parent.queue_free()
+
 
 
 
