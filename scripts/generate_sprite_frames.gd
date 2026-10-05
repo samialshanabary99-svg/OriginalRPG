@@ -9,6 +9,7 @@ func _init() -> void:
 	success = success and _build_player_frames()
 	success = success and _build_wolf_frames()
 	success = success and _build_stalks_frames()
+	success = success and _build_tree_frames()
 
 	if success:
 		print("ALL SpriteFrames generated successfully!")
@@ -199,4 +200,42 @@ func _build_stalks_frames() -> bool:
 		printerr("Failed to save green_stalks_sprite_frames.tres: ", err)
 		return false
 	print("Saved green_stalks_sprite_frames.tres with ", sf.get_animation_names().size(), " animations.")
+	return true
+
+func _build_tree_frames() -> bool:
+	print("Building tree_sprite_frames.tres with 8 directions...")
+	var sf := SpriteFrames.new()
+	var base := "res://assets/sprites/environment/tree/animations/sway"
+	var rot_base := "res://assets/sprites/environment/tree/rotations"
+
+	for dir in DIRECTIONS:
+		var anim_name: String = "sway_%s" % dir
+		var dir_path: String = base.path_join(dir)
+		if not _add_animation_to_frames(sf, anim_name, dir_path, 9, 6.0, true):
+			return false
+
+		# Add rot_<dir> single frame
+		var rot_anim: String = "rot_%s" % dir
+		if not sf.has_animation(rot_anim):
+			sf.add_animation(rot_anim)
+		sf.set_animation_speed(rot_anim, 1.0)
+		sf.set_animation_loop(rot_anim, false)
+		sf.clear(rot_anim)
+		var rot_tex: Texture2D = load(rot_base.path_join("%s.png" % dir)) as Texture2D
+		if rot_tex != null:
+			sf.add_frame(rot_anim, rot_tex)
+
+	# Add "default" and "sway" pointing to south
+	var south_path: String = base.path_join("south")
+	if not _add_animation_to_frames(sf, "default", south_path, 9, 6.0, true):
+		return false
+	if not _add_animation_to_frames(sf, "sway", south_path, 9, 6.0, true):
+		return false
+
+	var target_path := "res://assets/sprites/environment/tree/tree_sprite_frames.tres"
+	var err := ResourceSaver.save(sf, target_path)
+	if err != OK:
+		printerr("Failed to save tree_sprite_frames.tres: ", err)
+		return false
+	print("Saved tree_sprite_frames.tres with ", sf.get_animation_names().size(), " animations.")
 	return true

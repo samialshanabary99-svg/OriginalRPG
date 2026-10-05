@@ -1,5 +1,7 @@
 extends SceneTree
 
+const DirectionalProp3D = preload("res://src/entities/directional_prop_3d.gd")
+
 ## Automated test runner — Phase 2 RPG Systems.
 ## Run with: godot --headless --script tests/test_runner.gd
 
@@ -1756,6 +1758,134 @@ func _test_character_stats_and_game_state() -> void:
 	_ok("Enemy3D remains dead when auto_respawn is false", respawn_wolf.is_dead())
 
 	respawn_parent.queue_free()
+
+	# ─────────────────────────────────────────────────────────────────────────
+	# [Group BB] 8-Directional Environment Props (DirectionalProp3D, Tree, Bush, Green Stalks)
+	# ─────────────────────────────────────────────────────────────────────────
+	print("\n[Group BB] 8-Directional Environment Props (DirectionalProp3D, Tree, Bush, Green Stalks)")
+
+	var prop_script: GDScript = load("res://src/entities/directional_prop_3d.gd") as GDScript
+	_ok("DirectionalProp3D script loads", prop_script != null)
+
+	var prop: DirectionalProp3D = prop_script.new() as DirectionalProp3D
+	_ok("DirectionalProp3D instantiates", prop != null)
+	_ok("DirectionalProp3D billboard is BILLBOARD_FIXED_Y", prop.billboard == BaseMaterial3D.BILLBOARD_FIXED_Y)
+	_ok("DirectionalProp3D texture_filter is TEXTURE_FILTER_NEAREST", prop.texture_filter == BaseMaterial3D.TEXTURE_FILTER_NEAREST)
+	_ok("DirectionalProp3D cast_shadow is disabled", prop.cast_shadow == GeometryInstance3D.SHADOW_CASTING_SETTING_OFF)
+
+	# 1. Mathematical angle-to-direction mapping
+	_ok("Vector (0, 1) maps to south", prop._vector_to_direction(0.0, 1.0) == "south")
+	_ok("Vector (1, 0) maps to east", prop._vector_to_direction(1.0, 0.0) == "east")
+	_ok("Vector (0, -1) maps to north", prop._vector_to_direction(0.0, -1.0) == "north")
+	_ok("Vector (-1, 0) maps to west", prop._vector_to_direction(-1.0, 0.0) == "west")
+	_ok("Vector (1, 1) maps to south-east", prop._vector_to_direction(0.707, 0.707) == "south-east")
+	_ok("Vector (-1, 1) maps to south-west", prop._vector_to_direction(-0.707, 0.707) == "south-west")
+	_ok("Vector (1, -1) maps to north-east", prop._vector_to_direction(0.707, -0.707) == "north-east")
+	_ok("Vector (-1, -1) maps to north-west", prop._vector_to_direction(-0.707, -0.707) == "north-west")
+
+	# 2. Tree SpriteFrames 8 directions
+	var tree_sf: SpriteFrames = load("res://assets/sprites/environment/tree/tree_sprite_frames.tres") as SpriteFrames
+	_ok("Tree SpriteFrames loads", tree_sf != null)
+	var expected_dirs: Array[String] = ["south", "south-east", "east", "north-east", "north", "north-west", "west", "south-west"]
+	var tree_all_sway: bool = true
+	var tree_all_rot: bool = true
+	var tree_frames_9: bool = true
+	for d in expected_dirs:
+		if not tree_sf.has_animation("sway_" + d): tree_all_sway = false
+		if not tree_sf.has_animation("rot_" + d): tree_all_rot = false
+		if tree_sf.has_animation("sway_" + d) and tree_sf.get_frame_count("sway_" + d) != 9: tree_frames_9 = false
+	_ok("Tree has all 8 directional sway animations", tree_all_sway)
+	_ok("Tree has all 8 directional rotation animations", tree_all_rot)
+	_ok("Tree each directional sway has 9 frames", tree_frames_9)
+
+	# 3. Bush SpriteFrames 8 directions
+	var bush_sf: SpriteFrames = load("res://assets/sprites/environment/bush/bush_sprite_frames.tres") as SpriteFrames
+	_ok("Bush SpriteFrames loads", bush_sf != null)
+	var bush_all_sway: bool = true
+	for d in expected_dirs:
+		if not bush_sf.has_animation("sway_" + d): bush_all_sway = false
+	_ok("Bush has all 8 directional sway animations", bush_all_sway)
+
+	# 4. Green Stalks SpriteFrames 8 directions
+	var stalks_sf2: SpriteFrames = load("res://green stalks/green_stalks_sprite_frames.tres") as SpriteFrames
+	_ok("Green Stalks SpriteFrames loads", stalks_sf2 != null)
+	var stalks_all_sway: bool = true
+	for d in expected_dirs:
+		if not stalks_sf2.has_animation("sway_" + d): stalks_all_sway = false
+	_ok("Green Stalks has all 8 directional sway animations", stalks_all_sway)
+
+	# 5. Dynamic Camera Perspective Tracking with simulated camera
+	var prop_root: Node3D = Node3D.new()
+	root.add_child(prop_root)
+	prop_root.add_child(prop)
+	prop.position = Vector3(0.0, 0.0, 0.0)
+	prop.sprite_frames = tree_sf
+	prop.anim_prefix = "sway"
+	prop.world_facing_yaw = 0.0
+
+	var test_cam: Camera3D = Camera3D.new()
+	prop_root.add_child(test_cam)
+
+	# Camera at South looking towards prop
+	test_cam.position = Vector3(0.0, 1.0, 8.0)
+	prop.update_camera_direction_manual(test_cam)
+	_ok("Camera at South selects south direction", prop.get_current_direction() == "south")
+	_ok("Prop plays sway_south animation", prop.animation == "sway_south")
+
+	# Camera at East looking towards prop
+	test_cam.position = Vector3(8.0, 1.0, 0.0)
+	prop.update_camera_direction_manual(test_cam)
+	_ok("Camera at East selects east direction", prop.get_current_direction() == "east")
+	_ok("Prop plays sway_east animation", prop.animation == "sway_east")
+
+	# Camera at North looking towards prop
+	test_cam.position = Vector3(0.0, 1.0, -8.0)
+	prop.update_camera_direction_manual(test_cam)
+	_ok("Camera at North selects north direction", prop.get_current_direction() == "north")
+	_ok("Prop plays sway_north animation", prop.animation == "sway_north")
+
+	# Camera at West looking towards prop
+	test_cam.position = Vector3(-8.0, 1.0, 0.0)
+	prop.update_camera_direction_manual(test_cam)
+	_ok("Camera at West selects west direction", prop.get_current_direction() == "west")
+	_ok("Prop plays sway_west animation", prop.animation == "sway_west")
+
+	# Diagonal: Camera at South-West
+	test_cam.position = Vector3(-6.0, 1.0, 6.0)
+	prop.update_camera_direction_manual(test_cam)
+	_ok("Camera at South-West selects south-west direction", prop.get_current_direction() == "south-west")
+	_ok("Prop plays sway_south-west animation", prop.animation == "sway_south-west")
+
+	# 6. Animation Frame Preservation during angle switches
+	prop.frame = 5
+	test_cam.position = Vector3(0.0, 1.0, 8.0) # move to South
+	prop.update_camera_direction_manual(test_cam)
+	_ok("Frame index preserved when switching animation", prop.frame == 5)
+
+	# 7. World Facing Yaw rotation
+	prop.set_world_facing_yaw(deg_to_rad(90.0)) # Turn prop 90 deg (faces East)
+	test_cam.position = Vector3(0.0, 1.0, 8.0) # Camera at South
+	prop.update_camera_direction_manual(test_cam)
+	_ok("Turned prop shows side face when viewed from South", prop.get_current_direction() == "west")
+
+	# 8. TestWorld3D instantiation has DirectionalProp3D instances
+	var tw3d_scene: PackedScene = load("res://scenes/maps/test_world_3d.tscn") as PackedScene
+	_ok("TestWorld3D scene loads for prop test", tw3d_scene != null)
+	var tw3d_inst: TestWorld3D = tw3d_scene.instantiate() as TestWorld3D
+	root.add_child(tw3d_inst)
+	tw3d_inst._ready()
+
+	var directional_props_count: int = 0
+	var props_container: Node3D = tw3d_inst.get_node_or_null("Props") as Node3D
+	if props_container != null:
+		for c in props_container.get_children():
+			if c is DirectionalProp3D:
+				directional_props_count += 1
+	_ok("TestWorld3D instantiates DirectionalProp3D for environment props", directional_props_count >= 30)
+
+	tw3d_inst.queue_free()
+	prop_root.queue_free()
+
 
 
 

@@ -136,7 +136,7 @@ static func validate_directory(dir_path: String) -> Dictionary:
 
 	var files := _collect_files_recursive(dir_path)
 	for f: String in files:
-		if f.ends_with(".import") or f.ends_with(".uid") or f.contains("/parts/") or f.ends_with("rig.tscn"):
+		if f.ends_with(".import") or f.ends_with(".uid") or f.contains("/parts/") or f.ends_with("rig.tscn") or f.ends_with("source_padded.png"):
 			continue
 		total_files += 1
 		var res := validate_file(f)

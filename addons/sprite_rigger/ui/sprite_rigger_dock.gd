@@ -583,7 +583,11 @@ func _on_auto_box_pressed() -> void:
 	if canvas.sprite_image == null:
 		return
 
-	# Helper to generate reasonable bounding boxes around placed joints
+	var img_w = canvas.sprite_image.get_width()
+	var img_h = canvas.sprite_image.get_height()
+	# Dynamically scale boxes relative to sprite resolution (prevents clipping on high-res art)
+	var s: float = maxf(1.0, float(img_h) / 256.0)
+
 	for p_def in RigDefinitions.PARTS:
 		var p_name = p_def["name"]
 		var b_name = p_def["bone"]
@@ -591,34 +595,46 @@ func _on_auto_box_pressed() -> void:
 			continue
 
 		var j_pos: Vector2 = canvas.joints[b_name]
-		var box_w = 40
-		var box_h = 40
-		var offset_y = -20
+		var box_w = int(40 * s)
+		var box_h = int(40 * s)
+		var offset_y = int(-20 * s)
 
 		if p_name == "torso":
-			box_w = 70
-			box_h = 70
-			offset_y = -35
+			# Problem 3 Fix: Exclude arms so torso does not duplicate arm pixels
+			box_w = int(42 * s)
+			box_h = int(60 * s)
+			offset_y = int(-28 * s)
 		elif p_name == "head":
-			box_w = 50
-			box_h = 50
-			offset_y = -40
+			box_w = int(45 * s)
+			box_h = int(45 * s)
+			offset_y = int(-35 * s)
 		elif p_name in ["upper_arm_L", "upper_arm_R"]:
-			box_w = 30
-			box_h = 45
-			offset_y = -10
+			box_w = int(22 * s)
+			box_h = int(45 * s)
+			offset_y = int(-10 * s)
 		elif p_name in ["forearm_L", "forearm_R"]:
-			box_w = 26
-			box_h = 40
-			offset_y = -5
+			box_w = int(20 * s)
+			box_h = int(35 * s)
+			offset_y = int(-5 * s)
+		elif p_name in ["hand_L", "hand_R"]:
+			box_w = int(20 * s)
+			box_h = int(25 * s)
+			offset_y = int(-5 * s)
 		elif p_name in ["upper_leg_L", "upper_leg_R"]:
-			box_w = 32
-			box_h = 60
-			offset_y = -10
+			# Problem 2 Fix: Wide enough to cover the entire thigh and avoid vertical splitting
+			box_w = int(30 * s)
+			box_h = int(60 * s)
+			offset_y = int(-10 * s)
 		elif p_name in ["lower_leg_L", "lower_leg_R"]:
-			box_w = 32
-			box_h = 60
-			offset_y = -5
+			# Problem 1 Fix: Full reach down to the soles with bottom padding
+			box_w = int(32 * s)
+			var dist_to_bottom = img_h - int(j_pos.y) + int(12 * s)
+			box_h = max(int(70 * s), dist_to_bottom)
+			offset_y = int(-10 * s)
+		elif p_name == "hip":
+			box_w = int(55 * s)
+			box_h = int(30 * s)
+			offset_y = int(-15 * s)
 
 		var rect = Rect2i(int(j_pos.x - box_w / 2.0), int(j_pos.y + offset_y), box_w, box_h)
 		canvas.crop_rects[p_name] = rect

@@ -11,6 +11,8 @@ extends Node3D
 ##   - 2.5D Animated billboard player and props
 ##   - Seamless 2D HUD (Basic Info Window, status bars) on CanvasLayer
 
+const DirectionalProp3D = preload("res://src/entities/directional_prop_3d.gd")
+
 @onready var player: Player3D = $Player3D if has_node("Player3D") else null
 @onready var hud: HUD = $HUD if has_node("HUD") else null
 @onready var terrain_mesh_instance: MeshInstance3D = $Terrain/TerrainMesh if has_node("Terrain/TerrainMesh") else null
@@ -487,19 +489,15 @@ func _create_animated_bush_prop(parent: Node3D, frames: SpriteFrames, fallback_t
 	# The bush frame is 170x170 with center at y=85. Bottom-most foliage pixel is at y=130 (+45 px below center).
 	# Anchoring at y + 45.0 * pixel_scale touches the base of the bush foliage directly to the terrain surface.
 	var anchor_y: float = y + 45.0 * pixel_scale
-	if frames != null and frames.has_animation("default"):
-		var anim_sprite: AnimatedSprite3D = AnimatedSprite3D.new()
+	if frames != null and (frames.has_animation("default") or frames.has_animation("sway_south")):
+		var anim_sprite: DirectionalProp3D = DirectionalProp3D.new()
 		anim_sprite.sprite_frames = frames
-		anim_sprite.animation = "default"
-		anim_sprite.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
-		anim_sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
-		anim_sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		anim_sprite.anim_prefix = "sway"
+		anim_sprite.world_facing_yaw = fmod(absf(pos2d.x * 17.13 + pos2d.y * 31.37), TAU)
 		anim_sprite.pixel_size = pixel_scale
 		anim_sprite.position = Vector3(pos2d.x, anchor_y, pos2d.y)
-		anim_sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		parent.add_child(anim_sprite)
-		anim_sprite.play("default")
-		var fc: int = frames.get_frame_count("default")
+		var fc: int = frames.get_frame_count("sway_south") if frames.has_animation("sway_south") else frames.get_frame_count("default")
 		if fc > 0:
 			anim_sprite.frame = randi() % fc
 	elif fallback_tex != null:
@@ -540,19 +538,15 @@ func _create_animated_tree_prop(parent: Node3D, frames: SpriteFrames, fallback_t
 	# The tree frame is 256x256 with center at y=128. Bottom-most trunk pixel is at y=248 (+120 px below center).
 	# Anchoring at y + 118.0 * pixel_scale embeds root base slightly into the ground surface.
 	var anchor_y: float = y + 118.0 * pixel_scale
-	if frames != null and frames.has_animation("default"):
-		var anim_sprite: AnimatedSprite3D = AnimatedSprite3D.new()
+	if frames != null and (frames.has_animation("default") or frames.has_animation("sway_south")):
+		var anim_sprite: DirectionalProp3D = DirectionalProp3D.new()
 		anim_sprite.sprite_frames = frames
-		anim_sprite.animation = "default"
-		anim_sprite.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
-		anim_sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
-		anim_sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		anim_sprite.anim_prefix = "sway"
+		anim_sprite.world_facing_yaw = fmod(absf(pos2d.x * 23.41 + pos2d.y * 19.87), TAU)
 		anim_sprite.pixel_size = pixel_scale
 		anim_sprite.position = Vector3(pos2d.x, anchor_y, pos2d.y)
-		anim_sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		parent.add_child(anim_sprite)
-		anim_sprite.play("default")
-		var fc: int = frames.get_frame_count("default")
+		var fc: int = frames.get_frame_count("sway_south") if frames.has_animation("sway_south") else frames.get_frame_count("default")
 		if fc > 0:
 			anim_sprite.frame = randi() % fc
 	elif fallback_tex != null:
@@ -600,20 +594,15 @@ func _create_animated_stalks_prop(parent: Node3D, frames: SpriteFrames, fallback
 	# The stalks frame is 68x68 with center at y=34. The base of the stalks touches y=64 (+30 px below center).
 	# Anchoring at y + 30.0 * pixel_scale touches stalks base directly to the terrain surface.
 	var anchor_y: float = y + 30.0 * pixel_scale
-	if frames != null and (frames.has_animation("default") or frames.has_animation("sway")):
-		var anim_sprite: AnimatedSprite3D = AnimatedSprite3D.new()
+	if frames != null and (frames.has_animation("default") or frames.has_animation("sway") or frames.has_animation("sway_south")):
+		var anim_sprite: DirectionalProp3D = DirectionalProp3D.new()
 		anim_sprite.sprite_frames = frames
-		var anim_name: String = "default" if frames.has_animation("default") else "sway"
-		anim_sprite.animation = anim_name
-		anim_sprite.billboard = BaseMaterial3D.BILLBOARD_FIXED_Y
-		anim_sprite.alpha_cut = Sprite3D.ALPHA_CUT_DISCARD
-		anim_sprite.texture_filter = BaseMaterial3D.TEXTURE_FILTER_NEAREST
+		anim_sprite.anim_prefix = "sway"
+		anim_sprite.world_facing_yaw = fmod(absf(pos2d.x * 11.19 + pos2d.y * 29.43), TAU)
 		anim_sprite.pixel_size = pixel_scale
 		anim_sprite.position = Vector3(pos2d.x, anchor_y, pos2d.y)
-		anim_sprite.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 		parent.add_child(anim_sprite)
-		anim_sprite.play(anim_name)
-		var fc: int = frames.get_frame_count(anim_name)
+		var fc: int = frames.get_frame_count("sway_south") if frames.has_animation("sway_south") else frames.get_frame_count("default")
 		if fc > 0:
 			anim_sprite.frame = randi() % fc
 	elif fallback_tex != null:
