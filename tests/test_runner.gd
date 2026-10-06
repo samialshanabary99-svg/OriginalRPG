@@ -2295,6 +2295,48 @@ func _test_character_stats_and_game_state() -> void:
 	drop_dummy_player.queue_free()
 	pickup3d_inst.queue_free()
 
+	# ─────────────────────────────────────────────────────────────────────────
+	# [Group EE] 256x256 Grass & Dirt Autotiling TileSet System
+	# ─────────────────────────────────────────────────────────────────────────
+	print("\n[Group EE] 256x256 Grass & Dirt Autotiling TileSet System")
+
+	var terrain_ts: TileSet = load("res://assets/terrain/terrain_tileset.tres") as TileSet
+	_ok("terrain_tileset.tres loads successfully as TileSet", terrain_ts != null)
+	if terrain_ts != null:
+		_ok("terrain_tileset tile_size is Vector2i(256, 256)", terrain_ts.tile_size == Vector2i(256, 256))
+		_ok("terrain_tileset has terrain set 0", terrain_ts.get_terrain_sets_count() >= 1)
+		_ok("terrain set 0 is TERRAIN_MODE_MATCH_CORNERS", terrain_ts.get_terrain_set_mode(0) == TileSet.TERRAIN_MODE_MATCH_CORNERS)
+		_ok("terrain set 0 has 2 terrains", terrain_ts.get_terrains_count(0) == 2)
+		_ok("terrain 0 name is grass", terrain_ts.get_terrain_name(0, 0) == "grass")
+		_ok("terrain 1 name is dirt", terrain_ts.get_terrain_name(0, 1) == "dirt")
+		_ok("terrain_tileset has 2 custom data layers", terrain_ts.get_custom_data_layers_count() == 2)
+		_ok("custom data layer 0 is walkable", terrain_ts.get_custom_data_layer_name(0) == "walkable")
+		_ok("custom data layer 1 is footstep", terrain_ts.get_custom_data_layer_name(1) == "footstep")
+		_ok("terrain_tileset has source 0", terrain_ts.get_source_count() >= 1)
+		var atlas_src: TileSetAtlasSource = terrain_ts.get_source(terrain_ts.get_source_id(0)) as TileSetAtlasSource
+		_ok("terrain_tileset source is TileSetAtlasSource", atlas_src != null)
+		if atlas_src != null:
+			_ok("TileSetAtlasSource has 22 configured tiles", atlas_src.get_tiles_count() == 22)
+			_ok("TileSetAtlasSource texture_region_size is Vector2i(256, 256)", atlas_src.texture_region_size == Vector2i(256, 256))
+
+	var atlas_tex: Texture2D = load("res://assets/terrain/terrain_grass_dirt_atlas.png") as Texture2D
+	_ok("terrain_grass_dirt_atlas.png loads as Texture2D", atlas_tex != null)
+	if atlas_tex != null:
+		_ok("Atlas width is 1024", atlas_tex.get_width() == 1024)
+		_ok("Atlas height is 1536", atlas_tex.get_height() == 1536)
+
+	var terrain_scene: PackedScene = load("res://scenes/terrain_test.tscn") as PackedScene
+	_ok("scenes/terrain_test.tscn loads as PackedScene", terrain_scene != null)
+	if terrain_scene != null:
+		var scene_inst: Node = terrain_scene.instantiate()
+		root.add_child(scene_inst)
+		var tml: TileMapLayer = scene_inst.get_node_or_null("TileMapLayer") as TileMapLayer
+		_ok("terrain_test scene has TileMapLayer node", tml != null)
+		if tml != null:
+			_ok("TileMapLayer uses terrain_tileset.tres", tml.tile_set != null and tml.tile_set.resource_path.contains("terrain_tileset.tres"))
+		scene_inst.queue_free()
+
+
 
 
 

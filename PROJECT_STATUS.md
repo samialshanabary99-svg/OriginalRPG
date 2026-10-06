@@ -1,10 +1,15 @@
 # Project Status
 
 ## Current Phase
-**Monster Item Drops & Ragnarok ItemInfo System / Editor Implemented — 695/695 automated tests passing across 30 test groups.**
+**256x256 Grass & Dirt Autotiling TileSet System Implemented — 715/715 automated tests passing across 31 test groups.**
 
 ## Working Systems
 - All Phase 1 systems (Main Menu, Test World, Player, Camera, Interaction, HUD, scene transitions).
+- **`256x256 Grass & Dirt Autotiling TileSet System`** (`assets/terrain/`, `scenes/terrain_test.tscn`, `tools/`):
+  - Autotiling `TileSet` with `TERRAIN_MODE_MATCH_CORNERS`, 2 terrains (`grass` and `dirt`), and custom data layers (`walkable`, `footstep`).
+  - 1024×1536 px atlas (`assets/terrain/terrain_grass_dirt_atlas.png`) with 22 configured cells, mipmaps enabled, and linear mipmap canvas texture filtering.
+  - Complete Python automation pipeline (`tools/run_all.py`) supporting lossless rotations, diagonal composition, and quality checks (`art_build/report.md`).
+  - Verified in `scenes/terrain_test.tscn` covering large blobs, 1-tile holes, strips, isolated cells, and diagonal touches.
 - **`Monster Item Drops & In-World 3D Pickups`** (`src/entities/item_pickup_3d.gd`, `scenes/objects/item_pickup_3d.tscn`, `src/entities/enemy_3d.gd`):
   - In-world 3D item pickup entity with billboarded sprite, soft contact shadow, pop-bounce drop animation, gentle bobbing, and proximity + click collection into `InventoryComponent`.
   - Data-driven drop tables on `EnemyDefinition` (`drops: Array[Dictionary]`) with schema validation.
@@ -89,4 +94,4 @@ Not implemented. Architecture intentionally decoupled to support future headless
 - Damaging skills do not award XP on defeat (addressed in proposed ADR-005).
 
 ## Last Updated
-2026-10-06 (Antigravity — Monster Item Drops & Ragnarok ItemInfo System / Editor Complete & Verified)
+2026-10-06 (Antigravity — 256x256 Grass & Dirt Autotiling TileSet System Complete & Verified)

@@ -1,0 +1,442 @@
+[
+  {
+    "name": "terrain_grass_center_01.png",
+    "role": "grass_center_01",
+    "atlas_coords": [
+      0,
+      0
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "G",
+      "top_right": "G",
+      "bottom_right": "G",
+      "bottom_left": "G"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_center_02.png",
+    "role": "grass_center_02",
+    "atlas_coords": [
+      1,
+      0
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "G",
+      "top_right": "G",
+      "bottom_right": "G",
+      "bottom_left": "G"
+    },
+    "probability": 0.33,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_center_03.png",
+    "role": "grass_center_03",
+    "atlas_coords": [
+      2,
+      0
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "G",
+      "top_right": "G",
+      "bottom_right": "G",
+      "bottom_left": "G"
+    },
+    "probability": 0.25,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_center_04.png",
+    "role": "grass_center_04",
+    "atlas_coords": [
+      3,
+      0
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "G",
+      "top_right": "G",
+      "bottom_right": "G",
+      "bottom_left": "G"
+    },
+    "probability": 0.08,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_dirt_center_01.png",
+    "role": "dirt_center_01",
+    "atlas_coords": [
+      0,
+      1
+    ],
+    "own_terrain": "dirt",
+    "terrain_bits": {
+      "top_left": "D",
+      "top_right": "D",
+      "bottom_right": "D",
+      "bottom_left": "D"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "dirt"
+    }
+  },
+  {
+    "name": "terrain_dirt_center_02.png",
+    "role": "dirt_center_02",
+    "atlas_coords": [
+      1,
+      1
+    ],
+    "own_terrain": "dirt",
+    "terrain_bits": {
+      "top_left": "D",
+      "top_right": "D",
+      "bottom_right": "D",
+      "bottom_left": "D"
+    },
+    "probability": 0.33,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "dirt"
+    }
+  },
+  {
+    "name": "terrain_dirt_center_03.png",
+    "role": "dirt_center_03",
+    "atlas_coords": [
+      2,
+      1
+    ],
+    "own_terrain": "dirt",
+    "terrain_bits": {
+      "top_left": "D",
+      "top_right": "D",
+      "bottom_right": "D",
+      "bottom_left": "D"
+    },
+    "probability": 0.25,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "dirt"
+    }
+  },
+  {
+    "name": "terrain_dirt_center_04.png",
+    "role": "dirt_center_04",
+    "atlas_coords": [
+      3,
+      1
+    ],
+    "own_terrain": "dirt",
+    "terrain_bits": {
+      "top_left": "D",
+      "top_right": "D",
+      "bottom_right": "D",
+      "bottom_left": "D"
+    },
+    "probability": 0.08,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "dirt"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_outer_nw.png",
+    "role": "outer_nw",
+    "atlas_coords": [
+      0,
+      2
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "G",
+      "top_right": "D",
+      "bottom_right": "D",
+      "bottom_left": "D"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_edge_n.png",
+    "role": "edge_n",
+    "atlas_coords": [
+      1,
+      2
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "G",
+      "top_right": "G",
+      "bottom_right": "D",
+      "bottom_left": "D"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_outer_ne.png",
+    "role": "outer_ne",
+    "atlas_coords": [
+      2,
+      2
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "D",
+      "top_right": "G",
+      "bottom_right": "D",
+      "bottom_left": "D"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_inner_nw.png",
+    "role": "inner_nw",
+    "atlas_coords": [
+      3,
+      2
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "D",
+      "top_right": "G",
+      "bottom_right": "G",
+      "bottom_left": "G"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_edge_w.png",
+    "role": "edge_w",
+    "atlas_coords": [
+      0,
+      3
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "G",
+      "top_right": "D",
+      "bottom_right": "D",
+      "bottom_left": "G"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_edge_e.png",
+    "role": "edge_e",
+    "atlas_coords": [
+      2,
+      3
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "D",
+      "top_right": "G",
+      "bottom_right": "G",
+      "bottom_left": "D"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_inner_ne.png",
+    "role": "inner_ne",
+    "atlas_coords": [
+      3,
+      3
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "G",
+      "top_right": "D",
+      "bottom_right": "G",
+      "bottom_left": "G"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_outer_sw.png",
+    "role": "outer_sw",
+    "atlas_coords": [
+      0,
+      4
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "D",
+      "top_right": "D",
+      "bottom_right": "D",
+      "bottom_left": "G"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_edge_s.png",
+    "role": "edge_s",
+    "atlas_coords": [
+      1,
+      4
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "D",
+      "top_right": "D",
+      "bottom_right": "G",
+      "bottom_left": "G"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_outer_se.png",
+    "role": "outer_se",
+    "atlas_coords": [
+      2,
+      4
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "D",
+      "top_right": "D",
+      "bottom_right": "G",
+      "bottom_left": "D"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_inner_sw.png",
+    "role": "inner_sw",
+    "atlas_coords": [
+      3,
+      4
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "G",
+      "top_right": "G",
+      "bottom_right": "G",
+      "bottom_left": "D"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_inner_se.png",
+    "role": "inner_se",
+    "atlas_coords": [
+      0,
+      5
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "G",
+      "top_right": "G",
+      "bottom_right": "D",
+      "bottom_left": "G"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_diag_ne_sw.png",
+    "role": "diag_ne_sw",
+    "atlas_coords": [
+      1,
+      5
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "D",
+      "top_right": "G",
+      "bottom_right": "D",
+      "bottom_left": "G"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  },
+  {
+    "name": "terrain_grass_dirt_diag_nw_se.png",
+    "role": "diag_nw_se",
+    "atlas_coords": [
+      2,
+      5
+    ],
+    "own_terrain": "grass",
+    "terrain_bits": {
+      "top_left": "G",
+      "top_right": "D",
+      "bottom_right": "G",
+      "bottom_left": "D"
+    },
+    "probability": 1.0,
+    "custom_data": {
+      "walkable": true,
+      "footstep": "grass"
+    }
+  }
+]

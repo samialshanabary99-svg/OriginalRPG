@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://terrain_test_scene"]
+
+[ext_resource type="TileSet" uid="uid://assets/terrain/terrain_tileset.tres" path="res://assets/terrain/terrain_tileset.tres" id="1_tileset"]
+[ext_resource type="Script" path="res://scenes/terrain_test.gd" id="2_script"]
+
+[node name="TerrainTest" type="Node2D"]
+script = ExtResource("2_script")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("1_tileset")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(3072, 1792)
+zoom = Vector2(0.24, 0.24)

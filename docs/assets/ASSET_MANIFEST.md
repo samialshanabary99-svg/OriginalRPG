@@ -883,3 +883,30 @@ status: approved
 license_or_usage_notes: Project-exclusive custom asset for OriginalRPG
 notes: Ragnarok Online inspired iconic fruit consumable.
 ```
+
+### 28. `terrain_grass_dirt_autotile_256`
+```yaml
+asset_id: terrain_grass_dirt_autotile_256
+name: 256px Grass and Dirt Autotiling Terrain System
+type: tile
+path: assets/terrain/
+source: user_provided (11 source images) & generated (rotations and diagonals)
+generator_or_tool: python (tools/run_all.py, PIL, numpy)
+prompt_reference: "256x256 painterly top-down grass and dirt tiles, 4 grass variants, 4 dirt variants, and 3 base transitions rotated into 22 tiles, 1024x1536 atlas, and Godot 4 Match Corners TileSet"
+author: User & Antigravity
+created_date: 2026-10-06
+modified_date: 2026-10-06
+dimensions: 256x256
+frame_size: 256x256
+animation_frames: 1
+animation: none
+directions: none
+format: png, tres, json
+transparency: rgba_alpha
+intended_use: Godot 4 TileMapLayer autotiling field terrain system with Match Corners terrain mode
+related_entity: scenes/terrain_test.tscn
+status: approved
+license_or_usage_notes: 22 tiles (assets/terrain/tiles/), 1024x1536 atlas (assets/terrain/terrain_grass_dirt_atlas.png), atlas layout (assets/terrain/atlas_layout.json), and TileSet (assets/terrain/terrain_tileset.tres). Tiles: terrain_grass_center_01.png, terrain_grass_center_02.png, terrain_grass_center_03.png, terrain_grass_center_04.png, terrain_dirt_center_01.png, terrain_dirt_center_02.png, terrain_dirt_center_03.png, terrain_dirt_center_04.png, terrain_grass_dirt_edge_n.png, terrain_grass_dirt_edge_e.png, terrain_grass_dirt_edge_s.png, terrain_grass_dirt_edge_w.png, terrain_grass_dirt_outer_ne.png, terrain_grass_dirt_outer_se.png, terrain_grass_dirt_outer_sw.png, terrain_grass_dirt_outer_nw.png, terrain_grass_dirt_inner_ne.png, terrain_grass_dirt_inner_se.png, terrain_grass_dirt_inner_sw.png, terrain_grass_dirt_inner_nw.png, terrain_grass_dirt_diag_ne_sw.png, terrain_grass_dirt_diag_nw_se.png
+notes: Autotiling terrain set 0 in Match Corners mode with footstep metadata and walkable custom data.
+```
+
