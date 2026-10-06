@@ -1,0 +1,13 @@
+{
+  "item_id": "apple",
+  "display_name": "Apple",
+  "description": "A fresh, crispy red apple. Sweet and juicy. Restores 15 HP when eaten.",
+  "stackable": true,
+  "max_stack_size": 99,
+  "category": "consumable",
+  "heal_amount": 15,
+  "mana_amount": 0,
+  "weight": 2,
+  "price": 15,
+  "icon_path": "res://assets/icons/items/icon_item_apple.png"
+}

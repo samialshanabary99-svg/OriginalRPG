@@ -1,0 +1,428 @@
+[gd_scene load_steps=8 format=3 uid="uid://itemeditwin01"]
+
+[ext_resource type="Script" path="res://src/ui/item_editor_window.gd" id="1_script"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_title"]
+content_margin_left = 10.0
+content_margin_top = 4.0
+content_margin_right = 8.0
+content_margin_bottom = 4.0
+bg_color = Color(0.529, 0.31, 0.22, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_color = Color(0.337, 0.192, 0.129, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_btn"]
+content_margin_left = 4.0
+content_margin_right = 4.0
+bg_color = Color(0.627, 0.353, 0.243, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.282, 0.145, 0.086, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_main"]
+content_margin_left = 10.0
+content_margin_top = 8.0
+content_margin_right = 10.0
+content_margin_bottom = 8.0
+bg_color = Color(0.98, 0.835, 0.67, 1)
+border_width_left = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.58, 0.329, 0.22, 1)
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_inner"]
+content_margin_left = 6.0
+content_margin_top = 6.0
+content_margin_right = 6.0
+content_margin_bottom = 6.0
+bg_color = Color(0.92, 0.77, 0.60, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.68, 0.45, 0.30, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_preview"]
+bg_color = Color(0.85, 0.70, 0.52, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.50, 0.30, 0.18, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="ItemEditorWindow" type="Control"]
+custom_minimum_size = Vector2(580, 480)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 580.0
+offset_bottom = 480.0
+script = ExtResource("1_script")
+
+[node name="WindowFrame" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="TitleBar" type="PanelContainer" parent="WindowFrame"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_title")
+
+[node name="HBox" type="HBoxContainer" parent="WindowFrame/TitleBar"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="TitleLabel" type="Label" parent="WindowFrame/TitleBar/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(1, 0.94, 0.85, 1)
+theme_override_font_sizes/font_size = 13
+text = "ITEM DATABASE & INFO EDITOR"
+vertical_alignment = 1
+
+[node name="BtnMinimize" type="Button" parent="WindowFrame/TitleBar/HBox"]
+custom_minimum_size = Vector2(20, 18)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "-"
+
+[node name="BtnClose" type="Button" parent="WindowFrame/TitleBar/HBox"]
+custom_minimum_size = Vector2(20, 18)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.85, 1)
+theme_override_font_sizes/font_size = 11
+theme_override_styles/normal = SubResource("StyleBoxFlat_btn")
+text = "X"
+
+[node name="MainPanel" type="PanelContainer" parent="WindowFrame"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_main")
+
+[node name="Margin" type="MarginContainer" parent="WindowFrame/MainPanel"]
+layout_mode = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBox" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="LeftCol" type="VBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="SearchBox" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/LeftCol"]
+layout_mode = 2
+
+[node name="SearchInput" type="LineEdit" parent="WindowFrame/MainPanel/Margin/HBox/LeftCol/SearchBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+placeholder_text = "Search items..."
+clear_button_enabled = true
+
+[node name="ItemList" type="ItemList" parent="WindowFrame/MainPanel/Margin/HBox/LeftCol"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 11
+fixed_icon_size = Vector2i(24, 24)
+
+[node name="ListActions" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/LeftCol"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BtnNewItem" type="Button" parent="WindowFrame/MainPanel/Margin/HBox/LeftCol/ListActions"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text = "+ New"
+
+[node name="BtnDelete" type="Button" parent="WindowFrame/MainPanel/Margin/HBox/LeftCol/ListActions"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Delete"
+
+[node name="RightCol" type="VBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="Scroll" type="ScrollContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Fields" type="VBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="RowId" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowId"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "Item ID:"
+
+[node name="EditId" type="LineEdit" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowId"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="RowName" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowName"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "Display Name:"
+
+[node name="EditName" type="LineEdit" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowName"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="RowCategory" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowCategory"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "Category:"
+
+[node name="OptCategory" type="OptionButton" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowCategory"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="DescBox" type="VBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/DescBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "Description:"
+
+[node name="EditDesc" type="TextEdit" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/DescBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+wrap_mode = 1
+
+[node name="ImageBox" type="PanelContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_inner")
+
+[node name="HBox" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/ImageBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PreviewBox" type="PanelContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/ImageBox/HBox"]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_preview")
+
+[node name="PreviewIcon" type="TextureRect" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/ImageBox/HBox/PreviewBox"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PathCol" type="VBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/ImageBox/HBox"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="EditIconPath" type="LineEdit" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/ImageBox/HBox/PathCol"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+placeholder_text = "Icon Path (e.g. res://assets/icons/items/...)"
+
+[node name="OptPresetIcons" type="OptionButton" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/ImageBox/HBox/PathCol"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 10
+
+[node name="RowWeight" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowWeight"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "Weight:"
+
+[node name="SpinWeight" type="SpinBox" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowWeight"]
+layout_mode = 2
+max_value = 9999.0
+value = 10.0
+
+[node name="RowPrice" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowPrice"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "Price (Zeny):"
+
+[node name="SpinPrice" type="SpinBox" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowPrice"]
+layout_mode = 2
+max_value = 9999999.0
+value = 10.0
+
+[node name="RowStack" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+
+[node name="ChkStackable" type="CheckBox" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowStack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+button_pressed = true
+text = "Stackable"
+
+[node name="LblMax" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowStack"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "Max Stack:"
+
+[node name="SpinMaxStack" type="SpinBox" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowStack"]
+layout_mode = 2
+min_value = 1.0
+max_value = 999.0
+value = 99.0
+
+[node name="RowHeal" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowHeal"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "Heal HP:"
+
+[node name="SpinHeal" type="SpinBox" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowHeal"]
+layout_mode = 2
+max_value = 9999.0
+
+[node name="RowMana" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowMana"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "Restore SP:"
+
+[node name="SpinMana" type="SpinBox" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowMana"]
+layout_mode = 2
+max_value = 9999.0
+
+[node name="RowEquip" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+
+[node name="Lbl" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowEquip"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "Equip Slot:"
+
+[node name="OptEquipSlot" type="OptionButton" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowEquip"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+
+[node name="RowCombatStats" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields"]
+layout_mode = 2
+
+[node name="LblAtk" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowCombatStats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "ATK:"
+
+[node name="SpinAttack" type="SpinBox" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowCombatStats"]
+layout_mode = 2
+max_value = 999.0
+
+[node name="LblDef" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowCombatStats"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.20, 0.12, 1)
+theme_override_font_sizes/font_size = 11
+text = "DEF:"
+
+[node name="SpinDefence" type="SpinBox" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/Scroll/Fields/RowCombatStats"]
+layout_mode = 2
+max_value = 999.0
+
+[node name="ActionRow" type="HBoxContainer" parent="WindowFrame/MainPanel/Margin/HBox/RightCol"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="BtnSave" type="Button" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/ActionRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 11
+text = "Save Item"
+
+[node name="BtnRevert" type="Button" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/ActionRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Revert"
+
+[node name="BtnGiveBag" type="Button" parent="WindowFrame/MainPanel/Margin/HBox/RightCol/ActionRow"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 11
+text = "Test (Give 5x)"
+
+[node name="LabelStatus" type="Label" parent="WindowFrame/MainPanel/Margin/HBox/RightCol"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.6, 0.2, 1)
+theme_override_font_sizes/font_size = 10
+text = "Ready."
+autowrap_mode = 2

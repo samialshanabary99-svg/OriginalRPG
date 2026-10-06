@@ -537,10 +537,46 @@ func _on_died() -> void:
 			if p_stats != null:
 				if p_stats.has_method("gain_experience"):
 					p_stats.gain_experience(xp)
-				elif p_stats.has_method("gain_xp"):
-					p_stats.gain_xp(xp)
+	# Spawn monster item drops (e.g. Apple)
+	_spawn_item_drops()
 
 	emit_signal("enemy_died", self)
+
+## Spawns dropped items (like Apple) into the world from the enemy's definition drop table.
+func _spawn_item_drops() -> void:
+	if definition == null or definition.drops.is_empty():
+		return
+	var parent_node: Node = get_parent()
+	if parent_node == null:
+		return
+
+	var drop_scene: PackedScene = load("res://scenes/objects/item_pickup_3d.tscn") as PackedScene
+	if drop_scene == null:
+		return
+
+	for drop_entry: Dictionary in definition.drops:
+		var item_id: String = str(drop_entry.get("item_id", ""))
+		if item_id.is_empty():
+			continue
+		var chance: float = float(drop_entry.get("chance", 1.0))
+		if randf() > chance:
+			continue
+
+		var min_qty: int = int(drop_entry.get("min_qty", 1))
+		var max_qty: int = int(drop_entry.get("max_qty", 1))
+		var qty: int = randi_range(min_qty, max_qty)
+
+		var drop: ItemPickup3D = drop_scene.instantiate() as ItemPickup3D
+		if drop != null:
+			# Scatter slightly around the defeated enemy position
+			var angle: float = randf() * TAU
+			var dist: float = randf_range(0.3, 0.85)
+			var origin_pos: Vector3 = global_position if is_inside_tree() else position
+			var drop_pos: Vector3 = origin_pos + Vector3(cos(angle) * dist, 0.05, sin(angle) * dist)
+			if parent_node.has_method("_calculate_height"):
+				drop_pos.y = parent_node._calculate_height(drop_pos.x, drop_pos.z)
+			parent_node.add_child(drop)
+			drop.init_drop(item_id, qty, drop_pos)
 
 ## Fades out the fallen corpse and shadow before respawning.
 func _fade_out_corpse() -> void:

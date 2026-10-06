@@ -488,8 +488,8 @@ func _extract_enemy(collider: Object) -> Enemy3D:
 func _handle_mouse_click(mouse_pos: Vector2) -> void:
 	if character_state == CharacterState.DEAD:
 		return
-	# Raycast mask 6 = 2 (terrain) + 4 (enemies)
-	var hit: Dictionary = _raycast_from_mouse(mouse_pos, 6)
+	# Raycast mask 14 = 2 (terrain) + 4 (enemies) + 8 (item drops / pickups)
+	var hit: Dictionary = _raycast_from_mouse(mouse_pos, 14)
 	if hit.is_empty():
 		return
 
@@ -498,6 +498,14 @@ func _handle_mouse_click(mouse_pos: Vector2) -> void:
 
 	if hit_enemy != null and is_instance_valid(hit_enemy) and hit_enemy.current_state != Enemy3D.State.DEAD:
 		target_enemy(hit_enemy)
+	elif collider is ItemPickup3D or (collider is Node and (collider as Node).get_parent() is ItemPickup3D):
+		var pickup: ItemPickup3D = collider if collider is ItemPickup3D else (collider as Node).get_parent() as ItemPickup3D
+		clear_target_enemy()
+		var dist: float = global_position.distance_to(pickup.global_position)
+		if dist <= 2.2:
+			pickup.collect(self)
+		else:
+			set_move_destination(pickup.global_position, Vector3.UP)
 	else:
 		var hit_pos: Vector3 = hit.get("position", Vector3.ZERO)
 		var hit_normal: Vector3 = hit.get("normal", Vector3.UP)

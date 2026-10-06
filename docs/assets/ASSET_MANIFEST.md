@@ -858,9 +858,28 @@ license_or_usage_notes: prop_stepping_stone_single_256.png, prop_stepping_stone_
 notes: 256x256 transparent RGBA8 decals with soft feathered contact edges and earthy rims.
 ```
 
-
-
-
-
-
-
+### 27. `icon_item_apple`
+```yaml
+asset_id: icon_item_apple
+name: Apple Item Icon
+type: icon
+path: assets/icons/items/icon_item_apple.png
+source: human_authored
+generator_or_tool: manual
+prompt_reference: "32x32 pixel art apple with stem and leaf, glossy highlight and clean transparent background"
+author: Antigravity
+created_date: 2026-10-06
+modified_date: 2026-10-06
+dimensions: 32x32
+frame_size: 32x32
+animation_frames: 1
+animation: none
+directions: none
+format: png
+transparency: rgba_alpha
+intended_use: Inventory icon and ground item drop billboard for Apple consumable
+related_entity: src/core/item_definition.gd
+status: approved
+license_or_usage_notes: Project-exclusive custom asset for OriginalRPG
+notes: Ragnarok Online inspired iconic fruit consumable.
+```

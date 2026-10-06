@@ -2128,6 +2128,173 @@ func _test_character_stats_and_game_state() -> void:
 	inv_win.queue_free()
 	info_win.queue_free()
 
+	# ─────────────────────────────────────────────────────────────────────────
+	# [Group DD] Monster Item Drops & Ragnarok ItemInfo System
+	# ─────────────────────────────────────────────────────────────────────────
+	print("\n[Group DD] Monster Item Drops & Ragnarok ItemInfo System")
+
+	ContentRegistry.ensure_initialized()
+
+	# 1. Apple Item Definition & Icon Assets
+	var apple_def: ItemDefinition = ContentRegistry.get_item("apple")
+	_ok("Apple item definition loaded from ContentRegistry", apple_def != null)
+	_ok("Apple display_name is Apple", apple_def != null and apple_def.display_name == "Apple")
+	_ok("Apple category is CONSUMABLE", apple_def != null and apple_def.category == ItemDefinition.Category.CONSUMABLE)
+	_ok("Apple heal_amount is 15", apple_def != null and apple_def.heal_amount == 15)
+	_ok("Apple weight is 2", apple_def != null and apple_def.weight == 2)
+	_ok("Apple price is 15", apple_def != null and apple_def.price == 15)
+	_ok("Apple icon_path is valid", apple_def != null and apple_def.icon_path == "res://assets/icons/items/icon_item_apple.png")
+	var apple_icon: Texture2D = apple_def.get_icon() if apple_def != null else null
+	_ok("Apple get_icon returns valid Texture2D", apple_icon != null)
+	_ok("Apple get_type_text is Usable (Consumable)", apple_def != null and apple_def.get_type_text() == "Usable (Consumable)")
+	_ok("Apple get_stat_text contains Restores 15 HP", apple_def != null and apple_def.get_stat_text().contains("Restores 15 HP"))
+
+	# 2. EnemyDefinition Drop Table Serialization & Validation
+	var test_enemy_def: EnemyDefinition = EnemyDefinition.new()
+	test_enemy_def.enemy_id = "test_drop_mob"
+	test_enemy_def.display_name = "Drop Mob"
+	test_enemy_def.max_health = 50
+	test_enemy_def.drops = [
+		{"item_id": "apple", "chance": 0.75, "min_qty": 1, "max_qty": 2}
+	]
+	var enemy_ser: Dictionary = test_enemy_def.serialize()
+	_ok("EnemyDefinition serialize has drops", enemy_ser.has("drops") and enemy_ser["drops"].size() == 1)
+
+	var enemy_deser: EnemyDefinition = EnemyDefinition.new()
+	enemy_deser.deserialize(enemy_ser)
+	_ok("EnemyDefinition deserialize drops item_id", enemy_deser.drops.size() == 1 and str(enemy_deser.drops[0]["item_id"]) == "apple")
+	_ok("EnemyDefinition deserialize drops chance", float(enemy_deser.drops[0]["chance"]) == 0.75)
+	_ok("EnemyDefinition deserialize drops min_qty", int(enemy_deser.drops[0]["min_qty"]) == 1)
+	_ok("EnemyDefinition deserialize drops max_qty", int(enemy_deser.drops[0]["max_qty"]) == 2)
+	_ok("Valid enemy with drops passes validation", enemy_deser.validate().is_empty())
+
+	# Validation error cases
+	var bad_drop_mob: EnemyDefinition = EnemyDefinition.new()
+	bad_drop_mob.enemy_id = "bad_mob"
+	bad_drop_mob.display_name = "Bad Mob"
+	bad_drop_mob.max_health = 10
+	bad_drop_mob.drops = [
+		{"item_id": "", "chance": 1.5, "min_qty": 5, "max_qty": 2}
+	]
+	var bad_errs: Array[String] = bad_drop_mob.validate()
+	_ok("Validation detects empty drop item_id", bad_errs.any(func(e: String) -> bool: return e.contains("item_id")))
+	_ok("Validation detects drop chance > 1.0", bad_errs.any(func(e: String) -> bool: return e.contains("chance")))
+	_ok("Validation detects max_qty < min_qty", bad_errs.any(func(e: String) -> bool: return e.contains("max_qty")))
+
+	var wolf_def: EnemyDefinition = ContentRegistry.get_enemy("wolf_small")
+	_ok("Wolf enemy definition has drops table", wolf_def != null and not wolf_def.drops.is_empty())
+	_ok("Wolf drops table contains apple", wolf_def != null and wolf_def.drops.any(func(d: Dictionary) -> bool: return str(d.get("item_id")) == "apple"))
+
+	# 3. ItemPickup3D In-World Drop Entity
+	var pickup3d_scene: PackedScene = load("res://scenes/objects/item_pickup_3d.tscn") as PackedScene
+	_ok("ItemPickup3D scene loads", pickup3d_scene != null)
+	var pickup3d_inst: ItemPickup3D = pickup3d_scene.instantiate() as ItemPickup3D
+	root.add_child(pickup3d_inst)
+	pickup3d_inst.init_drop("apple", 2, Vector3(5.0, 0.2, 5.0))
+	_ok("ItemPickup3D item_id is apple", pickup3d_inst.item_id == "apple")
+	_ok("ItemPickup3D quantity is 2", pickup3d_inst.quantity == 2)
+	_ok("ItemPickup3D sprite has apple texture", pickup3d_inst.sprite != null and pickup3d_inst.sprite.texture != null)
+	_ok("ItemPickup3D shadow mesh exists", pickup3d_inst.shadow != null)
+
+	# 4. Proximity & Click Collection into InventoryComponent
+	var drop_dummy_player: Node3D = Node3D.new()
+	var drop_inv: InventoryComponent = InventoryComponent.new()
+	drop_inv.name = "InventoryComponent"
+	drop_inv.max_weight = 5000
+	drop_dummy_player.add_child(drop_inv)
+	root.add_child(drop_dummy_player)
+	_ok("Initial apple count in test inventory is 0", drop_inv.count_item("apple") == 0)
+
+	var collected_signals: Array[Dictionary] = []
+	pickup3d_inst.item_collected.connect(func(it: ItemDefinition, q: int, by: Node):
+		collected_signals.append({"item": it, "qty": q, "by": by})
+	)
+
+	var collect_success: bool = pickup3d_inst.collect(drop_dummy_player)
+	_ok("pickup3d collect returns true", collect_success)
+	_ok("pickup3d emits item_collected signal", not collected_signals.is_empty())
+	_ok("Apple added to player inventory (count == 2)", drop_inv.count_item("apple") == 2)
+
+	# 5. Enemy3D Spawns Drops on Death
+	var enemy3d_parent: Node3D = Node3D.new()
+	root.add_child(enemy3d_parent)
+	var enemy3d_scene: PackedScene = load("res://scenes/entities/enemy_3d.tscn") as PackedScene
+	var enemy3d_inst: Enemy3D = enemy3d_scene.instantiate() as Enemy3D
+	enemy3d_parent.add_child(enemy3d_inst)
+	enemy3d_inst.init_from_id("wolf_small")
+	_ok("Enemy3D initialized with wolf_small definition", enemy3d_inst.definition != null)
+	# Force 100% apple drop for deterministic test
+	enemy3d_inst.definition.drops = [{"item_id": "apple", "chance": 1.0, "min_qty": 1, "max_qty": 1}]
+	enemy3d_inst._on_died()
+	var drops_spawned: Array[Node] = []
+	for child in enemy3d_parent.get_children():
+		if child is ItemPickup3D:
+			drops_spawned.append(child)
+	_ok("Enemy3D death spawns ItemPickup3D in parent", not drops_spawned.is_empty())
+	if not drops_spawned.is_empty():
+		var spawned_drop: ItemPickup3D = drops_spawned[0] as ItemPickup3D
+		_ok("Spawned drop item_id is apple", spawned_drop.item_id == "apple")
+
+	# 6. ContentRegistry ItemInfo Import & Export
+	var iteminfo_test_path: String = "res://data/test_iteminfo_export.json"
+	var exp_err: Error = ContentRegistry.export_iteminfo(iteminfo_test_path)
+	_ok("ContentRegistry.export_iteminfo returns OK", exp_err == OK)
+	_ok("Exported iteminfo file exists on disk", FileAccess.file_exists(iteminfo_test_path))
+
+	var imported_count: int = ContentRegistry.import_iteminfo(iteminfo_test_path)
+	_ok("ContentRegistry.import_iteminfo loads items", imported_count >= 5)
+	if FileAccess.file_exists(iteminfo_test_path):
+		DirAccess.remove_absolute(iteminfo_test_path)
+
+	# 7. ContentRegistry Save and Delete Item to Disk
+	var custom_potion: ItemDefinition = ItemDefinition.new()
+	custom_potion.item_id = "test_speed_potion"
+	custom_potion.display_name = "Speed Potion"
+	custom_potion.description = "Grants swift footwork."
+	custom_potion.category = ItemDefinition.Category.CONSUMABLE
+	custom_potion.weight = 3
+	custom_potion.price = 75
+	custom_potion.icon_path = "res://assets/icons/items/icon_item_apple.png"
+	var save_err: Error = ContentRegistry.save_item_to_disk(custom_potion)
+	_ok("ContentRegistry.save_item_to_disk returns OK", save_err == OK)
+	_ok("Saved item retrieved from ContentRegistry", ContentRegistry.get_item("test_speed_potion") != null)
+	var del_err: Error = ContentRegistry.delete_item_from_disk("test_speed_potion")
+	_ok("ContentRegistry.delete_item_from_disk returns OK", del_err == OK)
+	_ok("Deleted item no longer in ContentRegistry", ContentRegistry.get_item("test_speed_potion") == null)
+
+	# 8. ItemEditorWindow Scene & Functionality
+	var editor_scene: PackedScene = load("res://scenes/ui/item_editor_window.tscn") as PackedScene
+	_ok("ItemEditorWindow scene loads", editor_scene != null)
+	var editor_inst: ItemEditorWindow = editor_scene.instantiate() as ItemEditorWindow
+	root.add_child(editor_inst)
+	editor_inst._ready()
+	_ok("ItemEditorWindow has item_list", editor_inst.item_list != null)
+	_ok("ItemEditorWindow item_list is populated", editor_inst.item_list.item_count >= 5)
+
+	editor_inst.select_item("apple")
+	_ok("Editor edit_id matches selected apple", editor_inst.edit_id != null and editor_inst.edit_id.text == "apple")
+	_ok("Editor edit_name matches selected Apple", editor_inst.edit_name != null and editor_inst.edit_name.text == "Apple")
+	_ok("Editor spin_heal matches apple heal_amount", editor_inst.spin_heal != null and int(editor_inst.spin_heal.value) == 15)
+
+	# 9. HUD Item Editor Toggle Integration
+	var hud_scene_editor: PackedScene = load("res://scenes/ui/hud.tscn") as PackedScene
+	var hud_editor_inst: HUD = hud_scene_editor.instantiate() as HUD
+	root.add_child(hud_editor_inst)
+	hud_editor_inst._ready()
+
+	_ok("HUD has toggle_editor_button", hud_editor_inst.toggle_editor_button != null)
+	hud_editor_inst.toggle_item_editor()
+	_ok("toggle_item_editor opens ItemEditorWindow in HUD", hud_editor_inst.item_editor_window != null and hud_editor_inst.item_editor_window.visible)
+	hud_editor_inst.toggle_item_editor()
+	_ok("toggle_item_editor closes ItemEditorWindow in HUD", not hud_editor_inst.item_editor_window.visible)
+
+	# Cleanup Group DD nodes
+	hud_editor_inst.queue_free()
+	editor_inst.queue_free()
+	enemy3d_parent.queue_free()
+	drop_dummy_player.queue_free()
+	pickup3d_inst.queue_free()
+
 
 
 

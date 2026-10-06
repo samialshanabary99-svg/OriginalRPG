@@ -136,10 +136,34 @@ func receive_hit(attacker_attack: int) -> void:
 func _on_died() -> void:
 	_state = State.DEAD
 	velocity = Vector2.ZERO
+	_spawn_item_drops()
 	enemy_died.emit(self)
 	# Delay removal so animations / effects can play (none yet)
 	await get_tree().create_timer(0.3).timeout
 	queue_free()
+
+func _spawn_item_drops() -> void:
+	if definition == null or definition.drops.is_empty():
+		return
+	var parent_node: Node = get_parent()
+	if parent_node == null:
+		return
+	var drop_scene: PackedScene = load("res://scenes/objects/item_pickup.tscn") as PackedScene
+	if drop_scene == null:
+		return
+	for drop_entry: Dictionary in definition.drops:
+		var item_id: String = str(drop_entry.get("item_id", ""))
+		if item_id.is_empty():
+			continue
+		var chance: float = float(drop_entry.get("chance", 1.0))
+		if randf() > chance:
+			continue
+		var drop: ItemPickup = drop_scene.instantiate() as ItemPickup
+		if drop != null:
+			var offset: Vector2 = Vector2(randf_range(-15.0, 15.0), randf_range(-15.0, 15.0))
+			drop.position = position + offset
+			drop.item_id = item_id
+			parent_node.add_child(drop)
 
 func _on_aggro_area_entered(area: Area2D) -> void:
 	# Detect player by checking parent node class

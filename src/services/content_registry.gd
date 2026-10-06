@@ -256,3 +256,81 @@ static func get_all_characters() -> Array[CharacterDefinition]:
 
 static func get_validation_errors() -> Array[String]:
 	return _validation_errors.duplicate()
+
+# ── Ragnarok-Style ItemInfo & Disk Persistence ────────────────────────────────
+
+## Saves an item definition to res://data/items/<item_id>.json, updates in-memory registry,
+## and syncs the centralized res://data/iteminfo.json.
+static func save_item_to_disk(item: ItemDefinition, base_dir: String = "res://data") -> Error:
+	if item == null or item.item_id.strip_edges().is_empty():
+		return ERR_INVALID_PARAMETER
+	var errs: Array[String] = item.validate()
+	if not errs.is_empty():
+		return ERR_INVALID_DATA
+
+	var items_dir: String = base_dir.path_join("items")
+	if not DirAccess.dir_exists_absolute(items_dir):
+		DirAccess.make_dir_recursive_absolute(items_dir)
+	var file_path: String = items_dir.path_join(item.item_id + ".json")
+	var file := FileAccess.open(file_path, FileAccess.WRITE)
+	if file == null:
+		return FileAccess.get_open_error()
+	file.store_string(JSON.stringify(item.serialize(), "  "))
+	file.close()
+
+	register_item(item)
+	export_iteminfo(base_dir.path_join("iteminfo.json"))
+	return OK
+
+## Deletes an item file from res://data/items/<item_id>.json, removes from memory, and updates iteminfo.json.
+static func delete_item_from_disk(item_id: String, base_dir: String = "res://data") -> Error:
+	if item_id.strip_edges().is_empty():
+		return ERR_INVALID_PARAMETER
+	var file_path: String = base_dir.path_join("items").path_join(item_id + ".json")
+	if FileAccess.file_exists(file_path):
+		DirAccess.remove_absolute(file_path)
+	_items.erase(item_id)
+	export_iteminfo(base_dir.path_join("iteminfo.json"))
+	return OK
+
+## Exports all registered items into a single Ragnarok-style iteminfo.json database.
+static func export_iteminfo(target_path: String = "res://data/iteminfo.json") -> Error:
+	ensure_initialized()
+	var items_dict: Dictionary = {}
+	var sorted_keys: Array = _items.keys()
+	sorted_keys.sort()
+	for id: String in sorted_keys:
+		var item: ItemDefinition = _items[id]
+		items_dict[id] = item.serialize()
+
+	var data: Dictionary = {
+		"version": "1.0.0",
+		"description": "OriginalRPG Ragnarok-Style Item Database (ItemInfo). Editable directly or via Item Info Editor.",
+		"items": items_dict
+	}
+	var file := FileAccess.open(target_path, FileAccess.WRITE)
+	if file == null:
+		return FileAccess.get_open_error()
+	file.store_string(JSON.stringify(data, "  "))
+	file.close()
+	return OK
+
+## Imports and registers all items from a Ragnarok-style iteminfo.json database.
+static func import_iteminfo(source_path: String = "res://data/iteminfo.json") -> int:
+	if not FileAccess.file_exists(source_path):
+		return 0
+	var res := _read_json_file(source_path)
+	if res.has("error") or not res.has("data"):
+		return 0
+	var root: Dictionary = res["data"]
+	var count: int = 0
+	if root.has("items") and root["items"] is Dictionary:
+		var items_map: Dictionary = root["items"]
+		for id: String in items_map:
+			var item_data: Dictionary = items_map[id]
+			var def := ItemDefinition.new()
+			def.deserialize(item_data)
+			if def.validate().is_empty():
+				register_item(def)
+				count += 1
+	return count

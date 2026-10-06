@@ -8,6 +8,7 @@ extends Resource
 @export var display_name: String = ""
 @export_multiline var description: String = ""
 @export var icon: Texture2D = null
+@export var icon_path: String = ""         ## e.g. "res://assets/icons/items/icon_item_apple.png"
 @export var stackable: bool = true
 @export var max_stack_size: int = 99
 
@@ -23,8 +24,17 @@ enum Category { MISC, WEAPON, ARMOUR, CONSUMABLE, QUEST }
 @export var heal_amount: int = 0
 @export var mana_amount: int = 0
 
-## Item weight (for inventory encumbrance)
+## Item weight (for inventory encumbrance) & price (Zeny)
 @export var weight: int = 10
+@export var price: int = 10
+
+## Returns the cached Texture2D icon, lazily loading from icon_path if needed.
+func get_icon() -> Texture2D:
+	if icon != null:
+		return icon
+	if not icon_path.is_empty() and ResourceLoader.exists(icon_path):
+		icon = load(icon_path) as Texture2D
+	return icon
 
 ## Helper returning stat bonuses for EquipmentComponent integration.
 func get_stat_bonuses() -> Dictionary:
@@ -66,6 +76,7 @@ func serialize() -> Dictionary:
 		"item_id": item_id,
 		"display_name": display_name,
 		"description": description,
+		"icon_path": icon_path,
 		"stackable": stackable,
 		"max_stack_size": max_stack_size,
 		"category": int(category),
@@ -74,6 +85,7 @@ func serialize() -> Dictionary:
 		"heal_amount": heal_amount,
 		"mana_amount": mana_amount,
 		"weight": weight,
+		"price": price,
 	}
 
 func deserialize(data: Dictionary) -> void:
@@ -93,6 +105,21 @@ func deserialize(data: Dictionary) -> void:
 	if data.has("heal_amount"):    heal_amount    = int(data["heal_amount"])
 	if data.has("mana_amount"):    mana_amount    = int(data["mana_amount"])
 	if data.has("weight"):         weight         = int(data["weight"])
+	if data.has("price"):          price          = int(data["price"])
+	elif data.has("cost"):         price          = int(data["cost"])
+
+	if data.has("icon_path"):
+		icon_path = str(data["icon_path"])
+		if not icon_path.is_empty() and ResourceLoader.exists(icon_path):
+			icon = load(icon_path) as Texture2D
+	elif data.has("image"):
+		icon_path = str(data["image"])
+		if not icon_path.is_empty() and ResourceLoader.exists(icon_path):
+			icon = load(icon_path) as Texture2D
+	elif data.has("icon") and data["icon"] is String:
+		icon_path = str(data["icon"])
+		if not icon_path.is_empty() and ResourceLoader.exists(icon_path):
+			icon = load(icon_path) as Texture2D
 
 func validate() -> Array[String]:
 	var errors: Array[String] = []

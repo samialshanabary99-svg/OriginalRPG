@@ -17,6 +17,8 @@ func _ready() -> void:
 		item = ContentRegistry.get_item(item_id)
 	if item != null:
 		prompt_message = "Press E to pick up [%s]" % item.display_name
+		if sprite != null and item.get_icon() != null:
+			sprite.texture = item.get_icon()
 	interacted.connect(_on_interacted)
 
 func _on_interacted(interactor: Node) -> void:

@@ -12,5 +12,13 @@
   "attack_range": 1.8,
   "attack_cooldown": 1.2,
   "sprite_tint": "#ffffffff",
-  "sprite_scale": [0.012, 0.012]
+  "sprite_scale": [0.012, 0.012],
+  "drops": [
+    {
+      "item_id": "apple",
+      "chance": 0.85,
+      "min_qty": 1,
+      "max_qty": 2
+    }
+  ]
 }

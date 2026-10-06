@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" path="res://scenes/ui/character_stats_window.tscn" id="3_char_stats"]
 [ext_resource type="PackedScene" path="res://scenes/ui/inventory_window.tscn" id="4_inventory"]
 [ext_resource type="PackedScene" path="res://scenes/ui/item_info_window.tscn" id="5_item_info"]
+[ext_resource type="PackedScene" path="res://scenes/ui/item_editor_window.tscn" id="6_item_editor"]
 
 [node name="HUD" type="CanvasLayer"]
 script = ExtResource("1_hud")
@@ -36,13 +37,20 @@ offset_top = 20.0
 offset_right = 1110.0
 offset_bottom = 380.0
 
+[node name="ItemEditorWindow" parent="." instance=ExtResource("6_item_editor")]
+visible = false
+offset_left = 280.0
+offset_top = 80.0
+offset_right = 860.0
+offset_bottom = 560.0
+
 [node name="HUDMenuBar" type="HBoxContainer" parent="."]
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -260.0
+offset_left = -340.0
 offset_top = -45.0
 offset_right = -20.0
 offset_bottom = -15.0
@@ -64,6 +72,11 @@ text = "Stats (C)"
 custom_minimum_size = Vector2(72, 28)
 layout_mode = 2
 text = "Bag (I)"
+
+[node name="ToggleEditorBtn" type="Button" parent="HUDMenuBar"]
+custom_minimum_size = Vector2(74, 28)
+layout_mode = 2
+text = "Items (F8)"
 
 [node name="DialoguePanel" type="PanelContainer" parent="."]
 anchors_preset = 7

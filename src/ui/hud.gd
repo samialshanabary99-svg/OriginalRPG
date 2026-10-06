@@ -32,6 +32,18 @@ signal return_to_menu_requested()
 			item_info_window = get_node_or_null("ItemInfoWindow") as ItemInfoWindow
 		return item_info_window
 
+@onready var item_editor_window: ItemEditorWindow = $ItemEditorWindow if has_node("ItemEditorWindow") else null:
+	get:
+		if item_editor_window == null and has_node("ItemEditorWindow"):
+			item_editor_window = get_node_or_null("ItemEditorWindow") as ItemEditorWindow
+		return item_editor_window
+
+var toggle_editor_button: Button:
+	get:
+		if has_node("HUDMenuBar/ToggleEditorBtn"):
+			return get_node("HUDMenuBar/ToggleEditorBtn") as Button
+		return null
+
 var health_bar: ProgressBar:
 	get:
 		if basic_info_window != null:
@@ -149,6 +161,10 @@ func _ready() -> void:
 		toggle_inventory_button.focus_mode = Control.FOCUS_NONE
 		if not toggle_inventory_button.pressed.is_connected(toggle_inventory):
 			toggle_inventory_button.pressed.connect(toggle_inventory)
+	if toggle_editor_button != null:
+		toggle_editor_button.focus_mode = Control.FOCUS_NONE
+		if not toggle_editor_button.pressed.is_connected(toggle_item_editor):
+			toggle_editor_button.pressed.connect(toggle_item_editor)
 
 	# Wire inventory and item info windows
 	if inventory_window != null and item_info_window != null:
@@ -170,8 +186,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		toggle_character_stats()
 	elif event.is_action_pressed("toggle_inventory") or (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_I):
 		toggle_inventory()
+	elif (event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_F8):
+		toggle_item_editor()
 	elif event is InputEventKey and event.pressed and not event.echo and event.keycode == KEY_ESCAPE:
-		if item_info_window != null and item_info_window.visible:
+		if item_editor_window != null and item_editor_window.visible:
+			item_editor_window.hide()
+		elif item_info_window != null and item_info_window.visible:
 			item_info_window.hide()
 		elif inventory_window != null and inventory_window.visible:
 			inventory_window.hide()
@@ -204,6 +224,18 @@ func toggle_inventory() -> void:
 func toggle_item_info() -> void:
 	if item_info_window != null:
 		item_info_window.toggle_window()
+
+func toggle_item_editor() -> void:
+	if item_editor_window == null:
+		var scene: PackedScene = load("res://scenes/ui/item_editor_window.tscn") as PackedScene
+		if scene != null:
+			item_editor_window = scene.instantiate() as ItemEditorWindow
+			item_editor_window.position = Vector2(280, 80)
+			add_child(item_editor_window)
+	if item_editor_window != null:
+		item_editor_window.visible = not item_editor_window.visible
+		if item_editor_window.visible:
+			item_editor_window.refresh_item_list()
 
 func _on_inventory_item_selected(item: ItemDefinition, qty: int, fav: bool) -> void:
 	if item_info_window != null:

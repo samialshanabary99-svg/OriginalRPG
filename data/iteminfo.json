@@ -1,0 +1,102 @@
+{
+  "description": "OriginalRPG Ragnarok-Style Item Database (ItemInfo). Editable directly or via Item Info Editor.",
+  "items": {
+    "apple": {
+      "category": 3,
+      "description": "A fresh, crispy red apple. Sweet and juicy. Restores 15 HP when eaten.",
+      "display_name": "Apple",
+      "equip_slot": "",
+      "heal_amount": 15,
+      "icon_path": "res://assets/icons/items/icon_item_apple.png",
+      "item_id": "apple",
+      "mana_amount": 0,
+      "max_stack_size": 99,
+      "price": 15,
+      "stackable": true,
+      "stat_modifiers": {},
+      "weight": 2
+    },
+    "herb_basic": {
+      "category": 3,
+      "description": "A common wild herb. Smells earthy. Useful for potions.",
+      "display_name": "Herb",
+      "equip_slot": "",
+      "heal_amount": 15,
+      "icon_path": "",
+      "item_id": "herb_basic",
+      "mana_amount": 0,
+      "max_stack_size": 99,
+      "price": 10,
+      "stackable": true,
+      "stat_modifiers": {},
+      "weight": 10
+    },
+    "potion_health": {
+      "category": 3,
+      "description": "A glass vial filled with crimson elixir. Restores 50 health.",
+      "display_name": "Health Potion",
+      "equip_slot": "",
+      "heal_amount": 50,
+      "icon_path": "",
+      "item_id": "potion_health",
+      "mana_amount": 0,
+      "max_stack_size": 20,
+      "price": 10,
+      "stackable": true,
+      "stat_modifiers": {},
+      "weight": 10
+    },
+    "potion_mana": {
+      "category": 3,
+      "description": "A shimmering azure draught that replenishes 30 mana points.",
+      "display_name": "Mana Potion",
+      "equip_slot": "",
+      "heal_amount": 0,
+      "icon_path": "",
+      "item_id": "potion_mana",
+      "mana_amount": 30,
+      "max_stack_size": 20,
+      "price": 10,
+      "stackable": true,
+      "stat_modifiers": {},
+      "weight": 10
+    },
+    "shield_wooden": {
+      "category": 2,
+      "description": "A sturdy round wooden shield reinforced with iron rivets.",
+      "display_name": "Wooden Shield",
+      "equip_slot": "offhand",
+      "heal_amount": 0,
+      "icon_path": "",
+      "item_id": "shield_wooden",
+      "mana_amount": 0,
+      "max_stack_size": 1,
+      "price": 10,
+      "stackable": false,
+      "stat_modifiers": {
+        "defence": 5.0,
+        "max_health": 15.0
+      },
+      "weight": 10
+    },
+    "sword_iron": {
+      "category": 1,
+      "description": "A well-forged iron blade with a balanced hilt. Increases attack power.",
+      "display_name": "Iron Sword",
+      "equip_slot": "weapon",
+      "heal_amount": 0,
+      "icon_path": "",
+      "item_id": "sword_iron",
+      "mana_amount": 0,
+      "max_stack_size": 1,
+      "price": 10,
+      "stackable": false,
+      "stat_modifiers": {
+        "attack": 8.0,
+        "speed": -1.0
+      },
+      "weight": 10
+    }
+  },
+  "version": "1.0.0"
+}

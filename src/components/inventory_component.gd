@@ -27,11 +27,16 @@ func add_item(item: ItemDefinition) -> bool:
 	return true
 
 ## Convenience method to add an item by its registry ID.
-func add_item_by_id(item_id: String) -> bool:
+func add_item_by_id(item_id: String, quantity: int = 1) -> bool:
 	var def: ItemDefinition = ContentRegistry.get_item(item_id)
 	if def == null:
 		return false
-	return add_item(def)
+	var all_added: bool = true
+	for _i: int in range(maxi(1, quantity)):
+		if not add_item(def):
+			all_added = false
+			break
+	return all_added
 
 func remove_item(item: ItemDefinition) -> bool:
 	var idx: int = items.find(item)

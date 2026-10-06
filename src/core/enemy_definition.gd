@@ -25,6 +25,9 @@ extends Resource
 @export var sprite_tint: Color = Color(1.0, 0.3, 0.3, 1.0)
 @export var sprite_scale: Vector2 = Vector2(0.15, 0.15)
 
+# ── Drop tables ──────────────────────────────────────────────────────────────
+@export var drops: Array[Dictionary] = [] ## Array of {"item_id": String, "chance": float, "min_qty": int, "max_qty": int}
+
 func serialize() -> Dictionary:
 	return {
 		"enemy_id": enemy_id,
@@ -40,7 +43,8 @@ func serialize() -> Dictionary:
 		"attack_range": attack_range,
 		"attack_cooldown": attack_cooldown,
 		"sprite_tint": sprite_tint.to_html(true),
-		"sprite_scale": [sprite_scale.x, sprite_scale.y]
+		"sprite_scale": [sprite_scale.x, sprite_scale.y],
+		"drops": drops
 	}
 
 func deserialize(data: Dictionary) -> void:
@@ -63,6 +67,11 @@ func deserialize(data: Dictionary) -> void:
 			sprite_tint = data["sprite_tint"]
 	if data.has("sprite_scale") and data["sprite_scale"] is Array and data["sprite_scale"].size() >= 2:
 		sprite_scale = Vector2(float(data["sprite_scale"][0]), float(data["sprite_scale"][1]))
+	if data.has("drops") and data["drops"] is Array:
+		drops.clear()
+		for d in data["drops"]:
+			if d is Dictionary:
+				drops.append((d as Dictionary).duplicate())
 
 func validate() -> Array[String]:
 	var errors: Array[String] = []
@@ -86,4 +95,18 @@ func validate() -> Array[String]:
 		errors.append("Enemy '%s': 'attack_cooldown' must be greater than 0." % enemy_id)
 	if xp_reward < 0:
 		errors.append("Enemy '%s': 'xp_reward' cannot be negative." % enemy_id)
+	for idx: int in range(drops.size()):
+		var d: Dictionary = drops[idx]
+		var item_id: String = str(d.get("item_id", ""))
+		if item_id.strip_edges().is_empty():
+			errors.append("Enemy '%s' drop[%d]: 'item_id' cannot be empty." % [enemy_id, idx])
+		var chance: float = float(d.get("chance", 1.0))
+		if chance < 0.0 or chance > 1.0:
+			errors.append("Enemy '%s' drop[%d]: 'chance' must be between 0.0 and 1.0." % [enemy_id, idx])
+		var min_qty: int = int(d.get("min_qty", 1))
+		var max_qty: int = int(d.get("max_qty", 1))
+		if min_qty < 1:
+			errors.append("Enemy '%s' drop[%d]: 'min_qty' must be at least 1." % [enemy_id, idx])
+		if max_qty < min_qty:
+			errors.append("Enemy '%s' drop[%d]: 'max_qty' must be >= 'min_qty'." % [enemy_id, idx])
 	return errors

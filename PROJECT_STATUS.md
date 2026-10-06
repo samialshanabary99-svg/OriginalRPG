@@ -1,10 +1,19 @@
 # Project Status
 
 ## Current Phase
-**Ragnarok-Style Inventory & Item Information Windows Implemented (ADR-007) — 646/646 automated tests passing across 29 test groups.**
+**Monster Item Drops & Ragnarok ItemInfo System / Editor Implemented — 695/695 automated tests passing across 30 test groups.**
 
 ## Working Systems
 - All Phase 1 systems (Main Menu, Test World, Player, Camera, Interaction, HUD, scene transitions).
+- **`Monster Item Drops & In-World 3D Pickups`** (`src/entities/item_pickup_3d.gd`, `scenes/objects/item_pickup_3d.tscn`, `src/entities/enemy_3d.gd`):
+  - In-world 3D item pickup entity with billboarded sprite, soft contact shadow, pop-bounce drop animation, gentle bobbing, and proximity + click collection into `InventoryComponent`.
+  - Data-driven drop tables on `EnemyDefinition` (`drops: Array[Dictionary]`) with schema validation.
+  - Monster death hooks spawning drops (e.g. Wolf dropping Apples).
+  - 32×32 pixel art Apple consumable item asset (`assets/icons/items/icon_item_apple.png`) restoring 15 HP.
+- **`Ragnarok-Style Centralized ItemInfo Database & Editor`** (`res://data/iteminfo.json`, `src/ui/item_editor_window.gd`, `scenes/ui/item_editor_window.tscn`, `addons/item_editor/`):
+  - Centralized Ragnarok Online-style `iteminfo.json` database syncing with `res://data/items/*.json`.
+  - Visual GUI Item Info Editor supporting live image preview, preset icon dropdown, property modification, disk persistence, item deletion, creation, and test giving.
+  - Available both in-game via HUD toggle button `Items (F8)` / hotkey `F8` and in Godot Editor as an editor dock plugin (`addons/item_editor/`).
 - **`Multi-Layer TileMapLayer Field Terrain & Slope System`** (`scenes/maps/test_world.tscn`, `assets/tiles/`):
   - 3 dedicated layers: `GroundLayer` (z = -2), `ElevationLayer` (z = -1), `DecorationLayer` (z = 0, y_sort_enabled).
   - 20 custom 32×32 pixel-art RGBA8 tiles (`assets/tiles/ground/`): lush meadow grass, flower variants, elevated grass, directional slopes, corners, ramps, cliffs, stepping stones, and doodads.
@@ -80,4 +89,4 @@ Not implemented. Architecture intentionally decoupled to support future headless
 - Damaging skills do not award XP on defeat (addressed in proposed ADR-005).
 
 ## Last Updated
-2026-10-05 (Antigravity — Inventory & Item Information Window Complete & Verified)
+2026-10-06 (Antigravity — Monster Item Drops & Ragnarok ItemInfo System / Editor Complete & Verified)
