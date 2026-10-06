@@ -99,7 +99,7 @@ Examples:
 | **Bosses** | 256x256 px or 512x512 px | Multi-frame phases | Low top-down | PNG (RGBA8) |
 | **NPCs** | 128x128 px or 64x64 px | 2–4 frames idle | Low top-down | PNG (RGBA8) |
 | **Icons (Items & Skills)** | Exactly 32x32 px (or 64x64 px HD) | 1 frame (Static) | Orthographic | PNG (RGBA8) |
-| **Terrain Tiles** | Exactly 32x32 px grid | 1 frame / Autotile | Orthographic / 3/4 | PNG (RGBA8) |
+| **Terrain Tiles** | 32x32, 64x64, 128x128, 256x256 px | 1 frame / Autotile | Orthographic / 3/4 / Top-Down | PNG (RGBA8) |
 | **Environment Props** | Divisible by 16px (e.g. 64x128, 128x256) | 1–4 frames | Low top-down | PNG (RGBA8) |
 | **UI Windows / Panels** | Divisible by 2px (9-slice borders) | 1 frame | Flat 2D | PNG (RGBA8) / SVG |
 | **Spell VFX / Impacts** | 64x64, 128x128, or 256x256 px | 6–12 frames | Top-down / Billowed | PNG (RGBA8) |

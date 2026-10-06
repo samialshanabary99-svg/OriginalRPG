@@ -15,7 +15,7 @@ const ALLOWED_DATA_EXTENSIONS: Array[String] = ["tres", "res", "json", "gdshader
 ## Standard size tiers for raster assets (width or height)
 const VALID_ICON_SIZES: Array[int] = [16, 24, 32, 48, 64, 128]
 const VALID_SPRITE_FRAME_SIZES: Array[int] = [32, 64, 128, 256, 512]
-const VALID_TILE_SIZES: Array[int] = [16, 32, 48, 64]
+const VALID_TILE_SIZES: Array[int] = [16, 32, 48, 64, 128, 256, 512]
 
 # ── File & Path Validation ───────────────────────────────────────────────────
 
@@ -136,7 +136,7 @@ static func validate_directory(dir_path: String) -> Dictionary:
 
 	var files := _collect_files_recursive(dir_path)
 	for f: String in files:
-		if f.ends_with(".import") or f.ends_with(".uid") or f.contains("/parts/") or f.ends_with("rig.tscn") or f.ends_with("source_padded.png"):
+		if f.ends_with(".import") or f.ends_with(".uid") or f.contains("/parts/") or f.ends_with("rig.tscn") or f.ends_with("source_padded.png") or f.ends_with("source.png"):
 			continue
 		total_files += 1
 		var res := validate_file(f)

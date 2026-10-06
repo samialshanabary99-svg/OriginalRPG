@@ -115,6 +115,11 @@ func _build_ui() -> void:
 	quick_north_btn.pressed.connect(func(): _try_load_quick_file("North.png"))
 	header_hbox.add_child(quick_north_btn)
 
+	var quick_tpose_btn = Button.new()
+	quick_tpose_btn.text = "Load T-Pose"
+	quick_tpose_btn.pressed.connect(func(): _try_load_quick_file("t_pose"))
+	header_hbox.add_child(quick_tpose_btn)
+
 	image_info_label = Label.new()
 	image_info_label.text = "No image loaded"
 	image_info_label.size_flags_horizontal = SIZE_EXPAND_FILL
@@ -414,11 +419,18 @@ func _on_browse_output_dir_pressed() -> void:
 
 func _try_load_quick_file(filename: String) -> void:
 	var candidates = [
+		"res://assets/sprites/player/t_pose/source_padded.png",
+		"res://assets/sprites/player/t_pose/source.png",
 		"C:/Users/SAMI/Desktop/" + filename,
 		"C:/Users/SAMI/Desktop/" + filename.to_lower(),
 		"res://assets/sprites/" + filename,
 		"res://" + filename
 	]
+	if filename == "t_pose":
+		candidates = [
+			"res://assets/sprites/player/t_pose/source_padded.png",
+			"res://assets/sprites/player/t_pose/source.png"
+		]
 	for p in candidates:
 		if FileAccess.file_exists(p):
 			_load_image_file(p)

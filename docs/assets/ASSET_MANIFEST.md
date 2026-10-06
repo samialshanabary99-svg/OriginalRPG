@@ -661,9 +661,9 @@ generator_or_tool: manual
 prompt_reference: "128x128 organic soil and root transition decal for tree bases, earthy walnut browns with root lobe flares fading softly into surrounding turf."
 author: Antigravity
 created_date: 2026-10-03
-modified_date: 2026-10-03
-dimensions: 128x128
-frame_size: 128x128
+modified_date: 2026-10-06
+dimensions: 256x256
+frame_size: 256x256
 animation_frames: 1
 animation: none
 directions: none
@@ -713,9 +713,9 @@ generator_or_tool: manual
 prompt_reference: "64x64 seamless warm straw, golden meadow, and tan earth texture matching painterly grass pixel scale for hollows and terrain blending."
 author: Antigravity
 created_date: 2026-10-03
-modified_date: 2026-10-03
-dimensions: 64x64
-frame_size: 64x64
+modified_date: 2026-10-06
+dimensions: 256x256
+frame_size: 256x256
 animation_frames: 1
 animation: none
 directions: none
@@ -805,6 +805,60 @@ status: approved
 license_or_usage_notes: 16 individual 64x64 RGBA8 tiles: tile_grass_meadow_plain.png, tile_grass_meadow_flowers.png, tile_grass_moss_mound.png, tile_grass_sunlit_patch.png, tile_dirt_path_edge.png, tile_dirt_puddle_patch.png, tile_dirt_pebble_ground.png, tile_dirt_rutted_trail.png, tile_stone_cliff_strata.png, tile_stone_wall_masonry.png, tile_stone_block_chiseled.png, tile_stone_fractured_bedrock.png, tile_paver_square_cobble.png, tile_paver_rustic_flagstone.png, tile_paver_weathered_sand.png, tile_paver_earth_embedded.png
 notes: Generated via Pixel Lab Map Workshop in 4x4 grid (64x64 tiles with 1px black separators), cleanly sliced and imported into Godot 4 without border artifacts.
 ```
+
+### 25. `tile_grass_clover_flowers_256`
+```yaml
+asset_id: tile_grass_clover_flowers_256
+name: Lush Clover & White Flowers 256px Meadow Grass Texture
+type: tile
+path: assets/tiles/ground/tile_grass_clover_flowers_256.png
+source: user_provided (Pixel Lab / AI Generated)
+generator_or_tool: pixel_lab
+prompt_reference: User prompt for high-resolution 256px lush meadow grass with white clover flowers
+author: User (SAMI)
+created_date: 2026-10-05
+modified_date: 2026-10-05
+dimensions: 256x256
+frame_size: 256x256
+animation_frames: 1
+animation: none
+directions: none
+format: png
+transparency: rgba_alpha
+intended_use: High-resolution 256x256 meadow ground texture for 3D terrain splat shader in test_world_3d.gd
+related_entity: src/entities/test_world_3d.gd
+status: approved
+license_or_usage_notes: OriginalRPG user-provided asset
+notes: 256x256 high-resolution texture with lush clover blades, white flowers, and warm sunlight shading.
+```
+
+### 26. `props_stepping_stones_256`
+```yaml
+asset_id: props_stepping_stones_256
+name: Ancient Natural Stepping Stones (Single, Double, Triple)
+type: environment
+path: assets/environment/ground/
+source: user_provided (Pixel Lab / AI Generated)
+generator_or_tool: pixel_lab
+prompt_reference: User prompt for flat weathered ancient stepping stones embedded in earth
+author: User (SAMI) & Antigravity
+created_date: 2026-10-06
+modified_date: 2026-10-06
+dimensions: 256x256
+frame_size: 256x256
+animation_frames: 1
+animation: none
+directions: none
+format: png
+transparency: rgba_alpha
+intended_use: High-resolution stepping stone decals placed along footpaths in TestWorld3D
+related_entity: src/entities/test_world_3d.gd
+status: approved
+license_or_usage_notes: prop_stepping_stone_single_256.png, prop_stepping_stone_double_256.png, prop_stepping_stone_triple_256.png
+notes: 256x256 transparent RGBA8 decals with soft feathered contact edges and earthy rims.
+```
+
+
 
 
 

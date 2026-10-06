@@ -134,7 +134,9 @@ func _generate_terrain() -> void:
 	var mat: ShaderMaterial = ShaderMaterial.new()
 	mat.shader = shader
 
-	var grass_tex: Texture2D = load("res://assets/environment/ground/ground_grass_painterly.png")
+	var grass_tex: Texture2D = load("res://assets/tiles/ground/tile_grass_clover_flowers_256.png")
+	if grass_tex == null:
+		grass_tex = load("res://assets/environment/ground/ground_grass_painterly.png")
 	if grass_tex == null:
 		grass_tex = load("res://assets/tiles/ground/tile_grass_base.png")
 	var rock_tex: Texture2D = load("res://assets/tiles/ground/tile_stone_cliff_strata.png")
@@ -463,13 +465,28 @@ func _spawn_field_decorations() -> void:
 		_create_animated_stalks_prop(props_node, stalks_frames, grass_tex_fallback, coord, 0.014)
 
 	# 4. Stepping stones along the path leading towards the plateau ramp (flat decals hugging terrain)
-	var stone_tex: Texture2D = load("res://assets/tiles/ground/tile_deco_stepping_stones.png")
+	var stone_single: Texture2D = load("res://assets/environment/ground/prop_stepping_stone_single_256.png")
+	var stone_double: Texture2D = load("res://assets/environment/ground/prop_stepping_stone_double_256.png")
+	var stone_triple: Texture2D = load("res://assets/environment/ground/prop_stepping_stone_triple_256.png")
+	var fallback_stone: Texture2D = load("res://assets/tiles/ground/tile_deco_stepping_stones.png")
+
+	var stone_list: Array[Texture2D] = []
+	if stone_single != null: stone_list.append(stone_single)
+	if stone_double != null: stone_list.append(stone_double)
+	if stone_triple != null: stone_list.append(stone_triple)
+	if stone_list.is_empty() and fallback_stone != null:
+		stone_list.append(fallback_stone)
+
 	var stone_coords: Array[Vector2] = [
 		Vector2(2.0, -0.6), Vector2(4.5, -1.1), Vector2(7.0, -1.6),
 		Vector2(9.0, -2.1), Vector2(11.0, -2.6)
 	]
-	for coord: Vector2 in stone_coords:
-		_create_flat_prop(props_node, stone_tex, coord, 0.032, 0.022)
+	for idx: int in range(stone_coords.size()):
+		var coord: Vector2 = stone_coords[idx]
+		var st_tex: Texture2D = stone_list[idx % stone_list.size()]
+		var is_new: bool = (st_tex != fallback_stone)
+		var p_scale: float = 0.0055 if is_new else 0.032
+		_create_flat_prop(props_node, st_tex, coord, p_scale, 0.022, is_new)
 
 	# 5. Authentic animated forest trees (Ragnarok Online style) across meadows, hilltops, and horizons
 	var tree_coords: Array[Vector2] = [
@@ -532,7 +549,7 @@ func _create_animated_bush_prop(parent: Node3D, frames: SpriteFrames, fallback_t
 func _create_animated_tree_prop(parent: Node3D, frames: SpriteFrames, fallback_tex: Texture2D, pos2d: Vector2, pixel_scale: float, shadow_tex: Texture2D = null, root_soil_tex: Texture2D = null) -> void:
 	# 1. Warm earthy soil & root flare transition decal
 	if root_soil_tex != null:
-		_create_flat_prop(parent, root_soil_tex, pos2d, 0.036, 0.012, true)
+		_create_flat_prop(parent, root_soil_tex, pos2d, 0.018, 0.012, true)
 
 	# 2. Deep soft canopy contact shadow decal
 	if shadow_tex != null:
